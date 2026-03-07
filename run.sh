@@ -1,0 +1,1 @@
+g++ -Wall -std=c++14 -I. main.cpp utils/Submission.cpp utils/Reviewer.cpp utils/FileParser.cpp data_structures/createGraphs.cpp -o main && ./main
