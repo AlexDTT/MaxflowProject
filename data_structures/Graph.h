@@ -9,7 +9,7 @@
 #include <queue>
 #include <limits>
 #include <algorithm>
-#include "../data_structures/MutablePriorityQueue.h" // not needed for now
+
 
 template <class T>
 class Edge;
@@ -22,7 +22,6 @@ template <class T>
 class Vertex {
 public:
     Vertex(T in);
-    bool operator<(Vertex<T> & vertex) const; // // required by MutablePriorityQueue
 
     T getInfo() const;
     std::vector<Edge<T> *> getAdj() const;
@@ -49,22 +48,18 @@ public:
     bool removeEdge(T in);
     void removeOutgoingEdges();
 
-    friend class MutablePriorityQueue<Vertex>;
 protected:
-    T info;                // info node
-    std::vector<Edge<T> *> adj;  // outgoing edges
+    T info;
+    std::vector<Edge<T> *> adj;
 
-    // auxiliary fields
-    bool visited = false; // used by DFS, BFS, Prim ...
-    bool processing = false; // used by isDAG (in addition to the visited attribute)
-    int low = -1, num = -1; // used by SCC Tarjan
-    unsigned int indegree; // used by topsort
+    bool visited = false;
+    bool processing = false;
+    int low = -1, num = -1;
+    unsigned int indegree;
     double dist = 0;
     Edge<T> *path = nullptr;
 
-    std::vector<Edge<T> *> incoming; // incoming edges
-
-    int queueIndex = 0; 		// required by MutablePriorityQueue and UFDS
+    std::vector<Edge<T> *> incoming;
 
     void deleteEdge(Edge<T> *edge);
 };
@@ -87,17 +82,15 @@ public:
     void setReverse(Edge<T> *reverse);
     void setFlow(double flow);
 protected:
-    Vertex<T> * dest; // destination vertex
-    double weight; // edge weight, can also be used for capacity
+    Vertex<T> * dest;
+    double weight;
 
-    // auxiliary fields
     bool selected = false;
 
-    // used for bidirectional edges
     Vertex<T> *orig;
     Edge<T> *reverse = nullptr;
 
-    double flow; // for flow-related problems
+    double flow;
 };
 
 /********************** Graph  ****************************/
@@ -196,11 +189,6 @@ void Vertex<T>::removeOutgoingEdges() {
         it = adj.erase(it);
         deleteEdge(edge);
     }
-}
-
-template <class T>
-bool Vertex<T>::operator<(Vertex<T> & vertex) const {
-    return this->dist < vertex.dist;
 }
 
 template <class T>
