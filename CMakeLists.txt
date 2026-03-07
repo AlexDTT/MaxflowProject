@@ -7,6 +7,5 @@ set( CMAKE_BUILD_TYPE "Debug" )
 
 set( CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE_TMP} )
 
-add_executable()
+add_executable(main main.cpp)
 
-target_link_libraries()
