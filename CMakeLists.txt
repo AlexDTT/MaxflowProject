@@ -11,7 +11,6 @@ add_executable(main
     main.cpp
     utils/Submission.cpp
     utils/Reviewer.cpp
-    utils/Parameters.cpp
     utils/FileParser.cpp
     data_structures/createGraphs.cpp
 )

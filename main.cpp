@@ -7,6 +7,7 @@
 #include "utils/Parameters.h"
 #include "utils/Reviewer.h"
 #include "utils/Submission.h"
+#include "data_structures/createGraphs.h"
 
 // --------------------------------------------------------------------------
 // Application state
@@ -121,6 +122,14 @@ static void doRiskAnalysis() {
     std::cout << "[Not yet implemented] Risk analysis (K=" << gParams.RiskAnalysis << ").\n";
 }
 
+static void doViewGraph() {
+    if (!gDataLoaded) { std::cout << "No data loaded. Use option 1 first.\n"; return; }
+    int mode = gParams.GenerateAssignments;
+    std::cout << "Building flow graph (mode=" << mode << ")...\n";
+    Graph<int> g = createGraphs::buildReviewFlowGraph(gSubmissions, gReviewers, gParams, mode);
+    createGraphs::printFlowGraph(g, gSubmissions, gReviewers);
+}
+
 // --------------------------------------------------------------------------
 // Interactive menu
 // --------------------------------------------------------------------------
@@ -142,6 +151,7 @@ static void printMenu() {
               << "   [4] Show parameters\n"
               << "   [5] Generate review assignments\n"
               << "   [6] Run risk analysis\n"
+              << "   [7] View flow graph\n"
               << "   [0] Exit\n";
     printSep('=', 57);
 }
@@ -158,6 +168,7 @@ static void runInteractiveMode() {
             case 4: doShowParameters();      break;
             case 5: doGenerateAssignments(); break;
             case 6: doRiskAnalysis();        break;
+            case 7: doViewGraph();           break;
             case 0: std::cout << "Goodbye!\n"; return;
             default: std::cout << "Unknown option. Try again.\n"; break;
         }

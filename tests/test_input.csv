@@ -20,6 +20,6 @@ SecondarySubmissionDomain, 1
 #
 
 #Control
-GenerateAssignments, 1
+GenerateAssignments, 3
 RiskAnalysis, 0
 OutputFileName, "assign.csv"
