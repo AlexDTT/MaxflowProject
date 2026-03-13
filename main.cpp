@@ -8,6 +8,7 @@
 #include "utils/Reviewer.h"
 #include "utils/Submission.h"
 #include "data_structures/createGraphs.h"
+#include "utils/EdmondKarp.h" 
 
 // --------------------------------------------------------------------------
 // Application state
@@ -108,6 +109,14 @@ static void doGenerateAssignments() {
         return;
     }
     // TODO T2.1/T2.4: implement Max-Flow assignment
+
+
+    int mode = gParams.GenerateAssignments;
+    std::cout << "Building flow graph (mode=" << mode << ")...\n";
+    Graph<int> g = createGraphs::buildReviewFlowGraph(gSubmissions, gReviewers, gParams, mode);
+
+    edmondsKarp(&g, createGraphs::sourceId(), createGraphs::sinkId((int)gSubmissions.size(), (int)gReviewers.size()));
+
     std::cout << "[Not yet implemented] Generate assignments (mode="
               << gParams.GenerateAssignments << ").\n";
 }
