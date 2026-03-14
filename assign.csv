@@ -1,0 +1,9 @@
+#SubmissionId,ReviewerId,Match
+31, 2, 4
+87, 1, 1
+#ReviewerId,SubmissionId,Match
+1, 87, 1
+2, 31, 4
+#Total: 2
+#Risk Analysis: 1
+1, 2

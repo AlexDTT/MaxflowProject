@@ -18,4 +18,18 @@ add_executable(main
 
 target_include_directories(main PRIVATE ${CMAKE_SOURCE_DIR})
 
+enable_testing()
+
+add_executable(maxflow_tests
+    tests/maxflow_tests.cpp
+    utils/Submission.cpp
+    utils/Reviewer.cpp
+    utils/EdmondKarp.cpp
+    data_structures/createGraphs.cpp
+)
+
+target_include_directories(maxflow_tests PRIVATE ${CMAKE_SOURCE_DIR})
+
+add_test(NAME maxflow_tests COMMAND maxflow_tests)
+
 

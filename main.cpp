@@ -2,6 +2,9 @@
 #include <limits>
 #include <string>
 #include <vector>
+#include <fstream>
+#include <algorithm>
+#include <tuple>
 
 #include "utils/FileParser.h"
 #include "utils/Parameters.h"
@@ -43,6 +46,185 @@ static int readInt(const std::string& prompt) {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cout << "  Invalid input. Please enter a number.\n";
     }
+}
+
+static int totalRequiredReviews(const std::vector<Submission>& submissions,
+                               const Parameters& params) {
+    return (int) submissions.size() * params.MinReviewsPerSubmission;
+}
+
+static int totalAssignedReviews(const Graph<int>& flowGraph,
+                               const std::vector<Submission>& submissions,
+                               const std::vector<Reviewer>& reviewers) {
+    int total = 0;
+    const int numSubs = (int) submissions.size();
+    const int numRevs = (int) reviewers.size();
+
+    if (numRevs == 0) return 0;
+
+    int firstRevNode = createGraphs::reviewerNodeId(0, numSubs);
+    int lastRevNode = createGraphs::reviewerNodeId(numRevs - 1, numSubs);
+
+    for (int i = 0; i < numSubs; ++i) {
+        int subNode = createGraphs::submissionNodeId(i);
+        Vertex<int>* subV = flowGraph.findVertex(subNode);
+        if (subV == nullptr) continue;
+
+        for (Edge<int>* e : subV->getAdj()) {
+            int destNode = e->getDest()->getInfo();
+            if (destNode >= firstRevNode && destNode <= lastRevNode && e->getFlow() > 0.0) {
+                total += (int) e->getFlow();
+            }
+        }
+    }
+    return total;
+}
+
+static std::vector<int> findRiskyReviewersK1(const std::vector<Submission>& submissions,
+                                              const std::vector<Reviewer>& reviewers,
+                                              const Parameters& params,
+                                              int mode) {
+    std::vector<int> risky;
+    const int needed = totalRequiredReviews(submissions, params);
+
+    for (size_t skip = 0; skip < reviewers.size(); ++skip) {
+        std::vector<Reviewer> reduced;
+        reduced.reserve(reviewers.size() - 1);
+        for (size_t i = 0; i < reviewers.size(); ++i) {
+            if (i != skip) reduced.push_back(reviewers[i]);
+        }
+
+        Graph<int> g = createGraphs::buildReviewFlowGraph(submissions, reduced, params, mode);
+        edmondsKarp(&g,
+                    createGraphs::sourceId(),
+                    createGraphs::sinkId((int) submissions.size(), (int) reduced.size()));
+
+        int achieved = totalAssignedReviews(g, submissions, reduced);
+        if (achieved < needed) risky.push_back(reviewers[skip].id);
+    }
+
+    std::sort(risky.begin(), risky.end());
+    return risky;
+}
+
+static void writeRiskSection(std::ofstream& out, int riskValue, const std::vector<int>& riskyReviewerIds) {
+    out << "#Risk Analysis: " << riskValue << "\n";
+    for (size_t i = 0; i < riskyReviewerIds.size(); ++i) {
+        if (i > 0) out << ", ";
+        out << riskyReviewerIds[i];
+    }
+    out << "\n";
+}
+
+static bool writeAssignmentsToFile(const Graph<int>& flowGraph,
+                                   const std::vector<Submission>& submissions,
+                                   const std::vector<Reviewer>& reviewers,
+                                   const Parameters& params,
+                                   int mode,
+                                   const std::vector<int>* riskyReviewerIds = nullptr,
+                                   int riskValue = 0,
+                                   const std::string& outputPath = "") {
+    const std::string path = outputPath.empty() ? params.OutputFileName : outputPath;
+    std::ofstream out(path);
+    if (!out.is_open()) {
+        std::cerr << "Error: cannot open output file '" << path << "'.\n";
+        return false;
+    }
+
+    const int numSubs = (int) submissions.size();
+    const int numRevs = (int) reviewers.size();
+
+    std::vector<std::tuple<int, int, int>> bySubmission;
+    std::vector<std::tuple<int, int, int>> byReviewer;
+
+    for (int i = 0; i < numSubs; ++i) {
+        int subNode = createGraphs::submissionNodeId(i);
+        Vertex<int>* subV = flowGraph.findVertex(subNode);
+        if (subV == nullptr) continue;
+
+        for (Edge<int>* e : subV->getAdj()) {
+            if (e->getFlow() <= 0.0) continue;
+
+            if (numRevs == 0) continue;
+
+            int destNode = e->getDest()->getInfo();
+            if (destNode < createGraphs::reviewerNodeId(0, numSubs) ||
+                destNode > createGraphs::reviewerNodeId(numRevs - 1, numSubs)) {
+                continue;
+            }
+
+            int revIndex = destNode - createGraphs::reviewerNodeId(0, numSubs);
+            int matchedDomain = createGraphs::getMatchedDomain(submissions[i], reviewers[revIndex], mode);
+            if (matchedDomain == -1) matchedDomain = submissions[i].primaryTopic;
+
+            bySubmission.emplace_back(submissions[i].id, reviewers[revIndex].id, matchedDomain);
+            byReviewer.emplace_back(reviewers[revIndex].id, submissions[i].id, matchedDomain);
+        }
+    }
+
+    std::sort(bySubmission.begin(), bySubmission.end());
+    std::sort(byReviewer.begin(), byReviewer.end());
+
+    int totalRequired = totalRequiredReviews(submissions, params);
+    int totalAssigned = (int) bySubmission.size();
+
+    if (!bySubmission.empty()) {
+        out << "#SubmissionId,ReviewerId,Match\n";
+        for (const auto& row : bySubmission) {
+            out << std::get<0>(row) << ", " << std::get<1>(row) << ", " << std::get<2>(row) << "\n";
+        }
+
+        out << "#ReviewerId,SubmissionId,Match\n";
+        for (const auto& row : byReviewer) {
+            out << std::get<0>(row) << ", " << std::get<1>(row) << ", " << std::get<2>(row) << "\n";
+        }
+
+        out << "#Total: " << totalAssigned << "\n";
+    }
+
+    if (totalAssigned < totalRequired) {
+        out << "#SubmissionId,Domain,MissingReviews\n";
+        for (int i = 0; i < numSubs; ++i) {
+            int subNode = createGraphs::submissionNodeId(i);
+            Vertex<int>* subV = flowGraph.findVertex(subNode);
+            int assignedForSubmission = 0;
+            if (subV != nullptr) {
+                for (Edge<int>* e : subV->getAdj()) {
+                    if (e->getFlow() > 0.0) assignedForSubmission += (int) e->getFlow();
+                }
+            }
+
+            int missing = params.MinReviewsPerSubmission - assignedForSubmission;
+            if (missing > 0) {
+                out << submissions[i].id << ", "
+                    << submissions[i].primaryTopic << ", "
+                    << missing << "\n";
+            }
+        }
+    }
+
+    if (riskyReviewerIds != nullptr && riskValue > 0) {
+        writeRiskSection(out, riskValue, *riskyReviewerIds);
+    }
+
+    return true;
+}
+
+static bool generateAssignmentsAndStore(Graph<int>& outGraph,
+                                        const std::vector<Submission>& submissions,
+                                        const std::vector<Reviewer>& reviewers,
+                                        const Parameters& params,
+                                        int mode,
+                                        bool writeOutput) {
+    outGraph = createGraphs::buildReviewFlowGraph(submissions, reviewers, params, mode);
+    edmondsKarp(&outGraph,
+                createGraphs::sourceId(),
+                createGraphs::sinkId((int) submissions.size(), (int) reviewers.size()));
+
+    if (writeOutput) {
+        return writeAssignmentsToFile(outGraph, submissions, reviewers, params, mode);
+    }
+    return true;
 }
 
 // --------------------------------------------------------------------------
@@ -105,18 +287,20 @@ static void doShowParameters() {
 
 static void doGenerateAssignments() {
     if (!gDataLoaded) { std::cout << "No data loaded. Use option 1 first.\n"; return; }
-    if (gParams.GenerateAssignments == 0) {
-        std::cout << "GenerateAssignments = 0: nothing to generate.\n";
+    int mode = gParams.GenerateAssignments;
+    std::cout << "Building flow graph (mode=" << mode << ")...\n";
+
+    bool writeOutput = (gParams.GenerateAssignments != 0);
+    if (!generateAssignmentsAndStore(gFlowGraph, gSubmissions, gReviewers, gParams, mode, writeOutput)) {
+        std::cout << "Failed to write output file '" << gParams.OutputFileName << "'.\n";
         return;
     }
 
-    int mode = gParams.GenerateAssignments;
-    std::cout << "Building flow graph (mode=" << mode << ")...\n";
-    Graph<int> g = createGraphs::buildReviewFlowGraph(gSubmissions, gReviewers, gParams, mode);
-
-    edmondsKarp(&g, createGraphs::sourceId(), createGraphs::sinkId((int)gSubmissions.size(), (int)gReviewers.size()));
-
-    gFlowGraph = g; 
+    if (writeOutput) {
+        std::cout << "Assignment output written to '" << gParams.OutputFileName << "'.\n";
+    } else {
+        std::cout << "GenerateAssignments = 0: assignment computed and kept in memory (no output file written).\n";
+    }
 }
 
 static void doRiskAnalysis() {
@@ -125,8 +309,33 @@ static void doRiskAnalysis() {
         std::cout << "RiskAnalysis = 0: no risk analysis requested.\n";
         return;
     }
-    // TODO T2.2/T2.3: implement risk analysis
-    std::cout << "[Not yet implemented] Risk analysis (K=" << gParams.RiskAnalysis << ").\n";
+    if (gParams.RiskAnalysis != 1) {
+        std::cout << "RiskAnalysis = " << gParams.RiskAnalysis << " is not implemented yet (only K=1).\n";
+        return;
+    }
+
+    int mode = gParams.GenerateAssignments;
+
+    if (!generateAssignmentsAndStore(gFlowGraph, gSubmissions, gReviewers, gParams, mode, false)) {
+        std::cout << "Failed to compute assignment baseline for risk analysis.\n";
+        return;
+    }
+
+    std::vector<int> risky = findRiskyReviewersK1(gSubmissions, gReviewers, gParams, mode);
+
+    if (!writeAssignmentsToFile(gFlowGraph,
+                                gSubmissions,
+                                gReviewers,
+                                gParams,
+                                mode,
+                                &risky,
+                                1,
+                                gParams.OutputFileName)) {
+        std::cout << "Failed to write risk analysis to '" << gParams.OutputFileName << "'.\n";
+        return;
+    }
+
+    std::cout << "Risk analysis (K=1) written to '" << gParams.OutputFileName << "'.\n";
 }
 
 static void doViewGraph() {
@@ -196,20 +405,46 @@ static void runBatchMode(const std::string& inputFile,
     std::cerr << "Loaded " << gSubmissions.size() << " submissions and "
               << gReviewers.size() << " reviewers.\n";
 
-    if (gParams.GenerateAssignments != 0) {
-        std::cerr << "Generating assignments (mode=" << gParams.GenerateAssignments
-                  << ") -> '" << gParams.OutputFileName << "'...\n";
-        // TODO T2.1/T2.4
-        std::cerr << "Warning: assignment generation not yet implemented.\n";
+    {
+        int mode = gParams.GenerateAssignments;
+        bool writeOutput = (gParams.GenerateAssignments != 0);
+
+        std::cerr << "Generating assignments (mode=" << mode << ")";
+        if (writeOutput) std::cerr << " -> '" << gParams.OutputFileName << "'";
+        std::cerr << "...\n";
+
+        if (!generateAssignmentsAndStore(gFlowGraph, gSubmissions, gReviewers, gParams, mode, writeOutput)) {
+            std::cerr << "Error: failed to generate/write assignments.\n";
+            return;
+        }
     }
 
     if (gParams.RiskAnalysis != 0) {
-        const std::string& out = riskOutputFile.empty()
-                                     ? gParams.OutputFileName : riskOutputFile;
+        const std::string out = riskOutputFile.empty() ? gParams.OutputFileName : riskOutputFile;
         std::cerr << "Running risk analysis (K=" << gParams.RiskAnalysis
                   << ") -> '" << out << "'...\n";
-        // TODO T2.2/T2.3
-        std::cerr << "Warning: risk analysis not yet implemented.\n";
+
+        if (gParams.RiskAnalysis != 1) {
+            std::cerr << "Warning: only RiskAnalysis=1 is implemented.\n";
+            return;
+        }
+
+        std::vector<int> risky = findRiskyReviewersK1(gSubmissions,
+                                                      gReviewers,
+                                                      gParams,
+                                                      gParams.GenerateAssignments);
+
+        if (!writeAssignmentsToFile(gFlowGraph,
+                                    gSubmissions,
+                                    gReviewers,
+                                    gParams,
+                                    gParams.GenerateAssignments,
+                                    &risky,
+                                    1,
+                                    out)) {
+            std::cerr << "Error: failed to write risk analysis output.\n";
+            return;
+        }
     }
 }
 
