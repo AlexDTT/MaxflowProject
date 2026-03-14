@@ -10,7 +10,6 @@
 #include <limits>
 #include <algorithm>
 
-
 template <class T>
 class Edge;
 
@@ -19,7 +18,8 @@ class Edge;
 /************************* Vertex  **************************/
 
 template <class T>
-class Vertex {
+class Vertex
+{
 public:
     Vertex(T in);
 
@@ -44,7 +44,7 @@ public:
     void setIndegree(unsigned int indegree);
     void setDist(double dist);
     void setPath(Edge<T> *path);
-    Edge<T> * addEdge(Vertex<T> *dest, double w);
+    Edge<T> *addEdge(Vertex<T> *dest, double w);
     bool removeEdge(T in);
     void removeOutgoingEdges();
 
@@ -67,22 +67,24 @@ protected:
 /********************** Edge  ****************************/
 
 template <class T>
-class Edge {
+class Edge
+{
 public:
     Edge(Vertex<T> *orig, Vertex<T> *dest, double w);
 
-    Vertex<T> * getDest() const;
+    Vertex<T> *getDest() const;
     double getWeight() const;
     bool isSelected() const;
-    Vertex<T> * getOrig() const;
+    Vertex<T> *getOrig() const;
     Edge<T> *getReverse() const;
     double getFlow() const;
 
     void setSelected(bool selected);
     void setReverse(Edge<T> *reverse);
     void setFlow(double flow);
+
 protected:
-    Vertex<T> * dest;
+    Vertex<T> *dest;
     double weight;
 
     bool selected = false;
@@ -90,18 +92,19 @@ protected:
     Vertex<T> *orig;
     Edge<T> *reverse = nullptr;
 
-    double flow;
+    double flow = 0;
 };
 
 /********************** Graph  ****************************/
 
 template <class T>
-class Graph {
+class Graph
+{
 public:
     ~Graph();
     /*
-    * Auxiliary function to find a vertex with a given the content.
-    */
+     * Auxiliary function to find a vertex with a given the content.
+     */
     Vertex<T> *findVertex(const T &in) const;
     /*
      *  Adds a vertex with a given content or info (in) to a graph (this).
@@ -123,10 +126,10 @@ public:
     std::vector<Vertex<T> *> getVertexSet() const;
 
 protected:
-    std::vector<Vertex<T> *> vertexSet;    // vertex set
+    std::vector<Vertex<T> *> vertexSet; // vertex set
 
-    double ** distMatrix = nullptr;   // dist matrix for Floyd-Warshall
-    int **pathMatrix = nullptr;   // path matrix for Floyd-Warshall
+    double **distMatrix = nullptr; // dist matrix for Floyd-Warshall
+    int **pathMatrix = nullptr;    // path matrix for Floyd-Warshall
 
     /*
      * Finds the index of the vertex with a given content.
@@ -137,17 +140,17 @@ protected:
 void deleteMatrix(int **m, int n);
 void deleteMatrix(double **m, int n);
 
-
 /************************* Vertex  **************************/
 
 template <class T>
-Vertex<T>::Vertex(T in): info(in) {}
+Vertex<T>::Vertex(T in) : info(in) {}
 /*
  * Auxiliary function to add an outgoing edge to a vertex (this),
  * with a given destination vertex (d) and edge weight (w).
  */
 template <class T>
-Edge<T> * Vertex<T>::addEdge(Vertex<T> *d, double w) {
+Edge<T> *Vertex<T>::addEdge(Vertex<T> *d, double w)
+{
     auto newEdge = new Edge<T>(this, d, w);
     adj.push_back(newEdge);
     d->incoming.push_back(newEdge);
@@ -160,18 +163,22 @@ Edge<T> * Vertex<T>::addEdge(Vertex<T> *d, double w) {
  * Returns true if successful, and false if such edge does not exist.
  */
 template <class T>
-bool Vertex<T>::removeEdge(T in) {
+bool Vertex<T>::removeEdge(T in)
+{
     bool removedEdge = false;
     auto it = adj.begin();
-    while (it != adj.end()) {
+    while (it != adj.end())
+    {
         Edge<T> *edge = *it;
         Vertex<T> *dest = edge->getDest();
-        if (dest->getInfo() == in) {
+        if (dest->getInfo() == in)
+        {
             it = adj.erase(it);
             deleteEdge(edge);
             removedEdge = true; // allows for multiple edges to connect the same pair of vertices (multigraph)
         }
-        else {
+        else
+        {
             it++;
         }
     }
@@ -182,9 +189,11 @@ bool Vertex<T>::removeEdge(T in) {
  * Auxiliary function to remove an outgoing edge of a vertex.
  */
 template <class T>
-void Vertex<T>::removeOutgoingEdges() {
+void Vertex<T>::removeOutgoingEdges()
+{
     auto it = adj.begin();
-    while (it != adj.end()) {
+    while (it != adj.end())
+    {
         Edge<T> *edge = *it;
         it = adj.erase(it);
         deleteEdge(edge);
@@ -192,105 +201,127 @@ void Vertex<T>::removeOutgoingEdges() {
 }
 
 template <class T>
-T Vertex<T>::getInfo() const {
+T Vertex<T>::getInfo() const
+{
     return this->info;
 }
 
 template <class T>
-int Vertex<T>::getLow() const {
+int Vertex<T>::getLow() const
+{
     return this->low;
 }
 
 template <class T>
-void Vertex<T>::setLow(int value) {
+void Vertex<T>::setLow(int value)
+{
     this->low = value;
 }
 
 template <class T>
-int Vertex<T>::getNum() const {
+int Vertex<T>::getNum() const
+{
     return this->num;
 }
 
 template <class T>
-void Vertex<T>::setNum(int value) {
+void Vertex<T>::setNum(int value)
+{
     this->num = value;
 }
 
 template <class T>
-std::vector<Edge<T>*> Vertex<T>::getAdj() const {
+std::vector<Edge<T> *> Vertex<T>::getAdj() const
+{
     return this->adj;
 }
 
 template <class T>
-bool Vertex<T>::isVisited() const {
+bool Vertex<T>::isVisited() const
+{
     return this->visited;
 }
 
 template <class T>
-bool Vertex<T>::isProcessing() const {
+bool Vertex<T>::isProcessing() const
+{
     return this->processing;
 }
 
 template <class T>
-unsigned int Vertex<T>::getIndegree() const {
+unsigned int Vertex<T>::getIndegree() const
+{
     return this->indegree;
 }
 
 template <class T>
-double Vertex<T>::getDist() const {
+double Vertex<T>::getDist() const
+{
     return this->dist;
 }
 
 template <class T>
-Edge<T> *Vertex<T>::getPath() const {
+Edge<T> *Vertex<T>::getPath() const
+{
     return this->path;
 }
 
 template <class T>
-std::vector<Edge<T> *> Vertex<T>::getIncoming() const {
+std::vector<Edge<T> *> Vertex<T>::getIncoming() const
+{
     return this->incoming;
 }
 
 template <class T>
-void Vertex<T>::setInfo(T in) {
+void Vertex<T>::setInfo(T in)
+{
     this->info = in;
 }
 
 template <class T>
-void Vertex<T>::setVisited(bool visited) {
+void Vertex<T>::setVisited(bool visited)
+{
     this->visited = visited;
 }
 
 template <class T>
-void Vertex<T>::setProcessing(bool processing) {
+void Vertex<T>::setProcessing(bool processing)
+{
     this->processing = processing;
 }
 
 template <class T>
-void Vertex<T>::setIndegree(unsigned int indegree) {
+void Vertex<T>::setIndegree(unsigned int indegree)
+{
     this->indegree = indegree;
 }
 
 template <class T>
-void Vertex<T>::setDist(double dist) {
+void Vertex<T>::setDist(double dist)
+{
     this->dist = dist;
 }
 
 template <class T>
-void Vertex<T>::setPath(Edge<T> *path) {
+void Vertex<T>::setPath(Edge<T> *path)
+{
     this->path = path;
 }
 
 template <class T>
-void Vertex<T>::deleteEdge(Edge<T> *edge) {
+void Vertex<T>::deleteEdge(Edge<T> *edge)
+{
     Vertex<T> *dest = edge->getDest();
     // Remove the corresponding edge from the incoming list
     auto it = dest->incoming.begin();
-    while (it != dest->incoming.end()) {
-        if ((*it)->getOrig()->getInfo() == info) {
+    while (it != dest->incoming.end())
+    {
+        if ((*it)->getOrig()->getInfo() == info)
+        {
             it = dest->incoming.erase(it);
         }
-        else {
+        else
+        {
             it++;
         }
     }
@@ -300,62 +331,73 @@ void Vertex<T>::deleteEdge(Edge<T> *edge) {
 /********************** Edge  ****************************/
 
 template <class T>
-Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double w): orig(orig), dest(dest), weight(w) {}
+Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double w) : dest(dest), weight(w), orig(orig) {}
 
 template <class T>
-Vertex<T> * Edge<T>::getDest() const {
+Vertex<T> *Edge<T>::getDest() const
+{
     return this->dest;
 }
 
 template <class T>
-double Edge<T>::getWeight() const {
+double Edge<T>::getWeight() const
+{
     return this->weight;
 }
 
 template <class T>
-Vertex<T> * Edge<T>::getOrig() const {
+Vertex<T> *Edge<T>::getOrig() const
+{
     return this->orig;
 }
 
 template <class T>
-Edge<T> *Edge<T>::getReverse() const {
+Edge<T> *Edge<T>::getReverse() const
+{
     return this->reverse;
 }
 
 template <class T>
-bool Edge<T>::isSelected() const {
+bool Edge<T>::isSelected() const
+{
     return this->selected;
 }
 
 template <class T>
-double Edge<T>::getFlow() const {
+double Edge<T>::getFlow() const
+{
     return flow;
 }
 
 template <class T>
-void Edge<T>::setSelected(bool selected) {
+void Edge<T>::setSelected(bool selected)
+{
     this->selected = selected;
 }
 
 template <class T>
-void Edge<T>::setReverse(Edge<T> *reverse) {
+void Edge<T>::setReverse(Edge<T> *reverse)
+{
     this->reverse = reverse;
 }
 
 template <class T>
-void Edge<T>::setFlow(double flow) {
+void Edge<T>::setFlow(double flow)
+{
     this->flow = flow;
 }
 
 /********************** Graph  ****************************/
 
 template <class T>
-int Graph<T>::getNumVertex() const {
+int Graph<T>::getNumVertex() const
+{
     return vertexSet.size();
 }
 
 template <class T>
-std::vector<Vertex<T> *> Graph<T>::getVertexSet() const {
+std::vector<Vertex<T> *> Graph<T>::getVertexSet() const
+{
     return vertexSet;
 }
 
@@ -363,7 +405,8 @@ std::vector<Vertex<T> *> Graph<T>::getVertexSet() const {
  * Auxiliary function to find a vertex with a given content.
  */
 template <class T>
-Vertex<T> * Graph<T>::findVertex(const T &in) const {
+Vertex<T> *Graph<T>::findVertex(const T &in) const
+{
     for (auto v : vertexSet)
         if (v->getInfo() == in)
             return v;
@@ -374,7 +417,8 @@ Vertex<T> * Graph<T>::findVertex(const T &in) const {
  * Finds the index of the vertex with a given content.
  */
 template <class T>
-int Graph<T>::findVertexIdx(const T &in) const {
+int Graph<T>::findVertexIdx(const T &in) const
+{
     for (unsigned i = 0; i < vertexSet.size(); i++)
         if (vertexSet[i]->getInfo() == in)
             return i;
@@ -385,7 +429,8 @@ int Graph<T>::findVertexIdx(const T &in) const {
  *  Returns true if successful, and false if a vertex with that content already exists.
  */
 template <class T>
-bool Graph<T>::addVertex(const T &in) {
+bool Graph<T>::addVertex(const T &in)
+{
     if (findVertex(in) != nullptr)
         return false;
     vertexSet.push_back(new Vertex<T>(in));
@@ -398,12 +443,16 @@ bool Graph<T>::addVertex(const T &in) {
  *  Returns true if successful, and false if such vertex does not exist.
  */
 template <class T>
-bool Graph<T>::removeVertex(const T &in) {
-    for (auto it = vertexSet.begin(); it != vertexSet.end(); it++) {
-        if ((*it)->getInfo() == in) {
+bool Graph<T>::removeVertex(const T &in)
+{
+    for (auto it = vertexSet.begin(); it != vertexSet.end(); it++)
+    {
+        if ((*it)->getInfo() == in)
+        {
             auto v = *it;
             v->removeOutgoingEdges();
-            for (auto u : vertexSet) {
+            for (auto u : vertexSet)
+            {
                 u->removeEdge(v->getInfo());
             }
             vertexSet.erase(it);
@@ -420,7 +469,8 @@ bool Graph<T>::removeVertex(const T &in) {
  * Returns true if successful, and false if the source or destination vertex does not exist.
  */
 template <class T>
-bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
+bool Graph<T>::addEdge(const T &sourc, const T &dest, double w)
+{
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
     if (v1 == nullptr || v2 == nullptr)
@@ -435,16 +485,19 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double w) {
  * Returns true if successful, and false if such edge does not exist.
  */
 template <class T>
-bool Graph<T>::removeEdge(const T &sourc, const T &dest) {
-    Vertex<T> * srcVertex = findVertex(sourc);
-    if (srcVertex == nullptr) {
+bool Graph<T>::removeEdge(const T &sourc, const T &dest)
+{
+    Vertex<T> *srcVertex = findVertex(sourc);
+    if (srcVertex == nullptr)
+    {
         return false;
     }
     return srcVertex->removeEdge(dest);
 }
 
 template <class T>
-bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double w) {
+bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double w)
+{
     auto v1 = findVertex(sourc);
     auto v2 = findVertex(dest);
     if (v1 == nullptr || v2 == nullptr)
@@ -456,26 +509,31 @@ bool Graph<T>::addBidirectionalEdge(const T &sourc, const T &dest, double w) {
     return true;
 }
 
-inline void deleteMatrix(int **m, int n) {
-    if (m != nullptr) {
+inline void deleteMatrix(int **m, int n)
+{
+    if (m != nullptr)
+    {
         for (int i = 0; i < n; i++)
             if (m[i] != nullptr)
-                delete [] m[i];
-        delete [] m;
+                delete[] m[i];
+        delete[] m;
     }
 }
 
-inline void deleteMatrix(double **m, int n) {
-    if (m != nullptr) {
+inline void deleteMatrix(double **m, int n)
+{
+    if (m != nullptr)
+    {
         for (int i = 0; i < n; i++)
             if (m[i] != nullptr)
-                delete [] m[i];
-        delete [] m;
+                delete[] m[i];
+        delete[] m;
     }
 }
 
 template <class T>
-Graph<T>::~Graph() {
+Graph<T>::~Graph()
+{
     deleteMatrix(distMatrix, vertexSet.size());
     deleteMatrix(pathMatrix, vertexSet.size());
 }

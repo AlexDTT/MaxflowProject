@@ -12,6 +12,7 @@ add_executable(main
     utils/Submission.cpp
     utils/Reviewer.cpp
     utils/FileParser.cpp
+    utils/EdmondKarp.cpp
     data_structures/createGraphs.cpp
 )
 
