@@ -17,6 +17,7 @@ static std::vector<Submission> gSubmissions;
 static std::vector<Reviewer>   gReviewers;
 static Parameters               gParams;
 static bool                     gDataLoaded = false;
+static Graph<int> gFlowGraph; 
 
 // --------------------------------------------------------------------------
 // Helper utilities
@@ -108,8 +109,6 @@ static void doGenerateAssignments() {
         std::cout << "GenerateAssignments = 0: nothing to generate.\n";
         return;
     }
-    // TODO T2.1/T2.4: implement Max-Flow assignment
-
 
     int mode = gParams.GenerateAssignments;
     std::cout << "Building flow graph (mode=" << mode << ")...\n";
@@ -117,8 +116,7 @@ static void doGenerateAssignments() {
 
     edmondsKarp(&g, createGraphs::sourceId(), createGraphs::sinkId((int)gSubmissions.size(), (int)gReviewers.size()));
 
-    std::cout << "[Not yet implemented] Generate assignments (mode="
-              << gParams.GenerateAssignments << ").\n";
+    gFlowGraph = g; 
 }
 
 static void doRiskAnalysis() {
@@ -134,9 +132,9 @@ static void doRiskAnalysis() {
 static void doViewGraph() {
     if (!gDataLoaded) { std::cout << "No data loaded. Use option 1 first.\n"; return; }
     int mode = gParams.GenerateAssignments;
-    std::cout << "Building flow graph (mode=" << mode << ")...\n";
-    Graph<int> g = createGraphs::buildReviewFlowGraph(gSubmissions, gReviewers, gParams, mode);
-    createGraphs::printFlowGraph(g, gSubmissions, gReviewers);
+    std::cout << "Building/Viewing flow graph (mode=" << mode << ")...\n";
+
+    createGraphs::printFlowGraph(gFlowGraph, gSubmissions, gReviewers);
 }
 
 // --------------------------------------------------------------------------
