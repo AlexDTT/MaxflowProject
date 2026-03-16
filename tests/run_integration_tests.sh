@@ -40,7 +40,7 @@ for input_file in "$INPUT_DIR"/dataset*.csv; do
         ((FAILED++))
         continue
     fi
-    if diff -q "$actual_output" "$expected_file" >/dev/null 2>&1; then
+    if diff -q --strip-trailing-cr "$actual_output" "$expected_file" >/dev/null 2>&1; then
         echo "[PASS] $basename_input"
         ((PASSED++))
         PASSED_OUTPUTS+=("$actual_output")
@@ -49,7 +49,7 @@ for input_file in "$INPUT_DIR"/dataset*.csv; do
         echo "       Expected: $expected_file"
         echo "       Got:      $actual_output"
         echo "       Diff:"
-        diff "$expected_file" "$actual_output" 2>&1 | head -20 | sed 's/^/       /'
+        diff --strip-trailing-cr "$expected_file" "$actual_output" 2>&1 | head -20 | sed 's/^/       /'
         echo "       (Keeping $output_name for inspection)"
         ((FAILED++))
     fi
