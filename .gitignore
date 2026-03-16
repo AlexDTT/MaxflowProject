@@ -4,4 +4,9 @@ Project1Description_rc1.pdf
 ./cmake-build-debug
 main.exe
 main
+maxflow_tests.exe
+maxflow_tests
+maxflow_tests.o
+output_dataset*.csv
+assign.csv
 *.o

@@ -30,6 +30,11 @@ add_executable(maxflow_tests
 
 target_include_directories(maxflow_tests PRIVATE ${CMAKE_SOURCE_DIR})
 
-add_test(NAME maxflow_tests COMMAND maxflow_tests)
+add_test(NAME unit_tests COMMAND maxflow_tests)
+
+add_test(NAME integration_tests
+    COMMAND bash ${CMAKE_SOURCE_DIR}/tests/run_integration_tests.sh
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
 
 
