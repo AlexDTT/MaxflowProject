@@ -87,6 +87,16 @@ static std::vector<int> findRiskyReviewersK1(const std::vector<Submission>& subm
     std::vector<int> risky;
     const int needed = totalRequiredReviews(submissions, params);
 
+    Graph<int> baseline = createGraphs::buildReviewFlowGraph(submissions, reviewers, params, mode);
+    edmondsKarp(&baseline,
+                createGraphs::sourceId(),
+                createGraphs::sinkId((int) submissions.size(), (int) reviewers.size()));
+    const int baselineAchieved = totalAssignedReviews(baseline, submissions, reviewers);
+
+    if (baselineAchieved < needed) {
+        return risky;
+    }
+
     for (size_t skip = 0; skip < reviewers.size(); ++skip) {
         std::vector<Reviewer> reduced;
         reduced.reserve(reviewers.size() - 1);
