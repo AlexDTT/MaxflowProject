@@ -141,71 +141,15 @@ static bool writeAssignmentsToFile(const Graph<int>& flowGraph,
         return false;
     }
 
-    const Graph<int>* graphForOutput = &flowGraph;
-    std::vector<Reviewer> reviewersForOutput = reviewers;
-    Graph<int> compactedGraph;
-
-    const int baselineAssigned = totalAssignedReviews(flowGraph, submissions, reviewers);
-    if (baselineAssigned > 0 && !reviewers.empty() && params.MaxReviewsPerReviewer > 0) {
-        int minReviewersNeeded = (baselineAssigned + params.MaxReviewsPerReviewer - 1) / params.MaxReviewsPerReviewer;
-        if (minReviewersNeeded < 1) minReviewersNeeded = 1;
-        if (minReviewersNeeded > (int) reviewers.size()) minReviewersNeeded = (int) reviewers.size();
-
-        if (minReviewersNeeded < (int) reviewers.size()) {
-            std::vector<Reviewer> prefix(reviewers.begin(), reviewers.begin() + minReviewersNeeded);
-            Graph<int> candidate = createGraphs::buildReviewFlowGraph(submissions, prefix, params, mode);
-            edmondsKarp(&candidate,
-                        createGraphs::sourceId(),
-                        createGraphs::sinkId((int) submissions.size(), (int) prefix.size()));
-
-            const int achieved = totalAssignedReviews(candidate, submissions, prefix);
-            if (achieved == baselineAssigned) {
-                compactedGraph = std::move(candidate);
-                reviewersForOutput = std::move(prefix);
-                graphForOutput = &compactedGraph;
-            }
-        }
-
-        if (graphForOutput == &compactedGraph && reviewersForOutput.size() > 1) {
-            bool allToAllCompatible = true;
-            for (const auto& s : submissions) {
-                for (const auto& r : reviewersForOutput) {
-                    if (createGraphs::getMatchedDomain(s, r, mode) == -1) {
-                        allToAllCompatible = false;
-                        break;
-                    }
-                }
-                if (!allToAllCompatible) break;
-            }
-
-            if (allToAllCompatible) {
-                std::vector<Reviewer> rotated = reviewersForOutput;
-                std::rotate(rotated.begin(), rotated.begin() + 1, rotated.end());
-
-                Graph<int> rotatedGraph = createGraphs::buildReviewFlowGraph(submissions, rotated, params, mode);
-                edmondsKarp(&rotatedGraph,
-                            createGraphs::sourceId(),
-                            createGraphs::sinkId((int) submissions.size(), (int) rotated.size()));
-
-                const int rotatedAchieved = totalAssignedReviews(rotatedGraph, submissions, rotated);
-                if (rotatedAchieved == baselineAssigned) {
-                    compactedGraph = std::move(rotatedGraph);
-                    reviewersForOutput = std::move(rotated);
-                    graphForOutput = &compactedGraph;
-                }
-            }
-        }
-    }
-
     const int numSubs = (int) submissions.size();
-    const int numRevs = (int) reviewersForOutput.size();
+    const int numRevs = (int) reviewers.size();
 
     std::vector<std::tuple<int, int, int>> bySubmission;
     std::vector<std::tuple<int, int, int>> byReviewer;
 
     for (int i = 0; i < numSubs; ++i) {
         int subNode = createGraphs::submissionNodeId(i);
-        Vertex<int>* subV = graphForOutput->findVertex(subNode);
+        Vertex<int>* subV = flowGraph.findVertex(subNode);
         if (subV == nullptr) continue;
 
         for (Edge<int>* e : subV->getAdj()) {
@@ -220,11 +164,11 @@ static bool writeAssignmentsToFile(const Graph<int>& flowGraph,
             }
 
             int revIndex = destNode - createGraphs::reviewerNodeId(0, numSubs);
-            int matchedDomain = createGraphs::getMatchedDomain(submissions[i], reviewersForOutput[revIndex], mode);
+            int matchedDomain = createGraphs::getMatchedDomain(submissions[i], reviewers[revIndex], mode);
             if (matchedDomain == -1) matchedDomain = submissions[i].primaryTopic;
 
-            bySubmission.emplace_back(submissions[i].id, reviewersForOutput[revIndex].id, matchedDomain);
-            byReviewer.emplace_back(reviewersForOutput[revIndex].id, submissions[i].id, matchedDomain);
+            bySubmission.emplace_back(submissions[i].id, reviewers[revIndex].id, matchedDomain);
+            byReviewer.emplace_back(reviewers[revIndex].id, submissions[i].id, matchedDomain);
         }
     }
 
@@ -274,7 +218,7 @@ static bool writeAssignmentsToFile(const Graph<int>& flowGraph,
     }
 
     return true;
-}
+};
 
 static bool generateAssignmentsAndStore(Graph<int>& outGraph,
                                         const std::vector<Submission>& submissions,
