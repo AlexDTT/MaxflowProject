@@ -10,3 +10,4 @@ maxflow_tests.o
 output_dataset*.csv
 assign.csv
 *.o
+*.dot
