@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -Wall -Wextra -std=c++14 -I.
+CXXFLAGS := -Wall -Wextra -std=c++17 -I.
 
 TARGET := main
 TARGET_SOURCES := \
@@ -7,7 +7,7 @@ TARGET_SOURCES := \
 	utils/Submission.cpp \
 	utils/Reviewer.cpp \
 	utils/FileParser.cpp \
-	utils/EdmondKarp.cpp \
+	utils/EdmondKarp.cpp utils/AssignmentLogic.cpp \
 	data_structures/createGraphs.cpp
 TARGET_OBJECTS := $(TARGET_SOURCES:.cpp=.o)
 
@@ -16,7 +16,7 @@ UNIT_TEST_SOURCES := \
 	tests/maxflow_tests.cpp \
 	utils/Submission.cpp \
 	utils/Reviewer.cpp \
-	utils/EdmondKarp.cpp \
+	utils/EdmondKarp.cpp utils/AssignmentLogic.cpp \
 	data_structures/createGraphs.cpp
 UNIT_TEST_OBJECTS := $(UNIT_TEST_SOURCES:.cpp=.o)
 

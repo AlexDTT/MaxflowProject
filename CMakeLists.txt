@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.26)
 project(MaxFlowProject)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set( CMAKE_BUILD_TYPE_TMP "${CMAKE_BUILD_TYPE}" )
 set( CMAKE_BUILD_TYPE "Debug" )
 
@@ -13,6 +13,7 @@ add_executable(main
     utils/Reviewer.cpp
     utils/FileParser.cpp
     utils/EdmondKarp.cpp
+    utils/AssignmentLogic.cpp
     data_structures/createGraphs.cpp
 )
 
@@ -25,6 +26,7 @@ add_executable(maxflow_tests
     utils/Submission.cpp
     utils/Reviewer.cpp
     utils/EdmondKarp.cpp
+    utils/AssignmentLogic.cpp
     data_structures/createGraphs.cpp
 )
 

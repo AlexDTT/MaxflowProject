@@ -1,5 +1,6 @@
 
 #include "EdmondKarp.h"
+#include <algorithm>
 
 // Function to test the given vertex 'w' and visit it if conditions are met
 template <class T>
@@ -80,7 +81,7 @@ void augmentFlowAlongPath(Vertex<T> *s, Vertex<T> *t, double f) {
 
 // Main function implementing the Edmonds-Karp algorithm
 template <class T>
-void edmondsKarp(Graph<T> *g, T source, T target) {
+void edmondsKarp(Graph<T> *g, T source, T target, std::function<void(const std::vector<T>&, double)> onAugment) {
     // Find source and target vertices in the graph
     Vertex<T>* s = g->findVertex(source);
     Vertex<T>* t = g->findVertex(target);
@@ -109,6 +110,19 @@ void edmondsKarp(Graph<T> *g, T source, T target) {
 
     while(findAugmentingPath(g, s, t)) {
         double f = findMinResidualAlongPath(s, t);
+        
+        if (onAugment) {
+            std::vector<T> pathNodes;
+            Vertex<T> *v = t;
+            while (v != s) {
+                pathNodes.push_back(v->getInfo());
+                v = v->getPath()->getOrig();
+            }
+            pathNodes.push_back(s->getInfo());
+            std::reverse(pathNodes.begin(), pathNodes.end());
+            onAugment(pathNodes, f);
+        }
+        
         augmentFlowAlongPath(s, t, f);
     }
 
@@ -162,4 +176,4 @@ void edmondsKarp(Graph<T> *g, T source, T target) {
 // }
 
 // Explicit instantiations for types used by the program
-template void edmondsKarp<int>(Graph<int>*, int, int);
+template void edmondsKarp<int>(Graph<int>*, int, int, std::function<void(const std::vector<int>&, double)>);

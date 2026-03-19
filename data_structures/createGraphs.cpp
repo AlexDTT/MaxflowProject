@@ -108,6 +108,23 @@ Graph<int> createGraphs::buildReviewFlowGraph(
 // Visual graph printer
 // ------------------------------------------------------------
 
+string createGraphs::getNodeLabel(int id, const vector<Submission>& submissions, const vector<Reviewer>& reviewers) {
+    int P = (int)submissions.size();
+    int R = (int)reviewers.size();
+    int src = sourceId();
+    int snk = sinkId(P, R);
+
+    if (id == src) return "SOURCE";
+    if (id == snk) return "SINK";
+    for (int i = 0; i < P; ++i)
+        if (id == submissionNodeId(i))
+            return "SUB#" + to_string(submissions[i].id);
+    for (int j = 0; j < R; ++j)
+        if (id == reviewerNodeId(j, P))
+            return "REV#" + to_string(reviewers[j].id);
+    return "NODE#" + to_string(id);
+}
+
 void createGraphs::printFlowGraph(
         const Graph<int>&         g,
         const vector<Submission>& submissions,
@@ -120,17 +137,7 @@ void createGraphs::printFlowGraph(
 
     // Build a label map: node ID -> display name
     auto label = [&](int id) -> string {
-        if (id == src) return "SOURCE";
-        if (id == snk) return "SINK";
-        // Submission node?
-        for (int i = 0; i < P; ++i)
-            if (id == submissionNodeId(i))
-                return "SUB#" + to_string(submissions[i].id);
-        // Reviewer node?
-        for (int j = 0; j < R; ++j)
-            if (id == reviewerNodeId(j, P))
-                return "REV#" + to_string(reviewers[j].id);
-        return "NODE#" + to_string(id);
+        return getNodeLabel(id, submissions, reviewers);
     };
 
     // Determine column width for alignment
@@ -171,5 +178,51 @@ void createGraphs::printFlowGraph(
         }
     }
     cout << string(60, '-') << "\n";
+}
+
+void createGraphs::exportToDOT(
+        const Graph<int>&         g,
+        const vector<Submission>& submissions,
+        const vector<Reviewer>&   reviewers,
+        const string&             filename) {
+
+    ofstream out(filename);
+    if (!out.is_open()) {
+        cerr << "Failed to open " << filename << " for DOT export.\n";
+        return;
+    }
+
+    out << "digraph MaxFlow {\n";
+    out << "  rankdir=LR;\n";
+    out << "  node [shape=box, style=filled, fillcolor=white];\n";
+
+    // Write edges
+    for (auto v : g.getVertexSet()) {
+        int srcId = v->getInfo();
+        string srcLabel = getNodeLabel(srcId, submissions, reviewers);
+        
+        // DOT nodes can't easily have `#` unquoted, so let's sanitize
+        string safeSrcLabel = "\"" + srcLabel + "\"";
+
+        for (auto e : v->getAdj()) {
+            int destId = e->getDest()->getInfo();
+            string destLabel = getNodeLabel(destId, submissions, reviewers);
+            string safeDestLabel = "\"" + destLabel + "\"";
+
+            double cap = e->getWeight();
+            double flow = e->getFlow();
+
+            if (cap > 0) { // Only show forward edges with capacity
+                string color = (flow > 0) ? "blue" : "black";
+                string penwidth = (flow > 0) ? "2.0" : "1.0";
+                
+                out << "  " << safeSrcLabel << " -> " << safeDestLabel 
+                    << " [label=\"" << flow << "/" << cap << "\", color=" << color 
+                    << ", penwidth=" << penwidth << "];\n";
+            }
+        }
+    }
+
+    out << "}\n";
 }
 

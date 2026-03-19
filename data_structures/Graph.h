@@ -22,6 +22,7 @@ class Vertex
 {
 public:
     Vertex(T in);
+    ~Vertex();
 
     T getInfo() const;
     std::vector<Edge<T> *> getAdj() const;
@@ -101,7 +102,17 @@ template <class T>
 class Graph
 {
 public:
+    Graph() = default;
     ~Graph();
+
+    // Disable copy
+    Graph(const Graph&) = delete;
+    Graph& operator=(const Graph&) = delete;
+
+    // Enable move
+    Graph(Graph&& other) noexcept;
+    Graph& operator=(Graph&& other) noexcept;
+
     /*
      * Auxiliary function to find a vertex with a given the content.
      */
@@ -144,6 +155,14 @@ void deleteMatrix(double **m, int n);
 
 template <class T>
 Vertex<T>::Vertex(T in) : info(in) {}
+
+template <class T>
+Vertex<T>::~Vertex() {
+    for (auto edge : adj) {
+        delete edge;
+    }
+}
+
 /*
  * Auxiliary function to add an outgoing edge to a vertex (this),
  * with a given destination vertex (d) and edge weight (w).
@@ -532,10 +551,38 @@ inline void deleteMatrix(double **m, int n)
 }
 
 template <class T>
+Graph<T>::Graph(Graph<T>&& other) noexcept : vertexSet(std::move(other.vertexSet)), distMatrix(other.distMatrix), pathMatrix(other.pathMatrix) {
+    other.vertexSet.clear();
+    other.distMatrix = nullptr;
+    other.pathMatrix = nullptr;
+}
+
+template <class T>
+Graph<T>& Graph<T>::operator=(Graph<T>&& other) noexcept {
+    if (this != &other) {
+        deleteMatrix(distMatrix, vertexSet.size());
+        deleteMatrix(pathMatrix, vertexSet.size());
+        for (auto v : vertexSet) delete v;
+        
+        vertexSet = std::move(other.vertexSet);
+        distMatrix = other.distMatrix;
+        pathMatrix = other.pathMatrix;
+        
+        other.vertexSet.clear();
+        other.distMatrix = nullptr;
+        other.pathMatrix = nullptr;
+    }
+    return *this;
+}
+
+template <class T>
 Graph<T>::~Graph()
 {
     deleteMatrix(distMatrix, vertexSet.size());
     deleteMatrix(pathMatrix, vertexSet.size());
+    for (auto v : vertexSet) {
+        delete v;
+    }
 }
 
 #endif /* DA_TP_CLASSES_GRAPH */
