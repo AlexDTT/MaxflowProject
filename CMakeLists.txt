@@ -9,12 +9,13 @@ set( CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE_TMP} )
 
 add_executable(main
     main.cpp
-    utils/Submission.cpp
-    utils/Reviewer.cpp
-    utils/FileParser.cpp
-    utils/EdmondKarp.cpp
-    utils/AssignmentLogic.cpp
-    data_structures/createGraphs.cpp
+    ui/ConferenceApp.cpp
+    models/Submission.cpp
+    models/Reviewer.cpp
+    io/FileParser.cpp
+    algorithms/EdmondKarp.cpp
+    services/AssignmentLogic.cpp
+    data_structures/GraphBuilder.cpp
 )
 
 target_include_directories(main PRIVATE ${CMAKE_SOURCE_DIR})
@@ -23,11 +24,11 @@ enable_testing()
 
 add_executable(maxflow_tests
     tests/maxflow_tests.cpp
-    utils/Submission.cpp
-    utils/Reviewer.cpp
-    utils/EdmondKarp.cpp
-    utils/AssignmentLogic.cpp
-    data_structures/createGraphs.cpp
+    models/Submission.cpp
+    models/Reviewer.cpp
+    algorithms/EdmondKarp.cpp
+    services/AssignmentLogic.cpp
+    data_structures/GraphBuilder.cpp
 )
 
 target_include_directories(maxflow_tests PRIVATE ${CMAKE_SOURCE_DIR})

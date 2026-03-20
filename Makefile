@@ -4,20 +4,21 @@ CXXFLAGS := -Wall -Wextra -std=c++17 -I.
 TARGET := main
 TARGET_SOURCES := \
 	main.cpp \
-	utils/Submission.cpp \
-	utils/Reviewer.cpp \
-	utils/FileParser.cpp \
-	utils/EdmondKarp.cpp utils/AssignmentLogic.cpp \
-	data_structures/createGraphs.cpp
+	ui/ConferenceApp.cpp \
+	models/Submission.cpp \
+	models/Reviewer.cpp \
+	io/FileParser.cpp \
+	algorithms/EdmondKarp.cpp services/AssignmentLogic.cpp \
+	data_structures/GraphBuilder.cpp
 TARGET_OBJECTS := $(TARGET_SOURCES:.cpp=.o)
 
 UNIT_TEST_TARGET := maxflow_tests
 UNIT_TEST_SOURCES := \
 	tests/maxflow_tests.cpp \
-	utils/Submission.cpp \
-	utils/Reviewer.cpp \
-	utils/EdmondKarp.cpp utils/AssignmentLogic.cpp \
-	data_structures/createGraphs.cpp
+	models/Submission.cpp \
+	models/Reviewer.cpp \
+	algorithms/EdmondKarp.cpp services/AssignmentLogic.cpp \
+	data_structures/GraphBuilder.cpp
 UNIT_TEST_OBJECTS := $(UNIT_TEST_SOURCES:.cpp=.o)
 
 .PHONY: all unit-test integration-test test run clean docs

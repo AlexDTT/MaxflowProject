@@ -7,12 +7,12 @@
 #include <utility>
 #include <vector>
 
-#include "../data_structures/Graph.h"
-#include "../data_structures/createGraphs.h"
-#include "../utils/EdmondKarp.h"
-#include "../utils/Parameters.h"
-#include "../utils/Reviewer.h"
-#include "../utils/Submission.h"
+#include "data_structures/Graph.h"
+#include "data_structures/GraphBuilder.h"
+#include "algorithms/EdmondKarp.h"
+#include "models/Parameters.h"
+#include "models/Reviewer.h"
+#include "models/Submission.h"
 
 static double getEdgeFlow(const Graph<int>& g, int from, int to) {
     Vertex<int>* v = g.findVertex(from);
@@ -32,12 +32,12 @@ static double totalFlowFromSource(const Graph<int>& g, int source) {
 }
 
 static int assignedToSubmission(const Graph<int>& g, int subIndex, int numSubs, int numRevs) {
-    int subNode = createGraphs::submissionNodeId(subIndex);
+    int subNode = GraphBuilder::submissionNodeId(subIndex);
     Vertex<int>* subV = g.findVertex(subNode);
     if (subV == nullptr) return 0;
 
-    int firstRevNode = (numRevs > 0) ? createGraphs::reviewerNodeId(0, numSubs) : 1;
-    int lastRevNode = (numRevs > 0) ? createGraphs::reviewerNodeId(numRevs - 1, numSubs) : 0;
+    int firstRevNode = (numRevs > 0) ? GraphBuilder::reviewerNodeId(0, numSubs) : 1;
+    int lastRevNode = (numRevs > 0) ? GraphBuilder::reviewerNodeId(numRevs - 1, numSubs) : 0;
 
     int total = 0;
     for (Edge<int>* e : subV->getAdj()) {
@@ -51,8 +51,8 @@ static int assignedToSubmission(const Graph<int>& g, int subIndex, int numSubs, 
 
 static int assignedByReviewer(const Graph<int>& g, int revIndex, int numSubs, int numRevs) {
     if (numRevs == 0) return 0;
-    int revNode = createGraphs::reviewerNodeId(revIndex, numSubs);
-    int sink = createGraphs::sinkId(numSubs, numRevs);
+    int revNode = GraphBuilder::reviewerNodeId(revIndex, numSubs);
+    int sink = GraphBuilder::sinkId(numSubs, numRevs);
     return (int) getEdgeFlow(g, revNode, sink);
 }
 
@@ -67,11 +67,11 @@ static Graph<int> runAssignmentFlow(
     params.MinReviewsPerSubmission = minReviews;
     params.MaxReviewsPerReviewer = maxReviews;
 
-    Graph<int> g = createGraphs::buildReviewFlowGraph(submissions, reviewers, params, mode);
+    Graph<int> g = GraphBuilder::buildReviewFlowGraph(submissions, reviewers, params, mode);
     edmondsKarp(
         &g,
-        createGraphs::sourceId(),
-        createGraphs::sinkId((int) submissions.size(), (int) reviewers.size())
+        GraphBuilder::sourceId(),
+        GraphBuilder::sinkId((int) submissions.size(), (int) reviewers.size())
     );
     return g;
 }
@@ -115,7 +115,7 @@ static std::vector<std::vector<int>> compatibilityMatrix(
     for (size_t i = 0; i < submissions.size(); ++i) {
         for (size_t j = 0; j < reviewers.size(); ++j) {
             canAssign[i][j] =
-                (createGraphs::getMatchedDomain(submissions[i], reviewers[j], mode) != -1) ? 1 : 0;
+                (GraphBuilder::getMatchedDomain(submissions[i], reviewers[j], mode) != -1) ? 1 : 0;
         }
     }
 
@@ -203,7 +203,7 @@ static void verifyFlowRespectsCaps(
     int maxReviewsPerReviewer) {
 
     for (int i = 0; i < subCount; ++i) {
-        int subNode = createGraphs::submissionNodeId(i);
+        int subNode = GraphBuilder::submissionNodeId(i);
         Vertex<int>* subV = g.findVertex(subNode);
         expect(subV != nullptr, "Submission node missing from graph");
 
@@ -215,8 +215,8 @@ static void verifyFlowRespectsCaps(
     }
 
     for (int j = 0; j < revCount; ++j) {
-        int revNode = createGraphs::reviewerNodeId(j, subCount);
-        int sinkNode = createGraphs::sinkId(subCount, revCount);
+        int revNode = GraphBuilder::reviewerNodeId(j, subCount);
+        int sinkNode = GraphBuilder::sinkId(subCount, revCount);
         double flowToSink = getEdgeFlow(g, revNode, sinkNode);
         expect(flowToSink <= maxReviewsPerReviewer + 1e-9, "Reviewer exceeds maximum allowed reviews");
     }
@@ -237,9 +237,9 @@ static void testAllModesAllMinMaxCombinations() {
                 params.MinReviewsPerSubmission = minR;
                 params.MaxReviewsPerReviewer = maxR;
 
-                Graph<int> g = createGraphs::buildReviewFlowGraph(submissions, reviewers, params, mode);
-                int source = createGraphs::sourceId();
-                int sink = createGraphs::sinkId((int) submissions.size(), (int) reviewers.size());
+                Graph<int> g = GraphBuilder::buildReviewFlowGraph(submissions, reviewers, params, mode);
+                int source = GraphBuilder::sourceId();
+                int sink = GraphBuilder::sinkId((int) submissions.size(), (int) reviewers.size());
 
                 edmondsKarp(&g, source, sink);
 
@@ -280,9 +280,9 @@ static void testModeMonotonicity() {
             double flowByMode[4] = {0, 0, 0, 0};
 
             for (int mode = 0; mode <= 3; ++mode) {
-                Graph<int> g = createGraphs::buildReviewFlowGraph(submissions, reviewers, params, mode);
-                int source = createGraphs::sourceId();
-                int sink = createGraphs::sinkId((int) submissions.size(), (int) reviewers.size());
+                Graph<int> g = GraphBuilder::buildReviewFlowGraph(submissions, reviewers, params, mode);
+                int source = GraphBuilder::sourceId();
+                int sink = GraphBuilder::sinkId((int) submissions.size(), (int) reviewers.size());
                 edmondsKarp(&g, source, sink);
                 flowByMode[mode] = totalFlowFromSource(g, source);
             }
@@ -317,7 +317,7 @@ static void testExample1FullySatisfiableHappyPath() {
     const int mode = 1;
 
     Graph<int> g = runAssignmentFlow(submissions, reviewers, minReviews, maxReviews, mode);
-    int source = createGraphs::sourceId();
+    int source = GraphBuilder::sourceId();
 
     expect(nearlyEqual(totalFlowFromSource(g, source), 6), "Example 1 should assign all 6 required reviews");
 
@@ -348,7 +348,7 @@ static void testExample2PartiallyUnsatisfiable() {
     const int mode = 1;
 
     Graph<int> g = runAssignmentFlow(submissions, reviewers, minReviews, maxReviews, mode);
-    int source = createGraphs::sourceId();
+    int source = GraphBuilder::sourceId();
 
     expect(nearlyEqual(totalFlowFromSource(g, source), 2), "Example 2 should assign only 2 reviews in total");
 
@@ -380,7 +380,7 @@ static void testExample3RiskAnalysisOneCriticalReviewer() {
     const int totalRequired = (int) submissions.size() * minReviews;
 
     Graph<int> baseline = runAssignmentFlow(submissions, reviewers, minReviews, maxReviews, mode);
-    expect((int) totalFlowFromSource(baseline, createGraphs::sourceId()) == totalRequired,
+    expect((int) totalFlowFromSource(baseline, GraphBuilder::sourceId()) == totalRequired,
            "Example 3 baseline should be feasible");
 
     for (int removedId : {1, 2, 3}) {
@@ -390,7 +390,7 @@ static void testExample3RiskAnalysisOneCriticalReviewer() {
         }
 
         Graph<int> gReduced = runAssignmentFlow(submissions, reduced, minReviews, maxReviews, mode);
-        int flow = (int) totalFlowFromSource(gReduced, createGraphs::sourceId());
+        int flow = (int) totalFlowFromSource(gReduced, GraphBuilder::sourceId());
 
         if (removedId == 3) {
             expect(flow < totalRequired, "Example 3: removing reviewer 3 must make assignment infeasible");
@@ -450,9 +450,9 @@ static void testPrimaryModeAssignmentFlow() {
     params.MinReviewsPerSubmission = 1;
     params.MaxReviewsPerReviewer = 1;
 
-    Graph<int> g = createGraphs::buildReviewFlowGraph(submissions, reviewers, params, 1);
-    int source = createGraphs::sourceId();
-    int sink = createGraphs::sinkId((int) submissions.size(), (int) reviewers.size());
+    Graph<int> g = GraphBuilder::buildReviewFlowGraph(submissions, reviewers, params, 1);
+    int source = GraphBuilder::sourceId();
+    int sink = GraphBuilder::sinkId((int) submissions.size(), (int) reviewers.size());
 
     edmondsKarp(&g, source, sink);
 
@@ -476,11 +476,11 @@ static void testSecondarySubmissionModeEnablesMatch() {
     params.MinReviewsPerSubmission = 1;
     params.MaxReviewsPerReviewer = 1;
 
-    Graph<int> gMode1 = createGraphs::buildReviewFlowGraph(submissions, reviewers, params, 1);
-    Graph<int> gMode2 = createGraphs::buildReviewFlowGraph(submissions, reviewers, params, 2);
+    Graph<int> gMode1 = GraphBuilder::buildReviewFlowGraph(submissions, reviewers, params, 1);
+    Graph<int> gMode2 = GraphBuilder::buildReviewFlowGraph(submissions, reviewers, params, 2);
 
-    int source = createGraphs::sourceId();
-    int sink = createGraphs::sinkId((int) submissions.size(), (int) reviewers.size());
+    int source = GraphBuilder::sourceId();
+    int sink = GraphBuilder::sinkId((int) submissions.size(), (int) reviewers.size());
 
     edmondsKarp(&gMode1, source, sink);
     edmondsKarp(&gMode2, source, sink);

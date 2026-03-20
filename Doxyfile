@@ -5,7 +5,7 @@ PROJECT_NAME           = "Maxflow Project T9G2"
 OUTPUT_DIRECTORY       = docs
 
 # Input files
-INPUT                  = main.cpp data_structures tests utils README.md
+INPUT                  = main.cpp data_structures tests models io algorithms services ui README.md
 RECURSIVE              = YES
 FILE_PATTERNS          = *.c *.cpp *.h *.hpp *.md
 USE_MDFILE_AS_MAINPAGE = README.md
@@ -38,7 +38,7 @@ PAGE_OUTLINE_PANEL     = NO
 HAVE_DOT               = YES
 DOT_IMAGE_FORMAT       = svg
 DOT_TRANSPARENT        = YES
-DOTFILE_DIRS           = .
+DOTFILE_DIRS           = . dox
 HTML_COLORSTYLE        = LIGHT
 
 # Other options

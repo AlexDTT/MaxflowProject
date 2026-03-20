@@ -10,7 +10,7 @@ This project implements an organizational tool to assist a scientific committee 
 - Maximum number of reviews a reviewer is willing to perform.
 - Matching submissions with reviewers based on their Primary (and potentially Secondary) domains of expertise.
 
-In addition to base assignments, the tool supports **Risk Analysis** scenarios to evaluate how the absence of a reviewer ($K=1$) might jeopardize the integrity of the review process. 
+In addition to base assignments, the tool supports **Risk Analysis** scenarios to evaluate how the absence of a reviewer (K=1) might jeopardize the integrity of the review process. 
 
 ## Group T9G2 Members
 This project was developed by Group T9G2:
@@ -39,7 +39,7 @@ This diagram illustrates the bipartite matching between **Submissions** and **Re
 
 <div class="interactive_dotgraph">
 
-\dotfile graph.dot
+\dotfile dox/example_graph.dot
 
 </div>
 
