@@ -3,6 +3,14 @@
 
 #include <string>
 
+/**
+ * @struct Parameters
+ * @brief Struct to hold global configuration parameters.
+ * 
+ * Contains all parameters extracted from the Control and Parameters sections
+ * of the input CSV dataset, dictating assignment logic, capacities, risk analysis mode,
+ * and the expected output file name.
+ */
 struct Parameters {
     int MinReviewsPerSubmission    = 1;
     int MaxReviewsPerReviewer      = 1;

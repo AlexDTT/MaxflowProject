@@ -1,5 +1,10 @@
-// Declarations for Edmonds-Karp helper functions
-// (Implementations remain in EdmondKarp.cpp)
+/**
+ * @file EdmondKarp.h
+ * @brief Implementations of the Edmonds-Karp algorithm for calculating maximum flow.
+ * 
+ * Provides template-based implementations of BFS-based path augmentation 
+ * on generic directed flow networks.
+ */
 
 #ifndef MAXFLOW_EDMONDKARP_H
 #define MAXFLOW_EDMONDKARP_H

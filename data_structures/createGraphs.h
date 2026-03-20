@@ -10,6 +10,13 @@
 
 using namespace std;
 
+/**
+ * @class createGraphs
+ * @brief Factory class to construct and visualize network flow graphs.
+ * 
+ * Contains utility methods used exclusively to build the corresponding Max-Flow network,
+ * map entities to node IDs, and display/export the graph states.
+ */
 class createGraphs{
 public:
 

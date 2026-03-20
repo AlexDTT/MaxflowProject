@@ -17,6 +17,11 @@ class Edge;
 
 /************************* Vertex  **************************/
 
+/**
+ * @class Vertex
+ * @brief Represents a node in the graph.
+ * @tparam T The data type of the information stored in the vertex.
+ */
 template <class T>
 class Vertex
 {
@@ -67,6 +72,11 @@ protected:
 
 /********************** Edge  ****************************/
 
+/**
+ * @class Edge
+ * @brief Represents a directed connection between two vertices in the graph.
+ * @tparam T The data type of the information stored in the connected vertices.
+ */
 template <class T>
 class Edge
 {
@@ -98,6 +108,11 @@ protected:
 
 /********************** Graph  ****************************/
 
+/**
+ * @class Graph
+ * @brief Represents a general graph using an adjacency list.
+ * @tparam T The data type of the information stored in the graph's vertices.
+ */
 template <class T>
 class Graph
 {

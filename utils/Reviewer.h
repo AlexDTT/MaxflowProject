@@ -7,6 +7,14 @@
 
 #include <string>
 
+/**
+ * @class Reviewer
+ * @brief Represents a conference reviewer.
+ * 
+ * Contains all metadata relevant to a reviewer, including their unique identifier,
+ * name, contact information, and domain topics (primary and optional secondary) 
+ * indicating their areas of expertise.
+ */
 class Reviewer {
 public:
     int id;

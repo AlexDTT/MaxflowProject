@@ -7,6 +7,13 @@
 
 #include <string>
 
+/**
+ * @class Submission
+ * @brief Represents a scientific paper/article submission.
+ * 
+ * Contains all metadata relevant to a submission, including its unique identifier,
+ * title, authors, contact information, and domain topics (primary and optional secondary).
+ */
 class Submission {
 public:
     int id;
