@@ -21,6 +21,13 @@ GENERATE_RTF           = NO
 GENERATE_MAN           = NO
 GENERATE_XML           = NO
 
+# Doxygen Awesome CSS configuration
+GENERATE_TREEVIEW      = YES
+DISABLE_INDEX          = NO
+FULL_SIDEBAR           = NO
+HTML_EXTRA_STYLESHEET  = doxygen-awesome.css
+HTML_COLORSTYLE        = LIGHT
+
 # Other options
 SOURCE_BROWSER         = YES
 INLINE_SOURCES         = YES
