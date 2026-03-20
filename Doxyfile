@@ -1,0 +1,27 @@
+# Doxyfile 1.9.0
+
+# Project related configuration
+PROJECT_NAME           = "MaxflowProject"
+OUTPUT_DIRECTORY       = docs
+
+# Input files
+INPUT                  = main.cpp data_structures tests utils
+RECURSIVE              = YES
+FILE_PATTERNS          = *.c *.cpp *.h *.hpp
+
+# Extraction settings
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = YES
+EXTRACT_STATIC         = YES
+
+# Output formats
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_RTF           = NO
+GENERATE_MAN           = NO
+GENERATE_XML           = NO
+
+# Other options
+SOURCE_BROWSER         = YES
+INLINE_SOURCES         = YES
+WARNINGS               = YES

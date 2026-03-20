@@ -20,7 +20,7 @@ UNIT_TEST_SOURCES := \
 	data_structures/createGraphs.cpp
 UNIT_TEST_OBJECTS := $(UNIT_TEST_SOURCES:.cpp=.o)
 
-.PHONY: all unit-test integration-test test run clean
+.PHONY: all unit-test integration-test test run clean docs
 
 all: $(TARGET)
 
@@ -44,6 +44,10 @@ test: unit-test integration-test
 run: $(TARGET)
 	./$(TARGET)
 
+docs:
+	doxygen Doxyfile
+
 clean:
 	rm -f $(TARGET_OBJECTS) $(UNIT_TEST_OBJECTS) $(TARGET) $(UNIT_TEST_TARGET)
 	rm -f output_dataset*.csv assign.csv
+	rm -rf docs
