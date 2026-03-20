@@ -5,9 +5,10 @@ PROJECT_NAME           = "Maxflow Project T9G2"
 OUTPUT_DIRECTORY       = docs
 
 # Input files
-INPUT                  = main.cpp data_structures tests utils
+INPUT                  = main.cpp data_structures tests utils README.md
 RECURSIVE              = YES
-FILE_PATTERNS          = *.c *.cpp *.h *.hpp
+FILE_PATTERNS          = *.c *.cpp *.h *.hpp *.md
+USE_MDFILE_AS_MAINPAGE = README.md
 
 # Extraction settings
 EXTRACT_ALL            = YES
