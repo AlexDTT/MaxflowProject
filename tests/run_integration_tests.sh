@@ -32,7 +32,10 @@ for input_file in "$INPUT_DIR"/dataset*.csv; do
         continue
     fi
     ((TOTAL++))
-    output_name=$(grep -oP 'OutputFileName,\s*"\K[^"]+' "$input_file" 2>/dev/null || echo "output.csv")
+    output_name=$(awk -F'"' '/OutputFileName/ {print $2}' "$input_file" 2>/dev/null)
+    if [[ -z "$output_name" ]]; then
+        output_name="output.csv"
+    fi
     actual_output="$PROJECT_ROOT/$output_name"
     ./main -b "$input_file" >/dev/null 2>&1
     if [[ ! -f "$actual_output" ]]; then
