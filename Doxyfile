@@ -1,7 +1,7 @@
 # Doxyfile 1.9.0
 
 # Project related configuration
-PROJECT_NAME           = "MaxflowProject"
+PROJECT_NAME           = "Maxflow Project T9G2"
 OUTPUT_DIRECTORY       = docs
 
 # Input files
@@ -25,3 +25,6 @@ GENERATE_XML           = NO
 SOURCE_BROWSER         = YES
 INLINE_SOURCES         = YES
 WARNINGS               = YES
+
+# Custom aliases
+ALIASES += "complexity=\par Complexity:\n"
