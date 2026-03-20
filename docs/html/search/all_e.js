@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['secondaryreviewerexpertise_0',['SecondaryReviewerExpertise',['../struct_parameters.html#a9ac2241ed0f41c0f0d46e7a10f67c4ac',1,'Parameters']]],
+  ['secondarysubmissiondomain_1',['SecondarySubmissionDomain',['../struct_parameters.html#af29e21748d41b4d8a0867d8083ad7551',1,'Parameters']]],
+  ['secondarytopic_2',['secondaryTopic',['../class_reviewer.html#a06c85219cee04d5f82f2897152e336bc',1,'Reviewer::secondaryTopic'],['../class_submission.html#a31e3e68d8338cb9de1a11ed822f62c9a',1,'Submission::secondaryTopic']]],
+  ['selected_3',['selected',['../class_edge.html#a5242549271b59544ad1189fb532b5bbe',1,'Edge']]],
+  ['setdist_4',['setDist',['../class_vertex.html#a060fbea0c3738cc3e09d84ad8c431b34',1,'Vertex']]],
+  ['setflow_5',['setFlow',['../class_edge.html#a1819116e2c156733a14bbd94cc27908e',1,'Edge']]],
+  ['setindegree_6',['setIndegree',['../class_vertex.html#af9c4caaac19bdaae5a88a7a671639b59',1,'Vertex']]],
+  ['setinfo_7',['setInfo',['../class_vertex.html#a31cd60c26640f8072a928ba70eb2f95e',1,'Vertex']]],
+  ['setlow_8',['setLow',['../class_vertex.html#a62acec2c4fcbec56e995974b91444ec9',1,'Vertex']]],
+  ['setnum_9',['setNum',['../class_vertex.html#ab3f9026ba6cbd11243ab484a856c6581',1,'Vertex']]],
+  ['setpath_10',['setPath',['../class_vertex.html#a5ebf4b550ec94b89a8f80df1a53cc97d',1,'Vertex']]],
+  ['setprocessing_11',['setProcessing',['../class_vertex.html#a5ccb6f7215c915afdbcbdb81ad70a408',1,'Vertex']]],
+  ['setreverse_12',['setReverse',['../class_edge.html#afe8f8429025756c63f38e8c6fde7382c',1,'Edge']]],
+  ['setselected_13',['setSelected',['../class_edge.html#a87c8402c5edd6729a2c934e2a0cce6fe',1,'Edge']]],
+  ['setvisited_14',['setVisited',['../class_vertex.html#a95a3f3c55f2ba371fae51d3fe0e76c23',1,'Vertex']]],
+  ['sinkid_15',['sinkId',['../classcreate_graphs.html#a6cdda8c40cfd3717ff801029835cbac3',1,'createGraphs']]],
+  ['sourceid_16',['sourceId',['../classcreate_graphs.html#a0ba636c8b419a41f1e50c77da062ced6',1,'createGraphs']]],
+  ['submission_17',['Submission',['../class_submission.html',1,'Submission'],['../class_submission.html#aef0d46fbb565d31c272cb84488c6c0fe',1,'Submission::Submission()']]],
+  ['submission_2ecpp_18',['Submission.cpp',['../_submission_8cpp.html',1,'']]],
+  ['submission_2eh_19',['Submission.h',['../_submission_8h.html',1,'']]],
+  ['submissionnodeid_20',['submissionNodeId',['../classcreate_graphs.html#ad6b814f583129915c5f857686859598d',1,'createGraphs']]]
+];
