@@ -1,15 +1,15 @@
+<!-- HTML header for doxygen 1.9.1+ -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Maxflow Project T9G2: utils/EdmondKarp.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
@@ -19,16 +19,33 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<!-- doxygen-awesome extensions -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr id="projectrow">
-  <td id="projectalign">
+ <tr style="height: 56px;">
+  <!-- PROJECT LOGO -->
+  <!-- PROJECT TITLE -->
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Maxflow Project T9G2
    </div>
+   <div id="projectbrief"></div>
   </td>
  </tr>
  </tbody>
@@ -287,25 +304,25 @@ $(function(){initNavTree('_edmond_karp_8cpp_source.html','',''); });
 <div class="ttc" id="a_edmond_karp_8cpp_html_a9813dc412187df7cc322afea1283c22c"><div class="ttname"><a href="_edmond_karp_8cpp.html#a9813dc412187df7cc322afea1283c22c">augmentFlowAlongPath</a></div><div class="ttdeci">void augmentFlowAlongPath(Vertex&lt; T &gt; *s, Vertex&lt; T &gt; *t, double f)</div><div class="ttdoc">Augments the flow along the path by a given amount f.</div><div class="ttdef"><b>Definition</b> <a href="#l00068">EdmondKarp.cpp:68</a></div></div>
 <div class="ttc" id="a_edmond_karp_8cpp_html_ab38647bac4738e296aba7b1bc4744835"><div class="ttname"><a href="_edmond_karp_8cpp.html#ab38647bac4738e296aba7b1bc4744835">findMinResidualAlongPath</a></div><div class="ttdeci">double findMinResidualAlongPath(Vertex&lt; T &gt; *s, Vertex&lt; T &gt; *t)</div><div class="ttdoc">Finds the minimum residual capacity along an augmenting path.</div><div class="ttdef"><b>Definition</b> <a href="#l00048">EdmondKarp.cpp:48</a></div></div>
 <div class="ttc" id="a_edmond_karp_8cpp_html_acb329d42a9a476d072878ef35a6a343c"><div class="ttname"><a href="_edmond_karp_8cpp.html#acb329d42a9a476d072878ef35a6a343c">testAndVisit</a></div><div class="ttdeci">void testAndVisit(std::queue&lt; Vertex&lt; T &gt; * &gt; &amp;q, Edge&lt; T &gt; *e, Vertex&lt; T &gt; *w, double residual)</div><div class="ttdoc">Helper function to test and visit a vertex during BFS.</div><div class="ttdef"><b>Definition</b> <a href="#l00007">EdmondKarp.cpp:7</a></div></div>
-<div class="ttc" id="a_edmond_karp_8h_html"><div class="ttname"><a href="_edmond_karp_8h.html">EdmondKarp.h</a></div></div>
+<div class="ttc" id="a_edmond_karp_8h_html"><div class="ttname"><a href="_edmond_karp_8h.html">EdmondKarp.h</a></div><div class="ttdoc">Implementations of the Edmonds-Karp algorithm for calculating maximum flow.</div></div>
 <div class="ttc" id="a_graph_8h_html_a12c2040f25d8e3a7b9e1c2024c618cb6"><div class="ttname"><a href="_graph_8h.html#a12c2040f25d8e3a7b9e1c2024c618cb6">INF</a></div><div class="ttdeci">#define INF</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00016">Graph.h:16</a></div></div>
-<div class="ttc" id="aclass_edge_html"><div class="ttname"><a href="class_edge.html">Edge</a></div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00071">Graph.h:72</a></div></div>
-<div class="ttc" id="aclass_edge_html_a1819116e2c156733a14bbd94cc27908e"><div class="ttname"><a href="class_edge.html#a1819116e2c156733a14bbd94cc27908e">Edge::setFlow</a></div><div class="ttdeci">void setFlow(double flow)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00404">Graph.h:404</a></div></div>
-<div class="ttc" id="aclass_edge_html_a3df378e283d6c8be5be4170ac8d7f4e8"><div class="ttname"><a href="class_edge.html#a3df378e283d6c8be5be4170ac8d7f4e8">Edge::getWeight</a></div><div class="ttdeci">double getWeight() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00362">Graph.h:362</a></div></div>
-<div class="ttc" id="aclass_edge_html_a75458cfc838ca5aee5c34cb9f03b5647"><div class="ttname"><a href="class_edge.html#a75458cfc838ca5aee5c34cb9f03b5647">Edge::getFlow</a></div><div class="ttdeci">double getFlow() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00386">Graph.h:386</a></div></div>
-<div class="ttc" id="aclass_edge_html_a9a2de066dff8513dd788d553fc1d0c81"><div class="ttname"><a href="class_edge.html#a9a2de066dff8513dd788d553fc1d0c81">Edge::getDest</a></div><div class="ttdeci">Vertex&lt; T &gt; * getDest() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00356">Graph.h:356</a></div></div>
-<div class="ttc" id="aclass_edge_html_af0a900f3006e47b9f363df7429298eeb"><div class="ttname"><a href="class_edge.html#af0a900f3006e47b9f363df7429298eeb">Edge::getReverse</a></div><div class="ttdeci">Edge&lt; T &gt; * getReverse() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00374">Graph.h:374</a></div></div>
-<div class="ttc" id="aclass_edge_html_afe8f8429025756c63f38e8c6fde7382c"><div class="ttname"><a href="class_edge.html#afe8f8429025756c63f38e8c6fde7382c">Edge::setReverse</a></div><div class="ttdeci">void setReverse(Edge&lt; T &gt; *reverse)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00398">Graph.h:398</a></div></div>
-<div class="ttc" id="aclass_graph_html"><div class="ttname"><a href="class_graph.html">Graph</a></div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00102">Graph.h:103</a></div></div>
-<div class="ttc" id="aclass_graph_html_a41624b03fcb6bd29e4df574a1ec58541"><div class="ttname"><a href="class_graph.html#a41624b03fcb6bd29e4df574a1ec58541">Graph::getVertexSet</a></div><div class="ttdeci">std::vector&lt; Vertex&lt; T &gt; * &gt; getVertexSet() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00418">Graph.h:418</a></div></div>
-<div class="ttc" id="aclass_graph_html_a8b7b7465fbfd562e2a469f90a437ab75"><div class="ttname"><a href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">Graph::findVertex</a></div><div class="ttdeci">Vertex&lt; T &gt; * findVertex(const T &amp;in) const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00427">Graph.h:427</a></div></div>
-<div class="ttc" id="aclass_vertex_html"><div class="ttname"><a href="class_vertex.html">Vertex</a></div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00021">Graph.h:22</a></div></div>
-<div class="ttc" id="aclass_vertex_html_a0010a7d0b7db1bb81dd2ebb1ffae650a"><div class="ttname"><a href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">Vertex::getAdj</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; getAdj() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00253">Graph.h:253</a></div></div>
-<div class="ttc" id="aclass_vertex_html_a15e4ff95fba2bb5970a6551137ceb950"><div class="ttname"><a href="class_vertex.html#a15e4ff95fba2bb5970a6551137ceb950">Vertex::getPath</a></div><div class="ttdeci">Edge&lt; T &gt; * getPath() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00283">Graph.h:283</a></div></div>
-<div class="ttc" id="aclass_vertex_html_a48eae2f7af2362634adab02b7b2dbec6"><div class="ttname"><a href="class_vertex.html#a48eae2f7af2362634adab02b7b2dbec6">Vertex::getInfo</a></div><div class="ttdeci">T getInfo() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00223">Graph.h:223</a></div></div>
-<div class="ttc" id="aclass_vertex_html_a5ebf4b550ec94b89a8f80df1a53cc97d"><div class="ttname"><a href="class_vertex.html#a5ebf4b550ec94b89a8f80df1a53cc97d">Vertex::setPath</a></div><div class="ttdeci">void setPath(Edge&lt; T &gt; *path)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00325">Graph.h:325</a></div></div>
-<div class="ttc" id="aclass_vertex_html_a95a3f3c55f2ba371fae51d3fe0e76c23"><div class="ttname"><a href="class_vertex.html#a95a3f3c55f2ba371fae51d3fe0e76c23">Vertex::setVisited</a></div><div class="ttdeci">void setVisited(bool visited)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00301">Graph.h:301</a></div></div>
-<div class="ttc" id="aclass_vertex_html_aa2bb17f6ebd98a67f8da1f689b22fadc"><div class="ttname"><a href="class_vertex.html#aa2bb17f6ebd98a67f8da1f689b22fadc">Vertex::isVisited</a></div><div class="ttdeci">bool isVisited() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00259">Graph.h:259</a></div></div>
+<div class="ttc" id="aclass_edge_html"><div class="ttname"><a href="class_edge.html">Edge</a></div><div class="ttdoc">Represents a directed connection between two vertices in the graph.</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00081">Graph.h:82</a></div></div>
+<div class="ttc" id="aclass_edge_html_a1819116e2c156733a14bbd94cc27908e"><div class="ttname"><a href="class_edge.html#a1819116e2c156733a14bbd94cc27908e">Edge::setFlow</a></div><div class="ttdeci">void setFlow(double flow)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00419">Graph.h:419</a></div></div>
+<div class="ttc" id="aclass_edge_html_a3df378e283d6c8be5be4170ac8d7f4e8"><div class="ttname"><a href="class_edge.html#a3df378e283d6c8be5be4170ac8d7f4e8">Edge::getWeight</a></div><div class="ttdeci">double getWeight() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00377">Graph.h:377</a></div></div>
+<div class="ttc" id="aclass_edge_html_a75458cfc838ca5aee5c34cb9f03b5647"><div class="ttname"><a href="class_edge.html#a75458cfc838ca5aee5c34cb9f03b5647">Edge::getFlow</a></div><div class="ttdeci">double getFlow() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00401">Graph.h:401</a></div></div>
+<div class="ttc" id="aclass_edge_html_a9a2de066dff8513dd788d553fc1d0c81"><div class="ttname"><a href="class_edge.html#a9a2de066dff8513dd788d553fc1d0c81">Edge::getDest</a></div><div class="ttdeci">Vertex&lt; T &gt; * getDest() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00371">Graph.h:371</a></div></div>
+<div class="ttc" id="aclass_edge_html_af0a900f3006e47b9f363df7429298eeb"><div class="ttname"><a href="class_edge.html#af0a900f3006e47b9f363df7429298eeb">Edge::getReverse</a></div><div class="ttdeci">Edge&lt; T &gt; * getReverse() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00389">Graph.h:389</a></div></div>
+<div class="ttc" id="aclass_edge_html_afe8f8429025756c63f38e8c6fde7382c"><div class="ttname"><a href="class_edge.html#afe8f8429025756c63f38e8c6fde7382c">Edge::setReverse</a></div><div class="ttdeci">void setReverse(Edge&lt; T &gt; *reverse)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00413">Graph.h:413</a></div></div>
+<div class="ttc" id="aclass_graph_html"><div class="ttname"><a href="class_graph.html">Graph</a></div><div class="ttdoc">Represents a general graph using an adjacency list.</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00117">Graph.h:118</a></div></div>
+<div class="ttc" id="aclass_graph_html_a41624b03fcb6bd29e4df574a1ec58541"><div class="ttname"><a href="class_graph.html#a41624b03fcb6bd29e4df574a1ec58541">Graph::getVertexSet</a></div><div class="ttdeci">std::vector&lt; Vertex&lt; T &gt; * &gt; getVertexSet() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00433">Graph.h:433</a></div></div>
+<div class="ttc" id="aclass_graph_html_a8b7b7465fbfd562e2a469f90a437ab75"><div class="ttname"><a href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">Graph::findVertex</a></div><div class="ttdeci">Vertex&lt; T &gt; * findVertex(const T &amp;in) const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00442">Graph.h:442</a></div></div>
+<div class="ttc" id="aclass_vertex_html"><div class="ttname"><a href="class_vertex.html">Vertex</a></div><div class="ttdoc">Represents a node in the graph.</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00026">Graph.h:27</a></div></div>
+<div class="ttc" id="aclass_vertex_html_a0010a7d0b7db1bb81dd2ebb1ffae650a"><div class="ttname"><a href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">Vertex::getAdj</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; getAdj() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00268">Graph.h:268</a></div></div>
+<div class="ttc" id="aclass_vertex_html_a15e4ff95fba2bb5970a6551137ceb950"><div class="ttname"><a href="class_vertex.html#a15e4ff95fba2bb5970a6551137ceb950">Vertex::getPath</a></div><div class="ttdeci">Edge&lt; T &gt; * getPath() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00298">Graph.h:298</a></div></div>
+<div class="ttc" id="aclass_vertex_html_a48eae2f7af2362634adab02b7b2dbec6"><div class="ttname"><a href="class_vertex.html#a48eae2f7af2362634adab02b7b2dbec6">Vertex::getInfo</a></div><div class="ttdeci">T getInfo() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00238">Graph.h:238</a></div></div>
+<div class="ttc" id="aclass_vertex_html_a5ebf4b550ec94b89a8f80df1a53cc97d"><div class="ttname"><a href="class_vertex.html#a5ebf4b550ec94b89a8f80df1a53cc97d">Vertex::setPath</a></div><div class="ttdeci">void setPath(Edge&lt; T &gt; *path)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00340">Graph.h:340</a></div></div>
+<div class="ttc" id="aclass_vertex_html_a95a3f3c55f2ba371fae51d3fe0e76c23"><div class="ttname"><a href="class_vertex.html#a95a3f3c55f2ba371fae51d3fe0e76c23">Vertex::setVisited</a></div><div class="ttdeci">void setVisited(bool visited)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00316">Graph.h:316</a></div></div>
+<div class="ttc" id="aclass_vertex_html_aa2bb17f6ebd98a67f8da1f689b22fadc"><div class="ttname"><a href="class_vertex.html#aa2bb17f6ebd98a67f8da1f689b22fadc">Vertex::isVisited</a></div><div class="ttdeci">bool isVisited() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00274">Graph.h:274</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

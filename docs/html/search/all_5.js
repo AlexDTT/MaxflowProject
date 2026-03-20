@@ -1,12 +1,13 @@
 var searchData=
 [
-  ['fileparser_0',['FileParser',['../class_file_parser.html',1,'']]],
-  ['fileparser_2ecpp_1',['FileParser.cpp',['../_file_parser_8cpp.html',1,'']]],
-  ['fileparser_2eh_2',['FileParser.h',['../_file_parser_8h.html',1,'']]],
-  ['findaugmentingpath_3',['findAugmentingPath',['../_edmond_karp_8cpp.html#a7ef59ca73ad539b2405ee93bb9e1b8de',1,'findAugmentingPath(Graph&lt; T &gt; *g, Vertex&lt; T &gt; *s, Vertex&lt; T &gt; *t):&#160;EdmondKarp.cpp'],['../_edmond_karp_8h.html#a7ef59ca73ad539b2405ee93bb9e1b8de',1,'findAugmentingPath(Graph&lt; T &gt; *g, Vertex&lt; T &gt; *s, Vertex&lt; T &gt; *t):&#160;EdmondKarp.cpp']]],
-  ['findminresidualalongpath_4',['findMinResidualAlongPath',['../_edmond_karp_8cpp.html#ab38647bac4738e296aba7b1bc4744835',1,'findMinResidualAlongPath(Vertex&lt; T &gt; *s, Vertex&lt; T &gt; *t):&#160;EdmondKarp.cpp'],['../_edmond_karp_8h.html#ab38647bac4738e296aba7b1bc4744835',1,'findMinResidualAlongPath(Vertex&lt; T &gt; *s, Vertex&lt; T &gt; *t):&#160;EdmondKarp.cpp']]],
-  ['findriskyreviewersk1_5',['findRiskyReviewersK1',['../class_assignment_logic.html#af7460acb335b05095c2bd5bbca2925f9',1,'AssignmentLogic']]],
-  ['findvertex_6',['findVertex',['../class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75',1,'Graph']]],
-  ['findvertexidx_7',['findVertexIdx',['../class_graph.html#a676cdfb976eccfa82b631d2094c1cdac',1,'Graph']]],
-  ['flow_8',['flow',['../class_edge.html#a30808601fa37f509147eabf9cc5f9ed6',1,'Edge']]]
+  ['edge_0',['Edge',['../class_edge.html',1,'Edge&lt; T &gt;'],['../class_edge.html#ab976213419283ed754f42f57b195a288',1,'Edge::Edge()']]],
+  ['edmondkarp_2ecpp_1',['EdmondKarp.cpp',['../_edmond_karp_8cpp.html',1,'']]],
+  ['edmondkarp_2eh_2',['EdmondKarp.h',['../_edmond_karp_8h.html',1,'']]],
+  ['edmondskarp_3',['edmondsKarp',['../_edmond_karp_8cpp.html#a3910c57ab30860808075348a43092a6f',1,'edmondsKarp(Graph&lt; T &gt; *g, T source, T target, std::function&lt; void(const std::vector&lt; T &gt; &amp;, double)&gt; onAugment):&#160;EdmondKarp.cpp'],['../_edmond_karp_8h.html#a8c04ce320355c79c1f510b6e46ad1e08',1,'edmondsKarp(Graph&lt; T &gt; *g, T source, T target, std::function&lt; void(const std::vector&lt; T &gt; &amp;, double)&gt; onAugment=nullptr):&#160;EdmondKarp.cpp']]],
+  ['edmondskarp_3c_20int_20_3e_4',['edmondsKarp&lt; int &gt;',['../_edmond_karp_8cpp.html#a1b7a932723c832f796e7eb79e1af10f0',1,'EdmondKarp.cpp']]],
+  ['email_5',['email',['../class_reviewer.html#a5ae05709e98e328427aed3ead8912fd8',1,'Reviewer::email'],['../class_submission.html#ab524f4484bf346c7ba0d94b0a7dd114c',1,'Submission::email']]],
+  ['example_6',['Generated Graph Example',['../index.html#autotoc_md6',1,'']]],
+  ['executeandreportriskanalysis_7',['executeAndReportRiskAnalysis',['../main_8cpp.html#a08461c95b164fbe5b0ed3f9db3a3cab7',1,'main.cpp']]],
+  ['expect_8',['expect',['../maxflow__tests_8cpp.html#a7e6ea3473535176813c89536171cba05',1,'maxflow_tests.cpp']]],
+  ['exporttodot_9',['exportToDOT',['../classcreate_graphs.html#a090df02a30ddb783be7beb1f5053639b',1,'createGraphs']]]
 ];

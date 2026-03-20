@@ -1,15 +1,15 @@
+<!-- HTML header for doxygen 1.9.1+ -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Maxflow Project T9G2: utils/Submission.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
@@ -19,16 +19,33 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<!-- doxygen-awesome extensions -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr id="projectrow">
-  <td id="projectalign">
+ <tr style="height: 56px;">
+  <!-- PROJECT LOGO -->
+  <!-- PROJECT TITLE -->
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Maxflow Project T9G2
    </div>
+   <div id="projectbrief"></div>
   </td>
  </tr>
  </tbody>
@@ -100,32 +117,32 @@ $(function(){initNavTree('_submission_8h_source.html','',''); });
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#define MAXFLOWPROJECT_SUBMISSION_H</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="foldopen" id="foldopen00010" data-start="{" data-end="};">
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="class_submission.html">   10</a></span><span class="keyword">class </span><a class="code hl_function" href="class_submission.html#aef0d46fbb565d31c272cb84488c6c0fe">Submission</a> {</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="class_submission.html#a7b6e2405d79134e923f1d74beba845a0">   12</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_submission.html#a7b6e2405d79134e923f1d74beba845a0">id</a>;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno"><a class="line" href="class_submission.html#ae143f4081965aaa80af89fc3a1b5baa6">   13</a></span>    std::string <a class="code hl_variable" href="class_submission.html#ae143f4081965aaa80af89fc3a1b5baa6">title</a>;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_submission.html#a853f337b093f91f4192c70df3e02d631">   14</a></span>    std::string <a class="code hl_variable" href="class_submission.html#a853f337b093f91f4192c70df3e02d631">authors</a>;</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="class_submission.html#ab524f4484bf346c7ba0d94b0a7dd114c">   15</a></span>    std::string <a class="code hl_variable" href="class_submission.html#ab524f4484bf346c7ba0d94b0a7dd114c">email</a>;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_submission.html#aa3acc5309038ce8cee78a4edc6faab2e">   16</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_submission.html#aa3acc5309038ce8cee78a4edc6faab2e">primaryTopic</a>;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_submission.html#a31e3e68d8338cb9de1a11ed822f62c9a">   17</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_submission.html#a31e3e68d8338cb9de1a11ed822f62c9a">secondaryTopic</a>; <span class="comment">// -1 if not defined</span></div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_function" href="class_submission.html#aef0d46fbb565d31c272cb84488c6c0fe">Submission</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>, <span class="keyword">const</span> std::string&amp; <a class="code hl_variable" href="class_submission.html#ae143f4081965aaa80af89fc3a1b5baa6">title</a>, <span class="keyword">const</span> std::string&amp; <a class="code hl_variable" href="class_submission.html#a853f337b093f91f4192c70df3e02d631">authors</a>,</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>               <span class="keyword">const</span> std::string&amp; <a class="code hl_variable" href="class_submission.html#ab524f4484bf346c7ba0d94b0a7dd114c">email</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="class_submission.html#aa3acc5309038ce8cee78a4edc6faab2e">primaryTopic</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="class_submission.html#a31e3e68d8338cb9de1a11ed822f62c9a">secondaryTopic</a> = -1);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_submission.html#a6b345c5c898e53db5d71d3d7bc9cbc8f">print</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>};</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span></div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_submission.html">   17</a></span><span class="keyword">class </span><a class="code hl_function" href="class_submission.html#aef0d46fbb565d31c272cb84488c6c0fe">Submission</a> {</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="class_submission.html#a7b6e2405d79134e923f1d74beba845a0">   19</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_submission.html#a7b6e2405d79134e923f1d74beba845a0">id</a>;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="class_submission.html#ae143f4081965aaa80af89fc3a1b5baa6">   20</a></span>    std::string <a class="code hl_variable" href="class_submission.html#ae143f4081965aaa80af89fc3a1b5baa6">title</a>;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno"><a class="line" href="class_submission.html#a853f337b093f91f4192c70df3e02d631">   21</a></span>    std::string <a class="code hl_variable" href="class_submission.html#a853f337b093f91f4192c70df3e02d631">authors</a>;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="class_submission.html#ab524f4484bf346c7ba0d94b0a7dd114c">   22</a></span>    std::string <a class="code hl_variable" href="class_submission.html#ab524f4484bf346c7ba0d94b0a7dd114c">email</a>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="class_submission.html#aa3acc5309038ce8cee78a4edc6faab2e">   23</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_submission.html#aa3acc5309038ce8cee78a4edc6faab2e">primaryTopic</a>;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="class_submission.html#a31e3e68d8338cb9de1a11ed822f62c9a">   24</a></span>    <span class="keywordtype">int</span> <a class="code hl_variable" href="class_submission.html#a31e3e68d8338cb9de1a11ed822f62c9a">secondaryTopic</a>; <span class="comment">// -1 if not defined</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <a class="code hl_function" href="class_submission.html#aef0d46fbb565d31c272cb84488c6c0fe">Submission</a>(<span class="keywordtype">int</span> <span class="keywordtype">id</span>, <span class="keyword">const</span> std::string&amp; <a class="code hl_variable" href="class_submission.html#ae143f4081965aaa80af89fc3a1b5baa6">title</a>, <span class="keyword">const</span> std::string&amp; <a class="code hl_variable" href="class_submission.html#a853f337b093f91f4192c70df3e02d631">authors</a>,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>               <span class="keyword">const</span> std::string&amp; <a class="code hl_variable" href="class_submission.html#ab524f4484bf346c7ba0d94b0a7dd114c">email</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="class_submission.html#aa3acc5309038ce8cee78a4edc6faab2e">primaryTopic</a>, <span class="keywordtype">int</span> <a class="code hl_variable" href="class_submission.html#a31e3e68d8338cb9de1a11ed822f62c9a">secondaryTopic</a> = -1);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_submission.html#a6b345c5c898e53db5d71d3d7bc9cbc8f">print</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>};</div>
 </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#endif </span><span class="comment">// MAXFLOWPROJECT_SUBMISSION_H</span></div>
-<div class="ttc" id="aclass_submission_html_a31e3e68d8338cb9de1a11ed822f62c9a"><div class="ttname"><a href="class_submission.html#a31e3e68d8338cb9de1a11ed822f62c9a">Submission::secondaryTopic</a></div><div class="ttdeci">int secondaryTopic</div><div class="ttdef"><b>Definition</b> <a href="#l00017">Submission.h:17</a></div></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="preprocessor">#endif </span><span class="comment">// MAXFLOWPROJECT_SUBMISSION_H</span></div>
+<div class="ttc" id="aclass_submission_html_a31e3e68d8338cb9de1a11ed822f62c9a"><div class="ttname"><a href="class_submission.html#a31e3e68d8338cb9de1a11ed822f62c9a">Submission::secondaryTopic</a></div><div class="ttdeci">int secondaryTopic</div><div class="ttdef"><b>Definition</b> <a href="#l00024">Submission.h:24</a></div></div>
 <div class="ttc" id="aclass_submission_html_a6b345c5c898e53db5d71d3d7bc9cbc8f"><div class="ttname"><a href="class_submission.html#a6b345c5c898e53db5d71d3d7bc9cbc8f">Submission::print</a></div><div class="ttdeci">void print() const</div><div class="ttdef"><b>Definition</b> <a href="_submission_8cpp_source.html#l00009">Submission.cpp:9</a></div></div>
-<div class="ttc" id="aclass_submission_html_a7b6e2405d79134e923f1d74beba845a0"><div class="ttname"><a href="class_submission.html#a7b6e2405d79134e923f1d74beba845a0">Submission::id</a></div><div class="ttdeci">int id</div><div class="ttdef"><b>Definition</b> <a href="#l00012">Submission.h:12</a></div></div>
-<div class="ttc" id="aclass_submission_html_a853f337b093f91f4192c70df3e02d631"><div class="ttname"><a href="class_submission.html#a853f337b093f91f4192c70df3e02d631">Submission::authors</a></div><div class="ttdeci">std::string authors</div><div class="ttdef"><b>Definition</b> <a href="#l00014">Submission.h:14</a></div></div>
-<div class="ttc" id="aclass_submission_html_aa3acc5309038ce8cee78a4edc6faab2e"><div class="ttname"><a href="class_submission.html#aa3acc5309038ce8cee78a4edc6faab2e">Submission::primaryTopic</a></div><div class="ttdeci">int primaryTopic</div><div class="ttdef"><b>Definition</b> <a href="#l00016">Submission.h:16</a></div></div>
-<div class="ttc" id="aclass_submission_html_ab524f4484bf346c7ba0d94b0a7dd114c"><div class="ttname"><a href="class_submission.html#ab524f4484bf346c7ba0d94b0a7dd114c">Submission::email</a></div><div class="ttdeci">std::string email</div><div class="ttdef"><b>Definition</b> <a href="#l00015">Submission.h:15</a></div></div>
-<div class="ttc" id="aclass_submission_html_ae143f4081965aaa80af89fc3a1b5baa6"><div class="ttname"><a href="class_submission.html#ae143f4081965aaa80af89fc3a1b5baa6">Submission::title</a></div><div class="ttdeci">std::string title</div><div class="ttdef"><b>Definition</b> <a href="#l00013">Submission.h:13</a></div></div>
+<div class="ttc" id="aclass_submission_html_a7b6e2405d79134e923f1d74beba845a0"><div class="ttname"><a href="class_submission.html#a7b6e2405d79134e923f1d74beba845a0">Submission::id</a></div><div class="ttdeci">int id</div><div class="ttdef"><b>Definition</b> <a href="#l00019">Submission.h:19</a></div></div>
+<div class="ttc" id="aclass_submission_html_a853f337b093f91f4192c70df3e02d631"><div class="ttname"><a href="class_submission.html#a853f337b093f91f4192c70df3e02d631">Submission::authors</a></div><div class="ttdeci">std::string authors</div><div class="ttdef"><b>Definition</b> <a href="#l00021">Submission.h:21</a></div></div>
+<div class="ttc" id="aclass_submission_html_aa3acc5309038ce8cee78a4edc6faab2e"><div class="ttname"><a href="class_submission.html#aa3acc5309038ce8cee78a4edc6faab2e">Submission::primaryTopic</a></div><div class="ttdeci">int primaryTopic</div><div class="ttdef"><b>Definition</b> <a href="#l00023">Submission.h:23</a></div></div>
+<div class="ttc" id="aclass_submission_html_ab524f4484bf346c7ba0d94b0a7dd114c"><div class="ttname"><a href="class_submission.html#ab524f4484bf346c7ba0d94b0a7dd114c">Submission::email</a></div><div class="ttdeci">std::string email</div><div class="ttdef"><b>Definition</b> <a href="#l00022">Submission.h:22</a></div></div>
+<div class="ttc" id="aclass_submission_html_ae143f4081965aaa80af89fc3a1b5baa6"><div class="ttname"><a href="class_submission.html#ae143f4081965aaa80af89fc3a1b5baa6">Submission::title</a></div><div class="ttdeci">std::string title</div><div class="ttdef"><b>Definition</b> <a href="#l00020">Submission.h:20</a></div></div>
 <div class="ttc" id="aclass_submission_html_aef0d46fbb565d31c272cb84488c6c0fe"><div class="ttname"><a href="class_submission.html#aef0d46fbb565d31c272cb84488c6c0fe">Submission::Submission</a></div><div class="ttdeci">Submission(int id, const std::string &amp;title, const std::string &amp;authors, const std::string &amp;email, int primaryTopic, int secondaryTopic=-1)</div><div class="ttdef"><b>Definition</b> <a href="_submission_8cpp_source.html#l00004">Submission.cpp:4</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

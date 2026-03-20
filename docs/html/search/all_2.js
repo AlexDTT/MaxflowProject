@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['compatibilitymatrix_0',['compatibilityMatrix',['../maxflow__tests_8cpp.html#a113322ced1252884bb1a882f17a0759a',1,'maxflow_tests.cpp']]],
-  ['creategraphs_1',['createGraphs',['../classcreate_graphs.html',1,'']]],
-  ['creategraphs_2ecpp_2',['createGraphs.cpp',['../create_graphs_8cpp.html',1,'']]],
-  ['creategraphs_2eh_3',['createGraphs.h',['../create_graphs_8h.html',1,'']]]
+  ['bruteforcemaxassignments_0',['bruteForceMaxAssignments',['../maxflow__tests_8cpp.html#a189ca5c4f52dcfd0df89be32bb5c3527',1,'maxflow_tests.cpp']]],
+  ['bruteforcemaxassignmentsrec_1',['bruteForceMaxAssignmentsRec',['../maxflow__tests_8cpp.html#a5a2485fda0545f5e6a94864495c21940',1,'maxflow_tests.cpp']]],
+  ['buildreviewflowgraph_2',['buildReviewFlowGraph',['../classcreate_graphs.html#a6dd2afca3d3d0db38c179d988455fb5f',1,'createGraphs']]]
 ];

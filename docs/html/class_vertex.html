@@ -1,15 +1,15 @@
+<!-- HTML header for doxygen 1.9.1+ -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Maxflow Project T9G2: Vertex&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
@@ -19,16 +19,33 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<!-- doxygen-awesome extensions -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr id="projectrow">
-  <td id="projectalign">
+ <tr style="height: 56px;">
+  <!-- PROJECT LOGO -->
+  <!-- PROJECT TITLE -->
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Maxflow Project T9G2
    </div>
+   <div id="projectbrief"></div>
   </td>
  </tr>
  </tbody>
@@ -89,9 +106,17 @@ $(function(){initNavTree('class_vertex.html','','class_vertex-members'); });
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="class_vertex-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Vertex&lt; T &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Represents a node in the graph.  
+ <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_graph_8h_source.html">Graph.h</a>&gt;</code></p>
 <table class="memberdecls">
@@ -140,8 +165,15 @@ Protected Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;class T&gt;<br />
-class Vertex&lt; T &gt;</div>
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00021">21</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+class Vertex&lt; T &gt;</div><p>Represents a node in the graph. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The data type of the information stored in the vertex. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00026">26</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="afcbdd4d4198b672356559cb8fa088408" name="afcbdd4d4198b672356559cb8fa088408"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#afcbdd4d4198b672356559cb8fa088408">&#9670;&#160;</a></span>Vertex()</h2>
@@ -160,10 +192,10 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00157">157</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  157</span>: <a class="code hl_variable" href="#a415d7811eef6cdd992f0dca1f35a49cd">info</a>(<a class="code hl_class" href="class_vertex.html">in</a>) {}</div>
-<div class="ttc" id="aclass_vertex_html"><div class="ttname"><a href="class_vertex.html">Vertex</a></div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00021">Graph.h:22</a></div></div>
-<div class="ttc" id="aclass_vertex_html_a415d7811eef6cdd992f0dca1f35a49cd"><div class="ttname"><a href="#a415d7811eef6cdd992f0dca1f35a49cd">Vertex::info</a></div><div class="ttdeci">T info</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00053">Graph.h:53</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00172">172</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  172</span>: <a class="code hl_variable" href="#a415d7811eef6cdd992f0dca1f35a49cd">info</a>(<a class="code hl_class" href="class_vertex.html">in</a>) {}</div>
+<div class="ttc" id="aclass_vertex_html"><div class="ttname"><a href="class_vertex.html">Vertex</a></div><div class="ttdoc">Represents a node in the graph.</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00026">Graph.h:27</a></div></div>
+<div class="ttc" id="aclass_vertex_html_a415d7811eef6cdd992f0dca1f35a49cd"><div class="ttname"><a href="#a415d7811eef6cdd992f0dca1f35a49cd">Vertex::info</a></div><div class="ttdeci">T info</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00058">Graph.h:58</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -184,13 +216,13 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00160">160</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  160</span>                   {</div>
-<div class="line"><span class="lineno">  161</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> <a class="code hl_class" href="class_vertex.html">edge</a> : <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>) {</div>
-<div class="line"><span class="lineno">  162</span>        <span class="keyword">delete</span> <a class="code hl_class" href="class_vertex.html">edge</a>;</div>
-<div class="line"><span class="lineno">  163</span>    }</div>
-<div class="line"><span class="lineno">  164</span>}</div>
-<div class="ttc" id="aclass_vertex_html_adb48310bebc687c86e90d2a20215642f"><div class="ttname"><a href="#adb48310bebc687c86e90d2a20215642f">Vertex::adj</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; adj</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00054">Graph.h:54</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00175">175</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  175</span>                   {</div>
+<div class="line"><span class="lineno">  176</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span> <a class="code hl_class" href="class_vertex.html">edge</a> : <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>) {</div>
+<div class="line"><span class="lineno">  177</span>        <span class="keyword">delete</span> <a class="code hl_class" href="class_vertex.html">edge</a>;</div>
+<div class="line"><span class="lineno">  178</span>    }</div>
+<div class="line"><span class="lineno">  179</span>}</div>
+<div class="ttc" id="aclass_vertex_html_adb48310bebc687c86e90d2a20215642f"><div class="ttname"><a href="#adb48310bebc687c86e90d2a20215642f">Vertex::adj</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; adj</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00059">Graph.h:59</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -216,14 +248,14 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00171">171</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  172</span>{</div>
-<div class="line"><span class="lineno">  173</span>    <span class="keyword">auto</span> <a class="code hl_class" href="class_vertex.html">newEdge</a> = <span class="keyword">new</span> <a class="code hl_class" href="class_vertex.html">Edge&lt;T&gt;</a>(<span class="keyword">this</span>, <a class="code hl_class" href="class_vertex.html">d</a>, <a class="code hl_class" href="class_vertex.html">w</a>);</div>
-<div class="line"><span class="lineno">  174</span>    <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.push_back(<a class="code hl_class" href="class_vertex.html">newEdge</a>);</div>
-<div class="line"><span class="lineno">  175</span>    <a class="code hl_class" href="class_vertex.html">d</a>-&gt;<a class="code hl_variable" href="#a004d1b624d1cd1a7afe49295682e2899">incoming</a>.push_back(<a class="code hl_class" href="class_vertex.html">newEdge</a>);</div>
-<div class="line"><span class="lineno">  176</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="class_vertex.html">newEdge</a>;</div>
-<div class="line"><span class="lineno">  177</span>}</div>
-<div class="ttc" id="aclass_vertex_html_a004d1b624d1cd1a7afe49295682e2899"><div class="ttname"><a href="#a004d1b624d1cd1a7afe49295682e2899">Vertex::incoming</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; incoming</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00063">Graph.h:63</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00186">186</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  187</span>{</div>
+<div class="line"><span class="lineno">  188</span>    <span class="keyword">auto</span> <a class="code hl_class" href="class_vertex.html">newEdge</a> = <span class="keyword">new</span> <a class="code hl_class" href="class_vertex.html">Edge&lt;T&gt;</a>(<span class="keyword">this</span>, <a class="code hl_class" href="class_vertex.html">d</a>, <a class="code hl_class" href="class_vertex.html">w</a>);</div>
+<div class="line"><span class="lineno">  189</span>    <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.push_back(<a class="code hl_class" href="class_vertex.html">newEdge</a>);</div>
+<div class="line"><span class="lineno">  190</span>    <a class="code hl_class" href="class_vertex.html">d</a>-&gt;<a class="code hl_variable" href="#a004d1b624d1cd1a7afe49295682e2899">incoming</a>.push_back(<a class="code hl_class" href="class_vertex.html">newEdge</a>);</div>
+<div class="line"><span class="lineno">  191</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="class_vertex.html">newEdge</a>;</div>
+<div class="line"><span class="lineno">  192</span>}</div>
+<div class="ttc" id="aclass_vertex_html_a004d1b624d1cd1a7afe49295682e2899"><div class="ttname"><a href="#a004d1b624d1cd1a7afe49295682e2899">Vertex::incoming</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; incoming</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00068">Graph.h:68</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -252,25 +284,25 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00331">331</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  332</span>{</div>
-<div class="line"><span class="lineno">  333</span>    <a class="code hl_function" href="#afcbdd4d4198b672356559cb8fa088408">Vertex&lt;T&gt;</a> *<a class="code hl_class" href="class_vertex.html">dest</a> = <a class="code hl_class" href="class_vertex.html">edge</a>-&gt;getDest();</div>
-<div class="line"><span class="lineno">  334</span>    <span class="comment">// Remove the corresponding edge from the incoming list</span></div>
-<div class="line"><span class="lineno">  335</span>    <span class="keyword">auto</span> <a class="code hl_class" href="class_vertex.html">it</a> = <a class="code hl_class" href="class_vertex.html">dest</a>-&gt;<a class="code hl_variable" href="#a004d1b624d1cd1a7afe49295682e2899">incoming</a>.begin();</div>
-<div class="line"><span class="lineno">  336</span>    <span class="keywordflow">while</span> (<a class="code hl_class" href="class_vertex.html">it</a> != <a class="code hl_class" href="class_vertex.html">dest</a>-&gt;<a class="code hl_variable" href="#a004d1b624d1cd1a7afe49295682e2899">incoming</a>.end())</div>
-<div class="line"><span class="lineno">  337</span>    {</div>
-<div class="line"><span class="lineno">  338</span>        <span class="keywordflow">if</span> ((*it)-&gt;getOrig()-&gt;getInfo() == <a class="code hl_variable" href="#a415d7811eef6cdd992f0dca1f35a49cd">info</a>)</div>
-<div class="line"><span class="lineno">  339</span>        {</div>
-<div class="line"><span class="lineno">  340</span>            <a class="code hl_class" href="class_vertex.html">it</a> = <a class="code hl_class" href="class_vertex.html">dest</a>-&gt;<a class="code hl_variable" href="#a004d1b624d1cd1a7afe49295682e2899">incoming</a>.erase(<a class="code hl_class" href="class_vertex.html">it</a>);</div>
-<div class="line"><span class="lineno">  341</span>        }</div>
-<div class="line"><span class="lineno">  342</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  343</span>        {</div>
-<div class="line"><span class="lineno">  344</span>            <a class="code hl_class" href="class_vertex.html">it</a>++;</div>
-<div class="line"><span class="lineno">  345</span>        }</div>
-<div class="line"><span class="lineno">  346</span>    }</div>
-<div class="line"><span class="lineno">  347</span>    <span class="keyword">delete</span> <a class="code hl_class" href="class_vertex.html">edge</a>;</div>
-<div class="line"><span class="lineno">  348</span>}</div>
-<div class="ttc" id="aclass_vertex_html_afcbdd4d4198b672356559cb8fa088408"><div class="ttname"><a href="#afcbdd4d4198b672356559cb8fa088408">Vertex::Vertex</a></div><div class="ttdeci">Vertex(T in)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00157">Graph.h:157</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00346">346</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  347</span>{</div>
+<div class="line"><span class="lineno">  348</span>    <a class="code hl_function" href="#afcbdd4d4198b672356559cb8fa088408">Vertex&lt;T&gt;</a> *<a class="code hl_class" href="class_vertex.html">dest</a> = <a class="code hl_class" href="class_vertex.html">edge</a>-&gt;getDest();</div>
+<div class="line"><span class="lineno">  349</span>    <span class="comment">// Remove the corresponding edge from the incoming list</span></div>
+<div class="line"><span class="lineno">  350</span>    <span class="keyword">auto</span> <a class="code hl_class" href="class_vertex.html">it</a> = <a class="code hl_class" href="class_vertex.html">dest</a>-&gt;<a class="code hl_variable" href="#a004d1b624d1cd1a7afe49295682e2899">incoming</a>.begin();</div>
+<div class="line"><span class="lineno">  351</span>    <span class="keywordflow">while</span> (<a class="code hl_class" href="class_vertex.html">it</a> != <a class="code hl_class" href="class_vertex.html">dest</a>-&gt;<a class="code hl_variable" href="#a004d1b624d1cd1a7afe49295682e2899">incoming</a>.end())</div>
+<div class="line"><span class="lineno">  352</span>    {</div>
+<div class="line"><span class="lineno">  353</span>        <span class="keywordflow">if</span> ((*it)-&gt;getOrig()-&gt;getInfo() == <a class="code hl_variable" href="#a415d7811eef6cdd992f0dca1f35a49cd">info</a>)</div>
+<div class="line"><span class="lineno">  354</span>        {</div>
+<div class="line"><span class="lineno">  355</span>            <a class="code hl_class" href="class_vertex.html">it</a> = <a class="code hl_class" href="class_vertex.html">dest</a>-&gt;<a class="code hl_variable" href="#a004d1b624d1cd1a7afe49295682e2899">incoming</a>.erase(<a class="code hl_class" href="class_vertex.html">it</a>);</div>
+<div class="line"><span class="lineno">  356</span>        }</div>
+<div class="line"><span class="lineno">  357</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  358</span>        {</div>
+<div class="line"><span class="lineno">  359</span>            <a class="code hl_class" href="class_vertex.html">it</a>++;</div>
+<div class="line"><span class="lineno">  360</span>        }</div>
+<div class="line"><span class="lineno">  361</span>    }</div>
+<div class="line"><span class="lineno">  362</span>    <span class="keyword">delete</span> <a class="code hl_class" href="class_vertex.html">edge</a>;</div>
+<div class="line"><span class="lineno">  363</span>}</div>
+<div class="ttc" id="aclass_vertex_html_afcbdd4d4198b672356559cb8fa088408"><div class="ttname"><a href="#afcbdd4d4198b672356559cb8fa088408">Vertex::Vertex</a></div><div class="ttdeci">Vertex(T in)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00172">Graph.h:172</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -291,10 +323,10 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00253">253</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  254</span>{</div>
-<div class="line"><span class="lineno">  255</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>;</div>
-<div class="line"><span class="lineno">  256</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00268">268</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  269</span>{</div>
+<div class="line"><span class="lineno">  270</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>;</div>
+<div class="line"><span class="lineno">  271</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -315,11 +347,11 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00277">277</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  278</span>{</div>
-<div class="line"><span class="lineno">  279</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#a08a2b813e77f97aa8b6c1d252e5417f7">dist</a>;</div>
-<div class="line"><span class="lineno">  280</span>}</div>
-<div class="ttc" id="aclass_vertex_html_a08a2b813e77f97aa8b6c1d252e5417f7"><div class="ttname"><a href="#a08a2b813e77f97aa8b6c1d252e5417f7">Vertex::dist</a></div><div class="ttdeci">double dist</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00060">Graph.h:60</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00292">292</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  293</span>{</div>
+<div class="line"><span class="lineno">  294</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#a08a2b813e77f97aa8b6c1d252e5417f7">dist</a>;</div>
+<div class="line"><span class="lineno">  295</span>}</div>
+<div class="ttc" id="aclass_vertex_html_a08a2b813e77f97aa8b6c1d252e5417f7"><div class="ttname"><a href="#a08a2b813e77f97aa8b6c1d252e5417f7">Vertex::dist</a></div><div class="ttdeci">double dist</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00065">Graph.h:65</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -340,10 +372,10 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00289">289</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  290</span>{</div>
-<div class="line"><span class="lineno">  291</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#a004d1b624d1cd1a7afe49295682e2899">incoming</a>;</div>
-<div class="line"><span class="lineno">  292</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00304">304</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  305</span>{</div>
+<div class="line"><span class="lineno">  306</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#a004d1b624d1cd1a7afe49295682e2899">incoming</a>;</div>
+<div class="line"><span class="lineno">  307</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -364,11 +396,11 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00271">271</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  272</span>{</div>
-<div class="line"><span class="lineno">  273</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#af5db7e2f035a38dcc7c6e1b03117b06a">indegree</a>;</div>
-<div class="line"><span class="lineno">  274</span>}</div>
-<div class="ttc" id="aclass_vertex_html_af5db7e2f035a38dcc7c6e1b03117b06a"><div class="ttname"><a href="#af5db7e2f035a38dcc7c6e1b03117b06a">Vertex::indegree</a></div><div class="ttdeci">unsigned int indegree</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00059">Graph.h:59</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00286">286</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  287</span>{</div>
+<div class="line"><span class="lineno">  288</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#af5db7e2f035a38dcc7c6e1b03117b06a">indegree</a>;</div>
+<div class="line"><span class="lineno">  289</span>}</div>
+<div class="ttc" id="aclass_vertex_html_af5db7e2f035a38dcc7c6e1b03117b06a"><div class="ttname"><a href="#af5db7e2f035a38dcc7c6e1b03117b06a">Vertex::indegree</a></div><div class="ttdeci">unsigned int indegree</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00064">Graph.h:64</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -389,10 +421,10 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00223">223</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  224</span>{</div>
-<div class="line"><span class="lineno">  225</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#a415d7811eef6cdd992f0dca1f35a49cd">info</a>;</div>
-<div class="line"><span class="lineno">  226</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00238">238</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  239</span>{</div>
+<div class="line"><span class="lineno">  240</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#a415d7811eef6cdd992f0dca1f35a49cd">info</a>;</div>
+<div class="line"><span class="lineno">  241</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -413,11 +445,11 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00229">229</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  230</span>{</div>
-<div class="line"><span class="lineno">  231</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#a35d937c418952520cfa26b098e86b755">low</a>;</div>
-<div class="line"><span class="lineno">  232</span>}</div>
-<div class="ttc" id="aclass_vertex_html_a35d937c418952520cfa26b098e86b755"><div class="ttname"><a href="#a35d937c418952520cfa26b098e86b755">Vertex::low</a></div><div class="ttdeci">int low</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00058">Graph.h:58</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00244">244</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  245</span>{</div>
+<div class="line"><span class="lineno">  246</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#a35d937c418952520cfa26b098e86b755">low</a>;</div>
+<div class="line"><span class="lineno">  247</span>}</div>
+<div class="ttc" id="aclass_vertex_html_a35d937c418952520cfa26b098e86b755"><div class="ttname"><a href="#a35d937c418952520cfa26b098e86b755">Vertex::low</a></div><div class="ttdeci">int low</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00063">Graph.h:63</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -438,11 +470,11 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00241">241</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  242</span>{</div>
-<div class="line"><span class="lineno">  243</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#aeb941bcd51ef71c6101e02eaed1cae12">num</a>;</div>
-<div class="line"><span class="lineno">  244</span>}</div>
-<div class="ttc" id="aclass_vertex_html_aeb941bcd51ef71c6101e02eaed1cae12"><div class="ttname"><a href="#aeb941bcd51ef71c6101e02eaed1cae12">Vertex::num</a></div><div class="ttdeci">int num</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00058">Graph.h:58</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00256">256</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  257</span>{</div>
+<div class="line"><span class="lineno">  258</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#aeb941bcd51ef71c6101e02eaed1cae12">num</a>;</div>
+<div class="line"><span class="lineno">  259</span>}</div>
+<div class="ttc" id="aclass_vertex_html_aeb941bcd51ef71c6101e02eaed1cae12"><div class="ttname"><a href="#aeb941bcd51ef71c6101e02eaed1cae12">Vertex::num</a></div><div class="ttdeci">int num</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00063">Graph.h:63</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -463,11 +495,11 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00283">283</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  284</span>{</div>
-<div class="line"><span class="lineno">  285</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#abfc6d8f64308c47901c72d5ebceda80e">path</a>;</div>
-<div class="line"><span class="lineno">  286</span>}</div>
-<div class="ttc" id="aclass_vertex_html_abfc6d8f64308c47901c72d5ebceda80e"><div class="ttname"><a href="#abfc6d8f64308c47901c72d5ebceda80e">Vertex::path</a></div><div class="ttdeci">Edge&lt; T &gt; * path</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00061">Graph.h:61</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00298">298</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  299</span>{</div>
+<div class="line"><span class="lineno">  300</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#abfc6d8f64308c47901c72d5ebceda80e">path</a>;</div>
+<div class="line"><span class="lineno">  301</span>}</div>
+<div class="ttc" id="aclass_vertex_html_abfc6d8f64308c47901c72d5ebceda80e"><div class="ttname"><a href="#abfc6d8f64308c47901c72d5ebceda80e">Vertex::path</a></div><div class="ttdeci">Edge&lt; T &gt; * path</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00066">Graph.h:66</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -488,11 +520,11 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00265">265</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  266</span>{</div>
-<div class="line"><span class="lineno">  267</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#ae575d4b9a6b1ada3f9626c458c060f54">processing</a>;</div>
-<div class="line"><span class="lineno">  268</span>}</div>
-<div class="ttc" id="aclass_vertex_html_ae575d4b9a6b1ada3f9626c458c060f54"><div class="ttname"><a href="#ae575d4b9a6b1ada3f9626c458c060f54">Vertex::processing</a></div><div class="ttdeci">bool processing</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00057">Graph.h:57</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00280">280</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  281</span>{</div>
+<div class="line"><span class="lineno">  282</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#ae575d4b9a6b1ada3f9626c458c060f54">processing</a>;</div>
+<div class="line"><span class="lineno">  283</span>}</div>
+<div class="ttc" id="aclass_vertex_html_ae575d4b9a6b1ada3f9626c458c060f54"><div class="ttname"><a href="#ae575d4b9a6b1ada3f9626c458c060f54">Vertex::processing</a></div><div class="ttdeci">bool processing</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00062">Graph.h:62</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -513,11 +545,11 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00259">259</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  260</span>{</div>
-<div class="line"><span class="lineno">  261</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#a187a2fe4ff50261cf3c15b8cda7dfc56">visited</a>;</div>
-<div class="line"><span class="lineno">  262</span>}</div>
-<div class="ttc" id="aclass_vertex_html_a187a2fe4ff50261cf3c15b8cda7dfc56"><div class="ttname"><a href="#a187a2fe4ff50261cf3c15b8cda7dfc56">Vertex::visited</a></div><div class="ttdeci">bool visited</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00056">Graph.h:56</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00274">274</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  275</span>{</div>
+<div class="line"><span class="lineno">  276</span>    <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="#a187a2fe4ff50261cf3c15b8cda7dfc56">visited</a>;</div>
+<div class="line"><span class="lineno">  277</span>}</div>
+<div class="ttc" id="aclass_vertex_html_a187a2fe4ff50261cf3c15b8cda7dfc56"><div class="ttname"><a href="#a187a2fe4ff50261cf3c15b8cda7dfc56">Vertex::visited</a></div><div class="ttdeci">bool visited</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00061">Graph.h:61</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -538,29 +570,29 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00185">185</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  186</span>{</div>
-<div class="line"><span class="lineno">  187</span>    <span class="keywordtype">bool</span> <a class="code hl_class" href="class_vertex.html">removedEdge</a> = <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">  188</span>    <span class="keyword">auto</span> <a class="code hl_class" href="class_vertex.html">it</a> = <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.begin();</div>
-<div class="line"><span class="lineno">  189</span>    <span class="keywordflow">while</span> (<a class="code hl_class" href="class_vertex.html">it</a> != <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.end())</div>
-<div class="line"><span class="lineno">  190</span>    {</div>
-<div class="line"><span class="lineno">  191</span>        <a class="code hl_class" href="class_vertex.html">Edge&lt;T&gt;</a> *<a class="code hl_class" href="class_vertex.html">edge</a> = *<a class="code hl_class" href="class_vertex.html">it</a>;</div>
-<div class="line"><span class="lineno">  192</span>        <a class="code hl_function" href="#afcbdd4d4198b672356559cb8fa088408">Vertex&lt;T&gt;</a> *<a class="code hl_class" href="class_vertex.html">dest</a> = <a class="code hl_class" href="class_vertex.html">edge</a>-&gt;getDest();</div>
-<div class="line"><span class="lineno">  193</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="class_vertex.html">dest</a>-&gt;<a class="code hl_function" href="#a48eae2f7af2362634adab02b7b2dbec6">getInfo</a>() == <a class="code hl_class" href="class_vertex.html">in</a>)</div>
-<div class="line"><span class="lineno">  194</span>        {</div>
-<div class="line"><span class="lineno">  195</span>            <a class="code hl_class" href="class_vertex.html">it</a> = <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.erase(<a class="code hl_class" href="class_vertex.html">it</a>);</div>
-<div class="line"><span class="lineno">  196</span>            <a class="code hl_function" href="#a622503fe44ef12d5c39bd1043d47865c">deleteEdge</a>(<a class="code hl_class" href="class_vertex.html">edge</a>);</div>
-<div class="line"><span class="lineno">  197</span>            <a class="code hl_class" href="class_vertex.html">removedEdge</a> = <span class="keyword">true</span>; <span class="comment">// allows for multiple edges to connect the same pair of vertices (multigraph)</span></div>
-<div class="line"><span class="lineno">  198</span>        }</div>
-<div class="line"><span class="lineno">  199</span>        <span class="keywordflow">else</span></div>
-<div class="line"><span class="lineno">  200</span>        {</div>
-<div class="line"><span class="lineno">  201</span>            <a class="code hl_class" href="class_vertex.html">it</a>++;</div>
-<div class="line"><span class="lineno">  202</span>        }</div>
-<div class="line"><span class="lineno">  203</span>    }</div>
-<div class="line"><span class="lineno">  204</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="class_vertex.html">removedEdge</a>;</div>
-<div class="line"><span class="lineno">  205</span>}</div>
-<div class="ttc" id="aclass_vertex_html_a48eae2f7af2362634adab02b7b2dbec6"><div class="ttname"><a href="#a48eae2f7af2362634adab02b7b2dbec6">Vertex::getInfo</a></div><div class="ttdeci">T getInfo() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00223">Graph.h:223</a></div></div>
-<div class="ttc" id="aclass_vertex_html_a622503fe44ef12d5c39bd1043d47865c"><div class="ttname"><a href="#a622503fe44ef12d5c39bd1043d47865c">Vertex::deleteEdge</a></div><div class="ttdeci">void deleteEdge(Edge&lt; T &gt; *edge)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00331">Graph.h:331</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00200">200</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  201</span>{</div>
+<div class="line"><span class="lineno">  202</span>    <span class="keywordtype">bool</span> <a class="code hl_class" href="class_vertex.html">removedEdge</a> = <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">  203</span>    <span class="keyword">auto</span> <a class="code hl_class" href="class_vertex.html">it</a> = <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.begin();</div>
+<div class="line"><span class="lineno">  204</span>    <span class="keywordflow">while</span> (<a class="code hl_class" href="class_vertex.html">it</a> != <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.end())</div>
+<div class="line"><span class="lineno">  205</span>    {</div>
+<div class="line"><span class="lineno">  206</span>        <a class="code hl_class" href="class_vertex.html">Edge&lt;T&gt;</a> *<a class="code hl_class" href="class_vertex.html">edge</a> = *<a class="code hl_class" href="class_vertex.html">it</a>;</div>
+<div class="line"><span class="lineno">  207</span>        <a class="code hl_function" href="#afcbdd4d4198b672356559cb8fa088408">Vertex&lt;T&gt;</a> *<a class="code hl_class" href="class_vertex.html">dest</a> = <a class="code hl_class" href="class_vertex.html">edge</a>-&gt;getDest();</div>
+<div class="line"><span class="lineno">  208</span>        <span class="keywordflow">if</span> (<a class="code hl_class" href="class_vertex.html">dest</a>-&gt;<a class="code hl_function" href="#a48eae2f7af2362634adab02b7b2dbec6">getInfo</a>() == <a class="code hl_class" href="class_vertex.html">in</a>)</div>
+<div class="line"><span class="lineno">  209</span>        {</div>
+<div class="line"><span class="lineno">  210</span>            <a class="code hl_class" href="class_vertex.html">it</a> = <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.erase(<a class="code hl_class" href="class_vertex.html">it</a>);</div>
+<div class="line"><span class="lineno">  211</span>            <a class="code hl_function" href="#a622503fe44ef12d5c39bd1043d47865c">deleteEdge</a>(<a class="code hl_class" href="class_vertex.html">edge</a>);</div>
+<div class="line"><span class="lineno">  212</span>            <a class="code hl_class" href="class_vertex.html">removedEdge</a> = <span class="keyword">true</span>; <span class="comment">// allows for multiple edges to connect the same pair of vertices (multigraph)</span></div>
+<div class="line"><span class="lineno">  213</span>        }</div>
+<div class="line"><span class="lineno">  214</span>        <span class="keywordflow">else</span></div>
+<div class="line"><span class="lineno">  215</span>        {</div>
+<div class="line"><span class="lineno">  216</span>            <a class="code hl_class" href="class_vertex.html">it</a>++;</div>
+<div class="line"><span class="lineno">  217</span>        }</div>
+<div class="line"><span class="lineno">  218</span>    }</div>
+<div class="line"><span class="lineno">  219</span>    <span class="keywordflow">return</span> <a class="code hl_class" href="class_vertex.html">removedEdge</a>;</div>
+<div class="line"><span class="lineno">  220</span>}</div>
+<div class="ttc" id="aclass_vertex_html_a48eae2f7af2362634adab02b7b2dbec6"><div class="ttname"><a href="#a48eae2f7af2362634adab02b7b2dbec6">Vertex::getInfo</a></div><div class="ttdeci">T getInfo() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00238">Graph.h:238</a></div></div>
+<div class="ttc" id="aclass_vertex_html_a622503fe44ef12d5c39bd1043d47865c"><div class="ttname"><a href="#a622503fe44ef12d5c39bd1043d47865c">Vertex::deleteEdge</a></div><div class="ttdeci">void deleteEdge(Edge&lt; T &gt; *edge)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00346">Graph.h:346</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -581,16 +613,16 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00211">211</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  212</span>{</div>
-<div class="line"><span class="lineno">  213</span>    <span class="keyword">auto</span> <a class="code hl_class" href="class_vertex.html">it</a> = <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.begin();</div>
-<div class="line"><span class="lineno">  214</span>    <span class="keywordflow">while</span> (<a class="code hl_class" href="class_vertex.html">it</a> != <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.end())</div>
-<div class="line"><span class="lineno">  215</span>    {</div>
-<div class="line"><span class="lineno">  216</span>        <a class="code hl_class" href="class_vertex.html">Edge&lt;T&gt;</a> *<a class="code hl_class" href="class_vertex.html">edge</a> = *<a class="code hl_class" href="class_vertex.html">it</a>;</div>
-<div class="line"><span class="lineno">  217</span>        <a class="code hl_class" href="class_vertex.html">it</a> = <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.erase(<a class="code hl_class" href="class_vertex.html">it</a>);</div>
-<div class="line"><span class="lineno">  218</span>        <a class="code hl_function" href="#a622503fe44ef12d5c39bd1043d47865c">deleteEdge</a>(<a class="code hl_class" href="class_vertex.html">edge</a>);</div>
-<div class="line"><span class="lineno">  219</span>    }</div>
-<div class="line"><span class="lineno">  220</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00226">226</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  227</span>{</div>
+<div class="line"><span class="lineno">  228</span>    <span class="keyword">auto</span> <a class="code hl_class" href="class_vertex.html">it</a> = <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.begin();</div>
+<div class="line"><span class="lineno">  229</span>    <span class="keywordflow">while</span> (<a class="code hl_class" href="class_vertex.html">it</a> != <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.end())</div>
+<div class="line"><span class="lineno">  230</span>    {</div>
+<div class="line"><span class="lineno">  231</span>        <a class="code hl_class" href="class_vertex.html">Edge&lt;T&gt;</a> *<a class="code hl_class" href="class_vertex.html">edge</a> = *<a class="code hl_class" href="class_vertex.html">it</a>;</div>
+<div class="line"><span class="lineno">  232</span>        <a class="code hl_class" href="class_vertex.html">it</a> = <a class="code hl_variable" href="#adb48310bebc687c86e90d2a20215642f">adj</a>.erase(<a class="code hl_class" href="class_vertex.html">it</a>);</div>
+<div class="line"><span class="lineno">  233</span>        <a class="code hl_function" href="#a622503fe44ef12d5c39bd1043d47865c">deleteEdge</a>(<a class="code hl_class" href="class_vertex.html">edge</a>);</div>
+<div class="line"><span class="lineno">  234</span>    }</div>
+<div class="line"><span class="lineno">  235</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -611,10 +643,10 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00319">319</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  320</span>{</div>
-<div class="line"><span class="lineno">  321</span>    this-&gt;<a class="code hl_variable" href="#a08a2b813e77f97aa8b6c1d252e5417f7">dist</a> = <a class="code hl_variable" href="#a08a2b813e77f97aa8b6c1d252e5417f7">dist</a>;</div>
-<div class="line"><span class="lineno">  322</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00334">334</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  335</span>{</div>
+<div class="line"><span class="lineno">  336</span>    this-&gt;<a class="code hl_variable" href="#a08a2b813e77f97aa8b6c1d252e5417f7">dist</a> = <a class="code hl_variable" href="#a08a2b813e77f97aa8b6c1d252e5417f7">dist</a>;</div>
+<div class="line"><span class="lineno">  337</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -635,10 +667,10 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00313">313</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  314</span>{</div>
-<div class="line"><span class="lineno">  315</span>    this-&gt;<a class="code hl_variable" href="#af5db7e2f035a38dcc7c6e1b03117b06a">indegree</a> = <a class="code hl_variable" href="#af5db7e2f035a38dcc7c6e1b03117b06a">indegree</a>;</div>
-<div class="line"><span class="lineno">  316</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00328">328</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  329</span>{</div>
+<div class="line"><span class="lineno">  330</span>    this-&gt;<a class="code hl_variable" href="#af5db7e2f035a38dcc7c6e1b03117b06a">indegree</a> = <a class="code hl_variable" href="#af5db7e2f035a38dcc7c6e1b03117b06a">indegree</a>;</div>
+<div class="line"><span class="lineno">  331</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -659,10 +691,10 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00295">295</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  296</span>{</div>
-<div class="line"><span class="lineno">  297</span>    this-&gt;<a class="code hl_variable" href="#a415d7811eef6cdd992f0dca1f35a49cd">info</a> = <a class="code hl_class" href="class_vertex.html">in</a>;</div>
-<div class="line"><span class="lineno">  298</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00310">310</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  311</span>{</div>
+<div class="line"><span class="lineno">  312</span>    this-&gt;<a class="code hl_variable" href="#a415d7811eef6cdd992f0dca1f35a49cd">info</a> = <a class="code hl_class" href="class_vertex.html">in</a>;</div>
+<div class="line"><span class="lineno">  313</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -683,10 +715,10 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00235">235</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  236</span>{</div>
-<div class="line"><span class="lineno">  237</span>    this-&gt;<a class="code hl_variable" href="#a35d937c418952520cfa26b098e86b755">low</a> = <a class="code hl_class" href="class_vertex.html">value</a>;</div>
-<div class="line"><span class="lineno">  238</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00250">250</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  251</span>{</div>
+<div class="line"><span class="lineno">  252</span>    this-&gt;<a class="code hl_variable" href="#a35d937c418952520cfa26b098e86b755">low</a> = <a class="code hl_class" href="class_vertex.html">value</a>;</div>
+<div class="line"><span class="lineno">  253</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -707,10 +739,10 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00247">247</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  248</span>{</div>
-<div class="line"><span class="lineno">  249</span>    this-&gt;<a class="code hl_variable" href="#aeb941bcd51ef71c6101e02eaed1cae12">num</a> = <a class="code hl_class" href="class_vertex.html">value</a>;</div>
-<div class="line"><span class="lineno">  250</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00262">262</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  263</span>{</div>
+<div class="line"><span class="lineno">  264</span>    this-&gt;<a class="code hl_variable" href="#aeb941bcd51ef71c6101e02eaed1cae12">num</a> = <a class="code hl_class" href="class_vertex.html">value</a>;</div>
+<div class="line"><span class="lineno">  265</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -731,10 +763,10 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00325">325</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  326</span>{</div>
-<div class="line"><span class="lineno">  327</span>    this-&gt;<a class="code hl_variable" href="#abfc6d8f64308c47901c72d5ebceda80e">path</a> = <a class="code hl_variable" href="#abfc6d8f64308c47901c72d5ebceda80e">path</a>;</div>
-<div class="line"><span class="lineno">  328</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00340">340</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  341</span>{</div>
+<div class="line"><span class="lineno">  342</span>    this-&gt;<a class="code hl_variable" href="#abfc6d8f64308c47901c72d5ebceda80e">path</a> = <a class="code hl_variable" href="#abfc6d8f64308c47901c72d5ebceda80e">path</a>;</div>
+<div class="line"><span class="lineno">  343</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -755,10 +787,10 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00307">307</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  308</span>{</div>
-<div class="line"><span class="lineno">  309</span>    this-&gt;<a class="code hl_variable" href="#ae575d4b9a6b1ada3f9626c458c060f54">processing</a> = <a class="code hl_variable" href="#ae575d4b9a6b1ada3f9626c458c060f54">processing</a>;</div>
-<div class="line"><span class="lineno">  310</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00322">322</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  323</span>{</div>
+<div class="line"><span class="lineno">  324</span>    this-&gt;<a class="code hl_variable" href="#ae575d4b9a6b1ada3f9626c458c060f54">processing</a> = <a class="code hl_variable" href="#ae575d4b9a6b1ada3f9626c458c060f54">processing</a>;</div>
+<div class="line"><span class="lineno">  325</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -779,10 +811,10 @@ template&lt;class T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00301">301</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  302</span>{</div>
-<div class="line"><span class="lineno">  303</span>    this-&gt;<a class="code hl_variable" href="#a187a2fe4ff50261cf3c15b8cda7dfc56">visited</a> = <a class="code hl_variable" href="#a187a2fe4ff50261cf3c15b8cda7dfc56">visited</a>;</div>
-<div class="line"><span class="lineno">  304</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00316">316</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  317</span>{</div>
+<div class="line"><span class="lineno">  318</span>    this-&gt;<a class="code hl_variable" href="#a187a2fe4ff50261cf3c15b8cda7dfc56">visited</a> = <a class="code hl_variable" href="#a187a2fe4ff50261cf3c15b8cda7dfc56">visited</a>;</div>
+<div class="line"><span class="lineno">  319</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -809,7 +841,7 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00054">54</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00059">59</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
 
 </div>
 </div>
@@ -835,7 +867,7 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00060">60</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00065">65</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
 
 </div>
 </div>
@@ -861,7 +893,7 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00063">63</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00068">68</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
 
 </div>
 </div>
@@ -887,7 +919,7 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00059">59</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00064">64</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
 
 </div>
 </div>
@@ -913,7 +945,7 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00053">53</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00058">58</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
 
 </div>
 </div>
@@ -939,7 +971,7 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00058">58</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00063">63</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
 
 </div>
 </div>
@@ -965,7 +997,7 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00058">58</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00063">63</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
 
 </div>
 </div>
@@ -991,7 +1023,7 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00061">61</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00066">66</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
 
 </div>
 </div>
@@ -1017,7 +1049,7 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00057">57</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00062">62</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
 
 </div>
 </div>
@@ -1043,7 +1075,7 @@ template&lt;class T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00056">56</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00061">61</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
 
 </div>
 </div>
@@ -1052,13 +1084,6 @@ template&lt;class T&gt; </div>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div id="page-nav" class="page-nav-panel">
-<div id="page-nav-resize-handle"></div>
-<div id="page-nav-tree">
-<div id="page-nav-contents">
-</div><!-- page-nav-contents -->
-</div><!-- page-nav-tree -->
-</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

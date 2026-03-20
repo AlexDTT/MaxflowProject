@@ -1,15 +1,15 @@
+<!-- HTML header for doxygen 1.9.1+ -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Maxflow Project T9G2: data_structures/Graph.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
@@ -19,16 +19,33 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<!-- doxygen-awesome extensions -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr id="projectrow">
-  <td id="projectalign">
+ <tr style="height: 56px;">
+  <!-- PROJECT LOGO -->
+  <!-- PROJECT TITLE -->
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Maxflow Project T9G2
    </div>
+   <div id="projectbrief"></div>
   </td>
  </tr>
  </tbody>
@@ -89,6 +106,10 @@ $(function(){initNavTree('_graph_8h.html','',''); });
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle"><div class="title">Graph.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -97,14 +118,27 @@ $(function(){initNavTree('_graph_8h.html','',''); });
 <code>#include &lt;queue&gt;</code><br />
 <code>#include &lt;limits&gt;</code><br />
 <code>#include &lt;algorithm&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for Graph.h:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="_graph_8h__incl.svg" width="420" height="111"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="_graph_8h__dep__incl.svg" width="888" height="184"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+</div>
 </div>
 <p><a href="_graph_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:Vertex_3C_20T_20_3E" id="r_Vertex_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_vertex.html">Vertex&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a node in the graph.  <a href="class_vertex.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Edge_3C_20T_20_3E" id="r_Edge_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_edge.html">Edge&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a directed connection between two vertices in the graph.  <a href="class_edge.html#details">More...</a><br /></td></tr>
 <tr class="memitem:Graph_3C_20T_20_3E" id="r_Graph_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_graph.html">Graph&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a general graph using an adjacency list.  <a href="class_graph.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
@@ -160,16 +194,16 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00542">542</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  543</span>{</div>
-<div class="line"><span class="lineno">  544</span>    <span class="keywordflow">if</span> (m != <span class="keyword">nullptr</span>)</div>
-<div class="line"><span class="lineno">  545</span>    {</div>
-<div class="line"><span class="lineno">  546</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
-<div class="line"><span class="lineno">  547</span>            <span class="keywordflow">if</span> (m[i] != <span class="keyword">nullptr</span>)</div>
-<div class="line"><span class="lineno">  548</span>                <span class="keyword">delete</span>[] m[i];</div>
-<div class="line"><span class="lineno">  549</span>        <span class="keyword">delete</span>[] m;</div>
-<div class="line"><span class="lineno">  550</span>    }</div>
-<div class="line"><span class="lineno">  551</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00557">557</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  558</span>{</div>
+<div class="line"><span class="lineno">  559</span>    <span class="keywordflow">if</span> (m != <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno">  560</span>    {</div>
+<div class="line"><span class="lineno">  561</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
+<div class="line"><span class="lineno">  562</span>            <span class="keywordflow">if</span> (m[i] != <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno">  563</span>                <span class="keyword">delete</span>[] m[i];</div>
+<div class="line"><span class="lineno">  564</span>        <span class="keyword">delete</span>[] m;</div>
+<div class="line"><span class="lineno">  565</span>    }</div>
+<div class="line"><span class="lineno">  566</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -200,28 +234,21 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00531">531</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  532</span>{</div>
-<div class="line"><span class="lineno">  533</span>    <span class="keywordflow">if</span> (m != <span class="keyword">nullptr</span>)</div>
-<div class="line"><span class="lineno">  534</span>    {</div>
-<div class="line"><span class="lineno">  535</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
-<div class="line"><span class="lineno">  536</span>            <span class="keywordflow">if</span> (m[i] != <span class="keyword">nullptr</span>)</div>
-<div class="line"><span class="lineno">  537</span>                <span class="keyword">delete</span>[] m[i];</div>
-<div class="line"><span class="lineno">  538</span>        <span class="keyword">delete</span>[] m;</div>
-<div class="line"><span class="lineno">  539</span>    }</div>
-<div class="line"><span class="lineno">  540</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_graph_8h_source.html#l00546">546</a> of file <a class="el" href="_graph_8h_source.html">Graph.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  547</span>{</div>
+<div class="line"><span class="lineno">  548</span>    <span class="keywordflow">if</span> (m != <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno">  549</span>    {</div>
+<div class="line"><span class="lineno">  550</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; n; i++)</div>
+<div class="line"><span class="lineno">  551</span>            <span class="keywordflow">if</span> (m[i] != <span class="keyword">nullptr</span>)</div>
+<div class="line"><span class="lineno">  552</span>                <span class="keyword">delete</span>[] m[i];</div>
+<div class="line"><span class="lineno">  553</span>        <span class="keyword">delete</span>[] m;</div>
+<div class="line"><span class="lineno">  554</span>    }</div>
+<div class="line"><span class="lineno">  555</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div id="page-nav" class="page-nav-panel">
-<div id="page-nav-resize-handle"></div>
-<div id="page-nav-tree">
-<div id="page-nav-contents">
-</div><!-- page-nav-contents -->
-</div><!-- page-nav-tree -->
-</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

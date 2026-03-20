@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['operator_3d_0',['operator=',['../class_graph.html#aa584272fb278e4c4aa4f425a4147aed4',1,'Graph::operator=(const Graph &amp;)=delete'],['../class_graph.html#a5a815886a6d15e6261dd410cf6980308',1,'Graph::operator=(Graph &amp;&amp;other) noexcept']]],
-  ['orig_1',['orig',['../class_edge.html#a4510c31e0479f9d25f6e35d086887192',1,'Edge']]],
-  ['outputfilename_2',['OutputFileName',['../struct_parameters.html#a321c029d5d04dde55af4d4cb9824da52',1,'Parameters']]]
+  ['name_0',['name',['../class_reviewer.html#af9ab4025cd39328e9ce594ef165e9e9c',1,'Reviewer']]],
+  ['nearlyequal_1',['nearlyEqual',['../maxflow__tests_8cpp.html#afa7ff1bb1eafe1074e69b7f51e868443',1,'maxflow_tests.cpp']]],
+  ['num_2',['num',['../class_vertex.html#aeb941bcd51ef71c6101e02eaed1cae12',1,'Vertex']]]
 ];

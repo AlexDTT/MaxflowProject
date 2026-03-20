@@ -1,15 +1,15 @@
+<!-- HTML header for doxygen 1.9.1+ -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Maxflow Project T9G2: utils/AssignmentLogic.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
@@ -19,16 +19,33 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<!-- doxygen-awesome extensions -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr id="projectrow">
-  <td id="projectalign">
+ <tr style="height: 56px;">
+  <!-- PROJECT LOGO -->
+  <!-- PROJECT TITLE -->
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Maxflow Project T9G2
    </div>
+   <div id="projectbrief"></div>
   </td>
  </tr>
  </tbody>
@@ -263,17 +280,17 @@ $(function(){initNavTree('_assignment_logic_8cpp_source.html','',''); });
 <div class="ttc" id="a_assignment_logic_8cpp_html_a77876bd7e23629d20315a7ac61ef09c3"><div class="ttname"><a href="_assignment_logic_8cpp.html#a77876bd7e23629d20315a7ac61ef09c3">writeRiskSection</a></div><div class="ttdeci">static void writeRiskSection(std::ofstream &amp;out, int riskValue, const std::vector&lt; int &gt; &amp;riskyReviewerIds)</div><div class="ttdef"><b>Definition</b> <a href="#l00060">AssignmentLogic.cpp:60</a></div></div>
 <div class="ttc" id="a_assignment_logic_8h_html"><div class="ttname"><a href="_assignment_logic_8h.html">AssignmentLogic.h</a></div><div class="ttdoc">Logic for assigning reviewers to submissions based on Max Flow.</div></div>
 <div class="ttc" id="a_edmond_karp_8cpp_html_a1b7a932723c832f796e7eb79e1af10f0"><div class="ttname"><a href="_edmond_karp_8cpp.html#a1b7a932723c832f796e7eb79e1af10f0">edmondsKarp&lt; int &gt;</a></div><div class="ttdeci">template void edmondsKarp&lt; int &gt;(Graph&lt; int &gt; *, int, int, std::function&lt; void(const std::vector&lt; int &gt; &amp;, double)&gt;)</div></div>
-<div class="ttc" id="a_edmond_karp_8h_html"><div class="ttname"><a href="_edmond_karp_8h.html">EdmondKarp.h</a></div></div>
+<div class="ttc" id="a_edmond_karp_8h_html"><div class="ttname"><a href="_edmond_karp_8h.html">EdmondKarp.h</a></div><div class="ttdoc">Implementations of the Edmonds-Karp algorithm for calculating maximum flow.</div></div>
 <div class="ttc" id="aclass_assignment_logic_html_a1f49b0281d5e61cf5ab218988bfc5bba"><div class="ttname"><a href="class_assignment_logic.html#a1f49b0281d5e61cf5ab218988bfc5bba">AssignmentLogic::generateAssignmentsAndStore</a></div><div class="ttdeci">static bool generateAssignmentsAndStore(Graph&lt; int &gt; &amp;outGraph, const std::vector&lt; Submission &gt; &amp;submissions, const std::vector&lt; Reviewer &gt; &amp;reviewers, const Parameters &amp;params, int mode, bool writeOutput, std::function&lt; void(const std::vector&lt; int &gt; &amp;, double)&gt; logger=nullptr)</div><div class="ttdoc">Generates reviewer assignments based on max flow and optionally stores them.</div><div class="ttdef"><b>Definition</b> <a href="#l00148">AssignmentLogic.cpp:148</a></div></div>
 <div class="ttc" id="aclass_assignment_logic_html_a2d96da3e538bbca0269ba70b3d0ff050"><div class="ttname"><a href="class_assignment_logic.html#a2d96da3e538bbca0269ba70b3d0ff050">AssignmentLogic::totalAssignedReviews</a></div><div class="ttdeci">static int totalAssignedReviews(const Graph&lt; int &gt; &amp;flowGraph, const std::vector&lt; Submission &gt; &amp;submissions, const std::vector&lt; Reviewer &gt; &amp;reviewers)</div><div class="ttdoc">Computes the actual total number of assigned reviews from the flow graph.</div><div class="ttdef"><b>Definition</b> <a href="#l00013">AssignmentLogic.cpp:13</a></div></div>
 <div class="ttc" id="aclass_assignment_logic_html_a90461122cf11a333f981c472be0888bc"><div class="ttname"><a href="class_assignment_logic.html#a90461122cf11a333f981c472be0888bc">AssignmentLogic::writeAssignmentsToFile</a></div><div class="ttdeci">static bool writeAssignmentsToFile(const Graph&lt; int &gt; &amp;flowGraph, const std::vector&lt; Submission &gt; &amp;submissions, const std::vector&lt; Reviewer &gt; &amp;reviewers, const Parameters &amp;params, int mode, const std::vector&lt; int &gt; *riskyReviewerIds=nullptr, int riskValue=0, const std::string &amp;outputPath=&quot;&quot;)</div><div class="ttdoc">Writes the final review assignments to a CSV file.</div><div class="ttdef"><b>Definition</b> <a href="#l00069">AssignmentLogic.cpp:69</a></div></div>
 <div class="ttc" id="aclass_assignment_logic_html_a931974837d12215fb68978c18e00491a"><div class="ttname"><a href="class_assignment_logic.html#a931974837d12215fb68978c18e00491a">AssignmentLogic::totalRequiredReviews</a></div><div class="ttdeci">static int totalRequiredReviews(const std::vector&lt; Submission &gt; &amp;submissions, const Parameters &amp;params)</div><div class="ttdoc">Computes the total number of required reviews across all submissions.</div><div class="ttdef"><b>Definition</b> <a href="#l00009">AssignmentLogic.cpp:9</a></div></div>
 <div class="ttc" id="aclass_assignment_logic_html_af7460acb335b05095c2bd5bbca2925f9"><div class="ttname"><a href="class_assignment_logic.html#af7460acb335b05095c2bd5bbca2925f9">AssignmentLogic::findRiskyReviewersK1</a></div><div class="ttdeci">static std::vector&lt; int &gt; findRiskyReviewersK1(const std::vector&lt; Submission &gt; &amp;submissions, const std::vector&lt; Reviewer &gt; &amp;reviewers, const Parameters &amp;params, int mode)</div><div class="ttdoc">Identifies risky reviewers under K=1 logic.</div><div class="ttdef"><b>Definition</b> <a href="#l00034">AssignmentLogic.cpp:34</a></div></div>
-<div class="ttc" id="aclass_edge_html"><div class="ttname"><a href="class_edge.html">Edge</a></div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00071">Graph.h:72</a></div></div>
-<div class="ttc" id="aclass_graph_html"><div class="ttname"><a href="class_graph.html">Graph</a></div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00102">Graph.h:103</a></div></div>
-<div class="ttc" id="aclass_graph_html_a8b7b7465fbfd562e2a469f90a437ab75"><div class="ttname"><a href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">Graph::findVertex</a></div><div class="ttdeci">Vertex&lt; T &gt; * findVertex(const T &amp;in) const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00427">Graph.h:427</a></div></div>
-<div class="ttc" id="aclass_vertex_html"><div class="ttname"><a href="class_vertex.html">Vertex</a></div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00021">Graph.h:22</a></div></div>
-<div class="ttc" id="aclass_vertex_html_a0010a7d0b7db1bb81dd2ebb1ffae650a"><div class="ttname"><a href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">Vertex::getAdj</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; getAdj() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00253">Graph.h:253</a></div></div>
+<div class="ttc" id="aclass_edge_html"><div class="ttname"><a href="class_edge.html">Edge</a></div><div class="ttdoc">Represents a directed connection between two vertices in the graph.</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00081">Graph.h:82</a></div></div>
+<div class="ttc" id="aclass_graph_html"><div class="ttname"><a href="class_graph.html">Graph</a></div><div class="ttdoc">Represents a general graph using an adjacency list.</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00117">Graph.h:118</a></div></div>
+<div class="ttc" id="aclass_graph_html_a8b7b7465fbfd562e2a469f90a437ab75"><div class="ttname"><a href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">Graph::findVertex</a></div><div class="ttdeci">Vertex&lt; T &gt; * findVertex(const T &amp;in) const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00442">Graph.h:442</a></div></div>
+<div class="ttc" id="aclass_vertex_html"><div class="ttname"><a href="class_vertex.html">Vertex</a></div><div class="ttdoc">Represents a node in the graph.</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00026">Graph.h:27</a></div></div>
+<div class="ttc" id="aclass_vertex_html_a0010a7d0b7db1bb81dd2ebb1ffae650a"><div class="ttname"><a href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">Vertex::getAdj</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; getAdj() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00268">Graph.h:268</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a0ba636c8b419a41f1e50c77da062ced6"><div class="ttname"><a href="classcreate_graphs.html#a0ba636c8b419a41f1e50c77da062ced6">createGraphs::sourceId</a></div><div class="ttdeci">static int sourceId()</div><div class="ttdoc">Returns the super-source node ID (always 0).</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00015">createGraphs.cpp:15</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a40a4c22dfe21db45156d5375db8cc388"><div class="ttname"><a href="classcreate_graphs.html#a40a4c22dfe21db45156d5375db8cc388">createGraphs::reviewerNodeId</a></div><div class="ttdeci">static int reviewerNodeId(int revIndex, int numSubs)</div><div class="ttdoc">Maps a reviewer vector index to its graph node ID.</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00025">createGraphs.cpp:25</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a6862e1a6e7e1e09cfcff249b2ac80b01"><div class="ttname"><a href="classcreate_graphs.html#a6862e1a6e7e1e09cfcff249b2ac80b01">createGraphs::getMatchedDomain</a></div><div class="ttdeci">static int getMatchedDomain(const Submission &amp;sub, const Reviewer &amp;rev, int mode)</div><div class="ttdoc">Returns the topic on which submission and reviewer match in the given mode. Returns -1 if they do not...</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00034">createGraphs.cpp:34</a></div></div>
@@ -281,9 +298,9 @@ $(function(){initNavTree('_assignment_logic_8cpp_source.html','',''); });
 <div class="ttc" id="aclasscreate_graphs_html_a6dd2afca3d3d0db38c179d988455fb5f"><div class="ttname"><a href="classcreate_graphs.html#a6dd2afca3d3d0db38c179d988455fb5f">createGraphs::buildReviewFlowGraph</a></div><div class="ttdeci">static Graph&lt; int &gt; buildReviewFlowGraph(const vector&lt; Submission &gt; &amp;submissions, const vector&lt; Reviewer &gt; &amp;reviewers, const Parameters &amp;params, int mode)</div><div class="ttdoc">Builds a Max-Flow graph for the review assignment problem.</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00057">createGraphs.cpp:57</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_ad6b814f583129915c5f857686859598d"><div class="ttname"><a href="classcreate_graphs.html#ad6b814f583129915c5f857686859598d">createGraphs::submissionNodeId</a></div><div class="ttdeci">static int submissionNodeId(int subIndex)</div><div class="ttdoc">Maps a submission vector index to its graph node ID.</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00020">createGraphs.cpp:20</a></div></div>
 <div class="ttc" id="acreate_graphs_8h_html"><div class="ttname"><a href="create_graphs_8h.html">createGraphs.h</a></div></div>
-<div class="ttc" id="astruct_parameters_html"><div class="ttname"><a href="struct_parameters.html">Parameters</a></div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00006">Parameters.h:6</a></div></div>
-<div class="ttc" id="astruct_parameters_html_a321c029d5d04dde55af4d4cb9824da52"><div class="ttname"><a href="struct_parameters.html#a321c029d5d04dde55af4d4cb9824da52">Parameters::OutputFileName</a></div><div class="ttdeci">std::string OutputFileName</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00015">Parameters.h:15</a></div></div>
-<div class="ttc" id="astruct_parameters_html_aeea9e43cbdff07b655f0b7ea87f302a3"><div class="ttname"><a href="struct_parameters.html#aeea9e43cbdff07b655f0b7ea87f302a3">Parameters::MinReviewsPerSubmission</a></div><div class="ttdeci">int MinReviewsPerSubmission</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00007">Parameters.h:7</a></div></div>
+<div class="ttc" id="astruct_parameters_html"><div class="ttname"><a href="struct_parameters.html">Parameters</a></div><div class="ttdoc">Struct to hold global configuration parameters.</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00014">Parameters.h:14</a></div></div>
+<div class="ttc" id="astruct_parameters_html_a321c029d5d04dde55af4d4cb9824da52"><div class="ttname"><a href="struct_parameters.html#a321c029d5d04dde55af4d4cb9824da52">Parameters::OutputFileName</a></div><div class="ttdeci">std::string OutputFileName</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00023">Parameters.h:23</a></div></div>
+<div class="ttc" id="astruct_parameters_html_aeea9e43cbdff07b655f0b7ea87f302a3"><div class="ttname"><a href="struct_parameters.html#aeea9e43cbdff07b655f0b7ea87f302a3">Parameters::MinReviewsPerSubmission</a></div><div class="ttdeci">int MinReviewsPerSubmission</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00015">Parameters.h:15</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

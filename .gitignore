@@ -8,6 +8,7 @@ maxflow_tests.exe
 maxflow_tests
 maxflow_tests.o
 output_dataset*.csv
+output.csv
 assign.csv
 *.o
 *.dot

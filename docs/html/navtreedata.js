@@ -25,6 +25,7 @@
 var NAVTREE =
 [
   [ "Maxflow Project T9G2", "index.html", [
+    [ "Scientific Conference Organization Tool", "index.html", "index" ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

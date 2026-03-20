@@ -1,15 +1,15 @@
+<!-- HTML header for doxygen 1.9.1+ -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Maxflow Project T9G2: main.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
@@ -19,16 +19,33 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<!-- doxygen-awesome extensions -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr id="projectrow">
-  <td id="projectalign">
+ <tr style="height: 56px;">
+  <!-- PROJECT LOGO -->
+  <!-- PROJECT TITLE -->
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Maxflow Project T9G2
    </div>
+   <div id="projectbrief"></div>
   </td>
  </tr>
  </tbody>
@@ -583,7 +600,7 @@ $(function(){initNavTree('main_8cpp_source.html','',''); });
 </div>
 <div class="ttc" id="a_assignment_logic_8h_html"><div class="ttname"><a href="_assignment_logic_8h.html">AssignmentLogic.h</a></div><div class="ttdoc">Logic for assigning reviewers to submissions based on Max Flow.</div></div>
 <div class="ttc" id="a_edmond_karp_8cpp_html_a1b7a932723c832f796e7eb79e1af10f0"><div class="ttname"><a href="_edmond_karp_8cpp.html#a1b7a932723c832f796e7eb79e1af10f0">edmondsKarp&lt; int &gt;</a></div><div class="ttdeci">template void edmondsKarp&lt; int &gt;(Graph&lt; int &gt; *, int, int, std::function&lt; void(const std::vector&lt; int &gt; &amp;, double)&gt;)</div></div>
-<div class="ttc" id="a_edmond_karp_8h_html"><div class="ttname"><a href="_edmond_karp_8h.html">EdmondKarp.h</a></div></div>
+<div class="ttc" id="a_edmond_karp_8h_html"><div class="ttname"><a href="_edmond_karp_8h.html">EdmondKarp.h</a></div><div class="ttdoc">Implementations of the Edmonds-Karp algorithm for calculating maximum flow.</div></div>
 <div class="ttc" id="a_file_parser_8h_html"><div class="ttname"><a href="_file_parser_8h.html">FileParser.h</a></div><div class="ttdoc">Class definition for parsing input CSV files.</div></div>
 <div class="ttc" id="a_parameters_8h_html"><div class="ttname"><a href="_parameters_8h.html">Parameters.h</a></div></div>
 <div class="ttc" id="a_reviewer_8h_html"><div class="ttname"><a href="_reviewer_8h.html">Reviewer.h</a></div></div>
@@ -593,7 +610,7 @@ $(function(){initNavTree('main_8cpp_source.html','',''); });
 <div class="ttc" id="aclass_assignment_logic_html_a90461122cf11a333f981c472be0888bc"><div class="ttname"><a href="class_assignment_logic.html#a90461122cf11a333f981c472be0888bc">AssignmentLogic::writeAssignmentsToFile</a></div><div class="ttdeci">static bool writeAssignmentsToFile(const Graph&lt; int &gt; &amp;flowGraph, const std::vector&lt; Submission &gt; &amp;submissions, const std::vector&lt; Reviewer &gt; &amp;reviewers, const Parameters &amp;params, int mode, const std::vector&lt; int &gt; *riskyReviewerIds=nullptr, int riskValue=0, const std::string &amp;outputPath=&quot;&quot;)</div><div class="ttdoc">Writes the final review assignments to a CSV file.</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8cpp_source.html#l00069">AssignmentLogic.cpp:69</a></div></div>
 <div class="ttc" id="aclass_assignment_logic_html_af7460acb335b05095c2bd5bbca2925f9"><div class="ttname"><a href="class_assignment_logic.html#af7460acb335b05095c2bd5bbca2925f9">AssignmentLogic::findRiskyReviewersK1</a></div><div class="ttdeci">static std::vector&lt; int &gt; findRiskyReviewersK1(const std::vector&lt; Submission &gt; &amp;submissions, const std::vector&lt; Reviewer &gt; &amp;reviewers, const Parameters &amp;params, int mode)</div><div class="ttdoc">Identifies risky reviewers under K=1 logic.</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8cpp_source.html#l00034">AssignmentLogic.cpp:34</a></div></div>
 <div class="ttc" id="aclass_file_parser_html_aaea1bf0b7d4f662f4f38f8ff1bf433b1"><div class="ttname"><a href="class_file_parser.html#aaea1bf0b7d4f662f4f38f8ff1bf433b1">FileParser::parse</a></div><div class="ttdeci">static bool parse(const std::string &amp;filename, std::vector&lt; Submission &gt; &amp;submissions, std::vector&lt; Reviewer &gt; &amp;reviewers, Parameters &amp;params)</div><div class="ttdoc">Parses a CSV input file and populates submissions, reviewers and params.</div><div class="ttdef"><b>Definition</b> <a href="_file_parser_8cpp_source.html#l00052">FileParser.cpp:52</a></div></div>
-<div class="ttc" id="aclass_graph_html"><div class="ttname"><a href="class_graph.html">Graph</a></div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00102">Graph.h:103</a></div></div>
+<div class="ttc" id="aclass_graph_html"><div class="ttname"><a href="class_graph.html">Graph</a></div><div class="ttdoc">Represents a general graph using an adjacency list.</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00117">Graph.h:118</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a090df02a30ddb783be7beb1f5053639b"><div class="ttname"><a href="classcreate_graphs.html#a090df02a30ddb783be7beb1f5053639b">createGraphs::exportToDOT</a></div><div class="ttdeci">static void exportToDOT(const Graph&lt; int &gt; &amp;g, const vector&lt; Submission &gt; &amp;submissions, const vector&lt; Reviewer &gt; &amp;reviewers, const string &amp;filename)</div><div class="ttdoc">Exports the graph to a Graphviz .dot file for visualization.</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00183">createGraphs.cpp:183</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a0ba636c8b419a41f1e50c77da062ced6"><div class="ttname"><a href="classcreate_graphs.html#a0ba636c8b419a41f1e50c77da062ced6">createGraphs::sourceId</a></div><div class="ttdeci">static int sourceId()</div><div class="ttdoc">Returns the super-source node ID (always 0).</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00015">createGraphs.cpp:15</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a215e72cdc13999c99f8a8c928a2fc884"><div class="ttname"><a href="classcreate_graphs.html#a215e72cdc13999c99f8a8c928a2fc884">createGraphs::getNodeLabel</a></div><div class="ttdeci">static string getNodeLabel(int id, const vector&lt; Submission &gt; &amp;submissions, const vector&lt; Reviewer &gt; &amp;reviewers)</div><div class="ttdoc">Resolves node ID to string label.</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00111">createGraphs.cpp:111</a></div></div>
@@ -628,7 +645,7 @@ $(function(){initNavTree('main_8cpp_source.html','',''); });
 <div class="ttc" id="amain_8cpp_html_aea55a9610286b8fc73adf5c8ceca66ff"><div class="ttname"><a href="main_8cpp.html#aea55a9610286b8fc73adf5c8ceca66ff">gDataLoaded</a></div><div class="ttdeci">static bool gDataLoaded</div><div class="ttdef"><b>Definition</b> <a href="#l00027">main.cpp:27</a></div></div>
 <div class="ttc" id="amain_8cpp_html_af74822c7bd7a3760d853a381f291234a"><div class="ttname"><a href="main_8cpp.html#af74822c7bd7a3760d853a381f291234a">gFlowGraph</a></div><div class="ttdeci">static Graph&lt; int &gt; gFlowGraph</div><div class="ttdef"><b>Definition</b> <a href="#l00028">main.cpp:28</a></div></div>
 <div class="ttc" id="amaxflow__tests_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="maxflow__tests_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition</b> <a href="maxflow__tests_8cpp_source.html#l00492">maxflow_tests.cpp:492</a></div></div>
-<div class="ttc" id="astruct_parameters_html"><div class="ttname"><a href="struct_parameters.html">Parameters</a></div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00006">Parameters.h:6</a></div></div>
+<div class="ttc" id="astruct_parameters_html"><div class="ttname"><a href="struct_parameters.html">Parameters</a></div><div class="ttdoc">Struct to hold global configuration parameters.</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00014">Parameters.h:14</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

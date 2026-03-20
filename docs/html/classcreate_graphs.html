@@ -1,15 +1,15 @@
+<!-- HTML header for doxygen 1.9.1+ -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Maxflow Project T9G2: createGraphs Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
@@ -19,16 +19,33 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<!-- doxygen-awesome extensions -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr id="projectrow">
-  <td id="projectalign">
+ <tr style="height: 56px;">
+  <!-- PROJECT LOGO -->
+  <!-- PROJECT TITLE -->
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Maxflow Project T9G2
    </div>
+   <div id="projectbrief"></div>
   </td>
  </tr>
  </tbody>
@@ -89,9 +106,15 @@ $(function(){initNavTree('classcreate_graphs.html','','classcreate_graphs-member
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="classcreate_graphs-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">createGraphs Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Factory class to construct and visualize network flow graphs.  
+ <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="create_graphs_8h_source.html">createGraphs.h</a>&gt;</code></p>
 <table class="memberdecls">
@@ -117,8 +140,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a215e72cdc13999c99f8a8c928a2fc884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolves node ID to string label.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="create_graphs_8h_source.html#l00013">13</a> of file <a class="el" href="create_graphs_8h_source.html">createGraphs.h</a>.</p>
+<div class="textblock"><p>Factory class to construct and visualize network flow graphs. </p>
+<p>Contains utility methods used exclusively to build the corresponding Max-Flow network, map entities to node IDs, and display/export the graph states. </p>
+
+<p class="definition">Definition at line <a class="el" href="create_graphs_8h_source.html#l00020">20</a> of file <a class="el" href="create_graphs_8h_source.html">createGraphs.h</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="a6dd2afca3d3d0db38c179d988455fb5f" name="a6dd2afca3d3d0db38c179d988455fb5f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6dd2afca3d3d0db38c179d988455fb5f">&#9670;&#160;</a></span>buildReviewFlowGraph()</h2>
@@ -219,15 +244,15 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">  103</span> </div>
 <div class="line"><span class="lineno">  104</span>    <span class="keywordflow">return</span> g;</div>
 <div class="line"><span class="lineno">  105</span>}</div>
-<div class="ttc" id="aclass_graph_html_a00be284ea2be3b3d0f0d2e493b70245b"><div class="ttname"><a href="class_graph.html#a00be284ea2be3b3d0f0d2e493b70245b">Graph::addVertex</a></div><div class="ttdeci">bool addVertex(const T &amp;in)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00451">Graph.h:451</a></div></div>
-<div class="ttc" id="aclass_graph_html_ac61af3aafe6277215f5a3b3cc7d58ce2"><div class="ttname"><a href="class_graph.html#ac61af3aafe6277215f5a3b3cc7d58ce2">Graph::addEdge</a></div><div class="ttdeci">bool addEdge(const T &amp;sourc, const T &amp;dest, double w)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00491">Graph.h:491</a></div></div>
+<div class="ttc" id="aclass_graph_html_a00be284ea2be3b3d0f0d2e493b70245b"><div class="ttname"><a href="class_graph.html#a00be284ea2be3b3d0f0d2e493b70245b">Graph::addVertex</a></div><div class="ttdeci">bool addVertex(const T &amp;in)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00466">Graph.h:466</a></div></div>
+<div class="ttc" id="aclass_graph_html_ac61af3aafe6277215f5a3b3cc7d58ce2"><div class="ttname"><a href="class_graph.html#ac61af3aafe6277215f5a3b3cc7d58ce2">Graph::addEdge</a></div><div class="ttdeci">bool addEdge(const T &amp;sourc, const T &amp;dest, double w)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00506">Graph.h:506</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a0ba636c8b419a41f1e50c77da062ced6"><div class="ttname"><a href="#a0ba636c8b419a41f1e50c77da062ced6">createGraphs::sourceId</a></div><div class="ttdeci">static int sourceId()</div><div class="ttdoc">Returns the super-source node ID (always 0).</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00015">createGraphs.cpp:15</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a40a4c22dfe21db45156d5375db8cc388"><div class="ttname"><a href="#a40a4c22dfe21db45156d5375db8cc388">createGraphs::reviewerNodeId</a></div><div class="ttdeci">static int reviewerNodeId(int revIndex, int numSubs)</div><div class="ttdoc">Maps a reviewer vector index to its graph node ID.</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00025">createGraphs.cpp:25</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a6862e1a6e7e1e09cfcff249b2ac80b01"><div class="ttname"><a href="#a6862e1a6e7e1e09cfcff249b2ac80b01">createGraphs::getMatchedDomain</a></div><div class="ttdeci">static int getMatchedDomain(const Submission &amp;sub, const Reviewer &amp;rev, int mode)</div><div class="ttdoc">Returns the topic on which submission and reviewer match in the given mode. Returns -1 if they do not...</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00034">createGraphs.cpp:34</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a6cdda8c40cfd3717ff801029835cbac3"><div class="ttname"><a href="#a6cdda8c40cfd3717ff801029835cbac3">createGraphs::sinkId</a></div><div class="ttdeci">static int sinkId(int numSubs, int numRevs)</div><div class="ttdoc">Returns the super-sink node ID.</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00030">createGraphs.cpp:30</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_ad6b814f583129915c5f857686859598d"><div class="ttname"><a href="#ad6b814f583129915c5f857686859598d">createGraphs::submissionNodeId</a></div><div class="ttdeci">static int submissionNodeId(int subIndex)</div><div class="ttdoc">Maps a submission vector index to its graph node ID.</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00020">createGraphs.cpp:20</a></div></div>
-<div class="ttc" id="astruct_parameters_html_aeaab0c199b7a0d0857071dbec750a434"><div class="ttname"><a href="struct_parameters.html#aeaab0c199b7a0d0857071dbec750a434">Parameters::MaxReviewsPerReviewer</a></div><div class="ttdeci">int MaxReviewsPerReviewer</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00008">Parameters.h:8</a></div></div>
-<div class="ttc" id="astruct_parameters_html_aeea9e43cbdff07b655f0b7ea87f302a3"><div class="ttname"><a href="struct_parameters.html#aeea9e43cbdff07b655f0b7ea87f302a3">Parameters::MinReviewsPerSubmission</a></div><div class="ttdeci">int MinReviewsPerSubmission</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00007">Parameters.h:7</a></div></div>
+<div class="ttc" id="astruct_parameters_html_aeaab0c199b7a0d0857071dbec750a434"><div class="ttname"><a href="struct_parameters.html#aeaab0c199b7a0d0857071dbec750a434">Parameters::MaxReviewsPerReviewer</a></div><div class="ttdeci">int MaxReviewsPerReviewer</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00016">Parameters.h:16</a></div></div>
+<div class="ttc" id="astruct_parameters_html_aeea9e43cbdff07b655f0b7ea87f302a3"><div class="ttname"><a href="struct_parameters.html#aeea9e43cbdff07b655f0b7ea87f302a3">Parameters::MinReviewsPerSubmission</a></div><div class="ttdeci">int MinReviewsPerSubmission</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00015">Parameters.h:15</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -322,7 +347,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">  225</span> </div>
 <div class="line"><span class="lineno">  226</span>    out &lt;&lt; <span class="stringliteral">&quot;}\n&quot;</span>;</div>
 <div class="line"><span class="lineno">  227</span>}</div>
-<div class="ttc" id="aclass_graph_html_a41624b03fcb6bd29e4df574a1ec58541"><div class="ttname"><a href="class_graph.html#a41624b03fcb6bd29e4df574a1ec58541">Graph::getVertexSet</a></div><div class="ttdeci">std::vector&lt; Vertex&lt; T &gt; * &gt; getVertexSet() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00418">Graph.h:418</a></div></div>
+<div class="ttc" id="aclass_graph_html_a41624b03fcb6bd29e4df574a1ec58541"><div class="ttname"><a href="class_graph.html#a41624b03fcb6bd29e4df574a1ec58541">Graph::getVertexSet</a></div><div class="ttdeci">std::vector&lt; Vertex&lt; T &gt; * &gt; getVertexSet() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00433">Graph.h:433</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a215e72cdc13999c99f8a8c928a2fc884"><div class="ttname"><a href="#a215e72cdc13999c99f8a8c928a2fc884">createGraphs::getNodeLabel</a></div><div class="ttdeci">static string getNodeLabel(int id, const vector&lt; Submission &gt; &amp;submissions, const vector&lt; Reviewer &gt; &amp;reviewers)</div><div class="ttdoc">Resolves node ID to string label.</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00111">createGraphs.cpp:111</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -362,8 +387,8 @@ Static Public Member Functions</h2></td></tr>
 <p>Returns the topic on which submission and reviewer match in the given mode. Returns -1 if they do not match. Primary topics are preferred over secondary when multiple matches exist. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sub</td><td><a class="el" href="class_submission.html">Submission</a> </td></tr>
-    <tr><td class="paramname">rev</td><td><a class="el" href="class_reviewer.html">Reviewer</a> </td></tr>
+    <tr><td class="paramname">sub</td><td><a class="el" href="class_submission.html" title="Represents a scientific paper/article submission.">Submission</a> </td></tr>
+    <tr><td class="paramname">rev</td><td><a class="el" href="class_reviewer.html" title="Represents a conference reviewer.">Reviewer</a> </td></tr>
     <tr><td class="paramname">mode</td><td>GenerateAssignments mode (0-3) </td></tr>
   </table>
   </dd>
@@ -394,10 +419,10 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   53</span> </div>
 <div class="line"><span class="lineno">   54</span>    <span class="keywordflow">return</span> -1; <span class="comment">// no match</span></div>
 <div class="line"><span class="lineno">   55</span>}</div>
-<div class="ttc" id="aclass_reviewer_html_a06c85219cee04d5f82f2897152e336bc"><div class="ttname"><a href="class_reviewer.html#a06c85219cee04d5f82f2897152e336bc">Reviewer::secondaryTopic</a></div><div class="ttdeci">int secondaryTopic</div><div class="ttdef"><b>Definition</b> <a href="_reviewer_8h_source.html#l00016">Reviewer.h:16</a></div></div>
-<div class="ttc" id="aclass_reviewer_html_aa11afe491b5ec481910a5982279b5bc5"><div class="ttname"><a href="class_reviewer.html#aa11afe491b5ec481910a5982279b5bc5">Reviewer::primaryTopic</a></div><div class="ttdeci">int primaryTopic</div><div class="ttdef"><b>Definition</b> <a href="_reviewer_8h_source.html#l00015">Reviewer.h:15</a></div></div>
-<div class="ttc" id="aclass_submission_html_a31e3e68d8338cb9de1a11ed822f62c9a"><div class="ttname"><a href="class_submission.html#a31e3e68d8338cb9de1a11ed822f62c9a">Submission::secondaryTopic</a></div><div class="ttdeci">int secondaryTopic</div><div class="ttdef"><b>Definition</b> <a href="_submission_8h_source.html#l00017">Submission.h:17</a></div></div>
-<div class="ttc" id="aclass_submission_html_aa3acc5309038ce8cee78a4edc6faab2e"><div class="ttname"><a href="class_submission.html#aa3acc5309038ce8cee78a4edc6faab2e">Submission::primaryTopic</a></div><div class="ttdeci">int primaryTopic</div><div class="ttdef"><b>Definition</b> <a href="_submission_8h_source.html#l00016">Submission.h:16</a></div></div>
+<div class="ttc" id="aclass_reviewer_html_a06c85219cee04d5f82f2897152e336bc"><div class="ttname"><a href="class_reviewer.html#a06c85219cee04d5f82f2897152e336bc">Reviewer::secondaryTopic</a></div><div class="ttdeci">int secondaryTopic</div><div class="ttdef"><b>Definition</b> <a href="_reviewer_8h_source.html#l00024">Reviewer.h:24</a></div></div>
+<div class="ttc" id="aclass_reviewer_html_aa11afe491b5ec481910a5982279b5bc5"><div class="ttname"><a href="class_reviewer.html#aa11afe491b5ec481910a5982279b5bc5">Reviewer::primaryTopic</a></div><div class="ttdeci">int primaryTopic</div><div class="ttdef"><b>Definition</b> <a href="_reviewer_8h_source.html#l00023">Reviewer.h:23</a></div></div>
+<div class="ttc" id="aclass_submission_html_a31e3e68d8338cb9de1a11ed822f62c9a"><div class="ttname"><a href="class_submission.html#a31e3e68d8338cb9de1a11ed822f62c9a">Submission::secondaryTopic</a></div><div class="ttdeci">int secondaryTopic</div><div class="ttdef"><b>Definition</b> <a href="_submission_8h_source.html#l00024">Submission.h:24</a></div></div>
+<div class="ttc" id="aclass_submission_html_aa3acc5309038ce8cee78a4edc6faab2e"><div class="ttname"><a href="class_submission.html#aa3acc5309038ce8cee78a4edc6faab2e">Submission::primaryTopic</a></div><div class="ttdeci">int primaryTopic</div><div class="ttdef"><b>Definition</b> <a href="_submission_8h_source.html#l00023">Submission.h:23</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -560,9 +585,9 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">  179</span>    }</div>
 <div class="line"><span class="lineno">  180</span>    cout &lt;&lt; string(60, <span class="charliteral">&#39;-&#39;</span>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"><span class="lineno">  181</span>}</div>
-<div class="ttc" id="aclass_graph_html_a0853eac15cdf0f06d63f4b8a7820ec71"><div class="ttname"><a href="class_graph.html#a0853eac15cdf0f06d63f4b8a7820ec71">Graph::getNumVertex</a></div><div class="ttdeci">int getNumVertex() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00412">Graph.h:412</a></div></div>
-<div class="ttc" id="aclass_graph_html_a8b7b7465fbfd562e2a469f90a437ab75"><div class="ttname"><a href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">Graph::findVertex</a></div><div class="ttdeci">Vertex&lt; T &gt; * findVertex(const T &amp;in) const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00427">Graph.h:427</a></div></div>
-<div class="ttc" id="aclass_vertex_html_a0010a7d0b7db1bb81dd2ebb1ffae650a"><div class="ttname"><a href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">Vertex::getAdj</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; getAdj() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00253">Graph.h:253</a></div></div>
+<div class="ttc" id="aclass_graph_html_a0853eac15cdf0f06d63f4b8a7820ec71"><div class="ttname"><a href="class_graph.html#a0853eac15cdf0f06d63f4b8a7820ec71">Graph::getNumVertex</a></div><div class="ttdeci">int getNumVertex() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00427">Graph.h:427</a></div></div>
+<div class="ttc" id="aclass_graph_html_a8b7b7465fbfd562e2a469f90a437ab75"><div class="ttname"><a href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">Graph::findVertex</a></div><div class="ttdeci">Vertex&lt; T &gt; * findVertex(const T &amp;in) const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00442">Graph.h:442</a></div></div>
+<div class="ttc" id="aclass_vertex_html_a0010a7d0b7db1bb81dd2ebb1ffae650a"><div class="ttname"><a href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">Vertex::getAdj</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; getAdj() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00268">Graph.h:268</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -736,13 +761,6 @@ Static Public Member Functions</h2></td></tr>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
-<div id="page-nav" class="page-nav-panel">
-<div id="page-nav-resize-handle"></div>
-<div id="page-nav-tree">
-<div id="page-nav-contents">
-</div><!-- page-nav-contents -->
-</div><!-- page-nav-tree -->
-</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

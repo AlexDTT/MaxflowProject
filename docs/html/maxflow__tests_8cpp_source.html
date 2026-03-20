@@ -1,15 +1,15 @@
+<!-- HTML header for doxygen 1.9.1+ -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Maxflow Project T9G2: tests/maxflow_tests.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
 <script type="text/javascript" src="navtree.js"></script>
@@ -19,16 +19,33 @@
 <script type="text/javascript" src="search/search.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<!-- doxygen-awesome extensions -->
+<script type="text/javascript" src="doxygen-awesome-darkmode-toggle.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-interactive-toc.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+    DoxygenAwesomeDarkModeToggle.init()
+    DoxygenAwesomeFragmentCopyButton.init()
+    DoxygenAwesomeParagraphLink.init()
+    DoxygenAwesomeInteractiveToc.init()
+    DoxygenAwesomeTabs.init()
+</script>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
 <div id="titlearea">
 <table cellspacing="0" cellpadding="0">
  <tbody>
- <tr id="projectrow">
-  <td id="projectalign">
+ <tr style="height: 56px;">
+  <!-- PROJECT LOGO -->
+  <!-- PROJECT TITLE -->
+  <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Maxflow Project T9G2
    </div>
+   <div id="projectbrief"></div>
   </td>
  </tr>
  </tbody>
@@ -660,20 +677,20 @@ $(function(){initNavTree('maxflow__tests_8cpp_source.html','',''); });
 <div class="line"><a id="l00521" name="l00521"></a><span class="lineno">  521</span>}</div>
 </div>
 <div class="ttc" id="a_edmond_karp_8cpp_html_a3910c57ab30860808075348a43092a6f"><div class="ttname"><a href="_edmond_karp_8cpp.html#a3910c57ab30860808075348a43092a6f">edmondsKarp</a></div><div class="ttdeci">void edmondsKarp(Graph&lt; T &gt; *g, T source, T target, std::function&lt; void(const std::vector&lt; T &gt; &amp;, double)&gt; onAugment)</div><div class="ttdoc">Executes the Edmonds-Karp algorithm to find the Maximum Flow.</div><div class="ttdef"><b>Definition</b> <a href="_edmond_karp_8cpp_source.html#l00084">EdmondKarp.cpp:84</a></div></div>
-<div class="ttc" id="a_edmond_karp_8h_html"><div class="ttname"><a href="_edmond_karp_8h.html">EdmondKarp.h</a></div></div>
+<div class="ttc" id="a_edmond_karp_8h_html"><div class="ttname"><a href="_edmond_karp_8h.html">EdmondKarp.h</a></div><div class="ttdoc">Implementations of the Edmonds-Karp algorithm for calculating maximum flow.</div></div>
 <div class="ttc" id="a_graph_8h_html"><div class="ttname"><a href="_graph_8h.html">Graph.h</a></div></div>
 <div class="ttc" id="a_parameters_8h_html"><div class="ttname"><a href="_parameters_8h.html">Parameters.h</a></div></div>
 <div class="ttc" id="a_reviewer_8h_html"><div class="ttname"><a href="_reviewer_8h.html">Reviewer.h</a></div></div>
 <div class="ttc" id="a_submission_8h_html"><div class="ttname"><a href="_submission_8h.html">Submission.h</a></div></div>
-<div class="ttc" id="aclass_edge_html"><div class="ttname"><a href="class_edge.html">Edge</a></div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00071">Graph.h:72</a></div></div>
-<div class="ttc" id="aclass_graph_html"><div class="ttname"><a href="class_graph.html">Graph</a></div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00102">Graph.h:103</a></div></div>
-<div class="ttc" id="aclass_graph_html_a00be284ea2be3b3d0f0d2e493b70245b"><div class="ttname"><a href="class_graph.html#a00be284ea2be3b3d0f0d2e493b70245b">Graph::addVertex</a></div><div class="ttdeci">bool addVertex(const T &amp;in)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00451">Graph.h:451</a></div></div>
-<div class="ttc" id="aclass_graph_html_a8b7b7465fbfd562e2a469f90a437ab75"><div class="ttname"><a href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">Graph::findVertex</a></div><div class="ttdeci">Vertex&lt; T &gt; * findVertex(const T &amp;in) const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00427">Graph.h:427</a></div></div>
-<div class="ttc" id="aclass_graph_html_ac61af3aafe6277215f5a3b3cc7d58ce2"><div class="ttname"><a href="class_graph.html#ac61af3aafe6277215f5a3b3cc7d58ce2">Graph::addEdge</a></div><div class="ttdeci">bool addEdge(const T &amp;sourc, const T &amp;dest, double w)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00491">Graph.h:491</a></div></div>
-<div class="ttc" id="aclass_reviewer_html"><div class="ttname"><a href="class_reviewer.html">Reviewer</a></div><div class="ttdef"><b>Definition</b> <a href="_reviewer_8h_source.html#l00010">Reviewer.h:10</a></div></div>
-<div class="ttc" id="aclass_submission_html"><div class="ttname"><a href="class_submission.html">Submission</a></div><div class="ttdef"><b>Definition</b> <a href="_submission_8h_source.html#l00010">Submission.h:10</a></div></div>
-<div class="ttc" id="aclass_vertex_html"><div class="ttname"><a href="class_vertex.html">Vertex</a></div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00021">Graph.h:22</a></div></div>
-<div class="ttc" id="aclass_vertex_html_a0010a7d0b7db1bb81dd2ebb1ffae650a"><div class="ttname"><a href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">Vertex::getAdj</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; getAdj() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00253">Graph.h:253</a></div></div>
+<div class="ttc" id="aclass_edge_html"><div class="ttname"><a href="class_edge.html">Edge</a></div><div class="ttdoc">Represents a directed connection between two vertices in the graph.</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00081">Graph.h:82</a></div></div>
+<div class="ttc" id="aclass_graph_html"><div class="ttname"><a href="class_graph.html">Graph</a></div><div class="ttdoc">Represents a general graph using an adjacency list.</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00117">Graph.h:118</a></div></div>
+<div class="ttc" id="aclass_graph_html_a00be284ea2be3b3d0f0d2e493b70245b"><div class="ttname"><a href="class_graph.html#a00be284ea2be3b3d0f0d2e493b70245b">Graph::addVertex</a></div><div class="ttdeci">bool addVertex(const T &amp;in)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00466">Graph.h:466</a></div></div>
+<div class="ttc" id="aclass_graph_html_a8b7b7465fbfd562e2a469f90a437ab75"><div class="ttname"><a href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">Graph::findVertex</a></div><div class="ttdeci">Vertex&lt; T &gt; * findVertex(const T &amp;in) const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00442">Graph.h:442</a></div></div>
+<div class="ttc" id="aclass_graph_html_ac61af3aafe6277215f5a3b3cc7d58ce2"><div class="ttname"><a href="class_graph.html#ac61af3aafe6277215f5a3b3cc7d58ce2">Graph::addEdge</a></div><div class="ttdeci">bool addEdge(const T &amp;sourc, const T &amp;dest, double w)</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00506">Graph.h:506</a></div></div>
+<div class="ttc" id="aclass_reviewer_html"><div class="ttname"><a href="class_reviewer.html">Reviewer</a></div><div class="ttdoc">Represents a conference reviewer.</div><div class="ttdef"><b>Definition</b> <a href="_reviewer_8h_source.html#l00018">Reviewer.h:18</a></div></div>
+<div class="ttc" id="aclass_submission_html"><div class="ttname"><a href="class_submission.html">Submission</a></div><div class="ttdoc">Represents a scientific paper/article submission.</div><div class="ttdef"><b>Definition</b> <a href="_submission_8h_source.html#l00017">Submission.h:17</a></div></div>
+<div class="ttc" id="aclass_vertex_html"><div class="ttname"><a href="class_vertex.html">Vertex</a></div><div class="ttdoc">Represents a node in the graph.</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00026">Graph.h:27</a></div></div>
+<div class="ttc" id="aclass_vertex_html_a0010a7d0b7db1bb81dd2ebb1ffae650a"><div class="ttname"><a href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">Vertex::getAdj</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; getAdj() const</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00268">Graph.h:268</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a0ba636c8b419a41f1e50c77da062ced6"><div class="ttname"><a href="classcreate_graphs.html#a0ba636c8b419a41f1e50c77da062ced6">createGraphs::sourceId</a></div><div class="ttdeci">static int sourceId()</div><div class="ttdoc">Returns the super-source node ID (always 0).</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00015">createGraphs.cpp:15</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a40a4c22dfe21db45156d5375db8cc388"><div class="ttname"><a href="classcreate_graphs.html#a40a4c22dfe21db45156d5375db8cc388">createGraphs::reviewerNodeId</a></div><div class="ttdeci">static int reviewerNodeId(int revIndex, int numSubs)</div><div class="ttdoc">Maps a reviewer vector index to its graph node ID.</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00025">createGraphs.cpp:25</a></div></div>
 <div class="ttc" id="aclasscreate_graphs_html_a6862e1a6e7e1e09cfcff249b2ac80b01"><div class="ttname"><a href="classcreate_graphs.html#a6862e1a6e7e1e09cfcff249b2ac80b01">createGraphs::getMatchedDomain</a></div><div class="ttdeci">static int getMatchedDomain(const Submission &amp;sub, const Reviewer &amp;rev, int mode)</div><div class="ttdoc">Returns the topic on which submission and reviewer match in the given mode. Returns -1 if they do not...</div><div class="ttdef"><b>Definition</b> <a href="create_graphs_8cpp_source.html#l00034">createGraphs.cpp:34</a></div></div>
@@ -704,9 +721,9 @@ $(function(){initNavTree('maxflow__tests_8cpp_source.html','',''); });
 <div class="ttc" id="amaxflow__tests_8cpp_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="maxflow__tests_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition</b> <a href="#l00492">maxflow_tests.cpp:492</a></div></div>
 <div class="ttc" id="amaxflow__tests_8cpp_html_af9928f33ed284836aae79206ad76e543"><div class="ttname"><a href="maxflow__tests_8cpp.html#af9928f33ed284836aae79206ad76e543">testAllModesAllMinMaxCombinations</a></div><div class="ttdeci">static void testAllModesAllMinMaxCombinations()</div><div class="ttdef"><b>Definition</b> <a href="#l00225">maxflow_tests.cpp:225</a></div></div>
 <div class="ttc" id="amaxflow__tests_8cpp_html_afa7ff1bb1eafe1074e69b7f51e868443"><div class="ttname"><a href="maxflow__tests_8cpp.html#afa7ff1bb1eafe1074e69b7f51e868443">nearlyEqual</a></div><div class="ttdeci">static bool nearlyEqual(double a, double b, double eps=1e-9)</div><div class="ttdef"><b>Definition</b> <a href="#l00079">maxflow_tests.cpp:79</a></div></div>
-<div class="ttc" id="astruct_parameters_html"><div class="ttname"><a href="struct_parameters.html">Parameters</a></div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00006">Parameters.h:6</a></div></div>
-<div class="ttc" id="astruct_parameters_html_aeaab0c199b7a0d0857071dbec750a434"><div class="ttname"><a href="struct_parameters.html#aeaab0c199b7a0d0857071dbec750a434">Parameters::MaxReviewsPerReviewer</a></div><div class="ttdeci">int MaxReviewsPerReviewer</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00008">Parameters.h:8</a></div></div>
-<div class="ttc" id="astruct_parameters_html_aeea9e43cbdff07b655f0b7ea87f302a3"><div class="ttname"><a href="struct_parameters.html#aeea9e43cbdff07b655f0b7ea87f302a3">Parameters::MinReviewsPerSubmission</a></div><div class="ttdeci">int MinReviewsPerSubmission</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00007">Parameters.h:7</a></div></div>
+<div class="ttc" id="astruct_parameters_html"><div class="ttname"><a href="struct_parameters.html">Parameters</a></div><div class="ttdoc">Struct to hold global configuration parameters.</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00014">Parameters.h:14</a></div></div>
+<div class="ttc" id="astruct_parameters_html_aeaab0c199b7a0d0857071dbec750a434"><div class="ttname"><a href="struct_parameters.html#aeaab0c199b7a0d0857071dbec750a434">Parameters::MaxReviewsPerReviewer</a></div><div class="ttdeci">int MaxReviewsPerReviewer</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00016">Parameters.h:16</a></div></div>
+<div class="ttc" id="astruct_parameters_html_aeea9e43cbdff07b655f0b7ea87f302a3"><div class="ttname"><a href="struct_parameters.html#aeea9e43cbdff07b655f0b7ea87f302a3">Parameters::MinReviewsPerSubmission</a></div><div class="ttdeci">int MinReviewsPerSubmission</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00015">Parameters.h:15</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
