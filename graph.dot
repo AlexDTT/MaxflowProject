@@ -1,0 +1,22 @@
+digraph MaxFlow {
+  rankdir=LR;
+  node [shape=box, style=filled, fillcolor=white];
+  "SOURCE" -> "SUB#1" [label="2/2", color=blue, penwidth=2.0];
+  "SOURCE" -> "SUB#2" [label="2/2", color=blue, penwidth=2.0];
+  "SOURCE" -> "SUB#3" [label="2/2", color=blue, penwidth=2.0];
+  "SOURCE" -> "SUB#4" [label="2/2", color=blue, penwidth=2.0];
+  "SUB#1" -> "REV#1" [label="1/1", color=blue, penwidth=2.0];
+  "SUB#1" -> "REV#2" [label="1/1", color=blue, penwidth=2.0];
+  "SUB#2" -> "REV#1" [label="1/1", color=blue, penwidth=2.0];
+  "SUB#2" -> "REV#2" [label="1/1", color=blue, penwidth=2.0];
+  "SUB#2" -> "REV#3" [label="0/1", color=black, penwidth=1.0];
+  "SUB#2" -> "REV#4" [label="0/1", color=black, penwidth=1.0];
+  "SUB#3" -> "REV#3" [label="1/1", color=blue, penwidth=2.0];
+  "SUB#3" -> "REV#4" [label="1/1", color=blue, penwidth=2.0];
+  "SUB#4" -> "REV#3" [label="1/1", color=blue, penwidth=2.0];
+  "SUB#4" -> "REV#4" [label="1/1", color=blue, penwidth=2.0];
+  "REV#1" -> "SINK" [label="2/2", color=blue, penwidth=2.0];
+  "REV#2" -> "SINK" [label="2/2", color=blue, penwidth=2.0];
+  "REV#3" -> "SINK" [label="2/2", color=blue, penwidth=2.0];
+  "REV#4" -> "SINK" [label="2/2", color=blue, penwidth=2.0];
+}

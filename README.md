@@ -1,4 +1,4 @@
-# Maxflow Project T9G2 - Scientific Conference Organization Tool
+# Scientific Conference Organization Tool
 
 ## Design of Algorithms (DA) - Spring 2026
 **Course:** Analysis and Synthesis of Algorithms (L.EIC016)  
@@ -20,10 +20,34 @@ This project was developed by Group T9G2:
 
 ## Usage
 The application provides both a command-line menu interface and a batch mode for automated execution:
-```bash
-# Interactive mode
-./main
 
-# Batch mode
-./main -b input.csv output.csv
-```
+<div class="tabbed">
+
+- <b class="tab-title">Batch Mode (Recommended)</b> Automatically parses the input, generates assignments, evaluates risks, and outputs to files.
+  ```bash
+  ./main -b inputs/main_input.csv output.csv
+  ```
+- <b class="tab-title">Interactive Mode</b> Starts a terminal menu prompting the user to select tasks step by step.
+  ```bash
+  ./main
+  ```
+
+</div>
+
+## Generated Graph Example
+This diagram illustrates the bipartite matching between **Submissions** and **Reviewers** using a super-source and super-sink. The edges highlighted in blue represent the final assigned network flows.
+
+<div class="interactive_dotgraph">
+
+\dotfile graph.dot
+
+</div>
+
+<br>
+<div class="section_buttons">
+
+|                            Next |
+|--------------------------------:|
+|  [AssignmentLogic](@ref AssignmentLogic) |
+
+</div>
