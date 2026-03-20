@@ -140,8 +140,44 @@ Usage</h1>
 </div><!-- fragment --></li>
 </ul>
 </div><div class="tabbed"></div><h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+System Architecture &amp; Graph Mapping</h1>
+<p>The assignment problem is modeled as a Bipartite <a class="el" href="class_graph.html" title="Represents a general graph using an adjacency list.">Graph</a> with a Super-Source and Super-Sink. The capacities of the edges are determined by the application parameters to ensure constraints are strictly met:</p>
+<div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_annotated_architecture.dot_ec8d8964b3b276ed0116a032e38b8038.svg" width="743" height="570"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+Network Flow Architecture Mapping</div>
+</div>
+</div><div class="interactive_dotgraph"></div><h1 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
 Generated Graph Example</h1>
-<p>This diagram illustrates the bipartite matching between <b>Submissions</b> and <b>Reviewers</b> using a super-source and super-sink. The edges highlighted in blue represent the final assigned network flows.</p>
+<p>Here is a small example illustrating how the program reads a <span class="tt">.csv</span> configuration and generates the corresponding Max-Flow network.</p>
+<p><b>Example Input Data:</b> </p><div class="fragment"><div class="line"># Scenario: Secondary submission domain only - undercovered submissions</div>
+<div class="line">#Submissions</div>
+<div class="line">#Id, Title, Authors, E-mail, Primary, Secondary</div>
+<div class="line">1, &quot;AI Planning Systems&quot;, Alice Brown, alice.brown@gmail.com, 1, 2</div>
+<div class="line">2, &quot;Secure Databases&quot;, Bob Smith, bob.smith@gmail.com, 3, 2</div>
+<div class="line">3, &quot;GPU Scheduling&quot;, Carla Costa, carla.costa@gmail.com, 4, 3</div>
+<div class="line">4, &quot;Compiler Optimizations&quot;, Rui Fernandes, rfernandes@gmail.com, 5, 3</div>
+<div class="line">#</div>
+<div class="line"> </div>
+<div class="line">#Reviewers</div>
+<div class="line">#Id, Name, E-mail, Primary, Secondary</div>
+<div class="line">1, Jaqueline N. Chame, jchame@yahoo.com, 2,</div>
+<div class="line">2, Mary W. Hall, mhall@hotmail.edu, 2,</div>
+<div class="line">3, Daniel Carter, dcarter@gmail.com, 3,</div>
+<div class="line">4, Olivia White, owhite@gmail.com, 3, 1</div>
+<div class="line"> </div>
+<div class="line">#Parameters</div>
+<div class="line">MinReviewsPerSubmission, 2</div>
+<div class="line">MaxReviewsPerReviewer, 2</div>
+<div class="line">PrimaryReviewerExpertise, 1</div>
+<div class="line">SecondaryReviewerExpertise, 0</div>
+<div class="line">PrimarySubmissionDomain, 1</div>
+<div class="line">SecondarySubmissionDomain, 1</div>
+<div class="line"> </div>
+<div class="line">#Control</div>
+<div class="line">GenerateAssignments, 2</div>
+<div class="line">RiskAnalysis, 0</div>
+<div class="line">OutputFileName, &quot;output_dataset12.csv&quot;</div>
+</div><!-- fragment --><p>This diagram illustrates the bipartite matching between <b>Submissions</b> and <b>Reviewers</b> using a super-source and super-sink. The edges highlighted in blue represent the final assigned network flows.</p>
 <div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
 <iframe scrolling="no" loading="lazy" frameborder="0" src="dot_example_graph.dot_d5b03ece68ed35ae05776175f756dbf0.svg" width="538" height="490"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div><div class="interactive_dotgraph"></div><p><br  />

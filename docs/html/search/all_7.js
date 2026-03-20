@@ -2,7 +2,7 @@ var searchData=
 [
   ['generateassignments_0',['GenerateAssignments',['../struct_parameters.html#ad865476e3ce706b539c306ed3647f381',1,'Parameters']]],
   ['generateassignmentsandstore_1',['generateAssignmentsAndStore',['../class_assignment_logic.html#a1f49b0281d5e61cf5ab218988bfc5bba',1,'AssignmentLogic']]],
-  ['generated_20graph_20example_2',['Generated Graph Example',['../index.html#autotoc_md6',1,'']]],
+  ['generated_20graph_20example_2',['Generated Graph Example',['../index.html#autotoc_md7',1,'']]],
   ['getadj_3',['getAdj',['../class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a',1,'Vertex']]],
   ['getdest_4',['getDest',['../class_edge.html#a9a2de066dff8513dd788d553fc1d0c81',1,'Edge']]],
   ['getdist_5',['getDist',['../class_vertex.html#a01e90e3cdb2ee11dd3b1d593c8207382',1,'Vertex']]],
@@ -22,11 +22,12 @@ var searchData=
   ['getvertexset_19',['getVertexSet',['../class_graph.html#a41624b03fcb6bd29e4df574a1ec58541',1,'Graph']]],
   ['getweight_20',['getWeight',['../class_edge.html#a3df378e283d6c8be5be4170ac8d7f4e8',1,'Edge']]],
   ['graph_21',['Graph',['../class_graph.html',1,'Graph&lt; T &gt;'],['../class_graph.html#a4648f2918bf5095a3fb5e6613a6e562f',1,'Graph::Graph()=default'],['../class_graph.html#aaeeeb9215cab69526f9243aea5ec7eb9',1,'Graph::Graph(const Graph &amp;)=delete'],['../class_graph.html#ae2439726511807fb618cc59aa4bbd424',1,'Graph::Graph(Graph &amp;&amp;other) noexcept']]],
-  ['graph_20example_22',['Generated Graph Example',['../index.html#autotoc_md6',1,'']]],
-  ['graph_2eh_23',['Graph.h',['../_graph_8h.html',1,'']]],
-  ['graph_3c_20int_20_3e_24',['Graph&lt; int &gt;',['../class_graph.html',1,'']]],
-  ['graphbuilder_25',['GraphBuilder',['../class_graph_builder.html',1,'']]],
-  ['graphbuilder_2ecpp_26',['GraphBuilder.cpp',['../_graph_builder_8cpp.html',1,'']]],
-  ['graphbuilder_2eh_27',['GraphBuilder.h',['../_graph_builder_8h.html',1,'']]],
-  ['group_20t9g2_20members_28',['Group T9G2 Members',['../index.html#autotoc_md4',1,'']]]
+  ['graph_20example_22',['Generated Graph Example',['../index.html#autotoc_md7',1,'']]],
+  ['graph_20mapping_23',['System Architecture &amp;amp; Graph Mapping',['../index.html#autotoc_md6',1,'']]],
+  ['graph_2eh_24',['Graph.h',['../_graph_8h.html',1,'']]],
+  ['graph_3c_20int_20_3e_25',['Graph&lt; int &gt;',['../class_graph.html',1,'']]],
+  ['graphbuilder_26',['GraphBuilder',['../class_graph_builder.html',1,'']]],
+  ['graphbuilder_2ecpp_27',['GraphBuilder.cpp',['../_graph_builder_8cpp.html',1,'']]],
+  ['graphbuilder_2eh_28',['GraphBuilder.h',['../_graph_builder_8h.html',1,'']]],
+  ['group_20t9g2_20members_29',['Group T9G2 Members',['../index.html#autotoc_md4',1,'']]]
 ];

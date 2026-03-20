@@ -34,7 +34,50 @@ The application provides both a command-line menu interface and a batch mode for
 
 </div>
 
+## System Architecture & Graph Mapping
+The assignment problem is modeled as a Bipartite Graph with a Super-Source and Super-Sink. The capacities of the edges are determined by the application parameters to ensure constraints are strictly met:
+
+<div class="interactive_dotgraph">
+
+\dotfile dox/annotated_architecture.dot "Network Flow Architecture Mapping"
+
+</div>
+
 ## Generated Graph Example
+Here is a small example illustrating how the program reads a `.csv` configuration and generates the corresponding Max-Flow network. 
+
+**Example Input Data:**
+```text
+# Scenario: Secondary submission domain only - undercovered submissions
+#Submissions
+#Id, Title, Authors, E-mail, Primary, Secondary
+1, "AI Planning Systems", Alice Brown, alice.brown@gmail.com, 1, 2
+2, "Secure Databases", Bob Smith, bob.smith@gmail.com, 3, 2
+3, "GPU Scheduling", Carla Costa, carla.costa@gmail.com, 4, 3
+4, "Compiler Optimizations", Rui Fernandes, rfernandes@gmail.com, 5, 3
+#
+
+#Reviewers
+#Id, Name, E-mail, Primary, Secondary
+1, Jaqueline N. Chame, jchame@yahoo.com, 2,
+2, Mary W. Hall, mhall@hotmail.edu, 2,
+3, Daniel Carter, dcarter@gmail.com, 3,
+4, Olivia White, owhite@gmail.com, 3, 1
+
+#Parameters
+MinReviewsPerSubmission, 2
+MaxReviewsPerReviewer, 2
+PrimaryReviewerExpertise, 1
+SecondaryReviewerExpertise, 0
+PrimarySubmissionDomain, 1
+SecondarySubmissionDomain, 1
+
+#Control
+GenerateAssignments, 2
+RiskAnalysis, 0
+OutputFileName, "output_dataset12.csv"
+```
+
 This diagram illustrates the bipartite matching between **Submissions** and **Reviewers** using a super-source and super-sink. The edges highlighted in blue represent the final assigned network flows.
 
 <div class="interactive_dotgraph">
