@@ -41,8 +41,4 @@ digraph TestDiff_OurSolution {
     "REV#2\npri=2" -> "SINK" [label="2/2", color="#388e3c", penwidth=2.0];
     "REV#5\npri=2" -> "SINK" [label="0/2", color=gray, style=dashed];
     "REV#6\npri=2" -> "SINK" [label="0/2", color=gray, style=dashed];
-
-    label="Our Solution: Rev1,Rev2 at cap 2. Rev3,Rev4 at cap 1. Total flow = 6.";
-    labelloc=b;
-    fontsize=11;
 }

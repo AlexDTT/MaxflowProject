@@ -149,7 +149,11 @@ public:
      * @brief Finds a vertex with a given content.
      * @param in The content to search for.
      * @return Pointer to the vertex, or nullptr if not found.
-     * @complexity O(V) linear search over the vertex set.
+     * @complexity O(V) linear search over the vertex set.  This is the bottleneck in
+     *             graph construction, where addEdge calls findVertex for every endpoint.
+     *             A possible optimisation is to replace @c std::vector<Vertex<T>*> with
+     *             @c std::unordered_map<T, Vertex<T>*>, reducing findVertex to O(1) and
+     *             graph building to O(V + E).
      */
     Vertex<T> *findVertex(const T &in) const;
     /**

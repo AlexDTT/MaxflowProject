@@ -79,14 +79,15 @@ Graph edges (mode 1):
 | Step | Complexity |
 |------|-----------|
 | Build flow graph | O(P × R) - check all submission-reviewer pairs for domain match |
-| Edmonds-Karp | O(F × E), where F = P × MinReviewsPerSubmission |
+| Edmonds-Karp | O(V × E²) polynomial worst case; O(F × E) pseudopolynomial practical, F = P × MinReviewsPerSubmission |
 | Write output | O(V + E) - traverse graph once |
 | **Total** | **O(F × E)** |
 
-For typical inputs (P, R < 200), E ≈ 40,000 in the worst case. The theoretical O(V × E²)
-bound is very loose here - the network has diameter 3 (every augmenting path follows exactly
-source → submission → reviewer → sink, i.e. 3 edges). In practice the algorithm terminates
-in O(F × E) where F = P × MinReviewsPerSubmission, which is far more tractable.
+For typical inputs (P, R < 200), E ≈ 40,000 in the worst case. The polynomial worst case
+O(V × E²) is very loose here - the network has diameter 3 (every augmenting path follows
+exactly source → submission → reviewer → sink, i.e. 3 edges). The tighter pseudopolynomial
+bound O(F × E) where F = P × MinReviewsPerSubmission captures the practical behaviour,
+since F depends on the numeric capacity values rather than just the graph size.
 
 ---
 
@@ -160,14 +161,14 @@ impossible to cover Sub2.
 
 | Step | Complexity |
 |------|-----------|
-| Baseline max-flow | O(F × E), where F = P × MinReviewsPerSubmission |
-| R iterations, each: build graph + max-flow | R × O(F × E) |
+| Baseline max-flow | O(V × E²) worst case; O(F × E) practical, F = P × MinReviewsPerSubmission |
+| R iterations, each: build graph + max-flow | R × O(F × E) pseudopolynomial |
 | Sort risky IDs | O(R log R) |
-| **Total** | **O(R × F × E)** |
+| **Total** | **O(R × F × E)** pseudopolynomial; **O(R × V × E²)** polynomial worst case |
 
-The theoretical O(V × E²) per run is very loose for this 4-node-diameter network.
+The polynomial worst case O(R × V × E²) is very loose for this 4-node-diameter network.
 In practice each Edmonds-Karp run terminates in O(F × E) where F = P × MinReviewsPerSubmission,
-giving an effective complexity of O(R × F × E). For typical conference sizes
+giving an effective pseudopolynomial complexity of O(R × F × E). For typical conference sizes
 (R, P < 200, F < 400, E < 40,000), this is around 3×10⁹ operations in the worst case -
 feasible in a few seconds, though not instantaneous for large inputs.
 
@@ -206,7 +207,7 @@ count(remaining reviewers with primaryTopic == t) * MaxReviewsPerReviewer
 @endcode
 
 If this holds for any topic t, there simply are not enough reviewers left on that topic to
-cover all its submissions — the subset is provably critical and Edmonds-Karp can be skipped
+cover all its submissions - the subset is provably critical and Edmonds-Karp can be skipped
 entirely. Note that this optimisation is only reliable in mode 1 (primary domains only).
 In modes 2 and 3, submissions can be covered by reviewers of a different topic via secondary
 domain matching, so a per-topic count would incorrectly flag subsets as critical when
@@ -219,14 +220,14 @@ must always be run.
 |-----------|-----------|
 | Enumerate C(R, K) subsets | O(R choose K) ≈ O(R^K / K!) |
 | Build flow graph per subset | O(P × R) |
-| Edmonds-Karp per subset | O(F × E), where F = P × MinReviewsPerSubmission |
-| **Total (without pruning)** | **O(C(R,K) × F × E)** |
+| Edmonds-Karp per subset | O(V × E²) worst case; O(F × E) practical |
+| **Total (without pruning)** | **O(C(R,K) × F × E)** pseudopolynomial; **O(C(R,K) × V × E²)** polynomial |
 
-| K value | Approximate cost | Practical? |
-|---------|-----------------|------------|
-| 2 | O(R² × F × E) | Yes, for R < 100 |
-| 3 | O(R³ × F × E) | Borderline for R > 50 |
-| ≥ 4 | O(R⁴ × F × E) | Impractical without heavy pruning |
+| K value | Pseudopolynomial | Polynomial worst case | Practical? |
+|---------|-----------------|----------------------|------------|
+| 2 | O(R² × F × E) | O(R² × V × E²) | Yes, for R < 100 |
+| 3 | O(R³ × F × E) | O(R³ × V × E²) | Borderline for R > 50 |
+| ≥ 4 | O(R⁴ × F × E) | O(R⁴ × V × E²) | Impractical without heavy pruning |
 
 With pruning (removing known K=1 risky reviewers from consideration), the effective number
 of subsets drops significantly when many individual reviewers are already critical.
@@ -258,7 +259,7 @@ matches Rev3, Rev4. Required = 3 × 1 = 3.
 at least one reviewer per topic:
 - Remove Rev1 or Rev2: the other still covers both Sub1 and Sub3 (MaxReviewsPerReviewer=2).
 - Remove Rev3 or Rev4: the other still covers Sub2.
-K = 1 returns **empty** — no risky reviewers.
+K = 1 returns **empty** - no risky reviewers.
 
 <div class="interactive_dotgraph">
 
@@ -306,13 +307,13 @@ domains. A submission can be matched to a reviewer if any of the following holds
 - sub.primary == rev.secondary or sub.secondary == rev.primary (cross-primary-secondary)
 - sub.secondary == rev.secondary (secondary-secondary)
 
-Mode 3 as implemented is still a pure max-flow feasibility problem — any valid match counts
+Mode 3 as implemented is still a pure max-flow feasibility problem - any valid match counts
 equally and the goal remains satisfying MinReviewsPerSubmission for every submission. However,
 the spec notes that the problem has "high computational complexity if the optimal assignment is
 to be sought." This hints at a natural extension: since primary-primary matches are higher
 quality than cross or secondary-secondary matches, one could seek the assignment that maximises
 match quality rather than just feasibility. This transforms the problem into a
-**minimum-cost maximum flow** problem.
+<b>minimum-cost maximum flow</b> problem.
 
 @subsection ext_t2_4_approach Proposed Approach
 
@@ -356,7 +357,7 @@ since primary-primary matches (cost 0) are always preferred when available.
 
 | Approach | Complexity | Optimality |
 |----------|-----------|------------|
-| A: Layered Max-Flow | O(3 × F × E) = O(F × E) | Greedy, may not be globally optimal |
+| A: Layered Max-Flow | O(F × E) pseudopolynomial; O(V × E²) polynomial worst case | Greedy, may not be globally optimal |
 | B: Min-Cost Max-Flow (SSP + Dijkstra) | O(F × (V + E) × log V) | Exact, globally optimal |
 | Brute force (all assignments) | O((P×R)!) | Exact, impractical |
 
@@ -388,32 +389,31 @@ MaxReviewsPerReviewer, 2
 @endcode
 
 <b>Mode 3 matching possibilities</b>:
-- Sub1 (pri=1, sec=2) → Rev1 (pri=1): primary-primary (cost 0)
-- Sub1 (pri=1, sec=2) → Rev2 (pri=2): secondary-primary match (cost 1)
+- Sub1 (pri=1, sec=2) → Rev1 (pri=1): primary-primary match (mode 1,2,3)
+- Sub1 (pri=1, sec=2) → Rev2 (pri=2): secondary-primary cross match (mode 2,3)
 - Sub1 (pri=1, sec=2) → Rev3 (pri=3): sub.sec=2 vs rev.sec=1 - no match
-- Sub2 (pri=3, sec=1) → Rev1 (pri=1, sec=3): sub.sec=1==rev.pri=1 cross (cost 1), or
-  sub.pri=3==rev.sec=3 cross (cost 1)
-- Sub2 (pri=3, sec=1) → Rev2 (pri=2, sec=3): sub.pri=3==rev.sec=3 cross (cost 1)
-- Sub2 (pri=3, sec=1) → Rev3 (pri=3, sec=1): primary-primary (cost 0)
+- Sub2 (pri=3, sec=1) → Rev1 (pri=1, sec=3): sub.sec=1==rev.pri=1 cross (mode 2,3)
+- Sub2 (pri=3, sec=1) → Rev2 (pri=2, sec=3): sub.pri=3==rev.sec=3 cross (mode 3)
+- Sub2 (pri=3, sec=1) → Rev3 (pri=3, sec=1): primary-primary match (mode 1,2,3)
 
 <b>Layered approach</b>:
-- Layer 1 (cost 0): Sub1→Rev1, Sub2→Rev3. Both primary-primary. Flow = 2. Done.
+- Layer 1 (primary-primary only): Sub1→Rev1, Sub2→Rev3. Flow = 2. Done.
 
-<b>Min-cost max-flow</b>: Same result, total cost = 0. Both submissions get their best-possible
-primary-primary match.
+<b>Min-cost max-flow</b> (proposed, not implemented): Would assign the same edges,
+minimising total cost (0) since primary-primary matches are always preferred.
 
 <div class="interactive_dotgraph">
 
-\dotfile dox/t24_example.dot "T2.4 Example: Optimal assignment uses primary-primary matches (gold, cost 0)"
+\dotfile dox/t24_example.dot "T2.4 Example: Mode 3 matching. Gold = primary-primary (used), dashed = cross (unused)"
 
 </div>
 
-<b>A case where Layered fails and Min-Cost succeeds</b>:
-If Rev1 were removed, Layer 1 would match Sub2→Rev3 (cost 0), leaving Sub1 to find a match
-in Layer 2 (Sub1→Rev2 at cost 1). Total cost = 1. Min-cost max-flow would find the same.
+<b>A case where Layered fails and Min-Cost succeeds</b> (proposed):
+If Rev1 were removed, Layer 1 would match Sub2→Rev3 (primary-primary), leaving Sub1 to find
+a match in Layer 2 (Sub1→Rev2 via cross). Total match quality: 1 primary + 1 cross.
 But if there were a third submission competing for Rev3, Layer 1 might greedily assign Rev3
-to the wrong submission, forcing a suboptimal overall assignment - while min-cost max-flow
-would globally minimise total cost.
+to the wrong submission, forcing a worse overall assignment - while min-cost max-flow would
+globally minimise total cost.
 
 ---
 
@@ -518,14 +518,14 @@ project. See the individual function documentation for full details.
 
 | Function | Location | Complexity | Notes |
 |----------|----------|-----------|-------|
-| edmondsKarp | algorithms/EdmondKarp.h | O(F × E) | F = total flow, E = edges; theoretical O(V × E²) is very loose for this graph |
+| edmondsKarp | algorithms/EdmondKarp.h | O(V × E²) / O(F × E) | Polynomial worst case; pseudopolynomial practical bound where F = total flow |
 | findAugmentingPath | algorithms/EdmondKarp.h | O(V + E) | Single BFS pass |
 | findMinResidualAlongPath | algorithms/EdmondKarp.h | O(V) | Path walk |
 | augmentFlowAlongPath | algorithms/EdmondKarp.h | O(V) | Path walk |
 | buildReviewFlowGraph | data_structures/GraphBuilder.h | O(P × R) | P submissions, R reviewers |
 | getMatchedDomain | data_structures/GraphBuilder.h | O(1) | At most 2 topics per entity |
-| findRiskyReviewersK1 | services/AssignmentLogic.h | O(R × F × E) | R re-runs of Edmonds-Karp |
-| generateAssignmentsAndStore | services/AssignmentLogic.h | O(F × E) | Dominated by max-flow |
+| findRiskyReviewersK1 | services/AssignmentLogic.h | O(R × V × E²) / O(R × F × E) | R re-runs of Edmonds-Karp; polynomial / pseudopolynomial |
+| generateAssignmentsAndStore | services/AssignmentLogic.h | O(V × E²) / O(F × E) | Dominated by max-flow; polynomial / pseudopolynomial |
 | totalRequiredReviews | services/AssignmentLogic.h | O(N) | N submissions |
 | totalAssignedReviews | services/AssignmentLogic.h | O(P × R) | Iterates submission→reviewer edges |
 | FileParser::parse | io/FileParser.h | O(L) | L lines in input file |

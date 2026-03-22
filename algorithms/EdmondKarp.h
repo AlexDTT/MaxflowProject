@@ -62,8 +62,13 @@ void augmentFlowAlongPath(Vertex<T> *s, Vertex<T> *t, double f);
  * @param source The value representing the source node.
  * @param target The value representing the sink node.
  * @param onAugment Optional callback invoked whenever a path is augmented.
- * @complexity O(V * E^2) in the worst case, as the shortest path length increases monotonically, 
- *             and there are at most O(V * E) augmentations. Each BFS takes O(E).
+ * @complexity Polynomial worst case: O(V * E^2).
+ *             Pseudopolynomial (tighter in practice): O(F * E), where F is the total flow
+ *             value.  F depends on the numeric capacities, not just the graph size.  For our
+ *             network F = P * MinReviewsPerSubmission, bounded by a small constant times P,
+ *             and the graph has diameter 3 (source -> submission -> reviewer -> sink), so
+ *             O(F * E) is the practical bound while O(V * E^2) covers the theoretical worst
+ *             case.
  */
 template <class T>
 void edmondsKarp(Graph<T> *g, T source, T target, std::function<void(const std::vector<T>&, double)> onAugment = nullptr);

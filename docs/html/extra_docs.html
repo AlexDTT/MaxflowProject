@@ -170,7 +170,7 @@ Complexity</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(F × E)</b>  </td></tr>
 </table>
-<p>For typical inputs (P, R &lt; 200), E ≈ 40,000 in the worst case. The polynomial worst case O(V × E²) is very loose here — the network has diameter 3 (every augmenting path follows exactly source → submission → reviewer → sink, i.e. 3 edges). The tighter pseudopolynomial bound O(F × E) where F = P × MinReviewsPerSubmission captures the practical behaviour, since F depends on the numeric capacity values rather than just the graph size.</p>
+<p>For typical inputs (P, R &lt; 200), E ≈ 40,000 in the worst case. The polynomial worst case O(V × E²) is very loose here - the network has diameter 3 (every augmenting path follows exactly source → submission → reviewer → sink, i.e. 3 edges). The tighter pseudopolynomial bound O(F × E) where F = P × MinReviewsPerSubmission captures the practical behaviour, since F depends on the numeric capacity values rather than just the graph size.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_t2_2"></a>
 T2.2 - Basic Formulation with Risk Analysis (K = 1)</h1>
@@ -257,7 +257,7 @@ Proposed Approach</h2>
 <p><b>Early termination</b>: Before even building the flow graph for a subset, a cheap per-topic count can immediately identify critical subsets without running Edmonds-Karp at all. For each topic t, check:</p>
 <div class="fragment"><div class="line">count(remaining reviewers with primaryTopic == t) * MaxReviewsPerReviewer</div>
 <div class="line">    &lt; count(submissions with primaryTopic == t) * MinReviewsPerSubmission</div>
-</div><!-- fragment --><p>If this holds for any topic t, there simply are not enough reviewers left on that topic to cover all its submissions — the subset is provably critical and Edmonds-Karp can be skipped entirely. Note that this optimisation is only reliable in mode 1 (primary domains only). In modes 2 and 3, submissions can be covered by reviewers of a different topic via secondary domain matching, so a per-topic count would incorrectly flag subsets as critical when cross-topic coverage might still make the assignment feasible. In those modes, Edmonds-Karp must always be run.</p>
+</div><!-- fragment --><p>If this holds for any topic t, there simply are not enough reviewers left on that topic to cover all its submissions - the subset is provably critical and Edmonds-Karp can be skipped entirely. Note that this optimisation is only reliable in mode 1 (primary domains only). In modes 2 and 3, submissions can be covered by reviewers of a different topic via secondary domain matching, so a per-topic count would incorrectly flag subsets as critical when cross-topic coverage might still make the assignment feasible. In those modes, Edmonds-Karp must always be run.</p>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_3_complexity"></a>
 Complexity</h2>
 <table class="markdownTable">
@@ -304,7 +304,7 @@ Non-Trivial Input Example</h2>
 </ul>
 <p><b>K = 1 analysis</b>: No individual reviewer is risky. Removing any single reviewer still leaves at least one reviewer per topic:</p><ul>
 <li>Remove Rev1 or Rev2: the other still covers both Sub1 and Sub3 (MaxReviewsPerReviewer=2).</li>
-<li>Remove Rev3 or Rev4: the other still covers Sub2. K = 1 returns <b>empty</b> — no risky reviewers.</li>
+<li>Remove Rev3 or Rev4: the other still covers Sub2. K = 1 returns <b>empty</b> - no risky reviewers.</li>
 </ul>
 <div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
 <iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t23_baseline.dot_e7f13a6b84fd6be894591b4eddfd8db4.svg" width="548" height="296"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
@@ -332,8 +332,8 @@ Problem Description</h2>
 <li>sub.primary == rev.secondary or sub.secondary == rev.primary (cross-primary-secondary)</li>
 <li>sub.secondary == rev.secondary (secondary-secondary)</li>
 </ul>
-<p>Mode 3 as implemented is still a pure max-flow feasibility problem — any valid match counts equally and the goal remains satisfying MinReviewsPerSubmission for every submission. However, the spec notes that the problem has "high computational complexity if the optimal assignment is
-to be sought." This hints at a natural extension: since primary-primary matches are higher quality than cross or secondary-secondary matches, one could seek the assignment that maximises match quality rather than just feasibility. This transforms the problem into a minimum-cost maximum flow** problem.</p>
+<p>Mode 3 as implemented is still a pure max-flow feasibility problem - any valid match counts equally and the goal remains satisfying MinReviewsPerSubmission for every submission. However, the spec notes that the problem has "high computational complexity if the optimal assignment is
+to be sought." This hints at a natural extension: since primary-primary matches are higher quality than cross or secondary-secondary matches, one could seek the assignment that maximises match quality rather than just feasibility. This transforms the problem into a <b>minimum-cost maximum flow</b> problem.</p>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_4_approach"></a>
 Proposed Approach</h2>
 <p>We outline two approaches of increasing sophistication:</p>
@@ -438,7 +438,7 @@ Our Solution (dataset10)</h2>
 <div class="line"><span class="preprocessor">#Total: 6</span></div>
 </div><!-- fragment --><p>Reviewers 1 and 2 each handle 2 reviews (at capacity). Reviewers 3 and 4 each handle 1 review. Reviewers 5 and 6 are unused. Every submission gets exactly 2 reviews.</p>
 <div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
-<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_test_diff_ours.dot_18decd04dc5c1935678d34b834b81b3e.svg" width="572" height="479"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_test_diff_ours.dot_0a7355627588219efdf32e75b0c67f7c.svg" width="572" height="451"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
 Our solution for dataset10: Rev1,Rev2 at capacity, flow=6</div>
 </div>
 </div><div class="interactive_dotgraph"></div><h2 class="doxsection"><a class="anchor" id="ext_test_diff_reference"></a>

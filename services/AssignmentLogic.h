@@ -35,7 +35,7 @@ public:
      * @param submissions List of all submissions.
      * @param reviewers List of all reviewers.
      * @return The number of assigned reviews.
-     * @complexity O(V + E) representing graph traversal over flow paths.
+     * @complexity O(P * R) iterating over all submission-to-reviewer edges in the flow graph.
      */
     static int totalAssignedReviews(const Graph<int>& flowGraph, const std::vector<Submission>& submissions, const std::vector<Reviewer>& reviewers);
     
@@ -46,7 +46,14 @@ public:
      * @param params Global parameters.
      * @param mode Mode of evaluation.
      * @return Vector of risky reviewer IDs.
-     * @complexity O(P * R) where P is submissions and R is reviewers.
+     * @complexity Polynomial worst case: O(R * V * E^2).  Pseudopolynomial (practical):
+     *             O(R * F * E) where R is reviewers, F = P * MinReviewsPerSubmission is the
+     *             total flow.  Rebuilds the graph and re-runs Edmonds-Karp for each removed
+     *             reviewer.  A tighter O(R * MaxReviewsPerReviewer * E) is possible by keeping
+     *             the solved max-flow graph and, for each reviewer, temporarily reducing their
+     *             incoming flow (creating a deficit of at most MaxReviewsPerReviewer) and
+     *             running Edmonds-Karp only to resolve that deficit, rather than rebuilding
+     *             from scratch.
      */
     static std::vector<int> findRiskyReviewersK1(const std::vector<Submission>& submissions, const std::vector<Reviewer>& reviewers, const Parameters& params, int mode);
     
@@ -75,7 +82,9 @@ public:
      * @param writeOutput Indicates whether to dump the result to a CSV file.
      * @param logger Optional logging callback.
      * @return True if assignment was successful/complete.
-     * @complexity Depends on the underlying Max Flow algorithm, commonly O(V * E^2).
+     * @complexity Polynomial worst case: O(V * E^2).  Pseudopolynomial (practical):
+     *             O(F * E) dominated by the underlying Edmonds-Karp max-flow call,
+     *             where F = P * MinReviewsPerSubmission is the total flow.
      */
     static bool generateAssignmentsAndStore(Graph<int>& outGraph, const std::vector<Submission>& submissions, const std::vector<Reviewer>& reviewers, const Parameters& params, int mode, bool writeOutput, std::function<void(const std::vector<int>&, double)> logger = nullptr);
 };
