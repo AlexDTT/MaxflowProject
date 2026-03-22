@@ -27,18 +27,29 @@ var NAVTREE =
   [ "Maxflow Project T9G2", "index.html", [
     [ "Scientific Conference Organization Tool", "index.html", "index" ],
     [ "Extra Documentation", "extra_docs.html", [
-      [ "Overview", "extra_docs.html#ext_overview", null ],
-      [ "Risk Analysis for K &gt; 1", "extra_docs.html#ext_risk_k_gt_1", [
-        [ "Problem Statement", "extra_docs.html#ext_risk_k_desc", null ],
-        [ "Proposed Approach", "extra_docs.html#ext_risk_k_approach", null ],
-        [ "Complexity Analysis", "extra_docs.html#ext_risk_k_complexity", null ],
-        [ "Non-Trivial Input Example", "extra_docs.html#ext_risk_k_example", null ]
+      [ "T2.1 — Basic Formulation (Primary Domains, No Risk Analysis)", "extra_docs.html#ext_t2_1", [
+        [ "Problem Description", "extra_docs.html#ext_t2_1_problem", null ],
+        [ "How We Solve It", "extra_docs.html#ext_t2_1_approach", null ],
+        [ "Example", "extra_docs.html#ext_t2_1_example", null ],
+        [ "Complexity", "extra_docs.html#ext_t2_1_complexity", null ]
       ] ],
-      [ "General Case: Primary and Secondary Domains", "extra_docs.html#ext_general_domain", [
-        [ "Problem Statement", "extra_docs.html#ext_general_desc", null ],
-        [ "Proposed Approach", "extra_docs.html#ext_general_approach", null ],
-        [ "Comparison of Approaches", "extra_docs.html#ext_general_complexity", null ],
-        [ "Input Example", "extra_docs.html#ext_general_example", null ]
+      [ "T2.2 — Basic Formulation with Risk Analysis (K = 1)", "extra_docs.html#ext_t2_2", [
+        [ "Problem Description", "extra_docs.html#ext_t2_2_problem", null ],
+        [ "How We Solve It", "extra_docs.html#ext_t2_2_approach", null ],
+        [ "Example", "extra_docs.html#ext_t2_2_example", null ],
+        [ "Complexity", "extra_docs.html#ext_t2_2_complexity", null ]
+      ] ],
+      [ "T2.3 — Risk Analysis with K &gt; 1 (Proposed Approach)", "extra_docs.html#ext_t2_3", [
+        [ "Problem Description", "extra_docs.html#ext_t2_3_problem", null ],
+        [ "Proposed Approach", "extra_docs.html#ext_t2_3_approach", null ],
+        [ "Complexity", "extra_docs.html#ext_t2_3_complexity", null ],
+        [ "Non-Trivial Input Example", "extra_docs.html#ext_t2_3_example", null ]
+      ] ],
+      [ "T2.4 — General Formulation with Secondary Domains (Proposed Approach)", "extra_docs.html#ext_t2_4", [
+        [ "Problem Description", "extra_docs.html#ext_t2_4_problem", null ],
+        [ "Proposed Approach", "extra_docs.html#ext_t2_4_approach", null ],
+        [ "Complexity", "extra_docs.html#ext_t2_4_complexity", null ],
+        [ "Example", "extra_docs.html#ext_t2_4_example", null ]
       ] ],
       [ "Why Two Integration Tests \"Differ\"", "extra_docs.html#ext_test_diff", [
         [ "ext_test_diff_overview", "extra_docs.html#ext_test_diff_overview", null ],
@@ -72,7 +83,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "AssignmentLogic_8cpp.html",
-"maxflow__tests_8cpp.html#ad81a472414c12b77927df41de5f7717c"
+"maxflow__tests_8cpp.html#a6d62cfe4caeaa3ab65f2376119c24a35"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

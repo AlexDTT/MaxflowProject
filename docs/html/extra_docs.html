@@ -109,55 +109,179 @@ $(function(){initNavTree('extra_docs.html','',''); });
   <div class="headertitle"><div class="title">Extra Documentation </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="ext_overview"></a>
-Overview</h1>
-<p>This page covers advanced topics and analysis beyond the base Review Assignment Problem, including generalizations of the risk analysis, the more complex multi-domain assignment problem, and an explanation of integration test outputs that differ from the reference solutions while being equally correct.</p>
+<div class="textblock"><p>This page provides a detailed treatment of each variant of the Review Assignment Problem specified in the assignment (sections T2.1 through T2.4). For T2.1 and T2.2 we describe how our implementation solves them. For T2.3 and T2.4 we outline approaches we would take, discuss their complexity, and provide illustrative examples.</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="ext_risk_k_gt_1"></a>
-Risk Analysis for K &gt; 1</h1>
-<h2 class="doxsection"><a class="anchor" id="ext_risk_k_desc"></a>
-Problem Statement</h2>
-<p>Our current implementation supports <b>K = 1</b> risk analysis: it iterates over every reviewer, removes them one at a time, re-runs the max-flow, and checks whether the assignment remains feasible. A natural extension is to consider <b>K &gt; 1</b>: what happens when two or more reviewers become unavailable simultaneously?</p>
-<h2 class="doxsection"><a class="anchor" id="ext_risk_k_approach"></a>
-Proposed Approach</h2>
-<p>The following approach extends the existing max-flow pipeline without requiring a fundamentally different algorithm:</p>
+<h1 class="doxsection"><a class="anchor" id="ext_t2_1"></a>
+T2.1 — Basic Formulation (Primary Domains, No Risk Analysis)</h1>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_1_problem"></a>
+Problem Description</h2>
+<p>In this base variant, only the <b>Primary Domain</b> of each submission and the <b>Primary Expertise</b> of each reviewer are considered. Every reviewer is assumed to carry out their reviews (no risk). The objective is to determine whether a complete assignment exists such that every submission receives at least <code>MinReviewsPerSubmission</code> reviews, and no reviewer is assigned more than <code>MaxReviewsPerReviewer</code> reviews.</p>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_1_approach"></a>
+How We Solve It</h2>
+<p>We model the problem as a <b>Maximum Flow</b> problem on a bipartite graph with a super-source and super-sink.</p>
+<p><a class="el" href="classGraph.html" title="Represents a general graph using an adjacency list.">Graph</a> construction** (<a class="el" href="classGraphBuilder.html#a8b9ac34ac3339f52a020df504d954ef9" title="GraphBuilder::buildReviewFlowGraph">GraphBuilder::buildReviewFlowGraph</a>):</p>
+<ul>
+<li><b>Vertices:</b> super-source (ID 0), one node per submission (IDs 1..P), one node per reviewer (IDs P+1..P+R), super-sink (ID P+R+1).</li>
+<li><b>Edges and capacities:</b><ul>
+<li>Source → submission_i : capacity = <code>MinReviewsPerSubmission</code>. This caps how many reviews each submission can receive from the source side.</li>
+<li>submission_i → reviewer_j : capacity = 1, created only when <code>submission.primaryTopic</code> == <code>reviewer.primaryTopic</code> (mode 1). The capacity of 1 ensures a reviewer reviews a given submission at most once.</li>
+<li>reviewer_j → sink : capacity = <code>MaxReviewsPerReviewer</code>. This caps how many reviews each reviewer can perform.</li>
+</ul>
+</li>
+</ul>
+<p>A <b>complete assignment</b> is achieved when the total flow equals P × MinReviewsPerSubmission. If the max flow is less than this value, some submissions cannot be fully covered.</p>
+<p>Algorithm:** We run <a class="el" href="EdmondKarp_8cpp.html#a3910c57ab30860808075348a43092a6f" title="edmondsKarp">Edmonds-Karp</a> on the constructed graph. The BFS-based augmentation guarantees we find the maximum flow. After the algorithm terminates, edges from submissions to reviewers with positive flow represent the assigned reviews.</p>
+<p>Output:** The function <a class="el" href="classAssignmentLogic.html#a90461122cf11a333f981c472be0888bc" title="AssignmentLogic::writeAssignmentsToFile">writeAssignmentsToFile</a> traverses the flow graph and writes a CSV file listing every assignment (SubmissionId, ReviewerId, matched domain), grouped both by submission and by reviewer, with the total count. If the assignment is incomplete, a missing-reviews section is appended.</p>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_1_example"></a>
+Example</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#Submissions</span></div>
+<div class="line">1, <span class="stringliteral">&quot;Alpha&quot;</span>, Alice, alice@x, 1,</div>
+<div class="line">2, <span class="stringliteral">&quot;Beta&quot;</span>,  Bob,   bob@x,   2,</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#Reviewers</span></div>
+<div class="line">1, Rev1, r1@x, 1,</div>
+<div class="line">2, Rev2, r2@x, 1,</div>
+<div class="line">3, Rev3, r3@x, 2,</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#Parameters</span></div>
+<div class="line">MinReviewsPerSubmission, 2</div>
+<div class="line">MaxReviewsPerReviewer, 2</div>
+</div><!-- fragment --><p><a class="el" href="classGraph.html" title="Represents a general graph using an adjacency list.">Graph</a> edges (mode 1):**</p><ul>
+<li>Source → Sub1 (cap 2), Source → Sub2 (cap 2)</li>
+<li>Sub1 → Rev1 (cap 1), Sub1 → Rev2 (cap 1) — both match topic 1</li>
+<li>Sub2 → Rev3 (cap 1) — matches topic 2</li>
+<li><p class="startli">Rev1 → Sink (cap 2), Rev2 → Sink (cap 2), Rev3 → Sink (cap 2)</p>
+<p class="startli">Max flow:** 3 (Sub1 gets 2 reviews from Rev1 and Rev2; Sub2 gets only 1 from Rev3). Total required:** 4. <b>Result:</b> Incomplete — Sub2 is missing 1 review.</p>
+</li>
+</ul>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_1_complexity"></a>
+Complexity</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Step  </th><th class="markdownTableHeadNone">Complexity  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Build flow graph  </td><td class="markdownTableBodyNone">O(P × R) — check all submission-reviewer pairs for domain match  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Edmonds-Karp  </td><td class="markdownTableBodyNone">O(V × E²) — V = P + R + 2, E ≈ P + R + (matching pairs)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Write output  </td><td class="markdownTableBodyNone">O(V + E) — traverse graph once  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(P × R + V × E²)</b>  </td></tr>
+</table>
+<p>For typical inputs (P, R &lt; 200), V ≈ 400 and E ≈ 40,000, so V × E² is manageable.</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="ext_t2_2"></a>
+T2.2 — Basic Formulation with Risk Analysis (K = 1)</h1>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_2_problem"></a>
+Problem Description</h2>
+<p>Building on T2.1, this variant asks: <b>is there a single reviewer whose absence would make a complete assignment impossible?</b> If the baseline assignment (all reviewers available) is already incomplete, risk analysis is not performed. Otherwise, we test each reviewer individually.</p>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_2_approach"></a>
+How We Solve It</h2>
+<p>Our implementation is in <a class="el" href="classAssignmentLogic.html#af7460acb335b05095c2bd5bbca2925f9" title="AssignmentLogic::findRiskyReviewersK1">findRiskyReviewersK1</a>:</p>
 <ol type="1">
-<li><b>Enumerate combinations.</b> For each subset S of K reviewers (there are C(R, K) such subsets), build a reduced reviewer pool by removing S.</li>
-<li><b>Rebuild and re-run max-flow.</b> For each reduced pool, construct the flow graph via <a class="el" href="classGraphBuilder.html#a8b9ac34ac3339f52a020df504d954ef9" title="GraphBuilder::buildReviewFlowGraph">buildReviewFlowGraph</a> and run <a class="el" href="EdmondKarp_8cpp.html#a3910c57ab30860808075348a43092a6f" title="edmondsKarp">Edmonds-Karp</a> to compute the maximum achievable flow.</li>
-<li><b>Check feasibility.</b> If the achieved flow is less than <a class="el" href="classAssignmentLogic.html#a931974837d12215fb68978c18e00491a" title="AssignmentLogic::totalRequiredReviews">totalRequiredReviews</a> (P × MinReviewsPerSubmission), the subset S is <em>critical</em> — its absence breaks the assignment.</li>
-<li><b>Report.</b> Return all critical subsets of size K.</li>
+<li><b>Baseline check.</b> Run Edmonds-Karp with all reviewers. If the achieved flow is less than P × MinReviewsPerSubmission, return an empty list (the assignment is already infeasible; risk analysis is moot).</li>
+<li><b>Per-reviewer removal.</b> For each reviewer j (j = 0..R-1):<ul>
+<li>Build a reduced reviewer pool excluding j.</li>
+<li>Construct the flow graph with the reduced pool.</li>
+<li>Run Edmonds-Karp.</li>
+<li>If achieved flow &lt; required, reviewer j is <b>risky</b>.</li>
+</ul>
+</li>
+<li><b>Sort and return.</b> The risky reviewer IDs are sorted and returned.</li>
 </ol>
-<h2 class="doxsection"><a class="anchor" id="ext_risk_k_complexity"></a>
-Complexity Analysis</h2>
-<p>Let P be the number of submissions, R the number of reviewers, V = P + R + 2 the number of vertices, and E the number of edges in the flow graph.</p>
+<p>The risk analysis result is written to the output CSV under the <span class="tt">#Risk Analysis: 1</span> header, listing the IDs of all risky reviewers.</p>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_2_example"></a>
+Example</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#Submissions</span></div>
+<div class="line">1, <span class="stringliteral">&quot;Alpha&quot;</span>, Alice, alice@x, 1,</div>
+<div class="line">2, <span class="stringliteral">&quot;Beta&quot;</span>,  Bob,   bob@x,   2,</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#Reviewers</span></div>
+<div class="line">1, Rev1, r1@x, 1,</div>
+<div class="line">2, Rev2, r2@x, 1,</div>
+<div class="line">3, Rev3, r3@x, 2,</div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#Parameters</span></div>
+<div class="line">MinReviewsPerSubmission, 1</div>
+<div class="line">MaxReviewsPerReviewer, 2</div>
+</div><!-- fragment --><p>Baseline:** Sub1 matches {Rev1, Rev2}, Sub2 matches {Rev3}. Total required = 2.</p><ul>
+<li><p class="startli">Rev1 assigns 1 to Sub1, Rev3 assigns 1 to Sub2. Flow = 2. <b>Feasible.</b></p>
+<p class="startli">Remove Rev1:** Sub1 can only match Rev2. Sub2 matches Rev3. Flow = 2. Still feasible. Remove Rev2:** Sub1 can only match Rev1. Sub2 matches Rev3. Flow = 2. Still feasible. Remove Rev3:** Sub2 has <b>no match</b>. Flow = 1 &lt; 2. <b>Rev3 is risky!</b></p>
+<p class="startli">Output:** </p><div class="fragment"><div class="line"><span class="preprocessor">#Risk Analysis: 1</span></div>
+<div class="line">3</div>
+</div><!-- fragment --></li>
+</ul>
+<p>This is a non-trivial result: Rev3 is the only reviewer for topic 2. Its absence makes it impossible to cover Sub2.</p>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_2_complexity"></a>
+Complexity</h2>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Step  </th><th class="markdownTableHeadNone">Complexity  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Baseline max-flow  </td><td class="markdownTableBodyNone">O(V × E²)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">R iterations, each: build graph + max-flow  </td><td class="markdownTableBodyNone">R × O(P × R + V × E²)  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Sort risky IDs  </td><td class="markdownTableBodyNone">O(R log R)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(R × (P × R + V × E²))</b>  </td></tr>
+</table>
+<p>For R = 50 and typical graph sizes, this runs in under a second.</p>
+<hr  />
+<h1 class="doxsection"><a class="anchor" id="ext_t2_3"></a>
+T2.3 — Risk Analysis with K &gt; 1 (Proposed Approach)</h1>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_3_problem"></a>
+Problem Description</h2>
+<p>Extending T2.2, this variant asks: what happens when <b>K &gt; 1</b> reviewers become unavailable simultaneously? We need to identify all subsets of K reviewers whose collective absence makes a complete assignment impossible.</p>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_3_approach"></a>
+Proposed Approach</h2>
+<p>The approach generalises the K = 1 strategy to combinations of size K:</p>
+<ol type="1">
+<li><b>Enumerate all C(R, K) subsets</b> of reviewers to remove.</li>
+<li><b>For each subset S:</b><ul>
+<li>Build a reduced reviewer pool excluding all reviewers in S.</li>
+<li>Run Edmonds-Karp on the reduced graph.</li>
+<li>If achieved flow &lt; P × MinReviewsPerSubmission, S is a <b>critical subset</b>.</li>
+</ul>
+</li>
+<li><p class="startli"><b>Return</b> all critical subsets.</p>
+<p class="startli">Pruning optimisation:** If K &gt; 1 and a reviewer r was already identified as risky at K = 1, then any K-sized subset containing r is automatically critical — we can skip testing those subsets and mark them directly.</p>
+<p class="startli">Early termination:** For each subset, after building the graph, a quick check on the min-cut capacity (sum of source→submission capacities vs. available reviewer capacity per topic) can rule out obviously feasible cases without running the full algorithm.</p>
+</li>
+</ol>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_3_complexity"></a>
+Complexity</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Component  </th><th class="markdownTableHeadNone">Complexity  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Enumerate C(R, K) subsets  </td><td class="markdownTableBodyNone">O(R^K / K!)  </td></tr>
+<td class="markdownTableBodyNone">Enumerate C(R, K) subsets  </td><td class="markdownTableBodyNone">O(R choose K) ≈ O(R^K / K!)  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Build flow graph per subset  </td><td class="markdownTableBodyNone">O(P × R)  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Edmonds-Karp per subset  </td><td class="markdownTableBodyNone">O(V × E²)  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(C(R, K) × (P×R + V×E²))</b>  </td></tr>
+<td class="markdownTableBodyNone"><b>Total (without pruning)</b>  </td><td class="markdownTableBodyNone"><b>O(C(R,K) × (P×R + V×E²))</b>  </td></tr>
 </table>
-<p>For K = 2 this is O(R² × V×E²), which is practical for typical conference sizes (R &lt; 100). For K = 3 it becomes O(R³ × V×E²), still tractable. Beyond K = 3 the combinatorial explosion makes exhaustive enumeration impractical.</p>
-<p>Optimisation ideas:**</p><ul>
-<li><em>Pruning:</em> If removing a single reviewer already breaks feasibility (K = 1 risky reviewer), any superset containing that reviewer is also critical — no need to test further.</li>
-<li><em>Early termination:</em> After building the reduced graph, a quick min-cut analysis can detect infeasibility without running the full Edmonds-Karp.</li>
-</ul>
-<h2 class="doxsection"><a class="anchor" id="ext_risk_k_example"></a>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">K value  </th><th class="markdownTableHeadNone">Approximate cost  </th><th class="markdownTableHeadNone">Practical?  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">2  </td><td class="markdownTableBodyNone">O(R² × V×E²)  </td><td class="markdownTableBodyNone">Yes, for R &lt; 100  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">3  </td><td class="markdownTableBodyNone">O(R³ × V×E²)  </td><td class="markdownTableBodyNone">Borderline for R &gt; 50  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">≥ 4  </td><td class="markdownTableBodyNone">O(R⁴ × V×E²)  </td><td class="markdownTableBodyNone">Impractical without heavy pruning  </td></tr>
+</table>
+<p>With pruning (removing known K=1 risky reviewers from consideration), the effective number of subsets drops significantly when many individual reviewers are already critical.</p>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_3_example"></a>
 Non-Trivial Input Example</h2>
-<p>Consider the following scenario (mode 1, primary-only matching):</p>
 <div class="fragment"><div class="line"><span class="preprocessor">#Submissions</span></div>
-<div class="line"><span class="preprocessor">#Id, Title, Authors, E-mail, Primary, Secondary</span></div>
-<div class="line">1, <span class="stringliteral">&quot;Topic A Paper&quot;</span>, Alice, alice@x, 1,</div>
-<div class="line">2, <span class="stringliteral">&quot;Topic B Paper&quot;</span>, Bob, bob@x, 2,</div>
-<div class="line">3, <span class="stringliteral">&quot;Topic A Paper 2&quot;</span>, Carol, carol@x, 1,</div>
+<div class="line">1, <span class="stringliteral">&quot;Topic A&quot;</span>, Alice, alice@x, 1,</div>
+<div class="line">2, <span class="stringliteral">&quot;Topic B&quot;</span>, Bob,   bob@x,   2,</div>
+<div class="line">3, <span class="stringliteral">&quot;Topic A 2&quot;</span>, Carol, carol@x, 1,</div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#Reviewers</span></div>
-<div class="line"><span class="preprocessor">#Id, Name, E-mail, Primary, Secondary</span></div>
 <div class="line">1, Rev1, r1@x, 1,</div>
 <div class="line">2, Rev2, r2@x, 1,</div>
 <div class="line">3, Rev3, r3@x, 2,</div>
@@ -166,85 +290,77 @@ Non-Trivial Input Example</h2>
 <div class="line"><span class="preprocessor">#Parameters</span></div>
 <div class="line">MinReviewsPerSubmission, 2</div>
 <div class="line">MaxReviewsPerReviewer, 2</div>
-</div><!-- fragment --><p>Baseline (all reviewers available):**</p><ul>
-<li>Submissions 1, 3 (topic 1) match reviewers 1, 2. <a class="el" href="classSubmission.html" title="Represents a scientific paper/article submission.">Submission</a> 2 (topic 2) matches reviewers 3, 4.</li>
-<li><p class="startli">Total required: 3 × 2 = 6. Achievable: reviewer 1 assigns 2 to subs {1,3}, reviewer 2 assigns 2 to subs {1,3}, reviewer 3 assigns 2 to sub 2, reviewer 4 assigns 2 to sub 2. But sub 2 only needs 2, so flow = 6. <b>Feasible.</b></p>
-<p class="startli">K = 2, remove reviewers {1, 3}:**</p>
+</div><!-- fragment --><p>Baseline (all reviewers):** Topic A submissions {1,3} match Rev1, Rev2. Topic B submission {2} matches Rev3, Rev4. Required = 3 × 2 = 6.</p><ul>
+<li><p class="startli">Rev1 → {1,3} (2 reviews), Rev2 → {1,3} (2 reviews), Rev3 → {2} (1), Rev4 → {2} (1). Flow = 6. <b>Feasible.</b></p>
+<p class="startli">K = 2, remove {Rev1, Rev3}:** Remaining {Rev2, Rev4}. Sub1 and Sub3 share only Rev2 (cap 2, so 1 each). Sub2 uses Rev4 (cap 2, gets 1). Flow = 3 &lt; 6. <b>Critical subset.</b></p>
+<p class="startli">K = 2, remove {Rev1, Rev2}:** Remaining {Rev3, Rev4} — both topic 2 only. Sub1 and Sub3 have zero matches. Flow = 2 (only Sub2 covered). <b>Critical subset.</b></p>
+<p class="startli">K = 2, remove {Rev3, Rev4}:** Remaining {Rev1, Rev2} — both topic 1 only. Sub2 has zero matches. Flow = 4 &lt; 6. <b>Critical subset.</b></p>
+<p class="startli">K = 2, remove {Rev1, Rev4}:** Remaining {Rev2, Rev3}. Sub1+Sub3 share Rev2 (cap 2). Sub2 uses Rev3 (cap 2, gets 1). But Sub1+Sub3 need 4 total and Rev2 can only give 2. Sub2 gets 1 but needs 2. Flow ≤ 3. <b>Critical subset.</b></p>
 </li>
-<li>Remaining reviewers: 2 (topic 1), 4 (topic 2).</li>
-<li>Submissions 1, 3 can only match reviewer 2 (capacity 2). <a class="el" href="classSubmission.html" title="Represents a scientific paper/article submission.">Submission</a> 2 can match reviewer 4 (capacity 2).</li>
-<li>Max flow: reviewer 2 gives 2 (to subs 1 and 3), reviewer 4 gives 2 (to sub 2). Total = 4 &lt; 6.</li>
-<li><p class="startli"><b>Infeasible.</b> The subset {1, 3} is critical.</p>
-<p class="startli">K = 2, remove reviewers {1, 2}:**</p>
-</li>
-<li>Remaining reviewers: 3, 4 (both topic 2). No reviewer can cover topic 1 submissions.</li>
-<li><p class="startli">Max flow for subs 1, 3 = 0. Total = 2 &lt; 6. <b>Infeasible.</b> The subset {1, 2} is critical.</p>
-<p class="startli">K = 2, remove reviewers {3, 4}:**</p>
-</li>
-<li>Remaining reviewers: 1, 2 (both topic 1). No reviewer can cover topic 2 submission.</li>
-<li>Max flow for sub 2 = 0. Total = 4 &lt; 6. <b>Infeasible.</b> The subset {3, 4} is critical.</li>
 </ul>
-<p>This example shows that with K = 2, many subsets can be critical, and the approach correctly identifies all of them.</p>
+<p>This demonstrates that the K = 2 analysis reveals structural vulnerabilities not visible at K = 1: no individual reviewer is risky (K = 1 returns empty), but several pairs are critical.</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="ext_general_domain"></a>
-General Case: Primary and Secondary Domains</h1>
-<h2 class="doxsection"><a class="anchor" id="ext_general_desc"></a>
-Problem Statement</h2>
-<p>The general case extends the assignment problem so that:</p>
-<ul>
-<li><b>Submissions</b> have both a <em>Primary <a class="el" href="classSubmission.html" title="Represents a scientific paper/article submission.">Submission</a> Domain</em> and a <em>Secondary <a class="el" href="classSubmission.html" title="Represents a scientific paper/article submission.">Submission</a> Domain</em>.</li>
-<li><b>Reviewers</b> have both a <em>Primary Domain of Expertise</em> and a <em>Secondary Domain of Expertise</em>.</li>
-<li>The goal is to find the <b>optimal</b> assignment — not just a feasible one — where "optimal" means maximizing the quality of domain matches (e.g., primary-primary matches are preferred over secondary matches).</li>
+<h1 class="doxsection"><a class="anchor" id="ext_t2_4"></a>
+T2.4 — General Formulation with Secondary Domains (Proposed Approach)</h1>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_4_problem"></a>
+Problem Description</h2>
+<p>This is the most general variant. Both submissions and reviewers have <b>primary and secondary</b> domains. A submission can be matched to a reviewer if any of the following holds:</p><ul>
+<li>sub.primary == rev.primary (primary-primary)</li>
+<li>sub.primary == rev.secondary or sub.secondary == rev.primary (cross-primary-secondary)</li>
+<li>sub.secondary == rev.secondary (secondary-secondary)</li>
 </ul>
-<p>This is a more general problem with significantly higher computational complexity when the truly optimal assignment is sought, because it is no longer a pure max-flow problem but a maximum weight bipartite matching** problem.</p>
-<h2 class="doxsection"><a class="anchor" id="ext_general_approach"></a>
+<p>The goal is to find an assignment that maximises the quality of matches, not just feasibility. This transforms the problem from a pure max-flow problem into a <b>maximum-weight bipartite matching</b> problem with significantly higher computational complexity.</p>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_4_approach"></a>
 Proposed Approach</h2>
-<p>We propose a <b>tiered max-flow</b> approach combined with a <b>min-cost max-flow</b> formulation:</p>
-<p>Approach A: Tiered Max-Flow (Greedy Approximation)**</p>
+<p>We outline two approaches of increasing sophistication:</p>
+<p>Approach A: Layered Max-Flow (Greedy)**</p>
+<p>This extends the existing Edmonds-Karp pipeline with a priority-based, multi-pass strategy:</p>
 <ol type="1">
-<li><b>Layer 1 — Primary-Primary matches.</b> Build a flow graph where edges exist only when sub.primary == rev.primary. Run Edmonds-Karp to saturate as many primary-primary assignments as possible. Fix these flows.</li>
-<li><b>Layer 2 — Primary-Secondary matches.</b> On the remaining capacity, build a graph for sub.primary == rev.secondary or sub.secondary == rev.primary. Run max-flow again.</li>
-<li><b>Layer 3 — Secondary-Secondary matches.</b> Finally, attempt sub.secondary == rev.secondary on the still-available capacity.</li>
+<li><b>Layer 1 — Primary-Primary.</b> Build the flow graph with edges only where sub.primary == rev.primary. Run Edmonds-Karp. Record the resulting flows.</li>
+<li><b>Layer 2 — Cross matches.</b> On the <b>residual capacity</b> (after subtracting Layer 1 flows), add edges where sub.primary == rev.secondary or sub.secondary == rev.primary. Run Edmonds-Karp again to fill remaining capacity.</li>
+<li><b>Layer 3 — Secondary-Secondary.</b> On the still-remaining capacity, add edges where sub.secondary == rev.secondary. Run Edmonds-Karp a third time.</li>
+<li><b>Combine</b> flows from all three layers as the final assignment.</li>
 </ol>
-<p>This greedy tiered approach runs Edmonds-Karp up to 3 times, so its complexity is <b>O(3 × V × E²) = O(V × E²)</b>. It is fast but does not guarantee global optimality — a primary-primary match in layer 1 might block a better overall assignment.</p>
-<p>Approach B: Min-Cost Max-Flow (Exact Solution)**</p>
+<p>Each layer greedily maximises flow at its quality tier before moving to the next. The approach runs Edmonds-Karp at most 3 times.</p>
+<p>Approach B: Min-Cost Max-Flow (Exact)**</p>
+<p>For guaranteed optimality, we reformulate as a minimum-cost flow problem:</p>
 <ol type="1">
-<li>Assign a <b>cost</b> to each submission→reviewer edge based on match quality:<ul>
-<li>Primary-Primary: cost = 0 (best)</li>
-<li>Primary-Secondary: cost = 1</li>
-<li>Secondary-Secondary: cost = 2 (worst)</li>
+<li><b><a class="el" href="classEdge.html" title="Represents a directed connection between two vertices in the graph.">Edge</a> costs by match quality:</b><ul>
+<li>sub.primary == rev.primary: cost = 0</li>
+<li>cross match (primary ↔ secondary): cost = 1</li>
+<li>sub.secondary == rev.secondary: cost = 2</li>
 </ul>
 </li>
-<li>Add source→submission edges (capacity = MinReviewsPerSubmission, cost = 0) and reviewer→sink edges (capacity = MaxReviewsPerReviewer, cost = 0).</li>
-<li>Run <b>Successive Shortest Path (SSP)</b> min-cost max-flow:<ul>
-<li>While there exists a max-flow augmenting path, choose the one with minimum total cost.</li>
-<li>Uses Bellman-Ford or Dijkstra (with potentials) for shortest path computation.</li>
+<li><b>Same graph structure</b> as T2.1: source → submissions → reviewers → sink, with the same capacities. Each submission→reviewer edge carries the appropriate cost.</li>
+<li><b>Run Successive Shortest Path (SSP)</b> min-cost max-flow:<ul>
+<li>Use Dijkstra with Johnson's potentials to find the minimum-cost augmenting path each iteration.</li>
+<li>Repeat until flow reaches P × MinReviewsPerSubmission or no more augmenting paths exist.</li>
 </ul>
 </li>
 </ol>
-<p>The complexity of SSP with Dijkstra and potentials is <b>O(F × (V + E) × log V)</b>, where F is the total flow (P × MinReviewsPerSubmission). This guarantees the optimal assignment.</p>
-<h2 class="doxsection"><a class="anchor" id="ext_general_complexity"></a>
-Comparison of Approaches</h2>
+<p>The result is the assignment with the <b>minimum total cost</b> (i.e., maximum match quality), since primary-primary matches (cost 0) are always preferred when available.</p>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_4_complexity"></a>
+Complexity</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Approach  </th><th class="markdownTableHeadNone">Complexity  </th><th class="markdownTableHeadNone">Optimality  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Tiered Max-Flow (A)  </td><td class="markdownTableBodyNone">O(V × E²)  </td><td class="markdownTableBodyNone">Approximate (greedy)  </td></tr>
+<td class="markdownTableBodyNone">A: Layered Max-Flow  </td><td class="markdownTableBodyNone">O(3 × V × E²) = O(V × E²)  </td><td class="markdownTableBodyNone">Greedy, may not be globally optimal  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Min-Cost Max-Flow (B)  </td><td class="markdownTableBodyNone">O(F × (V + E) × log V)  </td><td class="markdownTableBodyNone">Exact (optimal)  </td></tr>
+<td class="markdownTableBodyNone">B: Min-Cost Max-Flow (SSP + Dijkstra)  </td><td class="markdownTableBodyNone">O(F × (V + E) × log V)  </td><td class="markdownTableBodyNone">Exact, globally optimal  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Brute-force enumeration  </td><td class="markdownTableBodyNone">O((P×R)!)  </td><td class="markdownTableBodyNone">Exact (impractical)  </td></tr>
+<td class="markdownTableBodyNone">Brute force (all assignments)  </td><td class="markdownTableBodyNone">O((P×R)!)  </td><td class="markdownTableBodyNone">Exact, impractical  </td></tr>
 </table>
-<p>For typical conference sizes (P &lt; 200, R &lt; 200), Approach B with Dijkstra is practical and produces the optimal assignment. Approach A is a reasonable fallback when speed is critical and near-optimal results suffice.</p>
-<h2 class="doxsection"><a class="anchor" id="ext_general_example"></a>
-Input Example</h2>
+<p>Where F = P × MinReviewsPerSubmission is the total flow value.</p>
+<p>Why the general case is harder:** In T2.1, any valid match is equally good — it is a pure feasibility problem. In T2.4, match quality varies (primary &gt; cross &gt; secondary), so we must optimise a weighted objective, not just maximise flow. This elevates the problem from max-flow to min-cost max-flow, increasing complexity by a factor of F × log V.</p>
+<p>For typical conference sizes (P, R &lt; 200, F &lt; 400), Approach B is practical and runs in under a second.</p>
+<h2 class="doxsection"><a class="anchor" id="ext_t2_4_example"></a>
+Example</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#Submissions</span></div>
-<div class="line"><span class="preprocessor">#Id, Title, Authors, E-mail, Primary, Secondary</span></div>
 <div class="line">1, <span class="stringliteral">&quot;ML Systems&quot;</span>, Alice, alice@x, 1, 2</div>
-<div class="line">2, <span class="stringliteral">&quot;Security Audit&quot;</span>, Bob, bob@x, 3, 1</div>
+<div class="line">2, <span class="stringliteral">&quot;Security&quot;</span>, Bob, bob@x, 3, 1</div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#Reviewers</span></div>
-<div class="line"><span class="preprocessor">#Id, Name, E-mail, Primary, Secondary</span></div>
 <div class="line">1, Rev1, r1@x, 1, 3</div>
 <div class="line">2, Rev2, r2@x, 2, 3</div>
 <div class="line">3, Rev3, r3@x, 3, 1</div>
@@ -252,14 +368,18 @@ Input Example</h2>
 <div class="line"><span class="preprocessor">#Parameters</span></div>
 <div class="line">MinReviewsPerSubmission, 1</div>
 <div class="line">MaxReviewsPerReviewer, 2</div>
-</div><!-- fragment --><p>Tiered approach (A) result:**</p><ul>
-<li>Layer 1: Sub 1 (pri=1) matches Rev 1 (pri=1). Sub 2 (pri=3) matches Rev 3 (pri=3). Flow = 2.</li>
-<li><p class="startli">All assignments are primary-primary. <b>Optimal in this case.</b></p>
-<p class="startli">Min-cost max-flow (B) result:**</p>
+</div><!-- fragment --><p>Mode 3 matching possibilities:**</p><ul>
+<li>Sub1 (pri=1, sec=2) → Rev1 (pri=1): primary-primary (cost 0)</li>
+<li>Sub1 (pri=1, sec=2) → Rev2 (pri=2): secondary-primary match (cost 1)</li>
+<li>Sub1 (pri=1, sec=2) → Rev3 (pri=3): sub.sec=2 vs rev.sec=1 — no match</li>
+<li>Sub2 (pri=3, sec=1) → Rev1 (pri=1, sec=3): sub.sec=1==rev.pri=1 cross (cost 1), or sub.pri=3==rev.sec=3 cross (cost 1)</li>
+<li>Sub2 (pri=3, sec=1) → Rev2 (pri=2, sec=3): sub.pri=3==rev.sec=3 cross (cost 1)</li>
+<li><p class="startli">Sub2 (pri=3, sec=1) → Rev3 (pri=3, sec=1): primary-primary (cost 0)</p>
+<p class="startli">Layered approach:**</p>
 </li>
-<li>Same result: Sub 1 ↔ Rev 1 (cost 0), Sub 2 ↔ Rev 3 (cost 0). Total cost = 0.</li>
-<li><p class="startli">Both approaches agree here because the primary-primary matches are sufficient.</p>
-<p class="startli">A case where they diverge:** If Rev 1 could also serve Sub 2 via secondary match (sub.sec=1 == rev.pri=1), the greedy approach assigns Rev 1 to Sub 1 first. But if Sub 2 has no other match and Sub 1 has an alternative, the min-cost approach would globally optimize to ensure both submissions are covered.</p>
+<li><p class="startli">Layer 1 (cost 0): Sub1→Rev1, Sub2→Rev3. Both primary-primary. Flow = 2. Done.</p>
+<p class="startli">Min-cost max-flow:** Same result, total cost = 0. Both submissions get their best-possible primary-primary match.</p>
+<p class="startli">A case where Layered fails and Min-Cost succeeds:** If Rev1 were removed, Layer 1 would match Sub2→Rev3 (cost 0), leaving Sub1 to find a match in Layer 2 (Sub1→Rev2 at cost 1). Total cost = 1. Min-cost max-flow would find the same. But if there were a third submission competing for Rev3, Layer 1 might greedily assign Rev3 to the wrong submission, forcing a suboptimal overall assignment — while min-cost max-flow would globally minimise total cost.</p>
 </li>
 </ul>
 <hr  />
@@ -316,7 +436,7 @@ Why Both Are Correct</h2>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_complexity_table"></a>
 Complexity Summary</h1>
-<p>The following table summarizes the time complexity of the most important functions in the project. See the individual function documentation for full details.</p>
+<p>The following table summarises the time complexity of the most important functions in the project. See the individual function documentation for full details.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Location  </th><th class="markdownTableHeadNone">Complexity  </th><th class="markdownTableHeadNone">Notes  </th></tr>

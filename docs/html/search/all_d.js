@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['name_0',['name',['../classReviewer.html#af9ab4025cd39328e9ce594ef165e9e9c',1,'Reviewer']]],
-  ['nearlyequal_1',['nearlyEqual',['../maxflow__tests_8cpp.html#afa7ff1bb1eafe1074e69b7f51e868443',1,'maxflow_tests.cpp']]],
-  ['non_20trivial_20input_20example_2',['Non-Trivial Input Example',['../extra_docs.html#ext_risk_k_example',1,'']]],
-  ['num_3',['num',['../classVertex.html#aeb941bcd51ef71c6101e02eaed1cae12',1,'Vertex']]]
+  ['k_201_0',['T2.2 — Basic Formulation with Risk Analysis (K = 1)',['../extra_docs.html#ext_t2_2',1,'']]],
+  ['k_201_20proposed_20approach_1',['T2.3 — Risk Analysis with K &amp;gt; 1 (Proposed Approach)',['../extra_docs.html#ext_t2_3',1,'']]]
 ];

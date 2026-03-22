@@ -1,9 +1,27 @@
 var searchData=
 [
-  ['waitenter_0',['waitEnter',['../classConferenceApp.html#a558519785f0c8b9d3288d76dc5008d47',1,'ConferenceApp']]],
-  ['weight_1',['weight',['../classEdge.html#af188b57b604f0d65e2da48733bd76426',1,'Edge']]],
-  ['why_20both_20are_20correct_2',['Why Both Are Correct',['../extra_docs.html#ext_test_diff_why',1,'']]],
-  ['why_20two_20integration_20tests_20differ_3',['Why Two Integration Tests &quot;Differ&quot;',['../extra_docs.html#ext_test_diff',1,'']]],
-  ['writeassignmentstofile_4',['writeAssignmentsToFile',['../classAssignmentLogic.html#a90461122cf11a333f981c472be0888bc',1,'AssignmentLogic']]],
-  ['writerisksection_5',['writeRiskSection',['../AssignmentLogic_8cpp.html#a77876bd7e23629d20315a7ac61ef09c3',1,'AssignmentLogic.cpp']]]
+  ['t2_201_20—_20basic_20formulation_20primary_20domains_20no_20risk_20analysis_0',['T2.1 — Basic Formulation (Primary Domains, No Risk Analysis)',['../extra_docs.html#ext_t2_1',1,'']]],
+  ['t2_202_20—_20basic_20formulation_20with_20risk_20analysis_20k_201_1',['T2.2 — Basic Formulation with Risk Analysis (K = 1)',['../extra_docs.html#ext_t2_2',1,'']]],
+  ['t2_203_20—_20risk_20analysis_20with_20k_201_20proposed_20approach_2',['T2.3 — Risk Analysis with K &amp;gt; 1 (Proposed Approach)',['../extra_docs.html#ext_t2_3',1,'']]],
+  ['t2_204_20—_20general_20formulation_20with_20secondary_20domains_20proposed_20approach_3',['T2.4 — General Formulation with Secondary Domains (Proposed Approach)',['../extra_docs.html#ext_t2_4',1,'']]],
+  ['t9g2_20members_4',['Group T9G2 Members',['../index.html#autotoc_md4',1,'']]],
+  ['testallmodesallminmaxcombinations_5',['testAllModesAllMinMaxCombinations',['../maxflow__tests_8cpp.html#af9928f33ed284836aae79206ad76e543',1,'maxflow_tests.cpp']]],
+  ['testandvisit_6',['testAndVisit',['../EdmondKarp_8cpp.html#acb329d42a9a476d072878ef35a6a343c',1,'testAndVisit(std::queue&lt; Vertex&lt; T &gt; * &gt; &amp;q, Edge&lt; T &gt; *e, Vertex&lt; T &gt; *w, double residual):&#160;EdmondKarp.cpp'],['../EdmondKarp_8h.html#acb329d42a9a476d072878ef35a6a343c',1,'testAndVisit(std::queue&lt; Vertex&lt; T &gt; * &gt; &amp;q, Edge&lt; T &gt; *e, Vertex&lt; T &gt; *w, double residual):&#160;EdmondKarp.cpp']]],
+  ['testclassicedmondskarpmaxflow_7',['testClassicEdmondsKarpMaxFlow',['../maxflow__tests_8cpp.html#a4d2fc5d1fa90b15fac003aa92fcab7a6',1,'maxflow_tests.cpp']]],
+  ['testexample1fullysatisfiablehappypath_8',['testExample1FullySatisfiableHappyPath',['../maxflow__tests_8cpp.html#a061299618e40ea5687ece41fbad4539e',1,'maxflow_tests.cpp']]],
+  ['testexample2partiallyunsatisfiable_9',['testExample2PartiallyUnsatisfiable',['../maxflow__tests_8cpp.html#a6d62cfe4caeaa3ab65f2376119c24a35',1,'maxflow_tests.cpp']]],
+  ['testexample3riskanalysisonecriticalreviewer_10',['testExample3RiskAnalysisOneCriticalReviewer',['../maxflow__tests_8cpp.html#a382801ca5a4bd6c08b5fa6005b05d423',1,'maxflow_tests.cpp']]],
+  ['testinvalidsourcethrows_11',['testInvalidSourceThrows',['../maxflow__tests_8cpp.html#a9017f932415b00f967a6f151fbc331ea',1,'maxflow_tests.cpp']]],
+  ['testmodemonotonicity_12',['testModeMonotonicity',['../maxflow__tests_8cpp.html#a8286e1fc85b920e760c0b51ffb1271ae',1,'maxflow_tests.cpp']]],
+  ['testprimarymodeassignmentflow_13',['testPrimaryModeAssignmentFlow',['../maxflow__tests_8cpp.html#ad81a472414c12b77927df41de5f7717c',1,'maxflow_tests.cpp']]],
+  ['tests_20differ_14',['Why Two Integration Tests &quot;Differ&quot;',['../extra_docs.html#ext_test_diff',1,'']]],
+  ['testsecondarysubmissionmodeenablesmatch_15',['testSecondarySubmissionModeEnablesMatch',['../maxflow__tests_8cpp.html#a549ad06baba91961e44ff6483ae4f9eb',1,'maxflow_tests.cpp']]],
+  ['the_20project_16',['About the Project',['../index.html#autotoc_md3',1,'']]],
+  ['title_17',['title',['../classSubmission.html#ae143f4081965aaa80af89fc3a1b5baa6',1,'Submission']]],
+  ['tool_18',['Scientific Conference Organization Tool',['../index.html',1,'']]],
+  ['totalassignedreviews_19',['totalAssignedReviews',['../classAssignmentLogic.html#a2d96da3e538bbca0269ba70b3d0ff050',1,'AssignmentLogic']]],
+  ['totalflowfromsource_20',['totalFlowFromSource',['../maxflow__tests_8cpp.html#a76861b439d6da5ab82b27ec9d3125af6',1,'maxflow_tests.cpp']]],
+  ['totalrequiredreviews_21',['totalRequiredReviews',['../classAssignmentLogic.html#a931974837d12215fb68978c18e00491a',1,'AssignmentLogic']]],
+  ['trivial_20input_20example_22',['Non-Trivial Input Example',['../extra_docs.html#ext_t2_3_example',1,'']]],
+  ['two_20integration_20tests_20differ_23',['Why Two Integration Tests &quot;Differ&quot;',['../extra_docs.html#ext_test_diff',1,'']]]
 ];

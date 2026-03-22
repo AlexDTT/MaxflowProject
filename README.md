@@ -86,6 +86,11 @@ This diagram illustrates the bipartite matching between **Submissions** and **Re
 
 </div>
 
+## Additional Documentation
+For extended analysis covering risk analysis generalization (K > 1), the general multi-domain
+assignment problem, and an explanation of test output differences, see the
+@ref extra_docs "Extra Documentation" page.
+
 <br>
 <div class="section_buttons">
 

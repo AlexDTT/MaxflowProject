@@ -50,8 +50,25 @@ public:
     void setIndegree(unsigned int indegree);
     void setDist(double dist);
     void setPath(Edge<T> *path);
+    /**
+     * @brief Adds an outgoing edge from this vertex to the destination.
+     * @param dest The destination vertex.
+     * @param w The weight of the edge.
+     * @return Pointer to the newly created edge.
+     * @complexity O(1) amortized.
+     */
     Edge<T> *addEdge(Vertex<T> *dest, double w);
+    /**
+     * @brief Removes all outgoing edges to a vertex with the given content.
+     * @param in The content of the destination vertex.
+     * @return True if at least one edge was removed.
+     * @complexity O(E_v) where E_v is the number of outgoing edges from this vertex.
+     */
     bool removeEdge(T in);
+    /**
+     * @brief Removes all outgoing edges from this vertex.
+     * @complexity O(E_v) where E_v is the number of outgoing edges.
+     */
     void removeOutgoingEdges();
 
 protected:
@@ -121,34 +138,74 @@ public:
     ~Graph();
 
     // Disable copy
-    Graph(const Graph&) = delete;
-    Graph& operator=(const Graph&) = delete;
+    Graph(const Graph &) = delete;
+    Graph &operator=(const Graph &) = delete;
 
     // Enable move
-    Graph(Graph&& other) noexcept;
-    Graph& operator=(Graph&& other) noexcept;
+    Graph(Graph &&other) noexcept;
+    Graph &operator=(Graph &&other) noexcept;
 
-    /*
-     * Auxiliary function to find a vertex with a given the content.
+    /**
+     * @brief Finds a vertex with a given content.
+     * @param in The content to search for.
+     * @return Pointer to the vertex, or nullptr if not found.
+     * @complexity O(V) linear search over the vertex set.
      */
     Vertex<T> *findVertex(const T &in) const;
-    /*
-     *  Adds a vertex with a given content or info (in) to a graph (this).
-     *  Returns true if successful, and false if a vertex with that content already exists.
+    /**
+     * @brief Adds a vertex with a given content to the graph.
+     * @param in The content for the new vertex.
+     * @return True if successful, false if a vertex with that content already exists.
+     * @complexity O(V) due to the duplicate check via findVertex.
      */
     bool addVertex(const T &in);
+    /**
+     * @brief Removes a vertex and all its incident edges from the graph.
+     * @param in The content of the vertex to remove.
+     * @return True if successful, false if the vertex does not exist.
+     * @complexity O(V + E) where V is the number of vertices and E the number of edges
+     *             incident to the removed vertex.
+     */
     bool removeVertex(const T &in);
 
-    /*
-     * Adds an edge to a graph (this), given the contents of the source and
-     * destination vertices and the edge weight (w).
-     * Returns true if successful, and false if the source or destination vertex does not exist.
+    /**
+     * @brief Adds a directed edge to the graph.
+     * @param sourc The content of the source vertex.
+     * @param dest The content of the destination vertex.
+     * @param w The weight (capacity) of the edge.
+     * @return True if successful, false if either vertex does not exist.
+     * @complexity O(V) due to findVertex lookups for both endpoints.
      */
     bool addEdge(const T &sourc, const T &dest, double w);
+    /**
+     * @brief Removes a directed edge from the graph.
+     * @param source The content of the source vertex.
+     * @param dest The content of the destination vertex.
+     * @return True if the edge was removed, false if it does not exist.
+     * @complexity O(V + E_v) due to findVertex and the vertex-level removeEdge.
+     */
     bool removeEdge(const T &source, const T &dest);
+    /**
+     * @brief Adds a bidirectional (undirected) edge to the graph.
+     * @param sourc The content of the first vertex.
+     * @param dest The content of the second vertex.
+     * @param w The weight of the edge in both directions.
+     * @return True if successful, false if either vertex does not exist.
+     * @complexity O(V) due to findVertex lookups for both endpoints.
+     */
     bool addBidirectionalEdge(const T &sourc, const T &dest, double w);
 
+    /**
+     * @brief Returns the number of vertices in the graph.
+     * @return The vertex count.
+     * @complexity O(1)
+     */
     int getNumVertex() const;
+    /**
+     * @brief Returns a copy of the vertex set.
+     * @return Vector of pointers to all vertices.
+     * @complexity O(V) to copy the vector.
+     */
     std::vector<Vertex<T> *> getVertexSet() const;
 
 protected:
@@ -157,8 +214,11 @@ protected:
     double **distMatrix = nullptr; // dist matrix for Floyd-Warshall
     int **pathMatrix = nullptr;    // path matrix for Floyd-Warshall
 
-    /*
-     * Finds the index of the vertex with a given content.
+    /**
+     * @brief Finds the index of the vertex with a given content.
+     * @param in The content to search for.
+     * @return The index in vertexSet, or -1 if not found.
+     * @complexity O(V) linear search.
      */
     int findVertexIdx(const T &in) const;
 };
@@ -168,20 +228,19 @@ void deleteMatrix(double **m, int n);
 
 /************************* Vertex  **************************/
 
+// Vertex constructor: stores the given content.
 template <class T>
 Vertex<T>::Vertex(T in) : info(in) {}
 
 template <class T>
-Vertex<T>::~Vertex() {
-    for (auto edge : adj) {
+Vertex<T>::~Vertex()
+{
+    for (auto edge : adj)
+    {
         delete edge;
     }
 }
 
-/*
- * Auxiliary function to add an outgoing edge to a vertex (this),
- * with a given destination vertex (d) and edge weight (w).
- */
 template <class T>
 Edge<T> *Vertex<T>::addEdge(Vertex<T> *d, double w)
 {
@@ -191,11 +250,7 @@ Edge<T> *Vertex<T>::addEdge(Vertex<T> *d, double w)
     return newEdge;
 }
 
-/*
- * Auxiliary function to remove an outgoing edge (with a given destination (d))
- * from a vertex (this).
- * Returns true if successful, and false if such edge does not exist.
- */
+// Remove all outgoing edges to a vertex with given destination content.
 template <class T>
 bool Vertex<T>::removeEdge(T in)
 {
@@ -219,9 +274,7 @@ bool Vertex<T>::removeEdge(T in)
     return removedEdge;
 }
 
-/*
- * Auxiliary function to remove an outgoing edge of a vertex.
- */
+// Remove all outgoing edges from this vertex.
 template <class T>
 void Vertex<T>::removeOutgoingEdges()
 {
@@ -364,6 +417,7 @@ void Vertex<T>::deleteEdge(Edge<T> *edge)
 
 /********************** Edge  ****************************/
 
+// Edge constructor: stores origin, destination, and weight.
 template <class T>
 Edge<T>::Edge(Vertex<T> *orig, Vertex<T> *dest, double w) : dest(dest), weight(w), orig(orig) {}
 
@@ -435,9 +489,7 @@ std::vector<Vertex<T> *> Graph<T>::getVertexSet() const
     return vertexSet;
 }
 
-/*
- * Auxiliary function to find a vertex with a given content.
- */
+// Find a vertex by content.
 template <class T>
 Vertex<T> *Graph<T>::findVertex(const T &in) const
 {
@@ -447,9 +499,7 @@ Vertex<T> *Graph<T>::findVertex(const T &in) const
     return nullptr;
 }
 
-/*
- * Finds the index of the vertex with a given content.
- */
+// Find the index of a vertex by content.
 template <class T>
 int Graph<T>::findVertexIdx(const T &in) const
 {
@@ -458,10 +508,7 @@ int Graph<T>::findVertexIdx(const T &in) const
             return i;
     return -1;
 }
-/*
- *  Adds a vertex with a given content or info (in) to a graph (this).
- *  Returns true if successful, and false if a vertex with that content already exists.
- */
+// Add a vertex with given content; returns false if it already exists.
 template <class T>
 bool Graph<T>::addVertex(const T &in)
 {
@@ -471,11 +518,7 @@ bool Graph<T>::addVertex(const T &in)
     return true;
 }
 
-/*
- *  Removes a vertex with a given content (in) from a graph (this), and
- *  all outgoing and incoming edges.
- *  Returns true if successful, and false if such vertex does not exist.
- */
+// Remove a vertex and all its incident edges.
 template <class T>
 bool Graph<T>::removeVertex(const T &in)
 {
@@ -497,11 +540,7 @@ bool Graph<T>::removeVertex(const T &in)
     return false;
 }
 
-/*
- * Adds an edge to a graph (this), given the contents of the source and
- * destination vertices and the edge weight (w).
- * Returns true if successful, and false if the source or destination vertex does not exist.
- */
+// Add a directed edge between two existing vertices.
 template <class T>
 bool Graph<T>::addEdge(const T &sourc, const T &dest, double w)
 {
@@ -513,11 +552,7 @@ bool Graph<T>::addEdge(const T &sourc, const T &dest, double w)
     return true;
 }
 
-/*
- * Removes an edge from a graph (this).
- * The edge is identified by the source (sourc) and destination (dest) contents.
- * Returns true if successful, and false if such edge does not exist.
- */
+// Remove a directed edge by source and destination content.
 template <class T>
 bool Graph<T>::removeEdge(const T &sourc, const T &dest)
 {
@@ -566,23 +601,27 @@ inline void deleteMatrix(double **m, int n)
 }
 
 template <class T>
-Graph<T>::Graph(Graph<T>&& other) noexcept : vertexSet(std::move(other.vertexSet)), distMatrix(other.distMatrix), pathMatrix(other.pathMatrix) {
+Graph<T>::Graph(Graph<T> &&other) noexcept : vertexSet(std::move(other.vertexSet)), distMatrix(other.distMatrix), pathMatrix(other.pathMatrix)
+{
     other.vertexSet.clear();
     other.distMatrix = nullptr;
     other.pathMatrix = nullptr;
 }
 
 template <class T>
-Graph<T>& Graph<T>::operator=(Graph<T>&& other) noexcept {
-    if (this != &other) {
+Graph<T> &Graph<T>::operator=(Graph<T> &&other) noexcept
+{
+    if (this != &other)
+    {
         deleteMatrix(distMatrix, vertexSet.size());
         deleteMatrix(pathMatrix, vertexSet.size());
-        for (auto v : vertexSet) delete v;
-        
+        for (auto v : vertexSet)
+            delete v;
+
         vertexSet = std::move(other.vertexSet);
         distMatrix = other.distMatrix;
         pathMatrix = other.pathMatrix;
-        
+
         other.vertexSet.clear();
         other.distMatrix = nullptr;
         other.pathMatrix = nullptr;
@@ -595,7 +634,8 @@ Graph<T>::~Graph()
 {
     deleteMatrix(distMatrix, vertexSet.size());
     deleteMatrix(pathMatrix, vertexSet.size());
-    for (auto v : vertexSet) {
+    for (auto v : vertexSet)
+    {
         delete v;
     }
 }

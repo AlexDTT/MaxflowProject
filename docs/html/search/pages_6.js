@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['example_0',['Example',['../index.html#autotoc_md7',1,'Generated Graph Example'],['../extra_docs.html#ext_general_example',1,'Input Example'],['../extra_docs.html#ext_risk_k_example',1,'Non-Trivial Input Example']]],
-  ['extra_20documentation_1',['Extra Documentation',['../extra_docs.html',1,'']]]
+  ['complexity_0',['Complexity',['../extra_docs.html#ext_t2_1_complexity',1,'Complexity'],['../extra_docs.html#ext_t2_2_complexity',1,'Complexity'],['../extra_docs.html#ext_t2_3_complexity',1,'Complexity'],['../extra_docs.html#ext_t2_4_complexity',1,'Complexity']]],
+  ['complexity_20summary_1',['Complexity Summary',['../extra_docs.html#ext_complexity_table',1,'']]],
+  ['conference_20organization_20tool_2',['Scientific Conference Organization Tool',['../index.html',1,'']]],
+  ['configuration_3',['Input Configuration',['../extra_docs.html#ext_test_diff_input',1,'']]],
+  ['correct_4',['Why Both Are Correct',['../extra_docs.html#ext_test_diff_why',1,'']]]
 ];

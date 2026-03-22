@@ -1,21 +1,15 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;main.cpp'],['../maxflow__tests_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;maxflow_tests.cpp']]],
-  ['main_2ecpp_1',['main.cpp',['../main_8cpp.html',1,'']]],
-  ['makecomplexreviewers_2',['makeComplexReviewers',['../maxflow__tests_8cpp.html#a84a96ef531693e273f6599eebf18cefc',1,'maxflow_tests.cpp']]],
-  ['makecomplexsubmissions_3',['makeComplexSubmissions',['../maxflow__tests_8cpp.html#aa2eef2556456119109c6034a6e3065e8',1,'maxflow_tests.cpp']]],
-  ['mapping_4',['System Architecture &amp;amp; Graph Mapping',['../index.html#autotoc_md6',1,'']]],
-  ['maxflow_5ftests_2ecpp_5',['maxflow_tests.cpp',['../maxflow__tests_8cpp.html',1,'']]],
-  ['maxreviewsperreviewer_6',['MaxReviewsPerReviewer',['../structParameters.html#aeaab0c199b7a0d0857071dbec750a434',1,'Parameters']]],
-  ['mdataloaded_7',['mDataLoaded',['../classConferenceApp.html#a5e12b62b2c9ba3ecdbeca83c17f6da05',1,'ConferenceApp']]],
-  ['members_8',['Group T9G2 Members',['../index.html#autotoc_md4',1,'']]],
-  ['menualgorithms_9',['menuAlgorithms',['../classConferenceApp.html#af219d1b890cf0c24acc7d2ab2bf794a0',1,'ConferenceApp']]],
-  ['menudatamanagement_10',['menuDataManagement',['../classConferenceApp.html#a71dfe5553e1852582de34dbb17a54486',1,'ConferenceApp']]],
-  ['menuparameterconfiguration_11',['menuParameterConfiguration',['../classConferenceApp.html#a27893a988f602d9cc5b609c4452d5630',1,'ConferenceApp']]],
-  ['menuvisualization_12',['menuVisualization',['../classConferenceApp.html#af745fdb2edcc3d63659be5ee2a4d9f0e',1,'ConferenceApp']]],
-  ['mflowgraph_13',['mFlowGraph',['../classConferenceApp.html#a084e46cc508a1814f3fab6f700e33fb6',1,'ConferenceApp']]],
-  ['minreviewspersubmission_14',['MinReviewsPerSubmission',['../structParameters.html#aeea9e43cbdff07b655f0b7ea87f302a3',1,'Parameters']]],
-  ['mparams_15',['mParams',['../classConferenceApp.html#a92c7c0e656fe4a6587e746b1fe208047',1,'ConferenceApp']]],
-  ['mreviewers_16',['mReviewers',['../classConferenceApp.html#a05f1affccb29dd096b4bc8a6de7581bc',1,'ConferenceApp']]],
-  ['msubmissions_17',['mSubmissions',['../classConferenceApp.html#a263be0fbc257a7df2e8988c5d7160668',1,'ConferenceApp']]]
+  ['id_0',['id',['../classReviewer.html#aeacccab23a0ec1c59ab0283f95f01fda',1,'Reviewer::id'],['../classSubmission.html#a7b6e2405d79134e923f1d74beba845a0',1,'Submission::id']]],
+  ['incoming_1',['incoming',['../classVertex.html#a004d1b624d1cd1a7afe49295682e2899',1,'Vertex']]],
+  ['indegree_2',['indegree',['../classVertex.html#af5db7e2f035a38dcc7c6e1b03117b06a',1,'Vertex']]],
+  ['inf_3',['INF',['../Graph_8h.html#a12c2040f25d8e3a7b9e1c2024c618cb6',1,'Graph.h']]],
+  ['info_4',['info',['../classVertex.html#a415d7811eef6cdd992f0dca1f35a49cd',1,'Vertex']]],
+  ['input_20configuration_5',['Input Configuration',['../extra_docs.html#ext_test_diff_input',1,'']]],
+  ['input_20example_6',['Non-Trivial Input Example',['../extra_docs.html#ext_t2_3_example',1,'']]],
+  ['integration_20tests_20differ_7',['Why Two Integration Tests &quot;Differ&quot;',['../extra_docs.html#ext_test_diff',1,'']]],
+  ['isprocessing_8',['isProcessing',['../classVertex.html#aaa41dfa4ce1a19b4e529cc6cdc23b764',1,'Vertex']]],
+  ['isselected_9',['isSelected',['../classEdge.html#a2d36af60fa3dea16824bec12e5f68c58',1,'Edge']]],
+  ['isvisited_10',['isVisited',['../classVertex.html#aa2bb17f6ebd98a67f8da1f689b22fadc',1,'Vertex']]],
+  ['it_11',['It',['../extra_docs.html#ext_t2_1_approach',1,'How We Solve It'],['../extra_docs.html#ext_t2_2_approach',1,'How We Solve It']]]
 ];

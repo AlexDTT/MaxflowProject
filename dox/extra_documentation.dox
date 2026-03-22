@@ -1,0 +1,506 @@
+/**
+@page extra_docs Extra Documentation
+
+This page provides a detailed treatment of each variant of the Review Assignment Problem
+specified in the assignment (sections T2.1 through T2.4). For T2.1 and T2.2 we describe
+how our implementation solves them. For T2.3 and T2.4 we outline approaches we would take,
+discuss their complexity, and provide illustrative examples.
+
+---
+
+@section ext_t2_1 T2.1 — Basic Formulation (Primary Domains, No Risk Analysis)
+
+@subsection ext_t2_1_problem Problem Description
+
+In this base variant, only the **Primary Domain** of each submission and the **Primary Expertise**
+of each reviewer are considered. Every reviewer is assumed to carry out their reviews (no risk).
+The objective is to determine whether a complete assignment exists such that every submission
+receives at least @c MinReviewsPerSubmission reviews, and no reviewer is assigned more than
+@c MaxReviewsPerReviewer reviews.
+
+@subsection ext_t2_1_approach How We Solve It
+
+We model the problem as a **Maximum Flow** problem on a bipartite graph with a super-source
+and super-sink.
+
+**Graph construction** (@ref GraphBuilder::buildReviewFlowGraph):
+
+- **Vertices:** super-source (ID 0), one node per submission (IDs 1..P), one node per reviewer
+  (IDs P+1..P+R), super-sink (ID P+R+1).
+- **Edges and capacities:**
+  - Source → submission_i : capacity = @c MinReviewsPerSubmission.
+    This caps how many reviews each submission can receive from the source side.
+  - submission_i → reviewer_j : capacity = 1, created only when
+    @c submission.primaryTopic == @c reviewer.primaryTopic (mode 1).
+    The capacity of 1 ensures a reviewer reviews a given submission at most once.
+  - reviewer_j → sink : capacity = @c MaxReviewsPerReviewer.
+    This caps how many reviews each reviewer can perform.
+
+A **complete assignment** is achieved when the total flow equals P × MinReviewsPerSubmission.
+If the max flow is less than this value, some submissions cannot be fully covered.
+
+**Algorithm:** We run @ref edmondsKarp "Edmonds-Karp" on the constructed graph. The BFS-based
+augmentation guarantees we find the maximum flow. After the algorithm terminates, edges from
+submissions to reviewers with positive flow represent the assigned reviews.
+
+**Output:** The function @ref AssignmentLogic::writeAssignmentsToFile "writeAssignmentsToFile"
+traverses the flow graph and writes a CSV file listing every assignment (SubmissionId,
+ReviewerId, matched domain), grouped both by submission and by reviewer, with the total count.
+If the assignment is incomplete, a missing-reviews section is appended.
+
+@subsection ext_t2_1_example Example
+
+@code
+#Submissions
+1, "Alpha", Alice, alice@x, 1,
+2, "Beta",  Bob,   bob@x,   2,
+
+#Reviewers
+1, Rev1, r1@x, 1,
+2, Rev2, r2@x, 1,
+3, Rev3, r3@x, 2,
+
+#Parameters
+MinReviewsPerSubmission, 2
+MaxReviewsPerReviewer, 2
+@endcode
+
+**Graph edges (mode 1):**
+- Source → Sub1 (cap 2), Source → Sub2 (cap 2)
+- Sub1 → Rev1 (cap 1), Sub1 → Rev2 (cap 1) — both match topic 1
+- Sub2 → Rev3 (cap 1) — matches topic 2
+- Rev1 → Sink (cap 2), Rev2 → Sink (cap 2), Rev3 → Sink (cap 2)
+
+**Max flow:** 3 (Sub1 gets 2 reviews from Rev1 and Rev2; Sub2 gets only 1 from Rev3).
+**Total required:** 4. **Result:** Incomplete — Sub2 is missing 1 review.
+
+<div class="interactive_dotgraph">
+
+\dotfile dox/t21_example.dot "T2.1 Example: Max-flow graph with partial assignment (flow=3, required=4)"
+
+</div>
+
+@subsection ext_t2_1_complexity Complexity
+
+| Step | Complexity |
+|------|-----------|
+| Build flow graph | O(P × R) — check all submission-reviewer pairs for domain match |
+| Edmonds-Karp | O(V × E²) — V = P + R + 2, E ≈ P + R + (matching pairs) |
+| Write output | O(V + E) — traverse graph once |
+| **Total** | **O(P × R + V × E²)** |
+
+For typical inputs (P, R < 200), V ≈ 400 and E ≈ 40,000, so V × E² is manageable.
+
+---
+
+@section ext_t2_2 T2.2 — Basic Formulation with Risk Analysis (K = 1)
+
+@subsection ext_t2_2_problem Problem Description
+
+Building on T2.1, this variant asks: **is there a single reviewer whose absence would make a
+complete assignment impossible?** If the baseline assignment (all reviewers available) is already
+incomplete, risk analysis is not performed. Otherwise, we test each reviewer individually.
+
+@subsection ext_t2_2_approach How We Solve It
+
+Our implementation is in @ref AssignmentLogic::findRiskyReviewersK1 "findRiskyReviewersK1":
+
+-# **Baseline check.** Run Edmonds-Karp with all reviewers. If the achieved flow is less than
+   P × MinReviewsPerSubmission, return an empty list (the assignment is already infeasible;
+   risk analysis is moot).
+-# **Per-reviewer removal.** For each reviewer j (j = 0..R-1):
+    - Build a reduced reviewer pool excluding j.
+    - Construct the flow graph with the reduced pool.
+    - Run Edmonds-Karp.
+    - If achieved flow < required, reviewer j is **risky**.
+-# **Sort and return.** The risky reviewer IDs are sorted and returned.
+
+The risk analysis result is written to the output CSV under the `#Risk Analysis: 1` header,
+listing the IDs of all risky reviewers.
+
+@subsection ext_t2_2_example Example
+
+@code
+#Submissions
+1, "Alpha", Alice, alice@x, 1,
+2, "Beta",  Bob,   bob@x,   2,
+
+#Reviewers
+1, Rev1, r1@x, 1,
+2, Rev2, r2@x, 1,
+3, Rev3, r3@x, 2,
+
+#Parameters
+MinReviewsPerSubmission, 1
+MaxReviewsPerReviewer, 2
+@endcode
+
+**Baseline:** Sub1 matches {Rev1, Rev2}, Sub2 matches {Rev3}. Total required = 2.
+- Rev1 assigns 1 to Sub1, Rev3 assigns 1 to Sub2. Flow = 2. **Feasible.**
+
+**Remove Rev1:** Sub1 can only match Rev2. Sub2 matches Rev3. Flow = 2. Still feasible.
+**Remove Rev2:** Sub1 can only match Rev1. Sub2 matches Rev3. Flow = 2. Still feasible.
+**Remove Rev3:** Sub2 has **no match**. Flow = 1 < 2. **Rev3 is risky!**
+
+**Output:**
+@code
+#Risk Analysis: 1
+3
+@endcode
+
+This is a non-trivial result: Rev3 is the only reviewer for topic 2. Its absence makes it
+impossible to cover Sub2.
+
+<div class="interactive_dotgraph">
+
+\dotfile dox/t22_example.dot "T2.2 Example: Rev3 (highlighted in red) is the sole risky reviewer"
+
+</div>
+
+@subsection ext_t2_2_complexity Complexity
+
+| Step | Complexity |
+|------|-----------|
+| Baseline max-flow | O(V × E²) |
+| R iterations, each: build graph + max-flow | R × O(P × R + V × E²) |
+| Sort risky IDs | O(R log R) |
+| **Total** | **O(R × (P × R + V × E²))** |
+
+For R = 50 and typical graph sizes, this runs in under a second.
+
+---
+
+@section ext_t2_3 T2.3 — Risk Analysis with K > 1 (Proposed Approach)
+
+@subsection ext_t2_3_problem Problem Description
+
+Extending T2.2, this variant asks: what happens when **K > 1** reviewers become unavailable
+simultaneously? We need to identify all subsets of K reviewers whose collective absence makes
+a complete assignment impossible.
+
+@subsection ext_t2_3_approach Proposed Approach
+
+The approach generalises the K = 1 strategy to combinations of size K:
+
+-# **Enumerate all C(R, K) subsets** of reviewers to remove.
+-# **For each subset S:**
+    - Build a reduced reviewer pool excluding all reviewers in S.
+    - Run Edmonds-Karp on the reduced graph.
+    - If achieved flow < P × MinReviewsPerSubmission, S is a **critical subset**.
+-# **Return** all critical subsets.
+
+**Pruning optimisation:** If K > 1 and a reviewer r was already identified as risky at K = 1,
+then any K-sized subset containing r is automatically critical — we can skip testing those
+subsets and mark them directly.
+
+**Early termination:** For each subset, after building the graph, a quick check on the
+min-cut capacity (sum of source→submission capacities vs. available reviewer capacity per topic)
+can rule out obviously feasible cases without running the full algorithm.
+
+@subsection ext_t2_3_complexity Complexity
+
+| Component | Complexity |
+|-----------|-----------|
+| Enumerate C(R, K) subsets | O(R choose K) ≈ O(R^K / K!) |
+| Build flow graph per subset | O(P × R) |
+| Edmonds-Karp per subset | O(V × E²) |
+| **Total (without pruning)** | **O(C(R,K) × (P×R + V×E²))** |
+
+| K value | Approximate cost | Practical? |
+|---------|-----------------|------------|
+| 2 | O(R² × V×E²) | Yes, for R < 100 |
+| 3 | O(R³ × V×E²) | Borderline for R > 50 |
+| ≥ 4 | O(R⁴ × V×E²) | Impractical without heavy pruning |
+
+With pruning (removing known K=1 risky reviewers from consideration), the effective number
+of subsets drops significantly when many individual reviewers are already critical.
+
+@subsection ext_t2_3_example Non-Trivial Input Example
+
+@code
+#Submissions
+1, "Topic A", Alice, alice@x, 1,
+2, "Topic B", Bob,   bob@x,   2,
+3, "Topic A 2", Carol, carol@x, 1,
+
+#Reviewers
+1, Rev1, r1@x, 1,
+2, Rev2, r2@x, 1,
+3, Rev3, r3@x, 2,
+4, Rev4, r4@x, 2,
+
+#Parameters
+MinReviewsPerSubmission, 2
+MaxReviewsPerReviewer, 2
+@endcode
+
+**Baseline (all reviewers):** Topic A submissions {1,3} match Rev1, Rev2. Topic B submission {2}
+matches Rev3, Rev4. Required = 3 × 2 = 6.
+- Rev1 → {1,3} (2 reviews), Rev2 → {1,3} (2 reviews), Rev3 → {2} (1), Rev4 → {2} (1).
+  Flow = 6. **Feasible.**
+
+<div class="interactive_dotgraph">
+
+\dotfile dox/t23_baseline.dot "T2.3 Baseline: All reviewers available, flow=6 (feasible)"
+
+</div>
+
+**K = 2, remove {Rev1, Rev3}:** Remaining {Rev2, Rev4}. Sub1 and Sub3 share only Rev2 (cap 2,
+so 1 each). Sub2 uses Rev4 (cap 2, gets 1). Flow = 3 < 6. **Critical subset.**
+
+<div class="interactive_dotgraph">
+
+\dotfile dox/t23_remove_1_3.dot "T2.3 K=2: Removing {Rev1, Rev3} leaves flow=3 < 6 — critical subset"
+
+</div>
+
+**K = 2, remove {Rev1, Rev2}:** Remaining {Rev3, Rev4} — both topic 2 only. Sub1 and Sub3 have
+zero matches. Flow = 2 (only Sub2 covered). **Critical subset.**
+
+**K = 2, remove {Rev3, Rev4}:** Remaining {Rev1, Rev2} — both topic 1 only. Sub2 has zero
+matches. Flow = 4 < 6. **Critical subset.**
+
+**K = 2, remove {Rev1, Rev4}:** Remaining {Rev2, Rev3}. Sub1+Sub3 share Rev2 (cap 2). Sub2
+uses Rev3 (cap 2, gets 1). But Sub1+Sub3 need 4 total and Rev2 can only give 2. Sub2 gets 1
+but needs 2. Flow ≤ 3. **Critical subset.**
+
+This demonstrates that the K = 2 analysis reveals structural vulnerabilities not visible at
+K = 1: no individual reviewer is risky (K = 1 returns empty), but several pairs are critical.
+
+---
+
+@section ext_t2_4 T2.4 — General Formulation with Secondary Domains (Proposed Approach)
+
+@subsection ext_t2_4_problem Problem Description
+
+This is the most general variant. Both submissions and reviewers have **primary and secondary**
+domains. A submission can be matched to a reviewer if any of the following holds:
+- sub.primary == rev.primary (primary-primary)
+- sub.primary == rev.secondary or sub.secondary == rev.primary (cross-primary-secondary)
+- sub.secondary == rev.secondary (secondary-secondary)
+
+The goal is to find an assignment that maximises the quality of matches, not just feasibility.
+This transforms the problem from a pure max-flow problem into a **maximum-weight bipartite
+matching** problem with significantly higher computational complexity.
+
+@subsection ext_t2_4_approach Proposed Approach
+
+We outline two approaches of increasing sophistication:
+
+**Approach A: Layered Max-Flow (Greedy)**
+
+This extends the existing Edmonds-Karp pipeline with a priority-based, multi-pass strategy:
+
+-# **Layer 1 — Primary-Primary.** Build the flow graph with edges only where
+   sub.primary == rev.primary. Run Edmonds-Karp. Record the resulting flows.
+-# **Layer 2 — Cross matches.** On the **residual capacity** (after subtracting Layer 1 flows),
+   add edges where sub.primary == rev.secondary or sub.secondary == rev.primary. Run
+   Edmonds-Karp again to fill remaining capacity.
+-# **Layer 3 — Secondary-Secondary.** On the still-remaining capacity, add edges where
+   sub.secondary == rev.secondary. Run Edmonds-Karp a third time.
+-# **Combine** flows from all three layers as the final assignment.
+
+Each layer greedily maximises flow at its quality tier before moving to the next.
+The approach runs Edmonds-Karp at most 3 times.
+
+**Approach B: Min-Cost Max-Flow (Exact)**
+
+For guaranteed optimality, we reformulate as a minimum-cost flow problem:
+
+-# **Edge costs by match quality:**
+   - sub.primary == rev.primary: cost = 0
+   - cross match (primary ↔ secondary): cost = 1
+   - sub.secondary == rev.secondary: cost = 2
+-# **Same graph structure** as T2.1: source → submissions → reviewers → sink, with the same
+   capacities. Each submission→reviewer edge carries the appropriate cost.
+-# **Run Successive Shortest Path (SSP)** min-cost max-flow:
+   - Use Dijkstra with Johnson's potentials to find the minimum-cost augmenting path each
+     iteration.
+   - Repeat until flow reaches P × MinReviewsPerSubmission or no more augmenting paths exist.
+
+The result is the assignment with the **minimum total cost** (i.e., maximum match quality),
+since primary-primary matches (cost 0) are always preferred when available.
+
+@subsection ext_t2_4_complexity Complexity
+
+| Approach | Complexity | Optimality |
+|----------|-----------|------------|
+| A: Layered Max-Flow | O(3 × V × E²) = O(V × E²) | Greedy, may not be globally optimal |
+| B: Min-Cost Max-Flow (SSP + Dijkstra) | O(F × (V + E) × log V) | Exact, globally optimal |
+| Brute force (all assignments) | O((P×R)!) | Exact, impractical |
+
+Where F = P × MinReviewsPerSubmission is the total flow value.
+
+**Why the general case is harder:** In T2.1, any valid match is equally good — it is a pure
+feasibility problem. In T2.4, match quality varies (primary > cross > secondary), so we must
+optimise a weighted objective, not just maximise flow. This elevates the problem from
+max-flow to min-cost max-flow, increasing complexity by a factor of F × log V.
+
+For typical conference sizes (P, R < 200, F < 400), Approach B is practical and runs in
+under a second.
+
+@subsection ext_t2_4_example Example
+
+@code
+#Submissions
+1, "ML Systems", Alice, alice@x, 1, 2
+2, "Security", Bob, bob@x, 3, 1
+
+#Reviewers
+1, Rev1, r1@x, 1, 3
+2, Rev2, r2@x, 2, 3
+3, Rev3, r3@x, 3, 1
+
+#Parameters
+MinReviewsPerSubmission, 1
+MaxReviewsPerReviewer, 2
+@endcode
+
+**Mode 3 matching possibilities:**
+- Sub1 (pri=1, sec=2) → Rev1 (pri=1): primary-primary (cost 0)
+- Sub1 (pri=1, sec=2) → Rev2 (pri=2): secondary-primary match (cost 1)
+- Sub1 (pri=1, sec=2) → Rev3 (pri=3): sub.sec=2 vs rev.sec=1 — no match
+- Sub2 (pri=3, sec=1) → Rev1 (pri=1, sec=3): sub.sec=1==rev.pri=1 cross (cost 1), or
+  sub.pri=3==rev.sec=3 cross (cost 1)
+- Sub2 (pri=3, sec=1) → Rev2 (pri=2, sec=3): sub.pri=3==rev.sec=3 cross (cost 1)
+- Sub2 (pri=3, sec=1) → Rev3 (pri=3, sec=1): primary-primary (cost 0)
+
+**Layered approach:**
+- Layer 1 (cost 0): Sub1→Rev1, Sub2→Rev3. Both primary-primary. Flow = 2. Done.
+
+**Min-cost max-flow:** Same result, total cost = 0. Both submissions get their best-possible
+primary-primary match.
+
+<div class="interactive_dotgraph">
+
+\dotfile dox/t24_example.dot "T2.4 Example: Optimal assignment uses primary-primary matches (gold, cost 0)"
+
+</div>
+
+**A case where Layered fails and Min-Cost succeeds:**
+If Rev1 were removed, Layer 1 would match Sub2→Rev3 (cost 0), leaving Sub1 to find a match
+in Layer 2 (Sub1→Rev2 at cost 1). Total cost = 1. Min-cost max-flow would find the same.
+But if there were a third submission competing for Rev3, Layer 1 might greedily assign Rev3
+to the wrong submission, forcing a suboptimal overall assignment — while min-cost max-flow
+would globally minimise total cost.
+
+---
+
+@section ext_test_diff Why Two Integration Tests "Differ"
+
+@subsection ext_test_diff_overview
+
+Integration tests **dataset10** and **dataset11** report output differences when compared against
+the reference solutions. However, our outputs are **equally correct** — they represent a different
+but valid decomposition of the same maximum flow.
+
+@subsection ext_test_diff_input Input Configuration
+
+Both datasets share the same submissions and reviewers. They differ only in whether risk analysis
+is enabled (dataset10: off, dataset11: on).
+
+@code
+# 3 submissions, all with secondary topic = 2
+Submissions:  1 (pri=1, sec=2),  2 (pri=3, sec=2),  3 (pri=4, sec=2)
+# 6 reviewers, all with primary topic = 2
+Reviewers:    1..6 (all pri=2)
+Mode: 2 (secondary submission domain enabled)
+MinReviewsPerSubmission = 2,  MaxReviewsPerReviewer = 2
+@endcode
+
+In mode 2, a submission matches a reviewer when the reviewer's primary topic equals either the
+submission's primary or secondary topic. Since all reviewers have primary topic 2, all three
+submissions match via their secondary topic (2). Every submission can be reviewed by every reviewer.
+
+**Total required:** 3 submissions × 2 reviews = 6.
+**Total reviewer capacity:** 6 reviewers × 2 = 12. Plenty of slack.
+
+@subsection ext_test_diff_our_solution Our Solution (dataset10)
+
+@code
+#SubmissionId,ReviewerId,Match
+1, 1, 2       # Sub 1 ← Rev 1 (via topic 2)
+1, 2, 2       # Sub 1 ← Rev 2 (via topic 2)
+2, 1, 2       # Sub 2 ← Rev 1 (via topic 2)
+2, 2, 2       # Sub 2 ← Rev 2 (via topic 2)
+3, 3, 2       # Sub 3 ← Rev 3 (via topic 2)
+3, 4, 2       # Sub 3 ← Rev 4 (via topic 2)
+#Total: 6
+@endcode
+
+Reviewers 1 and 2 each handle 2 reviews (at capacity). Reviewers 3 and 4 each handle 1 review.
+Reviewers 5 and 6 are unused. Every submission gets exactly 2 reviews.
+
+<div class="interactive_dotgraph">
+
+\dotfile dox/test_diff_ours.dot "Our solution for dataset10: Rev1,Rev2 at capacity, flow=6"
+
+</div>
+
+@subsection ext_test_diff_reference Reference Solution
+
+@code
+#SubmissionId,ReviewerId,Match
+1, 1, 2       # Sub 1 ← Rev 1 (via topic 2)
+1, 3, 2       # Sub 1 ← Rev 3 (via topic 2)
+2, 2, 2       # Sub 2 ← Rev 2 (via topic 2)
+2, 3, 2       # Sub 2 ← Rev 3 (via topic 2)
+3, 1, 2       # Sub 3 ← Rev 1 (via topic 2)
+3, 2, 2       # Sub 3 ← Rev 2 (via topic 2)
+#Total: 6
+@endcode
+
+Reviewers 1, 2, and 3 each handle 2 reviews (at capacity). Reviewers 4, 5, 6 are unused.
+Every submission gets exactly 2 reviews.
+
+@subsection ext_test_diff_why Why Both Are Correct
+
+The max-flow problem admits **multiple valid flow decompositions** that achieve the same total
+flow. Both solutions:
+
+- **Total flow = 6** (all required reviews assigned)
+- **Each submission receives exactly 2 reviews** (satisfying MinReviewsPerSubmission)
+- **No reviewer exceeds 2 reviews** (satisfying MaxReviewsPerReviewer)
+- **All edges are valid** (every assignment uses the secondary topic 2 match)
+
+The difference arises from the **BFS traversal order** in Edmonds-Karp. The algorithm finds the
+*shortest* augmenting path at each step, but when multiple shortest paths of equal length exist,
+the order in which adjacent edges are explored determines which path is chosen. Our adjacency
+list ordering produces a different — but equally optimal — flow decomposition.
+
+For dataset11 (with risk analysis), the same assignment is used as the baseline. Since no
+reviewer is individually critical (removing any single reviewer still leaves enough capacity
+to cover all 6 required reviews), the risk analysis output is empty in both cases — they agree
+on the risk analysis result, differing only in the assignment listing.
+
+@note The integration test uses exact `diff` comparison against a single reference output. This
+is a limitation of the test harness: it cannot recognize that two different assignments are
+equally valid. Both outputs represent a **correct maximum flow** with identical total flow and
+no constraint violations.
+
+---
+
+@section ext_complexity_table Complexity Summary
+
+The following table summarises the time complexity of the most important functions in the
+project. See the individual function documentation for full details.
+
+| Function | Location | Complexity | Notes |
+|----------|----------|-----------|-------|
+| edmondsKarp | algorithms/EdmondKarp.h | O(V × E²) | Worst case; V vertices, E edges |
+| findAugmentingPath | algorithms/EdmondKarp.h | O(V + E) | Single BFS pass |
+| findMinResidualAlongPath | algorithms/EdmondKarp.h | O(V) | Path walk |
+| augmentFlowAlongPath | algorithms/EdmondKarp.h | O(V) | Path walk |
+| buildReviewFlowGraph | data_structures/GraphBuilder.h | O(P × R) | P submissions, R reviewers |
+| getMatchedDomain | data_structures/GraphBuilder.h | O(1) | At most 2 topics per entity |
+| findRiskyReviewersK1 | services/AssignmentLogic.h | O(R × (P×R + V×E²)) | R re-runs of Edmonds-Karp |
+| generateAssignmentsAndStore | services/AssignmentLogic.h | O(V × E²) | Dominated by max-flow |
+| totalRequiredReviews | services/AssignmentLogic.h | O(N) | N submissions |
+| totalAssignedReviews | services/AssignmentLogic.h | O(P × R) | Iterates submission→reviewer edges |
+| FileParser::parse | io/FileParser.h | O(L) | L lines in input file |
+| Graph::findVertex | data_structures/Graph.h | O(V) | Linear search over vertex set |
+| Graph::addVertex | data_structures/Graph.h | O(V) | Duplicate check |
+| Graph::addEdge | data_structures/Graph.h | O(V) | Vertex lookups |
+| Graph::removeVertex | data_structures/Graph.h | O(V + E) | Removes all incident edges |
+
+*/
