@@ -1,0 +1,47 @@
+digraph TestDiff_OurSolution {
+    rankdir=LR;
+    node [shape=box, style=filled, fillcolor=white, fontname="Helvetica"];
+    edge [fontname="Helvetica", fontsize=9];
+
+    // Source and Sink
+    "SOURCE" [fillcolor="#ffcc80"];
+    "SINK"   [fillcolor="#80cbc4"];
+
+    // Submissions (all have sec=2)
+    "SUB#1\npri=1 sec=2" [fillcolor="#bbdefb"];
+    "SUB#2\npri=3 sec=2" [fillcolor="#bbdefb"];
+    "SUB#3\npri=4 sec=2" [fillcolor="#bbdefb"];
+
+    // Reviewers (all pri=2)
+    "REV#1\npri=2" [fillcolor="#c8e6c9"];
+    "REV#2\npri=2" [fillcolor="#c8e6c9"];
+    "REV#3\npri=2" [fillcolor="#c8e6c9"];
+    "REV#4\npri=2" [fillcolor="#c8e6c9"];
+    "REV#5\npri=2" [fillcolor="#e0e0e0"];
+    "REV#6\npri=2" [fillcolor="#e0e0e0"];
+
+    // Source -> Submissions (cap=2)
+    "SOURCE" -> "SUB#1\npri=1 sec=2" [label="2/2", color="#1976d2", penwidth=2.0];
+    "SOURCE" -> "SUB#2\npri=3 sec=2" [label="2/2", color="#1976d2", penwidth=2.0];
+    "SOURCE" -> "SUB#3\npri=4 sec=2" [label="2/2", color="#1976d2", penwidth=2.0];
+
+    // Our assigned edges (via sec=2 == pri=2)
+    "SUB#1\npri=1 sec=2" -> "REV#1\npri=2" [label="1/1", color=blue, penwidth=2.0];
+    "SUB#1\npri=1 sec=2" -> "REV#2\npri=2" [label="1/1", color=blue, penwidth=2.0];
+    "SUB#2\npri=3 sec=2" -> "REV#1\npri=2" [label="1/1", color=blue, penwidth=2.0];
+    "SUB#2\npri=3 sec=2" -> "REV#2\npri=2" [label="1/1", color=blue, penwidth=2.0];
+    "SUB#3\npri=4 sec=2" -> "REV#3\npri=2" [label="1/1", color=blue, penwidth=2.0];
+    "SUB#3\npri=4 sec=2" -> "REV#4\npri=2" [label="1/1", color=blue, penwidth=2.0];
+
+    // Unused edges
+    "REV#3\npri=2" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
+    "REV#4\npri=2" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
+    "REV#1\npri=2" -> "SINK" [label="2/2", color="#388e3c", penwidth=2.0];
+    "REV#2\npri=2" -> "SINK" [label="2/2", color="#388e3c", penwidth=2.0];
+    "REV#5\npri=2" -> "SINK" [label="0/2", color=gray, style=dashed];
+    "REV#6\npri=2" -> "SINK" [label="0/2", color=gray, style=dashed];
+
+    label="Our Solution: Rev1,Rev2 at cap 2. Rev3,Rev4 at cap 1. Total flow = 6.";
+    labelloc=b;
+    fontsize=11;
+}

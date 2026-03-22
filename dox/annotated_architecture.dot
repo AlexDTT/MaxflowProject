@@ -1,0 +1,91 @@
+digraph MaxFlowReviewAssignment {
+    // Basic graph styling
+    rankdir=TB; // Top to Bottom layout to save horizontal space
+    size="8,10"; // Constrain maximum dimensions
+    ratio="compress"; // Compress the graph to fit the size
+    node [shape=rect, style="filled,rounded", fontname="Helvetica", fillcolor=white, color="#333333", margin="0.1,0.05"];
+    edge [fontname="Helvetica", fontsize=9, color="#555555"];
+    bgcolor="transparent";
+
+    // -------------------------------------------------------------
+    // 1. SOURCE & SINK
+    // -------------------------------------------------------------
+    Source [fillcolor="#ffcc80", label="Source (S)"];
+    Sink [fillcolor="#80cbc4", label="Sink (T)"];
+
+    // -------------------------------------------------------------
+    // 2. SUBMISSIONS LAYER
+    // Each submission has a primary (and potentially secondary) domain.
+    // -------------------------------------------------------------
+    subgraph cluster_submissions {
+        label="Submissions (Domain)";
+        labelloc="t";
+        labeljust="l"; // Align left so arrows running down the middle don't hit it
+        margin=20;     // Push nodes further in so arrows stay away from edges
+        style=dashed;
+        color="#1976d2";
+        fontcolor="#0d47a1"; // Darker blue to separate from edges
+        fontname="Helvetica-Bold";
+        fontsize=14;
+        
+        Sub1 [label="Sub 1\nPrimary: AI\nSecondary: DB"];
+        Sub2 [label="Sub 2\nPrimary: DB\nSecondary: None"];
+    }
+
+    // -------------------------------------------------------------
+    // 3. REVIEWERS LAYER
+    // Reviewers declare Primary and Secondary domains of expertise.
+    // -------------------------------------------------------------
+    subgraph cluster_reviewers {
+        label="Reviewers (Expertise)";
+        labelloc="t";
+        labeljust="l"; // Align left
+        margin=20;     // Push nodes further in
+        style=dashed;
+        color="#388e3c";
+        fontcolor="#1b5e20"; // Darker green to separate from edges
+        fontname="Helvetica-Bold";
+        fontsize=14;
+        
+        Rev1 [label="Rev A\nPrimary: AI\nSecondary: None"];
+        Rev2 [label="Rev B\nPrimary: ML\nSecondary: DB"];
+        Rev3 [label="Rev C\nPrimary: DB\nSecondary: None"];
+    }
+
+    // -------------------------------------------------------------
+    // EDGE MAPPINGS AND CAPACITIES
+    // -------------------------------------------------------------
+
+    // A. Source -> Submissions
+    // Capacity = MinReviewsPerSubmission
+    Source -> Sub1 [label=" cap = MinReviews", color="#1976d2", fontcolor="#1976d2", penwidth=2];
+    Source -> Sub2 [label=" cap = MinReviews", color="#1976d2", fontcolor="#1976d2", penwidth=2];
+
+    // B. Submissions -> Reviewers (Category Matching)
+    // Capacity is always 1. The edge only EXISTS if domains match based on the Mode:
+    //
+    // Mode 0/1: sub.primary == rev.primary
+    // Mode 2  : (sub.primary OR sub.secondary) == rev.primary
+    // Mode 3  : (sub.primary OR sub.secondary) == (rev.primary OR rev.secondary)
+    
+    // Strict Match (Allowed in Mode 1, 2, 3)
+    Sub1 -> Rev1 [label=" cap = 1\nMode 1,2,3: Primary=Primary\n(AI = AI)", color="#ffd700", fontcolor="#cca300", penwidth=1.5];
+    
+    // Secondary-Primary Match (Allowed in Mode 2, 3)
+    // Sub 1's Secondary (DB) matches Rev 3's Primary (DB)
+    Sub1 -> Rev3 [label=" cap = 1\nMode 2,3: Sub.Sec=Rev.Pri\n(DB = DB)", color="#ff9800", fontcolor="#ff9800", style=dashed];
+    
+    // Secondary-Secondary Match (Allowed in Mode 3)
+    // Sub 1's Secondary (DB) matches Rev 2's Secondary (DB)
+    Sub1 -> Rev2 [label=" cap = 1\nMode 3: Sub.Sec=Rev.Sec\n(DB = DB)", color="#f44336", fontcolor="#f44336", style=dotted];
+
+    // Strict Match (Allowed in Mode 1, 2, 3)
+    Sub2 -> Rev3 [label=" cap = 1\nMode 1,2,3: Primary=Primary\n(DB = DB)", color="#ffd700", fontcolor="#cca300", penwidth=1.5];
+
+    // C. Reviewers -> Sink
+    // Capacity = MaxReviewsPerReviewer
+    // Acts as a workload bottleneck.
+    Rev1 -> Sink [label=" cap = MaxReviews", color="#388e3c", fontcolor="#388e3c", penwidth=2];
+    Rev2 -> Sink [label=" cap = MaxReviews", color="#388e3c", fontcolor="#388e3c", penwidth=2];
+    Rev3 -> Sink [label=" cap = MaxReviews", color="#388e3c", fontcolor="#388e3c", penwidth=2];
+}

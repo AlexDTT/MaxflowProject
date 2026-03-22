@@ -1,0 +1,39 @@
+digraph T23_Baseline {
+    rankdir=LR;
+    node [shape=box, style=filled, fillcolor=white, fontname="Helvetica"];
+    edge [fontname="Helvetica", fontsize=9];
+
+    // Source and Sink
+    "SOURCE" [fillcolor="#ffcc80"];
+    "SINK"   [fillcolor="#80cbc4"];
+
+    // Submissions (topic A and B)
+    "SUB#1\nTopic: A" [fillcolor="#bbdefb"];
+    "SUB#2\nTopic: B" [fillcolor="#bbdefb"];
+    "SUB#3\nTopic: A" [fillcolor="#bbdefb"];
+
+    // Reviewers
+    "REV#1\nTopic: A" [fillcolor="#c8e6c9"];
+    "REV#2\nTopic: A" [fillcolor="#c8e6c9"];
+    "REV#3\nTopic: B" [fillcolor="#c8e6c9"];
+    "REV#4\nTopic: B" [fillcolor="#c8e6c9"];
+
+    // Source -> Submissions (cap=2)
+    "SOURCE" -> "SUB#1\nTopic: A" [label="2/2", color="#1976d2", penwidth=2.0];
+    "SOURCE" -> "SUB#2\nTopic: B" [label="2/2", color="#1976d2", penwidth=2.0];
+    "SOURCE" -> "SUB#3\nTopic: A" [label="2/2", color="#1976d2", penwidth=2.0];
+
+    // Submissions -> Reviewers (mode 1, primary==primary)
+    "SUB#1\nTopic: A" -> "REV#1\nTopic: A" [label="1/1", color=blue, penwidth=2.0];
+    "SUB#1\nTopic: A" -> "REV#2\nTopic: A" [label="1/1", color=blue, penwidth=2.0];
+    "SUB#3\nTopic: A" -> "REV#1\nTopic: A" [label="0/1", color=gray, style=dashed];
+    "SUB#3\nTopic: A" -> "REV#2\nTopic: A" [label="0/1", color=gray, style=dashed];
+    "SUB#2\nTopic: B" -> "REV#3\nTopic: B" [label="1/1", color=blue, penwidth=2.0];
+    "SUB#2\nTopic: B" -> "REV#4\nTopic: B" [label="1/1", color=blue, penwidth=2.0];
+
+    // Reviewers -> Sink (cap=2)
+    "REV#1\nTopic: A" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
+    "REV#2\nTopic: A" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
+    "REV#3\nTopic: B" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
+    "REV#4\nTopic: B" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
+}

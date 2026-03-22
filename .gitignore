@@ -11,5 +11,4 @@ output_dataset*.csv
 output.csv
 assign.csv
 *.o
-*.dot
 .DS_Store

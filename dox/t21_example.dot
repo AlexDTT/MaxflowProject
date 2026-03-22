@@ -1,0 +1,32 @@
+digraph T21_Example {
+    rankdir=LR;
+    node [shape=box, style=filled, fillcolor=white, fontname="Helvetica"];
+    edge [fontname="Helvetica", fontsize=9];
+
+    // Source and Sink
+    "SOURCE" [fillcolor="#ffcc80"];
+    "SINK"   [fillcolor="#80cbc4"];
+
+    // Submissions
+    "SUB#1\nTopic: 1" [fillcolor="#bbdefb"];
+    "SUB#2\nTopic: 2" [fillcolor="#bbdefb"];
+
+    // Reviewers
+    "REV#1\nTopic: 1" [fillcolor="#c8e6c9"];
+    "REV#2\nTopic: 1" [fillcolor="#c8e6c9"];
+    "REV#3\nTopic: 2" [fillcolor="#c8e6c9"];
+
+    // Source -> Submissions
+    "SOURCE" -> "SUB#1\nTopic: 1" [label="2/2", color="#1976d2", penwidth=2.0];
+    "SOURCE" -> "SUB#2\nTopic: 2" [label="2/2", color="#1976d2", penwidth=2.0];
+
+    // Submissions -> Reviewers (mode 1: primary==primary)
+    "SUB#1\nTopic: 1" -> "REV#1\nTopic: 1" [label="1/1", color=blue, penwidth=2.0];
+    "SUB#1\nTopic: 1" -> "REV#2\nTopic: 1" [label="1/1", color=blue, penwidth=2.0];
+    "SUB#2\nTopic: 2" -> "REV#3\nTopic: 2" [label="1/1", color=blue, penwidth=2.0];
+
+    // Reviewers -> Sink
+    "REV#1\nTopic: 1" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
+    "REV#2\nTopic: 1" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
+    "REV#3\nTopic: 2" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
+}

@@ -1,0 +1,36 @@
+digraph T24_Example {
+    rankdir=LR;
+    node [shape=box, style=filled, fillcolor=white, fontname="Helvetica"];
+    edge [fontname="Helvetica", fontsize=9];
+
+    // Source and Sink
+    "SOURCE" [fillcolor="#ffcc80"];
+    "SINK"   [fillcolor="#80cbc4"];
+
+    // Submissions (with primary and secondary)
+    "SUB#1\npri=1\nsec=2" [fillcolor="#bbdefb"];
+    "SUB#2\npri=3\nsec=1" [fillcolor="#bbdefb"];
+
+    // Reviewers (with primary and secondary)
+    "REV#1\npri=1\nsec=3" [fillcolor="#c8e6c9"];
+    "REV#2\npri=2\nsec=3" [fillcolor="#c8e6c9"];
+    "REV#3\npri=3\nsec=1" [fillcolor="#c8e6c9"];
+
+    // Source -> Submissions (cap=1)
+    "SOURCE" -> "SUB#1\npri=1\nsec=2" [label="1/1", color="#1976d2", penwidth=2.0];
+    "SOURCE" -> "SUB#2\npri=3\nsec=1" [label="1/1", color="#1976d2", penwidth=2.0];
+
+    // Primary-Primary matches (cost 0, gold)
+    "SUB#1\npri=1\nsec=2" -> "REV#1\npri=1\nsec=3" [label="1/1\ncost=0\npri=pri", color="#ffd700", fontcolor="#cca300", penwidth=2.5];
+    "SUB#2\npri=3\nsec=1" -> "REV#3\npri=3\nsec=1" [label="1/1\ncost=0\npri=pri", color="#ffd700", fontcolor="#cca300", penwidth=2.5];
+
+    // Cross matches (cost 1, orange, dashed - not used in optimal)
+    "SUB#1\npri=1\nsec=2" -> "REV#2\npri=2\nsec=3" [label="0/1\ncost=1\nsec=pri", color="#ff9800", fontcolor="#ff9800", style=dashed];
+    "SUB#2\npri=3\nsec=1" -> "REV#1\npri=1\nsec=3" [label="0/1\ncost=1\nsec=pri", color="#ff9800", fontcolor="#ff9800", style=dashed];
+    "SUB#2\npri=3\nsec=1" -> "REV#2\npri=2\nsec=3" [label="0/1\ncost=1\npri=sec", color="#ff9800", fontcolor="#ff9800", style=dashed];
+
+    // Reviewers -> Sink (cap=2)
+    "REV#1\npri=1\nsec=3" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
+    "REV#2\npri=2\nsec=3" -> "SINK" [label="0/2", color=gray, style=dashed];
+    "REV#3\npri=3\nsec=1" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
+}
