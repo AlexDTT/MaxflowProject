@@ -1,0 +1,30 @@
+<map id="models/Reviewer.h" name="models/Reviewer.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="579,5,711,32"/>
+<area shape="rect" id="Node000002" href="$GraphBuilder_8h.html" title=" " alt="" coords="243,80,444,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="578,39,397,82,396,77,577,34"/>
+<area shape="rect" id="Node000005" href="$maxflow__tests_8cpp.html" title=" " alt="" coords="5,155,170,181"/>
+<area shape="poly" id="edge13_Node000001_Node000005" title=" " alt="" coords="563,25,491,30,407,41,319,58,232,83,195,99,159,119,105,156,102,152,157,114,193,94,231,77,317,52,406,36,490,25,563,20"/>
+<area shape="rect" id="Node000007" href="$FileParser_8h.html" title="Class definition for parsing input CSV files." alt="" coords="678,80,782,107"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="673,40,717,78,714,82,669,44"/>
+<area shape="rect" id="Node000009" href="$Reviewer_8cpp.html" title=" " alt="" coords="966,80,1113,107"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="727,32,971,77,970,82,726,37"/>
+<area shape="rect" id="Node000010" href="$AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow." alt="" coords="468,80,654,107"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="620,45,577,82,574,78,617,40"/>
+<area shape="rect" id="Node000011" href="$ConferenceApp_8h.html" title=" " alt="" coords="806,80,942,107"/>
+<area shape="poly" id="edge14_Node000001_Node000011" title=" " alt="" coords="700,35,835,77,833,82,698,40"/>
+<area shape="rect" id="Node000003" href="$GraphBuilder_8cpp.html" title=" " alt="" coords="194,155,408,181"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="331,122,310,156,306,153,326,119"/>
+<area shape="rect" id="Node000004" href="$AssignmentLogic_8cpp.html" title=" " alt="" coords="432,155,631,181"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="391,110,499,152,498,157,389,115"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="285,114,133,157,132,151,284,109"/>
+<area shape="rect" id="Node000006" href="$ConferenceApp_8cpp.html" title=" " alt="" coords="655,155,805,181"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="427,107,663,151,662,157,426,113"/>
+<area shape="poly" id="edge8_Node000007_Node000006" title=" " alt="" coords="733,122,733,154,728,154,728,122"/>
+<area shape="rect" id="Node000008" href="$FileParser_8cpp.html" title=" " alt="" coords="830,155,948,181"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="773,111,862,152,860,156,771,116"/>
+<area shape="poly" id="edge11_Node000010_Node000004" title=" " alt="" coords="552,122,539,155,534,153,548,120"/>
+<area shape="poly" id="edge12_Node000010_Node000006" title=" " alt="" coords="605,111,701,152,699,156,603,116"/>
+<area shape="poly" id="edge16_Node000011_Node000006" title=" " alt="" coords="837,116,757,156,754,152,834,112"/>
+<area shape="rect" id="Node000012" href="$main_8cpp.html" title=" " alt="" coords="972,155,1046,181"/>
+<area shape="poly" id="edge15_Node000011_Node000012" title=" " alt="" coords="912,112,986,152,984,156,909,117"/>
+</map>

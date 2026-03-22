@@ -1,0 +1,29 @@
+<map id="services/AssignmentLogic.h" name="services/AssignmentLogic.h">
+<area shape="rect" id="Node000001" title="Logic for assigning reviewers to submissions based on Max Flow." alt="" coords="308,5,493,32"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="628,155,685,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="494,30,584,49,621,62,645,78,654,92,660,108,662,139,657,140,655,109,650,94,641,82,619,67,582,54,493,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="269,155,322,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="308,30,257,48,234,62,216,81,211,98,219,115,235,131,256,145,253,149,232,135,215,118,206,99,212,79,231,58,254,43,306,25"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="226,80,303,107"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="378,35,303,75,301,70,376,30"/>
+<area shape="rect" id="Node000005" href="$Graph_8h.html" title=" " alt="" coords="731,80,892,107"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="473,30,725,74,724,79,472,35"/>
+<area shape="rect" id="Node000010" href="$Submission_8h.html" title=" " alt="" coords="328,80,474,107"/>
+<area shape="poly" id="edge10_Node000001_Node000010" title=" " alt="" coords="403,33,403,64,398,64,398,33"/>
+<area shape="rect" id="Node000011" href="$Reviewer_8h.html" title=" " alt="" coords="498,80,631,107"/>
+<area shape="poly" id="edge12_Node000001_Node000011" title=" " alt="" coords="430,30,523,71,521,76,428,35"/>
+<area shape="rect" id="Node000012" href="$Parameters_8h.html" title=" " alt="" coords="5,80,151,107"/>
+<area shape="poly" id="edge14_Node000001_Node000012" title=" " alt="" coords="345,35,150,79,149,73,344,30"/>
+<area shape="poly" id="edge6_Node000005_Node000002" title=" " alt="" coords="786,110,698,150,696,145,783,105"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="885,155,956,181"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="832,105,891,144,888,148,829,109"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="980,155,1037,181"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="847,105,967,149,966,154,845,110"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="709,155,762,181"/>
+<area shape="poly" id="edge8_Node000005_Node000008" title=" " alt="" coords="800,109,761,146,757,142,796,105"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="786,155,860,181"/>
+<area shape="poly" id="edge9_Node000005_Node000009" title=" " alt="" coords="816,107,821,139,816,140,811,108"/>
+<area shape="poly" id="edge11_Node000010_Node000003" title=" " alt="" coords="384,109,328,148,325,143,381,105"/>
+<area shape="poly" id="edge13_Node000011_Node000003" title=" " alt="" coords="518,110,338,158,336,153,517,105"/>
+<area shape="poly" id="edge15_Node000012_Node000003" title=" " alt="" coords="117,105,255,150,253,156,115,110"/>
+</map>
