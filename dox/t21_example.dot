@@ -18,7 +18,7 @@ digraph T21_Example {
 
     // Source -> Submissions
     "SOURCE" -> "SUB#1\nTopic: 1" [label="2/2", color="#1976d2", penwidth=2.0];
-    "SOURCE" -> "SUB#2\nTopic: 2" [label="2/2", color="#1976d2", penwidth=2.0];
+    "SOURCE" -> "SUB#2\nTopic: 2" [label="1/2", color="#1976d2", penwidth=2.0];
 
     // Submissions -> Reviewers (mode 1: primary==primary)
     "SUB#1\nTopic: 1" -> "REV#1\nTopic: 1" [label="1/1", color=blue, penwidth=2.0];

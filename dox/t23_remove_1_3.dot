@@ -19,9 +19,9 @@ digraph T23_Remove_Rev1_Rev3 {
     "REV#4\nTopic: B" [fillcolor="#c8e6c9"];
 
     // Source -> Submissions
-    "SOURCE" -> "SUB#1\nTopic: A" [label="2/2", color="#1976d2", penwidth=2.0];
-    "SOURCE" -> "SUB#2\nTopic: B" [label="2/2", color="#1976d2", penwidth=2.0];
-    "SOURCE" -> "SUB#3\nTopic: A" [label="2/2", color="#1976d2", penwidth=2.0];
+    "SOURCE" -> "SUB#1\nTopic: A" [label="1/2", color="#1976d2", penwidth=2.0];
+    "SOURCE" -> "SUB#2\nTopic: B" [label="1/2", color="#1976d2", penwidth=2.0];
+    "SOURCE" -> "SUB#3\nTopic: A" [label="1/2", color="#1976d2", penwidth=2.0];
 
     // Only remaining edges
     "SUB#1\nTopic: A" -> "REV#2\nTopic: A" [label="1/1", color=blue, penwidth=2.0];
