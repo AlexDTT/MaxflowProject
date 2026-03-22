@@ -393,22 +393,22 @@ Example</h2>
 <div class="line">MinReviewsPerSubmission, 1</div>
 <div class="line">MaxReviewsPerReviewer, 2</div>
 </div><!-- fragment --><p><b>Mode 3 matching possibilities</b>:</p><ul>
-<li>Sub1 (pri=1, sec=2) → Rev1 (pri=1): primary-primary (cost 0)</li>
-<li>Sub1 (pri=1, sec=2) → Rev2 (pri=2): secondary-primary match (cost 1)</li>
+<li>Sub1 (pri=1, sec=2) → Rev1 (pri=1): primary-primary match (mode 1,2,3)</li>
+<li>Sub1 (pri=1, sec=2) → Rev2 (pri=2): secondary-primary cross match (mode 2,3)</li>
 <li>Sub1 (pri=1, sec=2) → Rev3 (pri=3): sub.sec=2 vs rev.sec=1 - no match</li>
-<li>Sub2 (pri=3, sec=1) → Rev1 (pri=1, sec=3): sub.sec=1==rev.pri=1 cross (cost 1), or sub.pri=3==rev.sec=3 cross (cost 1)</li>
-<li>Sub2 (pri=3, sec=1) → Rev2 (pri=2, sec=3): sub.pri=3==rev.sec=3 cross (cost 1)</li>
-<li>Sub2 (pri=3, sec=1) → Rev3 (pri=3, sec=1): primary-primary (cost 0)</li>
+<li>Sub2 (pri=3, sec=1) → Rev1 (pri=1, sec=3): sub.sec=1==rev.pri=1 cross (mode 2,3)</li>
+<li>Sub2 (pri=3, sec=1) → Rev2 (pri=2, sec=3): sub.pri=3==rev.sec=3 cross (mode 3)</li>
+<li>Sub2 (pri=3, sec=1) → Rev3 (pri=3, sec=1): primary-primary match (mode 1,2,3)</li>
 </ul>
 <p><b>Layered approach</b>:</p><ul>
-<li>Layer 1 (cost 0): Sub1→Rev1, Sub2→Rev3. Both primary-primary. Flow = 2. Done.</li>
+<li>Layer 1 (primary-primary only): Sub1→Rev1, Sub2→Rev3. Flow = 2. Done.</li>
 </ul>
-<p><b>Min-cost max-flow</b>: Same result, total cost = 0. Both submissions get their best-possible primary-primary match.</p>
+<p><b>Min-cost max-flow</b> (proposed, not implemented): Would assign the same edges, minimising total cost (0) since primary-primary matches are always preferred.</p>
 <div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
-<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t24_example.dot_c266aeb83dce20379781f181950ccad4.svg" width="558" height="358"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
-T2.4 Example: Optimal assignment uses primary-primary matches (gold, cost 0)</div>
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t24_example.dot_15cd24abdef3839383642c3d39ece0bb.svg" width="578" height="362"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+T2.4 Example: Mode 3 matching. Gold = primary-primary (used), dashed = cross (unused)</div>
 </div>
-</div><div class="interactive_dotgraph"></div><p><b>A case where Layered fails and Min-Cost succeeds</b>: If Rev1 were removed, Layer 1 would match Sub2→Rev3 (cost 0), leaving Sub1 to find a match in Layer 2 (Sub1→Rev2 at cost 1). Total cost = 1. Min-cost max-flow would find the same. But if there were a third submission competing for Rev3, Layer 1 might greedily assign Rev3 to the wrong submission, forcing a suboptimal overall assignment - while min-cost max-flow would globally minimise total cost.</p>
+</div><div class="interactive_dotgraph"></div><p><b>A case where Layered fails and Min-Cost succeeds</b> (proposed): If Rev1 were removed, Layer 1 would match Sub2→Rev3 (primary-primary), leaving Sub1 to find a match in Layer 2 (Sub1→Rev2 via cross). Total match quality: 1 primary + 1 cross. But if there were a third submission competing for Rev3, Layer 1 might greedily assign Rev3 to the wrong submission, forcing a worse overall assignment - while min-cost max-flow would globally minimise total cost.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_test_diff"></a>
 Why Two Integration Tests "Differ"</h1>

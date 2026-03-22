@@ -184,7 +184,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector of risky reviewer IDs. \par Complexity:<br  />
- O(P * R) where P is submissions and R is reviewers. </dd></dl>
+ O(R * F * E) where R is reviewers, F = P * MinReviewsPerSubmission is the total flow, and E is edges. Rebuilds the graph and re-runs Edmonds-Karp for each removed reviewer. A tighter O(R * MaxReviewsPerReviewer * E) is possible by keeping the solved max-flow graph and, for each reviewer, temporarily reducing their incoming flow (creating a deficit of at most MaxReviewsPerReviewer) and running Edmonds-Karp only to resolve that deficit, rather than rebuilding from scratch. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="AssignmentLogic_8cpp_source.html#l00034">34</a> of file <a class="el" href="AssignmentLogic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   34</span>                                                                                                                                                                       {</div>
@@ -287,7 +287,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if assignment was successful/complete. \par Complexity:<br  />
- Depends on the underlying Max Flow algorithm, commonly O(V * E^2). </dd></dl>
+ O(F * E) dominated by the underlying Edmonds-Karp max-flow call, where F = P * MinReviewsPerSubmission is the total flow. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="AssignmentLogic_8cpp_source.html#l00148">148</a> of file <a class="el" href="AssignmentLogic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  148</span>                                                                                                                                                                                                                                                                     {</div>
@@ -345,7 +345,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The number of assigned reviews. \par Complexity:<br  />
- O(V + E) representing graph traversal over flow paths. </dd></dl>
+ O(P * R) iterating over all submission-to-reviewer edges in the flow graph. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="AssignmentLogic_8cpp_source.html#l00013">13</a> of file <a class="el" href="AssignmentLogic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   13</span>                                                                                                                                                     {</div>
@@ -370,8 +370,8 @@ Static Public Member Functions</h2></td></tr>
 <div class="line"><span class="lineno">   32</span>}</div>
 <div class="ttc" id="aclassGraphBuilder_html_a5808b56dac3eacd87dc7cc4966829116"><div class="ttname"><a href="classGraphBuilder.html#a5808b56dac3eacd87dc7cc4966829116">GraphBuilder::reviewerNodeId</a></div><div class="ttdeci">static int reviewerNodeId(int revIndex, int numSubs)</div><div class="ttdoc">Maps a reviewer vector index to its graph node ID.</div><div class="ttdef"><b>Definition</b> <a href="GraphBuilder_8cpp_source.html#l00025">GraphBuilder.cpp:25</a></div></div>
 <div class="ttc" id="aclassGraphBuilder_html_ae659322d094219e6348c42cf12e70482"><div class="ttname"><a href="classGraphBuilder.html#ae659322d094219e6348c42cf12e70482">GraphBuilder::submissionNodeId</a></div><div class="ttdeci">static int submissionNodeId(int subIndex)</div><div class="ttdoc">Maps a submission vector index to its graph node ID.</div><div class="ttdef"><b>Definition</b> <a href="GraphBuilder_8cpp_source.html#l00020">GraphBuilder.cpp:20</a></div></div>
-<div class="ttc" id="aclassGraph_html_a8b7b7465fbfd562e2a469f90a437ab75"><div class="ttname"><a href="classGraph.html#a8b7b7465fbfd562e2a469f90a437ab75">Graph::findVertex</a></div><div class="ttdeci">Vertex&lt; T &gt; * findVertex(const T &amp;in) const</div><div class="ttdoc">Finds a vertex with a given content.</div><div class="ttdef"><b>Definition</b> <a href="Graph_8h_source.html#l00494">Graph.h:494</a></div></div>
-<div class="ttc" id="aclassVertex_html_a0010a7d0b7db1bb81dd2ebb1ffae650a"><div class="ttname"><a href="classVertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">Vertex::getAdj</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; getAdj() const</div><div class="ttdef"><b>Definition</b> <a href="Graph_8h_source.html#l00321">Graph.h:321</a></div></div>
+<div class="ttc" id="aclassGraph_html_a8b7b7465fbfd562e2a469f90a437ab75"><div class="ttname"><a href="classGraph.html#a8b7b7465fbfd562e2a469f90a437ab75">Graph::findVertex</a></div><div class="ttdeci">Vertex&lt; T &gt; * findVertex(const T &amp;in) const</div><div class="ttdoc">Finds a vertex with a given content.</div><div class="ttdef"><b>Definition</b> <a href="Graph_8h_source.html#l00498">Graph.h:498</a></div></div>
+<div class="ttc" id="aclassVertex_html_a0010a7d0b7db1bb81dd2ebb1ffae650a"><div class="ttname"><a href="classVertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">Vertex::getAdj</a></div><div class="ttdeci">std::vector&lt; Edge&lt; T &gt; * &gt; getAdj() const</div><div class="ttdef"><b>Definition</b> <a href="Graph_8h_source.html#l00325">Graph.h:325</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
