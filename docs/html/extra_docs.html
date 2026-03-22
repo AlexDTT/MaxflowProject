@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.16.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Maxflow Project T9G2: Extra Documentation</title>
+<title>Maxflow Project T9G2: Extra Documentation and Outlined Approaches</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,13 +106,11 @@ $(function(){initNavTree('extra_docs.html','',''); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Extra Documentation </div></div>
+  <div class="headertitle"><div class="title">Extra Documentation and Outlined Approaches </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This page provides a detailed treatment of each variant of the Review Assignment Problem specified in the assignment (sections T2.1 through T2.4). For T2.1 and T2.2 we describe how our implementation solves them. For T2.3 and T2.4 we outline approaches we would take, discuss their complexity, and provide illustrative examples.</p>
-<hr  />
-<h1 class="doxsection"><a class="anchor" id="ext_t2_1"></a>
-T2.1 — Basic Formulation (Primary Domains, No Risk Analysis)</h1>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="ext_t2_1"></a>
+T2.1 - Basic Formulation (Primary Domains, No Risk Analysis)</h1>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_1_problem"></a>
 Problem Description</h2>
 <p>In this base variant, only the <b>Primary Domain</b> of each submission and the <b>Primary Expertise</b> of each reviewer are considered. Every reviewer is assumed to carry out their reviews (no risk). The objective is to determine whether a complete assignment exists such that every submission receives at least <code>MinReviewsPerSubmission</code> reviews, and no reviewer is assigned more than <code>MaxReviewsPerReviewer</code> reviews.</p>
@@ -148,10 +146,10 @@ Example</h2>
 <div class="line">MaxReviewsPerReviewer, 2</div>
 </div><!-- fragment --><p><a class="el" href="classGraph.html" title="Represents a general graph using an adjacency list.">Graph</a> edges (mode 1):**</p><ul>
 <li>Source → Sub1 (cap 2), Source → Sub2 (cap 2)</li>
-<li>Sub1 → Rev1 (cap 1), Sub1 → Rev2 (cap 1) — both match topic 1</li>
-<li>Sub2 → Rev3 (cap 1) — matches topic 2</li>
+<li>Sub1 → Rev1 (cap 1), Sub1 → Rev2 (cap 1) - both match topic 1</li>
+<li>Sub2 → Rev3 (cap 1) - matches topic 2</li>
 <li><p class="startli">Rev1 → Sink (cap 2), Rev2 → Sink (cap 2), Rev3 → Sink (cap 2)</p>
-<p class="startli">Max flow:** 3 (Sub1 gets 2 reviews from Rev1 and Rev2; Sub2 gets only 1 from Rev3). Total required:** 4. <b>Result:</b> Incomplete — Sub2 is missing 1 review.</p>
+<p class="startli">Max flow:** 3 (Sub1 gets 2 reviews from Rev1 and Rev2; Sub2 gets only 1 from Rev3). Total required:** 4. <b>Result:</b> Incomplete - Sub2 is missing 1 review.</p>
 </li>
 </ul>
 <div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
@@ -164,18 +162,18 @@ Complexity</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Step  </th><th class="markdownTableHeadNone">Complexity  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Build flow graph  </td><td class="markdownTableBodyNone">O(P × R) — check all submission-reviewer pairs for domain match  </td></tr>
+<td class="markdownTableBodyNone">Build flow graph  </td><td class="markdownTableBodyNone">O(P × R) - check all submission-reviewer pairs for domain match  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Edmonds-Karp  </td><td class="markdownTableBodyNone">O(V × E²) — V = P + R + 2, E ≈ P + R + (matching pairs)  </td></tr>
+<td class="markdownTableBodyNone">Edmonds-Karp  </td><td class="markdownTableBodyNone">O(V × E²) - V = P + R + 2, E ≈ P + R + (matching pairs)  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Write output  </td><td class="markdownTableBodyNone">O(V + E) — traverse graph once  </td></tr>
+<td class="markdownTableBodyNone">Write output  </td><td class="markdownTableBodyNone">O(V + E) - traverse graph once  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(P × R + V × E²)</b>  </td></tr>
 </table>
 <p>For typical inputs (P, R &lt; 200), V ≈ 400 and E ≈ 40,000, so V × E² is manageable.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_t2_2"></a>
-T2.2 — Basic Formulation with Risk Analysis (K = 1)</h1>
+T2.2 - Basic Formulation with Risk Analysis (K = 1)</h1>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_2_problem"></a>
 Problem Description</h2>
 <p>Building on T2.1, this variant asks: <b>is there a single reviewer whose absence would make a complete assignment impossible?</b> If the baseline assignment (all reviewers available) is already incomplete, risk analysis is not performed. Otherwise, we test each reviewer individually.</p>
@@ -237,7 +235,7 @@ Complexity</h2>
 <p>For R = 50 and typical graph sizes, this runs in under a second.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_t2_3"></a>
-T2.3 — Risk Analysis with K &gt; 1 (Proposed Approach)</h1>
+T2.3 - Risk Analysis with K &gt; 1 (Proposed Approach)</h1>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_3_problem"></a>
 Problem Description</h2>
 <p>Extending T2.2, this variant asks: what happens when <b>K &gt; 1</b> reviewers become unavailable simultaneously? We need to identify all subsets of K reviewers whose collective absence makes a complete assignment impossible.</p>
@@ -253,7 +251,7 @@ Proposed Approach</h2>
 </ul>
 </li>
 <li><p class="startli"><b>Return</b> all critical subsets.</p>
-<p class="startli">Pruning optimisation:** If K &gt; 1 and a reviewer r was already identified as risky at K = 1, then any K-sized subset containing r is automatically critical — we can skip testing those subsets and mark them directly.</p>
+<p class="startli">Pruning optimisation:** If K &gt; 1 and a reviewer r was already identified as risky at K = 1, then any K-sized subset containing r is automatically critical - we can skip testing those subsets and mark them directly.</p>
 <p class="startli">Early termination:** For each subset, after building the graph, a quick check on the min-cut capacity (sum of source→submission capacities vs. available reviewer capacity per topic) can rule out obviously feasible cases without running the full algorithm.</p>
 </li>
 </ol>
@@ -308,15 +306,15 @@ T2.3 Baseline: All reviewers available, flow=6 (feasible)</div>
 </div><div class="interactive_dotgraph"></div><p>K = 2, remove {Rev1, Rev3}:** Remaining {Rev2, Rev4}. Sub1 and Sub3 share only Rev2 (cap 2, so 1 each). Sub2 uses Rev4 (cap 2, gets 1). Flow = 3 &lt; 6. <b>Critical subset.</b></p>
 <div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
 <iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t23_remove_1_3.dot_b67b7f363eb639cf980ddc2e8b8c6e9e.svg" width="563" height="323"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
-T2.3 K=2: Removing {Rev1, Rev3} leaves flow=3 &lt; 6 — critical subset</div>
+T2.3 K=2: Removing {Rev1, Rev3} leaves flow=3 &lt; 6 - critical subset</div>
 </div>
-</div><div class="interactive_dotgraph"></div><p>K = 2, remove {Rev1, Rev2}:** Remaining {Rev3, Rev4} — both topic 2 only. Sub1 and Sub3 have zero matches. Flow = 2 (only Sub2 covered). <b>Critical subset.</b></p>
-<p>K = 2, remove {Rev3, Rev4}:** Remaining {Rev1, Rev2} — both topic 1 only. Sub2 has zero matches. Flow = 4 &lt; 6. <b>Critical subset.</b></p>
+</div><div class="interactive_dotgraph"></div><p>K = 2, remove {Rev1, Rev2}:** Remaining {Rev3, Rev4} - both topic 2 only. Sub1 and Sub3 have zero matches. Flow = 2 (only Sub2 covered). <b>Critical subset.</b></p>
+<p>K = 2, remove {Rev3, Rev4}:** Remaining {Rev1, Rev2} - both topic 1 only. Sub2 has zero matches. Flow = 4 &lt; 6. <b>Critical subset.</b></p>
 <p>K = 2, remove {Rev1, Rev4}:** Remaining {Rev2, Rev3}. Sub1+Sub3 share Rev2 (cap 2). Sub2 uses Rev3 (cap 2, gets 1). But Sub1+Sub3 need 4 total and Rev2 can only give 2. Sub2 gets 1 but needs 2. Flow ≤ 3. <b>Critical subset.</b></p>
 <p>This demonstrates that the K = 2 analysis reveals structural vulnerabilities not visible at K = 1: no individual reviewer is risky (K = 1 returns empty), but several pairs are critical.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_t2_4"></a>
-T2.4 — General Formulation with Secondary Domains (Proposed Approach)</h1>
+T2.4 - General Formulation with Secondary Domains (Proposed Approach)</h1>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_4_problem"></a>
 Problem Description</h2>
 <p>This is the most general variant. Both submissions and reviewers have <b>primary and secondary</b> domains. A submission can be matched to a reviewer if any of the following holds:</p><ul>
@@ -331,9 +329,9 @@ Proposed Approach</h2>
 <p>Approach A: Layered Max-Flow (Greedy)**</p>
 <p>This extends the existing Edmonds-Karp pipeline with a priority-based, multi-pass strategy:</p>
 <ol type="1">
-<li><b>Layer 1 — Primary-Primary.</b> Build the flow graph with edges only where sub.primary == rev.primary. Run Edmonds-Karp. Record the resulting flows.</li>
-<li><b>Layer 2 — Cross matches.</b> On the <b>residual capacity</b> (after subtracting Layer 1 flows), add edges where sub.primary == rev.secondary or sub.secondary == rev.primary. Run Edmonds-Karp again to fill remaining capacity.</li>
-<li><b>Layer 3 — Secondary-Secondary.</b> On the still-remaining capacity, add edges where sub.secondary == rev.secondary. Run Edmonds-Karp a third time.</li>
+<li><b>Layer 1 - Primary-Primary.</b> Build the flow graph with edges only where sub.primary == rev.primary. Run Edmonds-Karp. Record the resulting flows.</li>
+<li><b>Layer 2 - Cross matches.</b> On the <b>residual capacity</b> (after subtracting Layer 1 flows), add edges where sub.primary == rev.secondary or sub.secondary == rev.primary. Run Edmonds-Karp again to fill remaining capacity.</li>
+<li><b>Layer 3 - Secondary-Secondary.</b> On the still-remaining capacity, add edges where sub.secondary == rev.secondary. Run Edmonds-Karp a third time.</li>
 <li><b>Combine</b> flows from all three layers as the final assignment.</li>
 </ol>
 <p>Each layer greedily maximises flow at its quality tier before moving to the next. The approach runs Edmonds-Karp at most 3 times.</p>
@@ -367,7 +365,7 @@ Complexity</h2>
 <td class="markdownTableBodyNone">Brute force (all assignments)  </td><td class="markdownTableBodyNone">O((P×R)!)  </td><td class="markdownTableBodyNone">Exact, impractical  </td></tr>
 </table>
 <p>Where F = P × MinReviewsPerSubmission is the total flow value.</p>
-<p>Why the general case is harder:** In T2.1, any valid match is equally good — it is a pure feasibility problem. In T2.4, match quality varies (primary &gt; cross &gt; secondary), so we must optimise a weighted objective, not just maximise flow. This elevates the problem from max-flow to min-cost max-flow, increasing complexity by a factor of F × log V.</p>
+<p>Why the general case is harder:** In T2.1, any valid match is equally good - it is a pure feasibility problem. In T2.4, match quality varies (primary &gt; cross &gt; secondary), so we must optimise a weighted objective, not just maximise flow. This elevates the problem from max-flow to min-cost max-flow, increasing complexity by a factor of F × log V.</p>
 <p>For typical conference sizes (P, R &lt; 200, F &lt; 400), Approach B is practical and runs in under a second.</p>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_4_example"></a>
 Example</h2>
@@ -386,7 +384,7 @@ Example</h2>
 </div><!-- fragment --><p>Mode 3 matching possibilities:**</p><ul>
 <li>Sub1 (pri=1, sec=2) → Rev1 (pri=1): primary-primary (cost 0)</li>
 <li>Sub1 (pri=1, sec=2) → Rev2 (pri=2): secondary-primary match (cost 1)</li>
-<li>Sub1 (pri=1, sec=2) → Rev3 (pri=3): sub.sec=2 vs rev.sec=1 — no match</li>
+<li>Sub1 (pri=1, sec=2) → Rev3 (pri=3): sub.sec=2 vs rev.sec=1 - no match</li>
 <li>Sub2 (pri=3, sec=1) → Rev1 (pri=1, sec=3): sub.sec=1==rev.pri=1 cross (cost 1), or sub.pri=3==rev.sec=3 cross (cost 1)</li>
 <li>Sub2 (pri=3, sec=1) → Rev2 (pri=2, sec=3): sub.pri=3==rev.sec=3 cross (cost 1)</li>
 <li><p class="startli">Sub2 (pri=3, sec=1) → Rev3 (pri=3, sec=1): primary-primary (cost 0)</p>
@@ -400,13 +398,13 @@ Example</h2>
 <iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t24_example.dot_0b75dd36b1527307b36ea6d477aa8d4b.svg" width="558" height="358"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
 T2.4 Example: Optimal assignment uses primary-primary matches (gold, cost 0)</div>
 </div>
-</div><div class="interactive_dotgraph"></div><p>A case where Layered fails and Min-Cost succeeds:** If Rev1 were removed, Layer 1 would match Sub2→Rev3 (cost 0), leaving Sub1 to find a match in Layer 2 (Sub1→Rev2 at cost 1). Total cost = 1. Min-cost max-flow would find the same. But if there were a third submission competing for Rev3, Layer 1 might greedily assign Rev3 to the wrong submission, forcing a suboptimal overall assignment — while min-cost max-flow would globally minimise total cost.</p>
+</div><div class="interactive_dotgraph"></div><p>A case where Layered fails and Min-Cost succeeds:** If Rev1 were removed, Layer 1 would match Sub2→Rev3 (cost 0), leaving Sub1 to find a match in Layer 2 (Sub1→Rev2 at cost 1). Total cost = 1. Min-cost max-flow would find the same. But if there were a third submission competing for Rev3, Layer 1 might greedily assign Rev3 to the wrong submission, forcing a suboptimal overall assignment - while min-cost max-flow would globally minimise total cost.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_test_diff"></a>
 Why Two Integration Tests "Differ"</h1>
 <h2 class="doxsection"><a class="anchor" id="ext_test_diff_overview"></a>
 ext_test_diff_overview</h2>
-<p>Integration tests <b>dataset10</b> and <b>dataset11</b> report output differences when compared against the reference solutions. However, our outputs are <b>equally correct</b> — they represent a different but valid decomposition of the same maximum flow.</p>
+<p>Integration tests <b>dataset10</b> and <b>dataset11</b> report output differences when compared against the reference solutions. However, our outputs are <b>equally correct</b> - they represent a different but valid decomposition of the same maximum flow.</p>
 <h2 class="doxsection"><a class="anchor" id="ext_test_diff_input"></a>
 Input Configuration</h2>
 <p>Both datasets share the same submissions and reviewers. They differ only in whether risk analysis is enabled (dataset10: off, dataset11: on).</p>
@@ -453,8 +451,8 @@ Why Both Are Correct</h2>
 <li><b>No reviewer exceeds 2 reviews</b> (satisfying MaxReviewsPerReviewer)</li>
 <li><b>All edges are valid</b> (every assignment uses the secondary topic 2 match)</li>
 </ul>
-<p>The difference arises from the <b>BFS traversal order</b> in Edmonds-Karp. The algorithm finds the shortest* augmenting path at each step, but when multiple shortest paths of equal length exist, the order in which adjacent edges are explored determines which path is chosen. Our adjacency list ordering produces a different — but equally optimal — flow decomposition.</p>
-<p>For dataset11 (with risk analysis), the same assignment is used as the baseline. Since no reviewer is individually critical (removing any single reviewer still leaves enough capacity to cover all 6 required reviews), the risk analysis output is empty in both cases — they agree on the risk analysis result, differing only in the assignment listing.</p>
+<p>The difference arises from the <b>BFS traversal order</b> in Edmonds-Karp. The algorithm finds the shortest* augmenting path at each step, but when multiple shortest paths of equal length exist, the order in which adjacent edges are explored determines which path is chosen. Our adjacency list ordering produces a different - but equally optimal - flow decomposition.</p>
+<p>For dataset11 (with risk analysis), the same assignment is used as the baseline. Since no reviewer is individually critical (removing any single reviewer still leaves enough capacity to cover all 6 required reviews), the risk analysis output is empty in both cases - they agree on the risk analysis result, differing only in the assignment listing.</p>
 <dl class="section note"><dt>Note</dt><dd>The integration test uses exact <span class="tt">diff</span> comparison against a single reference output. This is a limitation of the test harness: it cannot recognize that two different assignments are equally valid. Both outputs represent a <b>correct maximum flow</b> with identical total flow and no constraint violations.</dd></dl>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_complexity_table"></a>

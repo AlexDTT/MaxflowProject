@@ -1,7 +1,7 @@
 var searchData=
 [
   ['scientific_20conference_20organization_20tool_0',['Scientific Conference Organization Tool',['../index.html',1,'']]],
-  ['secondary_20domains_20proposed_20approach_1',['T2.4 — General Formulation with Secondary Domains (Proposed Approach)',['../extra_docs.html#ext_t2_4',1,'']]],
+  ['secondary_20domains_20proposed_20approach_1',['T2.4 - General Formulation with Secondary Domains (Proposed Approach)',['../extra_docs.html#ext_t2_4',1,'']]],
   ['secondaryreviewerexpertise_2',['SecondaryReviewerExpertise',['../structParameters.html#a9ac2241ed0f41c0f0d46e7a10f67c4ac',1,'Parameters']]],
   ['secondarysubmissiondomain_3',['SecondarySubmissionDomain',['../structParameters.html#af29e21748d41b4d8a0867d8083ad7551',1,'Parameters']]],
   ['secondarytopic_4',['secondaryTopic',['../classReviewer.html#a06c85219cee04d5f82f2897152e336bc',1,'Reviewer::secondaryTopic'],['../classSubmission.html#a31e3e68d8338cb9de1a11ed822f62c9a',1,'Submission::secondaryTopic']]],

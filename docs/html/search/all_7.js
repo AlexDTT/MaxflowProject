@@ -14,13 +14,14 @@ var searchData=
   ['doaddreviewer_11',['doAddReviewer',['../classConferenceApp.html#a7e176bd5089a18ffc540d735cc9743c8',1,'ConferenceApp']]],
   ['doaddsubmission_12',['doAddSubmission',['../classConferenceApp.html#ab579299082f1114c7cfebc11b7022558',1,'ConferenceApp']]],
   ['dobrowseinputs_13',['doBrowseInputs',['../classConferenceApp.html#aa192e397f62c828b366f1e7680de1558',1,'ConferenceApp']]],
-  ['documentation_14',['Documentation',['../index.html#autotoc_md8',1,'Additional Documentation'],['../extra_docs.html',1,'Extra Documentation']]],
-  ['doexportgraphdot_15',['doExportGraphDOT',['../classConferenceApp.html#a678caa218b92afa21ed528c4ab710ac9',1,'ConferenceApp']]],
-  ['dogenerateassignments_16',['doGenerateAssignments',['../classConferenceApp.html#a56bb2222a9def4e2bab0adaa13843529',1,'ConferenceApp']]],
-  ['doloadspecificfile_17',['doLoadSpecificFile',['../classConferenceApp.html#abfd1da49d7ffa0da7d8f209ba430ff78',1,'ConferenceApp']]],
-  ['domains_20no_20risk_20analysis_18',['T2.1 — Basic Formulation (Primary Domains, No Risk Analysis)',['../extra_docs.html#ext_t2_1',1,'']]],
-  ['domains_20proposed_20approach_19',['T2.4 — General Formulation with Secondary Domains (Proposed Approach)',['../extra_docs.html#ext_t2_4',1,'']]],
-  ['doshowaugmentingpaths_20',['doShowAugmentingPaths',['../classConferenceApp.html#a5d7349abd9e1e4939d1211e3fbef7bf3',1,'ConferenceApp']]],
-  ['doviewdata_21',['doViewData',['../classConferenceApp.html#af236e62d6c4c8e1acf4dbafe3a7b5282',1,'ConferenceApp']]],
-  ['doviewgraphterminal_22',['doViewGraphTerminal',['../classConferenceApp.html#a5a9a467f506230735125e49ee0cd38ad',1,'ConferenceApp']]]
+  ['documentation_14',['Additional Documentation',['../index.html#autotoc_md8',1,'']]],
+  ['documentation_20and_20outlined_20approaches_15',['Extra Documentation and Outlined Approaches',['../extra_docs.html',1,'']]],
+  ['doexportgraphdot_16',['doExportGraphDOT',['../classConferenceApp.html#a678caa218b92afa21ed528c4ab710ac9',1,'ConferenceApp']]],
+  ['dogenerateassignments_17',['doGenerateAssignments',['../classConferenceApp.html#a56bb2222a9def4e2bab0adaa13843529',1,'ConferenceApp']]],
+  ['doloadspecificfile_18',['doLoadSpecificFile',['../classConferenceApp.html#abfd1da49d7ffa0da7d8f209ba430ff78',1,'ConferenceApp']]],
+  ['domains_20no_20risk_20analysis_19',['T2.1 - Basic Formulation (Primary Domains, No Risk Analysis)',['../extra_docs.html#ext_t2_1',1,'']]],
+  ['domains_20proposed_20approach_20',['T2.4 - General Formulation with Secondary Domains (Proposed Approach)',['../extra_docs.html#ext_t2_4',1,'']]],
+  ['doshowaugmentingpaths_21',['doShowAugmentingPaths',['../classConferenceApp.html#a5d7349abd9e1e4939d1211e3fbef7bf3',1,'ConferenceApp']]],
+  ['doviewdata_22',['doViewData',['../classConferenceApp.html#af236e62d6c4c8e1acf4dbafe3a7b5282',1,'ConferenceApp']]],
+  ['doviewgraphterminal_23',['doViewGraphTerminal',['../classConferenceApp.html#a5a9a467f506230735125e49ee0cd38ad',1,'ConferenceApp']]]
 ];

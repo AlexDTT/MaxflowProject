@@ -26,26 +26,26 @@ var NAVTREE =
 [
   [ "Maxflow Project T9G2", "index.html", [
     [ "Scientific Conference Organization Tool", "index.html", "index" ],
-    [ "Extra Documentation", "extra_docs.html", [
-      [ "T2.1 — Basic Formulation (Primary Domains, No Risk Analysis)", "extra_docs.html#ext_t2_1", [
+    [ "Extra Documentation and Outlined Approaches", "extra_docs.html", [
+      [ "T2.1 - Basic Formulation (Primary Domains, No Risk Analysis)", "extra_docs.html#ext_t2_1", [
         [ "Problem Description", "extra_docs.html#ext_t2_1_problem", null ],
         [ "How We Solve It", "extra_docs.html#ext_t2_1_approach", null ],
         [ "Example", "extra_docs.html#ext_t2_1_example", null ],
         [ "Complexity", "extra_docs.html#ext_t2_1_complexity", null ]
       ] ],
-      [ "T2.2 — Basic Formulation with Risk Analysis (K = 1)", "extra_docs.html#ext_t2_2", [
+      [ "T2.2 - Basic Formulation with Risk Analysis (K = 1)", "extra_docs.html#ext_t2_2", [
         [ "Problem Description", "extra_docs.html#ext_t2_2_problem", null ],
         [ "How We Solve It", "extra_docs.html#ext_t2_2_approach", null ],
         [ "Example", "extra_docs.html#ext_t2_2_example", null ],
         [ "Complexity", "extra_docs.html#ext_t2_2_complexity", null ]
       ] ],
-      [ "T2.3 — Risk Analysis with K &gt; 1 (Proposed Approach)", "extra_docs.html#ext_t2_3", [
+      [ "T2.3 - Risk Analysis with K &gt; 1 (Proposed Approach)", "extra_docs.html#ext_t2_3", [
         [ "Problem Description", "extra_docs.html#ext_t2_3_problem", null ],
         [ "Proposed Approach", "extra_docs.html#ext_t2_3_approach", null ],
         [ "Complexity", "extra_docs.html#ext_t2_3_complexity", null ],
         [ "Non-Trivial Input Example", "extra_docs.html#ext_t2_3_example", null ]
       ] ],
-      [ "T2.4 — General Formulation with Secondary Domains (Proposed Approach)", "extra_docs.html#ext_t2_4", [
+      [ "T2.4 - General Formulation with Secondary Domains (Proposed Approach)", "extra_docs.html#ext_t2_4", [
         [ "Problem Description", "extra_docs.html#ext_t2_4_problem", null ],
         [ "Proposed Approach", "extra_docs.html#ext_t2_4_approach", null ],
         [ "Complexity", "extra_docs.html#ext_t2_4_complexity", null ],

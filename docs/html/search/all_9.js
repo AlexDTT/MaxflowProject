@@ -9,7 +9,7 @@ var searchData=
   ['findvertex_6',['findVertex',['../classGraph.html#a8b7b7465fbfd562e2a469f90a437ab75',1,'Graph']]],
   ['findvertexidx_7',['findVertexIdx',['../classGraph.html#a676cdfb976eccfa82b631d2094c1cdac',1,'Graph']]],
   ['flow_8',['flow',['../classEdge.html#a30808601fa37f509147eabf9cc5f9ed6',1,'Edge']]],
-  ['formulation_20primary_20domains_20no_20risk_20analysis_9',['T2.1 — Basic Formulation (Primary Domains, No Risk Analysis)',['../extra_docs.html#ext_t2_1',1,'']]],
-  ['formulation_20with_20risk_20analysis_20k_201_10',['T2.2 — Basic Formulation with Risk Analysis (K = 1)',['../extra_docs.html#ext_t2_2',1,'']]],
-  ['formulation_20with_20secondary_20domains_20proposed_20approach_11',['T2.4 — General Formulation with Secondary Domains (Proposed Approach)',['../extra_docs.html#ext_t2_4',1,'']]]
+  ['formulation_20primary_20domains_20no_20risk_20analysis_9',['T2.1 - Basic Formulation (Primary Domains, No Risk Analysis)',['../extra_docs.html#ext_t2_1',1,'']]],
+  ['formulation_20with_20risk_20analysis_20k_201_10',['T2.2 - Basic Formulation with Risk Analysis (K = 1)',['../extra_docs.html#ext_t2_2',1,'']]],
+  ['formulation_20with_20secondary_20domains_20proposed_20approach_11',['T2.4 - General Formulation with Secondary Domains (Proposed Approach)',['../extra_docs.html#ext_t2_4',1,'']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['general_20formulation_20with_20secondary_20domains_20proposed_20approach_0',['T2.4 — General Formulation with Secondary Domains (Proposed Approach)',['../extra_docs.html#ext_t2_4',1,'']]],
+  ['general_20formulation_20with_20secondary_20domains_20proposed_20approach_0',['T2.4 - General Formulation with Secondary Domains (Proposed Approach)',['../extra_docs.html#ext_t2_4',1,'']]],
   ['generateassignments_1',['GenerateAssignments',['../structParameters.html#ad865476e3ce706b539c306ed3647f381',1,'Parameters']]],
   ['generateassignmentsandstore_2',['generateAssignmentsAndStore',['../classAssignmentLogic.html#a1f49b0281d5e61cf5ab218988bfc5bba',1,'AssignmentLogic']]],
   ['generated_20graph_20example_3',['Generated Graph Example',['../index.html#autotoc_md7',1,'']]],

@@ -10,6 +10,6 @@ var searchData=
   ['executeandreportriskanalysis_7',['executeAndReportRiskAnalysis',['../classConferenceApp.html#aac604bfa7fbf8854c83f40845e11e8d8',1,'ConferenceApp']]],
   ['expect_8',['expect',['../maxflow__tests_8cpp.html#a7e6ea3473535176813c89536171cba05',1,'maxflow_tests.cpp']]],
   ['exporttodot_9',['exportToDOT',['../classGraphBuilder.html#aadc2cb8558931481d9be2f49adc175c7',1,'GraphBuilder']]],
-  ['extra_20documentation_10',['Extra Documentation',['../extra_docs.html',1,'']]],
+  ['extra_20documentation_20and_20outlined_20approaches_10',['Extra Documentation and Outlined Approaches',['../extra_docs.html',1,'']]],
   ['extra_5fdocumentation_2edox_11',['extra_documentation.dox',['../extra__documentation_8dox.html',1,'']]]
 ];

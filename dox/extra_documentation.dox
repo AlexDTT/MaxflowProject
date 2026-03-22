@@ -1,14 +1,7 @@
 /**
-@page extra_docs Extra Documentation
+@page extra_docs Extra Documentation and Outlined Approaches
 
-This page provides a detailed treatment of each variant of the Review Assignment Problem
-specified in the assignment (sections T2.1 through T2.4). For T2.1 and T2.2 we describe
-how our implementation solves them. For T2.3 and T2.4 we outline approaches we would take,
-discuss their complexity, and provide illustrative examples.
-
----
-
-@section ext_t2_1 T2.1 — Basic Formulation (Primary Domains, No Risk Analysis)
+@section ext_t2_1 T2.1 - Basic Formulation (Primary Domains, No Risk Analysis)
 
 @subsection ext_t2_1_problem Problem Description
 
@@ -67,12 +60,12 @@ MaxReviewsPerReviewer, 2
 
 **Graph edges (mode 1):**
 - Source → Sub1 (cap 2), Source → Sub2 (cap 2)
-- Sub1 → Rev1 (cap 1), Sub1 → Rev2 (cap 1) — both match topic 1
-- Sub2 → Rev3 (cap 1) — matches topic 2
+- Sub1 → Rev1 (cap 1), Sub1 → Rev2 (cap 1) - both match topic 1
+- Sub2 → Rev3 (cap 1) - matches topic 2
 - Rev1 → Sink (cap 2), Rev2 → Sink (cap 2), Rev3 → Sink (cap 2)
 
 **Max flow:** 3 (Sub1 gets 2 reviews from Rev1 and Rev2; Sub2 gets only 1 from Rev3).
-**Total required:** 4. **Result:** Incomplete — Sub2 is missing 1 review.
+**Total required:** 4. **Result:** Incomplete - Sub2 is missing 1 review.
 
 <div class="interactive_dotgraph">
 
@@ -84,16 +77,16 @@ MaxReviewsPerReviewer, 2
 
 | Step | Complexity |
 |------|-----------|
-| Build flow graph | O(P × R) — check all submission-reviewer pairs for domain match |
-| Edmonds-Karp | O(V × E²) — V = P + R + 2, E ≈ P + R + (matching pairs) |
-| Write output | O(V + E) — traverse graph once |
+| Build flow graph | O(P × R) - check all submission-reviewer pairs for domain match |
+| Edmonds-Karp | O(V × E²) - V = P + R + 2, E ≈ P + R + (matching pairs) |
+| Write output | O(V + E) - traverse graph once |
 | **Total** | **O(P × R + V × E²)** |
 
 For typical inputs (P, R < 200), V ≈ 400 and E ≈ 40,000, so V × E² is manageable.
 
 ---
 
-@section ext_t2_2 T2.2 — Basic Formulation with Risk Analysis (K = 1)
+@section ext_t2_2 T2.2 - Basic Formulation with Risk Analysis (K = 1)
 
 @subsection ext_t2_2_problem Problem Description
 
@@ -170,7 +163,7 @@ For R = 50 and typical graph sizes, this runs in under a second.
 
 ---
 
-@section ext_t2_3 T2.3 — Risk Analysis with K > 1 (Proposed Approach)
+@section ext_t2_3 T2.3 - Risk Analysis with K > 1 (Proposed Approach)
 
 @subsection ext_t2_3_problem Problem Description
 
@@ -190,7 +183,7 @@ The approach generalises the K = 1 strategy to combinations of size K:
 -# **Return** all critical subsets.
 
 **Pruning optimisation:** If K > 1 and a reviewer r was already identified as risky at K = 1,
-then any K-sized subset containing r is automatically critical — we can skip testing those
+then any K-sized subset containing r is automatically critical - we can skip testing those
 subsets and mark them directly.
 
 **Early termination:** For each subset, after building the graph, a quick check on the
@@ -250,14 +243,14 @@ so 1 each). Sub2 uses Rev4 (cap 2, gets 1). Flow = 3 < 6. **Critical subset.**
 
 <div class="interactive_dotgraph">
 
-\dotfile dox/t23_remove_1_3.dot "T2.3 K=2: Removing {Rev1, Rev3} leaves flow=3 < 6 — critical subset"
+\dotfile dox/t23_remove_1_3.dot "T2.3 K=2: Removing {Rev1, Rev3} leaves flow=3 < 6 - critical subset"
 
 </div>
 
-**K = 2, remove {Rev1, Rev2}:** Remaining {Rev3, Rev4} — both topic 2 only. Sub1 and Sub3 have
+**K = 2, remove {Rev1, Rev2}:** Remaining {Rev3, Rev4} - both topic 2 only. Sub1 and Sub3 have
 zero matches. Flow = 2 (only Sub2 covered). **Critical subset.**
 
-**K = 2, remove {Rev3, Rev4}:** Remaining {Rev1, Rev2} — both topic 1 only. Sub2 has zero
+**K = 2, remove {Rev3, Rev4}:** Remaining {Rev1, Rev2} - both topic 1 only. Sub2 has zero
 matches. Flow = 4 < 6. **Critical subset.**
 
 **K = 2, remove {Rev1, Rev4}:** Remaining {Rev2, Rev3}. Sub1+Sub3 share Rev2 (cap 2). Sub2
@@ -269,7 +262,7 @@ K = 1: no individual reviewer is risky (K = 1 returns empty), but several pairs 
 
 ---
 
-@section ext_t2_4 T2.4 — General Formulation with Secondary Domains (Proposed Approach)
+@section ext_t2_4 T2.4 - General Formulation with Secondary Domains (Proposed Approach)
 
 @subsection ext_t2_4_problem Problem Description
 
@@ -291,12 +284,12 @@ We outline two approaches of increasing sophistication:
 
 This extends the existing Edmonds-Karp pipeline with a priority-based, multi-pass strategy:
 
--# **Layer 1 — Primary-Primary.** Build the flow graph with edges only where
+-# **Layer 1 - Primary-Primary.** Build the flow graph with edges only where
    sub.primary == rev.primary. Run Edmonds-Karp. Record the resulting flows.
--# **Layer 2 — Cross matches.** On the **residual capacity** (after subtracting Layer 1 flows),
+-# **Layer 2 - Cross matches.** On the **residual capacity** (after subtracting Layer 1 flows),
    add edges where sub.primary == rev.secondary or sub.secondary == rev.primary. Run
    Edmonds-Karp again to fill remaining capacity.
--# **Layer 3 — Secondary-Secondary.** On the still-remaining capacity, add edges where
+-# **Layer 3 - Secondary-Secondary.** On the still-remaining capacity, add edges where
    sub.secondary == rev.secondary. Run Edmonds-Karp a third time.
 -# **Combine** flows from all three layers as the final assignment.
 
@@ -331,7 +324,7 @@ since primary-primary matches (cost 0) are always preferred when available.
 
 Where F = P × MinReviewsPerSubmission is the total flow value.
 
-**Why the general case is harder:** In T2.1, any valid match is equally good — it is a pure
+**Why the general case is harder:** In T2.1, any valid match is equally good - it is a pure
 feasibility problem. In T2.4, match quality varies (primary > cross > secondary), so we must
 optimise a weighted objective, not just maximise flow. This elevates the problem from
 max-flow to min-cost max-flow, increasing complexity by a factor of F × log V.
@@ -359,7 +352,7 @@ MaxReviewsPerReviewer, 2
 **Mode 3 matching possibilities:**
 - Sub1 (pri=1, sec=2) → Rev1 (pri=1): primary-primary (cost 0)
 - Sub1 (pri=1, sec=2) → Rev2 (pri=2): secondary-primary match (cost 1)
-- Sub1 (pri=1, sec=2) → Rev3 (pri=3): sub.sec=2 vs rev.sec=1 — no match
+- Sub1 (pri=1, sec=2) → Rev3 (pri=3): sub.sec=2 vs rev.sec=1 - no match
 - Sub2 (pri=3, sec=1) → Rev1 (pri=1, sec=3): sub.sec=1==rev.pri=1 cross (cost 1), or
   sub.pri=3==rev.sec=3 cross (cost 1)
 - Sub2 (pri=3, sec=1) → Rev2 (pri=2, sec=3): sub.pri=3==rev.sec=3 cross (cost 1)
@@ -381,7 +374,7 @@ primary-primary match.
 If Rev1 were removed, Layer 1 would match Sub2→Rev3 (cost 0), leaving Sub1 to find a match
 in Layer 2 (Sub1→Rev2 at cost 1). Total cost = 1. Min-cost max-flow would find the same.
 But if there were a third submission competing for Rev3, Layer 1 might greedily assign Rev3
-to the wrong submission, forcing a suboptimal overall assignment — while min-cost max-flow
+to the wrong submission, forcing a suboptimal overall assignment - while min-cost max-flow
 would globally minimise total cost.
 
 ---
@@ -391,7 +384,7 @@ would globally minimise total cost.
 @subsection ext_test_diff_overview
 
 Integration tests **dataset10** and **dataset11** report output differences when compared against
-the reference solutions. However, our outputs are **equally correct** — they represent a different
+the reference solutions. However, our outputs are **equally correct** - they represent a different
 but valid decomposition of the same maximum flow.
 
 @subsection ext_test_diff_input Input Configuration
@@ -466,11 +459,11 @@ flow. Both solutions:
 The difference arises from the **BFS traversal order** in Edmonds-Karp. The algorithm finds the
 *shortest* augmenting path at each step, but when multiple shortest paths of equal length exist,
 the order in which adjacent edges are explored determines which path is chosen. Our adjacency
-list ordering produces a different — but equally optimal — flow decomposition.
+list ordering produces a different - but equally optimal - flow decomposition.
 
 For dataset11 (with risk analysis), the same assignment is used as the baseline. Since no
 reviewer is individually critical (removing any single reviewer still leaves enough capacity
-to cover all 6 required reviews), the risk analysis output is empty in both cases — they agree
+to cover all 6 required reviews), the risk analysis output is empty in both cases - they agree
 on the risk analysis result, differing only in the assignment listing.
 
 @note The integration test uses exact `diff` comparison against a single reference output. This
