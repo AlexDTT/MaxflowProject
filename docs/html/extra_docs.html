@@ -164,13 +164,13 @@ Complexity</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Build flow graph  </td><td class="markdownTableBodyNone">O(P × R) - check all submission-reviewer pairs for domain match  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Edmonds-Karp  </td><td class="markdownTableBodyNone">O(F × E), where F = P × MinReviewsPerSubmission  </td></tr>
+<td class="markdownTableBodyNone">Edmonds-Karp  </td><td class="markdownTableBodyNone">O(V × E²) polynomial worst case; O(F × E) pseudopolynomial practical, F = P × MinReviewsPerSubmission  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Write output  </td><td class="markdownTableBodyNone">O(V + E) - traverse graph once  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(F × E)</b>  </td></tr>
 </table>
-<p>For typical inputs (P, R &lt; 200), E ≈ 40,000 in the worst case. The theoretical O(V × E²) bound is very loose here - the network has diameter 3 (every augmenting path follows exactly source → submission → reviewer → sink, i.e. 3 edges). In practice the algorithm terminates in O(F × E) where F = P × MinReviewsPerSubmission, which is far more tractable.</p>
+<p>For typical inputs (P, R &lt; 200), E ≈ 40,000 in the worst case. The polynomial worst case O(V × E²) is very loose here — the network has diameter 3 (every augmenting path follows exactly source → submission → reviewer → sink, i.e. 3 edges). The tighter pseudopolynomial bound O(F × E) where F = P × MinReviewsPerSubmission captures the practical behaviour, since F depends on the numeric capacity values rather than just the graph size.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_t2_2"></a>
 T2.2 - Basic Formulation with Risk Analysis (K = 1)</h1>
@@ -225,15 +225,15 @@ Complexity</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Step  </th><th class="markdownTableHeadNone">Complexity  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Baseline max-flow  </td><td class="markdownTableBodyNone">O(F × E), where F = P × MinReviewsPerSubmission  </td></tr>
+<td class="markdownTableBodyNone">Baseline max-flow  </td><td class="markdownTableBodyNone">O(V × E²) worst case; O(F × E) practical, F = P × MinReviewsPerSubmission  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">R iterations, each: build graph + max-flow  </td><td class="markdownTableBodyNone">R × O(F × E)  </td></tr>
+<td class="markdownTableBodyNone">R iterations, each: build graph + max-flow  </td><td class="markdownTableBodyNone">R × O(F × E) pseudopolynomial  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Sort risky IDs  </td><td class="markdownTableBodyNone">O(R log R)  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(R × F × E)</b>  </td></tr>
+<td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(R × F × E)</b> pseudopolynomial; <b>O(R × V × E²)</b> polynomial worst case  </td></tr>
 </table>
-<p>The theoretical O(V × E²) per run is very loose for this 4-node-diameter network. In practice each Edmonds-Karp run terminates in O(F × E) where F = P × MinReviewsPerSubmission, giving an effective complexity of O(R × F × E). For typical conference sizes (R, P &lt; 200, F &lt; 400, E &lt; 40,000), this is around 3×10⁹ operations in the worst case - feasible in a few seconds, though not instantaneous for large inputs.</p>
+<p>The polynomial worst case O(R × V × E²) is very loose for this 4-node-diameter network. In practice each Edmonds-Karp run terminates in O(F × E) where F = P × MinReviewsPerSubmission, giving an effective pseudopolynomial complexity of O(R × F × E). For typical conference sizes (R, P &lt; 200, F &lt; 400, E &lt; 40,000), this is around 3×10⁹ operations in the worst case - feasible in a few seconds, though not instantaneous for large inputs.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_t2_3"></a>
 T2.3 - Risk Analysis with K &gt; 1 (Proposed Approach)</h1>
@@ -268,19 +268,19 @@ Complexity</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Build flow graph per subset  </td><td class="markdownTableBodyNone">O(P × R)  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Edmonds-Karp per subset  </td><td class="markdownTableBodyNone">O(F × E), where F = P × MinReviewsPerSubmission  </td></tr>
+<td class="markdownTableBodyNone">Edmonds-Karp per subset  </td><td class="markdownTableBodyNone">O(V × E²) worst case; O(F × E) practical  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Total (without pruning)</b>  </td><td class="markdownTableBodyNone"><b>O(C(R,K) × F × E)</b>  </td></tr>
+<td class="markdownTableBodyNone"><b>Total (without pruning)</b>  </td><td class="markdownTableBodyNone"><b>O(C(R,K) × F × E)</b> pseudopolynomial; <b>O(C(R,K) × V × E²)</b> polynomial  </td></tr>
 </table>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">K value  </th><th class="markdownTableHeadNone">Approximate cost  </th><th class="markdownTableHeadNone">Practical?  </th></tr>
+<th class="markdownTableHeadNone">K value  </th><th class="markdownTableHeadNone">Pseudopolynomial  </th><th class="markdownTableHeadNone">Polynomial worst case  </th><th class="markdownTableHeadNone">Practical?  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">2  </td><td class="markdownTableBodyNone">O(R² × F × E)  </td><td class="markdownTableBodyNone">Yes, for R &lt; 100  </td></tr>
+<td class="markdownTableBodyNone">2  </td><td class="markdownTableBodyNone">O(R² × F × E)  </td><td class="markdownTableBodyNone">O(R² × V × E²)  </td><td class="markdownTableBodyNone">Yes, for R &lt; 100  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">3  </td><td class="markdownTableBodyNone">O(R³ × F × E)  </td><td class="markdownTableBodyNone">Borderline for R &gt; 50  </td></tr>
+<td class="markdownTableBodyNone">3  </td><td class="markdownTableBodyNone">O(R³ × F × E)  </td><td class="markdownTableBodyNone">O(R³ × V × E²)  </td><td class="markdownTableBodyNone">Borderline for R &gt; 50  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">≥ 4  </td><td class="markdownTableBodyNone">O(R⁴ × F × E)  </td><td class="markdownTableBodyNone">Impractical without heavy pruning  </td></tr>
+<td class="markdownTableBodyNone">≥ 4  </td><td class="markdownTableBodyNone">O(R⁴ × F × E)  </td><td class="markdownTableBodyNone">O(R⁴ × V × E²)  </td><td class="markdownTableBodyNone">Impractical without heavy pruning  </td></tr>
 </table>
 <p>With pruning (removing known K=1 risky reviewers from consideration), the effective number of subsets drops significantly when many individual reviewers are already critical.</p>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_3_example"></a>
@@ -369,7 +369,7 @@ Complexity</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Approach  </th><th class="markdownTableHeadNone">Complexity  </th><th class="markdownTableHeadNone">Optimality  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">A: Layered Max-Flow  </td><td class="markdownTableBodyNone">O(3 × F × E) = O(F × E)  </td><td class="markdownTableBodyNone">Greedy, may not be globally optimal  </td></tr>
+<td class="markdownTableBodyNone">A: Layered Max-Flow  </td><td class="markdownTableBodyNone">O(F × E) pseudopolynomial; O(V × E²) polynomial worst case  </td><td class="markdownTableBodyNone">Greedy, may not be globally optimal  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">B: Min-Cost Max-Flow (SSP + Dijkstra)  </td><td class="markdownTableBodyNone">O(F × (V + E) × log V)  </td><td class="markdownTableBodyNone">Exact, globally optimal  </td></tr>
 <tr class="markdownTableRowOdd">
@@ -472,7 +472,7 @@ Complexity Summary</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Location  </th><th class="markdownTableHeadNone">Complexity  </th><th class="markdownTableHeadNone">Notes  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">edmondsKarp  </td><td class="markdownTableBodyNone"><a class="el" href="EdmondKarp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(F × E)  </td><td class="markdownTableBodyNone">F = total flow, E = edges; theoretical O(V × E²) is very loose for this graph  </td></tr>
+<td class="markdownTableBodyNone">edmondsKarp  </td><td class="markdownTableBodyNone"><a class="el" href="EdmondKarp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V × E²) / O(F × E)  </td><td class="markdownTableBodyNone">Polynomial worst case; pseudopolynomial practical bound where F = total flow  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">findAugmentingPath  </td><td class="markdownTableBodyNone"><a class="el" href="EdmondKarp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">Single BFS pass  </td></tr>
 <tr class="markdownTableRowOdd">
@@ -484,9 +484,9 @@ Complexity Summary</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">getMatchedDomain  </td><td class="markdownTableBodyNone"><a class="el" href="GraphBuilder_8h.html">data_structures/GraphBuilder.h</a>  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">At most 2 topics per entity  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">findRiskyReviewersK1  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(R × F × E)  </td><td class="markdownTableBodyNone">R re-runs of Edmonds-Karp  </td></tr>
+<td class="markdownTableBodyNone">findRiskyReviewersK1  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(R × V × E²) / O(R × F × E)  </td><td class="markdownTableBodyNone">R re-runs of Edmonds-Karp; polynomial / pseudopolynomial  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">generateAssignmentsAndStore  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(F × E)  </td><td class="markdownTableBodyNone">Dominated by max-flow  </td></tr>
+<td class="markdownTableBodyNone">generateAssignmentsAndStore  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(V × E²) / O(F × E)  </td><td class="markdownTableBodyNone">Dominated by max-flow; polynomial / pseudopolynomial  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">totalRequiredReviews  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(N)  </td><td class="markdownTableBodyNone">N submissions  </td></tr>
 <tr class="markdownTableRowEven">

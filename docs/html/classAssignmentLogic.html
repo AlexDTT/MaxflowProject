@@ -184,7 +184,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector of risky reviewer IDs. \par Complexity:<br  />
- O(R * F * E) where R is reviewers, F = P * MinReviewsPerSubmission is the total flow, and E is edges. Rebuilds the graph and re-runs Edmonds-Karp for each removed reviewer. A tighter O(R * MaxReviewsPerReviewer * E) is possible by keeping the solved max-flow graph and, for each reviewer, temporarily reducing their incoming flow (creating a deficit of at most MaxReviewsPerReviewer) and running Edmonds-Karp only to resolve that deficit, rather than rebuilding from scratch. </dd></dl>
+ Polynomial worst case: O(R * V * E^2). Pseudopolynomial (practical): O(R * F * E) where R is reviewers, F = P * MinReviewsPerSubmission is the total flow. Rebuilds the graph and re-runs Edmonds-Karp for each removed reviewer. A tighter O(R * MaxReviewsPerReviewer * E) is possible by keeping the solved max-flow graph and, for each reviewer, temporarily reducing their incoming flow (creating a deficit of at most MaxReviewsPerReviewer) and running Edmonds-Karp only to resolve that deficit, rather than rebuilding from scratch. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="AssignmentLogic_8cpp_source.html#l00034">34</a> of file <a class="el" href="AssignmentLogic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   34</span>                                                                                                                                                                       {</div>
@@ -287,7 +287,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if assignment was successful/complete. \par Complexity:<br  />
- O(F * E) dominated by the underlying Edmonds-Karp max-flow call, where F = P * MinReviewsPerSubmission is the total flow. </dd></dl>
+ Polynomial worst case: O(V * E^2). Pseudopolynomial (practical): O(F * E) dominated by the underlying Edmonds-Karp max-flow call, where F = P * MinReviewsPerSubmission is the total flow. </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="AssignmentLogic_8cpp_source.html#l00148">148</a> of file <a class="el" href="AssignmentLogic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">  148</span>                                                                                                                                                                                                                                                                     {</div>

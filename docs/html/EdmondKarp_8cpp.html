@@ -239,7 +239,7 @@ template&lt;class T&gt; </div>
     <tr><td class="paramname">source</td><td>The value representing the source node. </td></tr>
     <tr><td class="paramname">target</td><td>The value representing the sink node. </td></tr>
     <tr><td class="paramname">onAugment</td><td>Optional callback invoked whenever a path is augmented. \par Complexity:<br  />
- O(F * E) in practice, where F is the total flow and E the number of edges. The theoretical worst case is O(V * E^2), but our network has diameter 3 (source -&gt; submission -&gt; reviewer -&gt; sink), so each BFS is fast and the number of augmentations is bounded by F, not V*E. With integer capacities bounded by small constants (MinReviewsPerSubmission, MaxReviewsPerReviewer), F is strictly bounded by P * MinReviewsPerSubmission, making O(F * E) the tight practical bound. </td></tr>
+ Polynomial worst case: O(V * E^2). Pseudopolynomial (tighter in practice): O(F * E), where F is the total flow value. F depends on the numeric capacities, not just the graph size. For our network F = P * MinReviewsPerSubmission, bounded by a small constant times P, and the graph has diameter 3 (source -&gt; submission -&gt; reviewer -&gt; sink), so O(F * E) is the practical bound while O(V * E^2) covers the theoretical worst case. </td></tr>
   </table>
   </dd>
 </dl>
