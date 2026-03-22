@@ -1,5 +1,6 @@
 digraph TestDiff_OurSolution {
     rankdir=LR;
+    graph [bgcolor="transparent"];
     node [shape=box, style=filled, fillcolor=white, fontname="Helvetica"];
     edge [fontname="Helvetica", fontsize=9];
 

@@ -2,8 +2,8 @@
 
 <img src="logo.png" alt="Maxflow Project T9G2 Logo" width="100">
 
-## Design of Algorithms (DA) - Spring 2026
-**Course:** Analysis and Synthesis of Algorithms (L.EIC016)  
+## Algorithm Design (DA) - Spring 2026
+**Course:** Algorithm Design (L.EIC016)  
 **Project:** Programming Project I - Scientific Conference Organization Tool  
 
 ## About the Project

@@ -1,5 +1,6 @@
 digraph MaxFlow {
   rankdir=LR;
+  graph [bgcolor="transparent"];
   node [shape=box, style=filled, fillcolor=white];
   "SOURCE" -> "SUB#1" [label="2/2", color=blue, penwidth=2.0];
   "SOURCE" -> "SUB#2" [label="2/2", color=blue, penwidth=2.0];

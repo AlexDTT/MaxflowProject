@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['da_20spring_202026_0',['Design of Algorithms (DA) - Spring 2026',['../index.html#autotoc_md2',1,'']]],
+  ['da_20spring_202026_0',['Algorithm Design (DA) - Spring 2026',['../index.html#autotoc_md2',1,'']]],
   ['dataset10_1',['Our Solution (dataset10)',['../extra_docs.html#ext_test_diff_our_solution',1,'']]],
   ['datasets_2',['Datasets',['../dir_59425e443f801f1f2fd8bbe4959a3ccf.html#autotoc_md0',1,'']]],
   ['deleteedge_3',['deleteEdge',['../classVertex.html#a622503fe44ef12d5c39bd1043d47865c',1,'Vertex']]],
   ['deletematrix_4',['deleteMatrix',['../Graph_8h.html#ad56527992afe31a371065e795da57d25',1,'deleteMatrix(int **m, int n):&#160;Graph.h'],['../Graph_8h.html#af077bc8682a1a1d97e30b08eb1131b19',1,'deleteMatrix(double **m, int n):&#160;Graph.h']]],
   ['description_5',['Description',['../extra_docs.html#ext_t2_1_problem',1,'Problem Description'],['../extra_docs.html#ext_t2_2_problem',1,'Problem Description'],['../extra_docs.html#ext_t2_3_problem',1,'Problem Description'],['../extra_docs.html#ext_t2_4_problem',1,'Problem Description']]],
-  ['design_20of_20algorithms_20da_20spring_202026_6',['Design of Algorithms (DA) - Spring 2026',['../index.html#autotoc_md2',1,'']]],
+  ['design_20da_20spring_202026_6',['Algorithm Design (DA) - Spring 2026',['../index.html#autotoc_md2',1,'']]],
   ['dest_7',['dest',['../classEdge.html#ae4d65678b91bd9d814af4720ad87cd0c',1,'Edge']]],
   ['differ_8',['Why Two Integration Tests &quot;Differ&quot;',['../extra_docs.html#ext_test_diff',1,'']]],
   ['dist_9',['dist',['../classVertex.html#a08a2b813e77f97aa8b6c1d252e5417f7',1,'Vertex']]],

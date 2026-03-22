@@ -6,7 +6,7 @@ var searchData=
   ['additional_20documentation_3',['Additional Documentation',['../index.html#autotoc_md8',1,'']]],
   ['addvertex_4',['addVertex',['../classGraph.html#a00be284ea2be3b3d0f0d2e493b70245b',1,'Graph']]],
   ['adj_5',['adj',['../classVertex.html#adb48310bebc687c86e90d2a20215642f',1,'Vertex']]],
-  ['algorithms_20da_20spring_202026_6',['Design of Algorithms (DA) - Spring 2026',['../index.html#autotoc_md2',1,'']]],
+  ['algorithm_20design_20da_20spring_202026_6',['Algorithm Design (DA) - Spring 2026',['../index.html#autotoc_md2',1,'']]],
   ['analysis_7',['T2.1 - Basic Formulation (Primary Domains, No Risk Analysis)',['../extra_docs.html#ext_t2_1',1,'']]],
   ['analysis_20k_201_8',['T2.2 - Basic Formulation with Risk Analysis (K = 1)',['../extra_docs.html#ext_t2_2',1,'']]],
   ['analysis_20with_20k_201_20proposed_20approach_9',['T2.3 - Risk Analysis with K &amp;gt; 1 (Proposed Approach)',['../extra_docs.html#ext_t2_3',1,'']]],

@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['of_20algorithms_20da_20spring_202026_0',['Design of Algorithms (DA) - Spring 2026',['../index.html#autotoc_md2',1,'']]],
-  ['organization_20tool_1',['Scientific Conference Organization Tool',['../index.html',1,'']]],
-  ['our_20solution_20dataset10_2',['Our Solution (dataset10)',['../extra_docs.html#ext_test_diff_our_solution',1,'']]],
-  ['outlined_20approaches_3',['Extra Documentation and Outlined Approaches',['../extra_docs.html',1,'']]]
+  ['organization_20tool_0',['Scientific Conference Organization Tool',['../index.html',1,'']]],
+  ['our_20solution_20dataset10_1',['Our Solution (dataset10)',['../extra_docs.html#ext_test_diff_our_solution',1,'']]],
+  ['outlined_20approaches_2',['Extra Documentation and Outlined Approaches',['../extra_docs.html',1,'']]]
 ];

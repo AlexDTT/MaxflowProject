@@ -22,7 +22,7 @@ var searchData=
   ['solution_20dataset10_19',['Our Solution (dataset10)',['../extra_docs.html#ext_test_diff_our_solution',1,'']]],
   ['solve_20it_20',['Solve It',['../extra_docs.html#ext_t2_1_approach',1,'How We Solve It'],['../extra_docs.html#ext_t2_2_approach',1,'How We Solve It']]],
   ['sourceid_21',['sourceId',['../classGraphBuilder.html#af083e85dbe0487bc446f9419a65c514c',1,'GraphBuilder']]],
-  ['spring_202026_22',['Design of Algorithms (DA) - Spring 2026',['../index.html#autotoc_md2',1,'']]],
+  ['spring_202026_22',['Algorithm Design (DA) - Spring 2026',['../index.html#autotoc_md2',1,'']]],
   ['submission_23',['Submission',['../classSubmission.html',1,'Submission'],['../classSubmission.html#aef0d46fbb565d31c272cb84488c6c0fe',1,'Submission::Submission()']]],
   ['submission_2ecpp_24',['Submission.cpp',['../Submission_8cpp.html',1,'']]],
   ['submission_2eh_25',['Submission.h',['../Submission_8h.html',1,'']]],

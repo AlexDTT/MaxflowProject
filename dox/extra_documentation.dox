@@ -16,7 +16,7 @@ receives at least @c MinReviewsPerSubmission reviews, and no reviewer is assigne
 We model the problem as a **Maximum Flow** problem on a bipartite graph with a super-source
 and super-sink.
 
-**Graph construction** (@ref GraphBuilder::buildReviewFlowGraph):
+Graph construction (@ref GraphBuilder::buildReviewFlowGraph):
 
 - **Vertices:** super-source (ID 0), one node per submission (IDs 1..P), one node per reviewer
   (IDs P+1..P+R), super-sink (ID P+R+1).
@@ -32,11 +32,11 @@ and super-sink.
 A **complete assignment** is achieved when the total flow equals P × MinReviewsPerSubmission.
 If the max flow is less than this value, some submissions cannot be fully covered.
 
-**Algorithm:** We run @ref edmondsKarp "Edmonds-Karp" on the constructed graph. The BFS-based
+Algorithm: We run @ref edmondsKarp "Edmonds-Karp" on the constructed graph. The BFS-based
 augmentation guarantees we find the maximum flow. After the algorithm terminates, edges from
 submissions to reviewers with positive flow represent the assigned reviews.
 
-**Output:** The function @ref AssignmentLogic::writeAssignmentsToFile "writeAssignmentsToFile"
+Output: The function @ref AssignmentLogic::writeAssignmentsToFile "writeAssignmentsToFile"
 traverses the flow graph and writes a CSV file listing every assignment (SubmissionId,
 ReviewerId, matched domain), grouped both by submission and by reviewer, with the total count.
 If the assignment is incomplete, a missing-reviews section is appended.
@@ -58,14 +58,15 @@ MinReviewsPerSubmission, 2
 MaxReviewsPerReviewer, 2
 @endcode
 
-**Graph edges (mode 1):**
+Graph edges (mode 1):
 - Source → Sub1 (cap 2), Source → Sub2 (cap 2)
 - Sub1 → Rev1 (cap 1), Sub1 → Rev2 (cap 1) - both match topic 1
 - Sub2 → Rev3 (cap 1) - matches topic 2
 - Rev1 → Sink (cap 2), Rev2 → Sink (cap 2), Rev3 → Sink (cap 2)
 
-**Max flow:** 3 (Sub1 gets 2 reviews from Rev1 and Rev2; Sub2 gets only 1 from Rev3).
-**Total required:** 4. **Result:** Incomplete - Sub2 is missing 1 review.
+Max flow: 3 (Sub1 gets 2 reviews from Rev1 and Rev2; Sub2 gets only 1 from Rev3).
+
+Total required: 4. **Result:** Incomplete - Sub2 is missing 1 review.
 
 <div class="interactive_dotgraph">
 
@@ -128,12 +129,15 @@ MinReviewsPerSubmission, 1
 MaxReviewsPerReviewer, 2
 @endcode
 
-**Baseline:** Sub1 matches {Rev1, Rev2}, Sub2 matches {Rev3}. Total required = 2.
+Baseline: Sub1 matches {Rev1, Rev2}, Sub2 matches {Rev3}. Total required = 2.
 - Rev1 assigns 1 to Sub1, Rev3 assigns 1 to Sub2. Flow = 2. **Feasible.**
 
-**Remove Rev1:** Sub1 can only match Rev2. Sub2 matches Rev3. Flow = 2. Still feasible.
-**Remove Rev2:** Sub1 can only match Rev1. Sub2 matches Rev3. Flow = 2. Still feasible.
-**Remove Rev3:** Sub2 has **no match**. Flow = 1 < 2. **Rev3 is risky!**
+
+Remove Rev1: Sub1 can only match Rev2. Sub2 matches Rev3. Flow = 2. Still feasible.
+
+Remove Rev2: Sub1 can only match Rev1. Sub2 matches Rev3. Flow = 2. Still feasible.
+
+Remove Rev3: Sub2 has **no match**. Flow = 1 < 2. **Rev3 is risky!**
 
 **Output:**
 @code

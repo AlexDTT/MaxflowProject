@@ -1,4 +1,6 @@
 digraph MaxFlowReviewAssignment {
+    graph [bgcolor="transparent"];
+    
     // Basic graph styling
     rankdir=TB; // Top to Bottom layout to save horizontal space
     size="8,10"; // Constrain maximum dimensions

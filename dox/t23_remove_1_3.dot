@@ -1,5 +1,6 @@
 digraph T23_Remove_Rev1_Rev3 {
     rankdir=LR;
+    graph [bgcolor="transparent"];
     node [shape=box, style=filled, fillcolor=white, fontname="Helvetica"];
     edge [fontname="Helvetica", fontsize=9];
 

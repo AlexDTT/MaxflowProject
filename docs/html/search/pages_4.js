@@ -2,7 +2,7 @@ var searchData=
 [
   ['about_20the_20project_0',['About the Project',['../index.html#autotoc_md3',1,'']]],
   ['additional_20documentation_1',['Additional Documentation',['../index.html#autotoc_md8',1,'']]],
-  ['algorithms_20da_20spring_202026_2',['Design of Algorithms (DA) - Spring 2026',['../index.html#autotoc_md2',1,'']]],
+  ['algorithm_20design_20da_20spring_202026_2',['Algorithm Design (DA) - Spring 2026',['../index.html#autotoc_md2',1,'']]],
   ['analysis_3',['T2.1 - Basic Formulation (Primary Domains, No Risk Analysis)',['../extra_docs.html#ext_t2_1',1,'']]],
   ['analysis_20k_201_4',['T2.2 - Basic Formulation with Risk Analysis (K = 1)',['../extra_docs.html#ext_t2_2',1,'']]],
   ['analysis_20with_20k_201_20proposed_20approach_5',['T2.3 - Risk Analysis with K &amp;gt; 1 (Proposed Approach)',['../extra_docs.html#ext_t2_3',1,'']]],
