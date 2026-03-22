@@ -154,7 +154,11 @@ Example</h2>
 <p class="startli">Max flow:** 3 (Sub1 gets 2 reviews from Rev1 and Rev2; Sub2 gets only 1 from Rev3). Total required:** 4. <b>Result:</b> Incomplete — Sub2 is missing 1 review.</p>
 </li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="ext_t2_1_complexity"></a>
+<div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t21_example.dot_00dd8406fa312b47141c2828750f1843.svg" width="544" height="219"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+T2.1 Example: Max-flow graph with partial assignment (flow=3, required=4)</div>
+</div>
+</div><div class="interactive_dotgraph"></div><h2 class="doxsection"><a class="anchor" id="ext_t2_1_complexity"></a>
 Complexity</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -212,7 +216,11 @@ Example</h2>
 </div><!-- fragment --></li>
 </ul>
 <p>This is a non-trivial result: Rev3 is the only reviewer for topic 2. Its absence makes it impossible to cover Sub2.</p>
-<h2 class="doxsection"><a class="anchor" id="ext_t2_2_complexity"></a>
+<div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t22_example.dot_ed4ece27de8102677ab83a40bbb693f5.svg" width="544" height="238"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+T2.2 Example: Rev3 (highlighted in red) is the sole risky reviewer</div>
+</div>
+</div><div class="interactive_dotgraph"></div><h2 class="doxsection"><a class="anchor" id="ext_t2_2_complexity"></a>
 Complexity</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -291,13 +299,20 @@ Non-Trivial Input Example</h2>
 <div class="line">MinReviewsPerSubmission, 2</div>
 <div class="line">MaxReviewsPerReviewer, 2</div>
 </div><!-- fragment --><p>Baseline (all reviewers):** Topic A submissions {1,3} match Rev1, Rev2. Topic B submission {2} matches Rev3, Rev4. Required = 3 × 2 = 6.</p><ul>
-<li><p class="startli">Rev1 → {1,3} (2 reviews), Rev2 → {1,3} (2 reviews), Rev3 → {2} (1), Rev4 → {2} (1). Flow = 6. <b>Feasible.</b></p>
-<p class="startli">K = 2, remove {Rev1, Rev3}:** Remaining {Rev2, Rev4}. Sub1 and Sub3 share only Rev2 (cap 2, so 1 each). Sub2 uses Rev4 (cap 2, gets 1). Flow = 3 &lt; 6. <b>Critical subset.</b></p>
-<p class="startli">K = 2, remove {Rev1, Rev2}:** Remaining {Rev3, Rev4} — both topic 2 only. Sub1 and Sub3 have zero matches. Flow = 2 (only Sub2 covered). <b>Critical subset.</b></p>
-<p class="startli">K = 2, remove {Rev3, Rev4}:** Remaining {Rev1, Rev2} — both topic 1 only. Sub2 has zero matches. Flow = 4 &lt; 6. <b>Critical subset.</b></p>
-<p class="startli">K = 2, remove {Rev1, Rev4}:** Remaining {Rev2, Rev3}. Sub1+Sub3 share Rev2 (cap 2). Sub2 uses Rev3 (cap 2, gets 1). But Sub1+Sub3 need 4 total and Rev2 can only give 2. Sub2 gets 1 but needs 2. Flow ≤ 3. <b>Critical subset.</b></p>
-</li>
+<li>Rev1 → {1,3} (2 reviews), Rev2 → {1,3} (2 reviews), Rev3 → {2} (1), Rev4 → {2} (1). Flow = 6. <b>Feasible.</b></li>
 </ul>
+<div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t23_baseline.dot_b6c98394f94b9e00d868a00588abc5ec.svg" width="548" height="296"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+T2.3 Baseline: All reviewers available, flow=6 (feasible)</div>
+</div>
+</div><div class="interactive_dotgraph"></div><p>K = 2, remove {Rev1, Rev3}:** Remaining {Rev2, Rev4}. Sub1 and Sub3 share only Rev2 (cap 2, so 1 each). Sub2 uses Rev4 (cap 2, gets 1). Flow = 3 &lt; 6. <b>Critical subset.</b></p>
+<div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t23_remove_1_3.dot_b67b7f363eb639cf980ddc2e8b8c6e9e.svg" width="563" height="323"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+T2.3 K=2: Removing {Rev1, Rev3} leaves flow=3 &lt; 6 — critical subset</div>
+</div>
+</div><div class="interactive_dotgraph"></div><p>K = 2, remove {Rev1, Rev2}:** Remaining {Rev3, Rev4} — both topic 2 only. Sub1 and Sub3 have zero matches. Flow = 2 (only Sub2 covered). <b>Critical subset.</b></p>
+<p>K = 2, remove {Rev3, Rev4}:** Remaining {Rev1, Rev2} — both topic 1 only. Sub2 has zero matches. Flow = 4 &lt; 6. <b>Critical subset.</b></p>
+<p>K = 2, remove {Rev1, Rev4}:** Remaining {Rev2, Rev3}. Sub1+Sub3 share Rev2 (cap 2). Sub2 uses Rev3 (cap 2, gets 1). But Sub1+Sub3 need 4 total and Rev2 can only give 2. Sub2 gets 1 but needs 2. Flow ≤ 3. <b>Critical subset.</b></p>
 <p>This demonstrates that the K = 2 analysis reveals structural vulnerabilities not visible at K = 1: no individual reviewer is risky (K = 1 returns empty), but several pairs are critical.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_t2_4"></a>
@@ -379,9 +394,13 @@ Example</h2>
 </li>
 <li><p class="startli">Layer 1 (cost 0): Sub1→Rev1, Sub2→Rev3. Both primary-primary. Flow = 2. Done.</p>
 <p class="startli">Min-cost max-flow:** Same result, total cost = 0. Both submissions get their best-possible primary-primary match.</p>
-<p class="startli">A case where Layered fails and Min-Cost succeeds:** If Rev1 were removed, Layer 1 would match Sub2→Rev3 (cost 0), leaving Sub1 to find a match in Layer 2 (Sub1→Rev2 at cost 1). Total cost = 1. Min-cost max-flow would find the same. But if there were a third submission competing for Rev3, Layer 1 might greedily assign Rev3 to the wrong submission, forcing a suboptimal overall assignment — while min-cost max-flow would globally minimise total cost.</p>
 </li>
 </ul>
+<div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t24_example.dot_0b75dd36b1527307b36ea6d477aa8d4b.svg" width="558" height="358"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+T2.4 Example: Optimal assignment uses primary-primary matches (gold, cost 0)</div>
+</div>
+</div><div class="interactive_dotgraph"></div><p>A case where Layered fails and Min-Cost succeeds:** If Rev1 were removed, Layer 1 would match Sub2→Rev3 (cost 0), leaving Sub1 to find a match in Layer 2 (Sub1→Rev2 at cost 1). Total cost = 1. Min-cost max-flow would find the same. But if there were a third submission competing for Rev3, Layer 1 might greedily assign Rev3 to the wrong submission, forcing a suboptimal overall assignment — while min-cost max-flow would globally minimise total cost.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_test_diff"></a>
 Why Two Integration Tests "Differ"</h1>
@@ -410,7 +429,11 @@ Our Solution (dataset10)</h2>
 <div class="line">3, 4, 2       # Sub 3 ← Rev 4 (via topic 2)</div>
 <div class="line"><span class="preprocessor">#Total: 6</span></div>
 </div><!-- fragment --><p>Reviewers 1 and 2 each handle 2 reviews (at capacity). Reviewers 3 and 4 each handle 1 review. Reviewers 5 and 6 are unused. Every submission gets exactly 2 reviews.</p>
-<h2 class="doxsection"><a class="anchor" id="ext_test_diff_reference"></a>
+<div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_test_diff_ours.dot_2b123d127030d5b673f88c45ae6dfb5c.svg" width="572" height="479"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+Our solution for dataset10: Rev1,Rev2 at capacity, flow=6</div>
+</div>
+</div><div class="interactive_dotgraph"></div><h2 class="doxsection"><a class="anchor" id="ext_test_diff_reference"></a>
 Reference Solution</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#SubmissionId,ReviewerId,Match</span></div>
 <div class="line">1, 1, 2       # Sub 1 ← Rev 1 (via topic 2)</div>
