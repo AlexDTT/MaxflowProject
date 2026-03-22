@@ -21,14 +21,14 @@ digraph T24_Example {
     "SOURCE" -> "SUB#1\npri=1\nsec=2" [label="1/1", color="#1976d2", penwidth=2.0];
     "SOURCE" -> "SUB#2\npri=3\nsec=1" [label="1/1", color="#1976d2", penwidth=2.0];
 
-    // Primary-Primary matches (cost 0, gold)
-    "SUB#1\npri=1\nsec=2" -> "REV#1\npri=1\nsec=3" [label="1/1\ncost=0\npri=pri", color="#ffd700", fontcolor="#cca300", penwidth=2.5];
-    "SUB#2\npri=3\nsec=1" -> "REV#3\npri=3\nsec=1" [label="1/1\ncost=0\npri=pri", color="#ffd700", fontcolor="#cca300", penwidth=2.5];
+    // Primary-Primary matches (allowed in modes 1,2,3 - gold, used in flow)
+    "SUB#1\npri=1\nsec=2" -> "REV#1\npri=1\nsec=3" [label="1/1\nmode 1,2,3\npri=pri", color="#ffd700", fontcolor="#cca300", penwidth=2.5];
+    "SUB#2\npri=3\nsec=1" -> "REV#3\npri=3\nsec=1" [label="1/1\nmode 1,2,3\npri=pri", color="#ffd700", fontcolor="#cca300", penwidth=2.5];
 
-    // Cross matches (cost 1, orange, dashed - not used in optimal)
-    "SUB#1\npri=1\nsec=2" -> "REV#2\npri=2\nsec=3" [label="0/1\ncost=1\nsec=pri", color="#ff9800", fontcolor="#ff9800", style=dashed];
-    "SUB#2\npri=3\nsec=1" -> "REV#1\npri=1\nsec=3" [label="0/1\ncost=1\nsec=pri", color="#ff9800", fontcolor="#ff9800", style=dashed];
-    "SUB#2\npri=3\nsec=1" -> "REV#2\npri=2\nsec=3" [label="0/1\ncost=1\npri=sec", color="#ff9800", fontcolor="#ff9800", style=dashed];
+    // Cross matches (allowed in modes 2,3 - orange, dashed, not used)
+    "SUB#1\npri=1\nsec=2" -> "REV#2\npri=2\nsec=3" [label="0/1\nmode 2,3\nsec=pri", color="#ff9800", fontcolor="#ff9800", style=dashed];
+    "SUB#2\npri=3\nsec=1" -> "REV#1\npri=1\nsec=3" [label="0/1\nmode 2,3\nsec=pri", color="#ff9800", fontcolor="#ff9800", style=dashed];
+    "SUB#2\npri=3\nsec=1" -> "REV#2\npri=2\nsec=3" [label="0/1\nmode 3\npri=sec", color="#ff9800", fontcolor="#ff9800", style=dashed];
 
     // Reviewers -> Sink (cap=2)
     "REV#1\npri=1\nsec=3" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
