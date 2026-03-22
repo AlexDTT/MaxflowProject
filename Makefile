@@ -1,5 +1,5 @@
 CXX := g++
-CXXFLAGS := -Wall -Wextra -std=c++17 -I.
+CXXFLAGS := -Wall -Wextra -std=c++17 -I. -MMD -MP
 
 TARGET := main
 TARGET_SOURCES := \
@@ -20,6 +20,8 @@ UNIT_TEST_SOURCES := \
 	algorithms/EdmondKarp.cpp services/AssignmentLogic.cpp \
 	data_structures/GraphBuilder.cpp
 UNIT_TEST_OBJECTS := $(UNIT_TEST_SOURCES:.cpp=.o)
+
+ALL_DEPS := $(TARGET_OBJECTS:.o=.d) $(UNIT_TEST_OBJECTS:.o=.d)
 
 .PHONY: all unit-test integration-test test run clean docs
 
@@ -50,5 +52,8 @@ docs:
 
 clean:
 	rm -f $(TARGET_OBJECTS) $(UNIT_TEST_OBJECTS) $(TARGET) $(UNIT_TEST_TARGET)
+	rm -f $(ALL_DEPS)
 	rm -f output_dataset*.csv assign.csv
 	rm -rf docs
+
+-include $(ALL_DEPS)

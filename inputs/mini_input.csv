@@ -1,0 +1,17 @@
+#Submissions
+1, "Alpha", Alice, alice@x, 1,
+2, "Beta",  Bob,   bob@x,   2,
+ 
+#Reviewers
+1, Rev1, r1@x, 1,
+2, Rev2, r2@x, 1,
+3, Rev3, r3@x, 2,
+ 
+#Parameters
+MinReviewsPerSubmission, 1
+MaxReviewsPerReviewer, 2
+
+#Control
+GenerateAssignments, 1
+RiskAnalysis, 1
+OutputFileName, "assign.csv"
