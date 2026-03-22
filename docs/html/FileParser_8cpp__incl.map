@@ -1,0 +1,26 @@
+<map id="io/FileParser.cpp" name="io/FileParser.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="323,5,441,32"/>
+<area shape="rect" id="Node000002" href="$FileParser_8h.html" title="Class definition for parsing input CSV files." alt="" coords="128,80,233,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="348,35,231,77,229,72,346,30"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="257,80,322,107"/>
+<area shape="poly" id="edge10_Node000001_Node000008" title=" " alt="" coords="367,35,319,73,316,68,364,30"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="346,80,417,107"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="384,33,384,64,379,64,379,33"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="442,80,481,107"/>
+<area shape="poly" id="edge12_Node000001_Node000010" title=" " alt="" coords="397,31,439,68,435,72,394,35"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="505,80,584,107"/>
+<area shape="poly" id="edge13_Node000001_Node000011" title=" " alt="" coords="411,30,503,71,501,76,409,35"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="235,229,288,256"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="128,105,80,116,36,132,20,142,11,153,9,165,16,180,29,190,49,200,103,216,165,228,220,235,219,240,164,233,102,221,47,205,26,195,12,183,4,166,6,151,17,138,34,127,79,110,127,100"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="26,155,84,181"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="160,110,91,149,89,144,157,105"/>
+<area shape="rect" id="Node000005" href="$Submission_8h.html" title=" " alt="" coords="107,155,254,181"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="183,107,183,139,178,139,178,107"/>
+<area shape="rect" id="Node000006" href="$Reviewer_8h.html" title=" " alt="" coords="278,155,411,181"/>
+<area shape="poly" id="edge6_Node000002_Node000006" title=" " alt="" coords="210,105,303,145,301,150,208,110"/>
+<area shape="rect" id="Node000007" href="$Parameters_8h.html" title=" " alt="" coords="434,155,580,181"/>
+<area shape="poly" id="edge8_Node000002_Node000007" title=" " alt="" coords="233,104,435,148,434,153,232,109"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="196,180,238,217,235,221,193,184"/>
+<area shape="poly" id="edge7_Node000006_Node000003" title=" " alt="" coords="332,184,289,221,286,217,328,180"/>
+<area shape="poly" id="edge9_Node000007_Node000003" title=" " alt="" coords="465,184,304,232,303,227,464,179"/>
+</map>

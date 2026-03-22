@@ -48,7 +48,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_assignment_logic_8cpp.html"
+"AssignmentLogic_8cpp.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';
