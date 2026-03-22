@@ -12,3 +12,4 @@ output.csv
 assign.csv
 *.o
 *.dot
+.DS_Store
