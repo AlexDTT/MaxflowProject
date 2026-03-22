@@ -38,6 +38,7 @@ PAGE_OUTLINE_PANEL     = NO
 HAVE_DOT               = YES
 DOT_IMAGE_FORMAT       = svg
 DOTFILE_DIRS           = . dox
+IMAGE_PATH             = . ui
 HTML_COLORSTYLE        = LIGHT
 
 # Other options
