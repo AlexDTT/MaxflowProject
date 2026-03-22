@@ -164,13 +164,13 @@ Complexity</h2>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Build flow graph  </td><td class="markdownTableBodyNone">O(P × R) - check all submission-reviewer pairs for domain match  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Edmonds-Karp  </td><td class="markdownTableBodyNone">O(V × E²) - V = P + R + 2, E ≈ P + R + (matching pairs)  </td></tr>
+<td class="markdownTableBodyNone">Edmonds-Karp  </td><td class="markdownTableBodyNone">O(F × E), where F = P × MinReviewsPerSubmission  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Write output  </td><td class="markdownTableBodyNone">O(V + E) - traverse graph once  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(P × R + V × E²)</b>  </td></tr>
+<td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(F × E)</b>  </td></tr>
 </table>
-<p>For typical inputs (P, R &lt; 200), E ≈ 40,000 in the worst case. However, the theoretical O(V × E²) bound is very loose here - the network has diameter 4, so augmenting paths are always length 3. In practice the algorithm terminates in O(F × E) where F = P × MinReviewsPerSubmission, which is far more tractable.</p>
+<p>For typical inputs (P, R &lt; 200), E ≈ 40,000 in the worst case. The theoretical O(V × E²) bound is very loose here - the network has diameter 3 (every augmenting path follows exactly source → submission → reviewer → sink, i.e. 3 edges). In practice the algorithm terminates in O(F × E) where F = P × MinReviewsPerSubmission, which is far more tractable.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_t2_2"></a>
 T2.2 - Basic Formulation with Risk Analysis (K = 1)</h1>
@@ -225,15 +225,15 @@ Complexity</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Step  </th><th class="markdownTableHeadNone">Complexity  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Baseline max-flow  </td><td class="markdownTableBodyNone">O(V × E²)  </td></tr>
+<td class="markdownTableBodyNone">Baseline max-flow  </td><td class="markdownTableBodyNone">O(F × E), where F = P × MinReviewsPerSubmission  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">R iterations, each: build graph + max-flow  </td><td class="markdownTableBodyNone">R × O(P × R + V × E²)  </td></tr>
+<td class="markdownTableBodyNone">R iterations, each: build graph + max-flow  </td><td class="markdownTableBodyNone">R × O(F × E)  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Sort risky IDs  </td><td class="markdownTableBodyNone">O(R log R)  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(R × (P × R + V × E²))</b>  </td></tr>
+<td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(R × F × E)</b>  </td></tr>
 </table>
-<p>The theoretical O(V × E²) per run is very loose for this 4-node-diameter network. In practice each Edmonds-Karp run terminates in O(F × E) where F = P × MinReviewsPerSubmission, giving an effective complexity of O(R × F × E). For typical conference sizes (R, P &lt; 200, F &lt; 400, E &lt; 40,000), this is around 10⁹ operations in the worst case - feasible in a few seconds, though not instantaneous for large inputs.</p>
+<p>The theoretical O(V × E²) per run is very loose for this 4-node-diameter network. In practice each Edmonds-Karp run terminates in O(F × E) where F = P × MinReviewsPerSubmission, giving an effective complexity of O(R × F × E). For typical conference sizes (R, P &lt; 200, F &lt; 400, E &lt; 40,000), this is around 3×10⁹ operations in the worst case - feasible in a few seconds, though not instantaneous for large inputs.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_t2_3"></a>
 T2.3 - Risk Analysis with K &gt; 1 (Proposed Approach)</h1>
@@ -253,7 +253,7 @@ Proposed Approach</h2>
 </li>
 <li><b>Return</b> all critical subsets.</li>
 </ol>
-<p><b>Pruning optimisation:</b> If K &gt; 1 and a reviewer r was already identified as risky at K = 1, then any K-sized subset containing r is automatically critical - we can skip testing those subsets and mark them directly. We can also prune subsets containing multiple risky reviewers, as they are guaranteed to be critical.</p>
+<p><b>Pruning optimisation</b>: If K &gt; 1 and a reviewer r was already identified as risky at K = 1, then any K-sized subset containing r is automatically critical - we can skip testing those subsets and mark them directly.</p>
 <p><b>Early termination</b>: Before even building the flow graph for a subset, a cheap per-topic count can immediately identify critical subsets without running Edmonds-Karp at all. For each topic t, check:</p>
 <div class="fragment"><div class="line">count(remaining reviewers with primaryTopic == t) * MaxReviewsPerReviewer</div>
 <div class="line">    &lt; count(submissions with primaryTopic == t) * MinReviewsPerSubmission</div>
@@ -268,26 +268,26 @@ Complexity</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Build flow graph per subset  </td><td class="markdownTableBodyNone">O(P × R)  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Edmonds-Karp per subset  </td><td class="markdownTableBodyNone">O(V × E²)  </td></tr>
+<td class="markdownTableBodyNone">Edmonds-Karp per subset  </td><td class="markdownTableBodyNone">O(F × E), where F = P × MinReviewsPerSubmission  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Total (without pruning)</b>  </td><td class="markdownTableBodyNone"><b>O(C(R,K) × (P×R + V×E²))</b>  </td></tr>
+<td class="markdownTableBodyNone"><b>Total (without pruning)</b>  </td><td class="markdownTableBodyNone"><b>O(C(R,K) × F × E)</b>  </td></tr>
 </table>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">K value  </th><th class="markdownTableHeadNone">Approximate cost  </th><th class="markdownTableHeadNone">Practical?  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">2  </td><td class="markdownTableBodyNone">O(R² × V×E²)  </td><td class="markdownTableBodyNone">Yes, for R &lt; 100  </td></tr>
+<td class="markdownTableBodyNone">2  </td><td class="markdownTableBodyNone">O(R² × F × E)  </td><td class="markdownTableBodyNone">Yes, for R &lt; 100  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">3  </td><td class="markdownTableBodyNone">O(R³ × V×E²)  </td><td class="markdownTableBodyNone">Borderline for R &gt; 50  </td></tr>
+<td class="markdownTableBodyNone">3  </td><td class="markdownTableBodyNone">O(R³ × F × E)  </td><td class="markdownTableBodyNone">Borderline for R &gt; 50  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">≥ 4  </td><td class="markdownTableBodyNone">O(R⁴ × V×E²)  </td><td class="markdownTableBodyNone">Impractical without heavy pruning  </td></tr>
+<td class="markdownTableBodyNone">≥ 4  </td><td class="markdownTableBodyNone">O(R⁴ × F × E)  </td><td class="markdownTableBodyNone">Impractical without heavy pruning  </td></tr>
 </table>
 <p>With pruning (removing known K=1 risky reviewers from consideration), the effective number of subsets drops significantly when many individual reviewers are already critical.</p>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_3_example"></a>
 Non-Trivial Input Example</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#Submissions</span></div>
-<div class="line">1, <span class="stringliteral">&quot;Topic A&quot;</span>, Alice, alice@x, 1,</div>
-<div class="line">2, <span class="stringliteral">&quot;Topic B&quot;</span>, Bob,   bob@x,   2,</div>
+<div class="line">1, <span class="stringliteral">&quot;Topic A&quot;</span>,   Alice, alice@x, 1,</div>
+<div class="line">2, <span class="stringliteral">&quot;Topic B&quot;</span>,   Bob,   bob@x,   2,</div>
 <div class="line">3, <span class="stringliteral">&quot;Topic A 2&quot;</span>, Carol, carol@x, 1,</div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#Reviewers</span></div>
@@ -297,25 +297,32 @@ Non-Trivial Input Example</h2>
 <div class="line">4, Rev4, r4@x, 2,</div>
 <div class="line"> </div>
 <div class="line"><span class="preprocessor">#Parameters</span></div>
-<div class="line">MinReviewsPerSubmission, 2</div>
+<div class="line">MinReviewsPerSubmission, 1</div>
 <div class="line">MaxReviewsPerReviewer, 2</div>
-</div><!-- fragment --><p><b>Baseline (all reviewers)</b>: Topic A submissions {1,3} match Rev1, Rev2. Topic B submission {2} matches Rev3, Rev4. Required = 3 × 2 = 6.</p><ul>
-<li>Rev1 → {1,3} (2 reviews), Rev2 → {1,3} (2 reviews), Rev3 → {2} (1), Rev4 → {2} (1). Flow = 6. <b>Feasible.</b></li>
+</div><!-- fragment --><p><b>Baseline (all reviewers)</b>: Topic A submissions {1,3} match Rev1, Rev2. Topic B submission {2} matches Rev3, Rev4. Required = 3 × 1 = 3.</p><ul>
+<li>Rev1 → {1} (1 review), Rev2 → {3} (1 review), Rev3 → {2} (1 review). Flow = 3. <b>Feasible.</b></li>
+</ul>
+<p><b>K = 1 analysis</b>: No individual reviewer is risky. Removing any single reviewer still leaves at least one reviewer per topic:</p><ul>
+<li>Remove Rev1 or Rev2: the other still covers both Sub1 and Sub3 (MaxReviewsPerReviewer=2).</li>
+<li>Remove Rev3 or Rev4: the other still covers Sub2. K = 1 returns <b>empty</b> — no risky reviewers.</li>
 </ul>
 <div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
-<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t23_baseline.dot_8aef70271ed9a59f96541c661b9d787b.svg" width="548" height="296"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
-T2.3 Baseline: All reviewers available, flow=6 (feasible)</div>
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t23_baseline.dot_e7f13a6b84fd6be894591b4eddfd8db4.svg" width="548" height="296"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+T2.3 Baseline: All reviewers available, flow=3 (feasible)</div>
 </div>
-</div><div class="interactive_dotgraph"></div><p><b>K = 2, remove {Rev1, Rev3}</b>: Remaining {Rev2, Rev4}. Sub1 and Sub3 share only Rev2 (cap 2, so 1 each). Sub2 uses Rev4 (cap 2, gets 1). Flow = 3 &lt; 6. <b>Critical subset.</b></p>
+</div><div class="interactive_dotgraph"></div><p><b>K = 2, remove {Rev1, Rev2}</b>: No remaining topic-1 reviewers. Sub1 and Sub3 have zero matches. Flow = 1 (only Sub2 covered) &lt; 3. <b>Critical subset.</b></p>
 <div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
-<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t23_remove_1_3.dot_40424a6ee25bc744a0f17ef2d667e7d8.svg" width="563" height="323"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
-T2.3 K=2: Removing {Rev1, Rev3} leaves flow=3 &lt; 6 - critical subset</div>
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t23_remove_1_2.dot_b767ec7aa783d457231406291a65edfb.svg" width="563" height="342"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+T2.3 K=2: Removing {Rev1, Rev2} leaves flow=1 &lt; 3 - critical subset</div>
 </div>
-</div><div class="interactive_dotgraph"></div><p><b>K = 2, remove {Rev1, Rev2}</b>: Remaining {Rev3, Rev4} - both topic 2 only. Sub1 and Sub3 have zero matches. Flow = 2 (only Sub2 covered). <b>Critical subset.</b></p>
-<p><b>K = 2, remove {Rev3, Rev4}</b>: Remaining {Rev1, Rev2} - both topic 1 only. Sub2 has zero matches. Flow = 4 &lt; 6. <b>Critical subset.</b></p>
-<p><b>K = 2, remove {Rev1, Rev4}</b>: Remaining {Rev2, Rev3}. Sub1+Sub3 share Rev2 (cap 2). Sub2 uses Rev3 (cap 2, gets 1). But Sub1+Sub3 need 4 total and Rev2 can only give 2. Sub2 gets 1 but needs 2. Flow ≤ 3. <b>Critical subset.</b></p>
-<p>This demonstrates that the K = 2 analysis reveals structural vulnerabilities not visible at K = 1: no individual reviewer is risky (K = 1 returns empty), but several pairs are critical.</p>
-<hr  />
+</div><div class="interactive_dotgraph"></div><p><b>K = 2, remove {Rev3, Rev4}</b>: No remaining topic-2 reviewers. Sub2 has zero matches. Flow = 2 &lt; 3. <b>Critical subset.</b></p>
+<p><b>K = 2, remove {Rev1, Rev3}</b>: Rev2 covers Sub1 and Sub3 (cap 2). Rev4 covers Sub2. Flow = 3. <b>Feasible</b> - not a critical subset.</p>
+<p><b>K = 2, remove {Rev2, Rev4}</b>: Rev1 covers Sub1 and Sub3. Rev3 covers Sub2. Flow = 3. <b>Feasible</b> - not a critical subset.</p>
+<p>This demonstrates that the K = 2 analysis reveals structural vulnerabilities not visible at K = 1: no individual reviewer is risky, but removing both reviewers of the same topic is always critical. The output would be:</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#Risk Analysis: 2</span></div>
+<div class="line">1, 2</div>
+<div class="line">3, 4</div>
+</div><!-- fragment --><hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_t2_4"></a>
 T2.4 - General Formulation with Secondary Domains (Proposed Approach)</h1>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_4_problem"></a>
@@ -325,7 +332,8 @@ Problem Description</h2>
 <li>sub.primary == rev.secondary or sub.secondary == rev.primary (cross-primary-secondary)</li>
 <li>sub.secondary == rev.secondary (secondary-secondary)</li>
 </ul>
-<p>The goal is to find an assignment that maximises the quality of matches, not just feasibility. This transforms the problem from a pure max-flow problem into a <b>maximum-weight bipartite matching</b> problem with significantly higher computational complexity.</p>
+<p>Mode 3 as implemented is still a pure max-flow feasibility problem — any valid match counts equally and the goal remains satisfying MinReviewsPerSubmission for every submission. However, the spec notes that the problem has "high computational complexity if the optimal assignment is
+to be sought." This hints at a natural extension: since primary-primary matches are higher quality than cross or secondary-secondary matches, one could seek the assignment that maximises match quality rather than just feasibility. This transforms the problem into a minimum-cost maximum flow** problem.</p>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_4_approach"></a>
 Proposed Approach</h2>
 <p>We outline two approaches of increasing sophistication:</p>
@@ -361,14 +369,14 @@ Complexity</h2>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Approach  </th><th class="markdownTableHeadNone">Complexity  </th><th class="markdownTableHeadNone">Optimality  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">A: Layered Max-Flow  </td><td class="markdownTableBodyNone">O(3 × V × E²) = O(V × E²)  </td><td class="markdownTableBodyNone">Greedy, may not be globally optimal  </td></tr>
+<td class="markdownTableBodyNone">A: Layered Max-Flow  </td><td class="markdownTableBodyNone">O(3 × F × E) = O(F × E)  </td><td class="markdownTableBodyNone">Greedy, may not be globally optimal  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">B: Min-Cost Max-Flow (SSP + Dijkstra)  </td><td class="markdownTableBodyNone">O(F × (V + E) × log V)  </td><td class="markdownTableBodyNone">Exact, globally optimal  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Brute force (all assignments)  </td><td class="markdownTableBodyNone">O((P×R)!)  </td><td class="markdownTableBodyNone">Exact, impractical  </td></tr>
 </table>
 <p>Where F = P × MinReviewsPerSubmission is the total flow value.</p>
-<p><b>Why the general case is harder:</b> In T2.1, any valid match is equally good - it is a pure feasibility problem. In T2.4, match quality varies (primary &gt; cross &gt; secondary), so we must optimise a weighted objective, not just maximise flow. This elevates the problem from max-flow to min-cost max-flow, increasing complexity by a factor of F × log V.</p>
+<p><b>Why the general case is harder</b>: In T2.1, any valid match is equally good - it is a pure feasibility problem. In T2.4, match quality varies (primary &gt; cross &gt; secondary), so we must optimise a weighted objective, not just maximise flow. This elevates the problem from max-flow to min-cost max-flow, increasing complexity by a factor of log V per augmentation.</p>
 <p>For typical conference sizes (P, R &lt; 200, F &lt; 400), Approach B is practical and runs in under a second.</p>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_4_example"></a>
 Example</h2>
@@ -464,7 +472,7 @@ Complexity Summary</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Location  </th><th class="markdownTableHeadNone">Complexity  </th><th class="markdownTableHeadNone">Notes  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">edmondsKarp  </td><td class="markdownTableBodyNone"><a class="el" href="EdmondKarp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V × E²)  </td><td class="markdownTableBodyNone">Worst case; V vertices, E edges  </td></tr>
+<td class="markdownTableBodyNone">edmondsKarp  </td><td class="markdownTableBodyNone"><a class="el" href="EdmondKarp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(F × E)  </td><td class="markdownTableBodyNone">F = total flow, E = edges; theoretical O(V × E²) is very loose for this graph  </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">findAugmentingPath  </td><td class="markdownTableBodyNone"><a class="el" href="EdmondKarp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">Single BFS pass  </td></tr>
 <tr class="markdownTableRowOdd">
@@ -476,9 +484,9 @@ Complexity Summary</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">getMatchedDomain  </td><td class="markdownTableBodyNone"><a class="el" href="GraphBuilder_8h.html">data_structures/GraphBuilder.h</a>  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">At most 2 topics per entity  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">findRiskyReviewersK1  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(R × (P×R + V×E²))  </td><td class="markdownTableBodyNone">R re-runs of Edmonds-Karp  </td></tr>
+<td class="markdownTableBodyNone">findRiskyReviewersK1  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(R × F × E)  </td><td class="markdownTableBodyNone">R re-runs of Edmonds-Karp  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">generateAssignmentsAndStore  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(V × E²)  </td><td class="markdownTableBodyNone">Dominated by max-flow  </td></tr>
+<td class="markdownTableBodyNone">generateAssignmentsAndStore  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(F × E)  </td><td class="markdownTableBodyNone">Dominated by max-flow  </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">totalRequiredReviews  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(N)  </td><td class="markdownTableBodyNone">N submissions  </td></tr>
 <tr class="markdownTableRowEven">

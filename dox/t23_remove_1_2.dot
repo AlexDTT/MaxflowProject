@@ -1,0 +1,43 @@
+digraph T23_Remove_Rev1_Rev2 {
+    rankdir=LR;
+    graph [bgcolor="transparent"];
+    node [shape=box, style=filled, fillcolor=white, fontname="Helvetica"];
+    edge [fontname="Helvetica", fontsize=9];
+
+    // Source and Sink
+    "SOURCE" [fillcolor="#ffcc80"];
+    "SINK"   [fillcolor="#80cbc4"];
+
+    // Submissions
+    "SUB#1\nTopic: A" [fillcolor="#bbdefb"];
+    "SUB#2\nTopic: B" [fillcolor="#bbdefb"];
+    "SUB#3\nTopic: A" [fillcolor="#bbdefb"];
+
+    // Removed reviewers shown as dashed outlines
+    "REV#1\nREMOVED" [fillcolor="#ffcdd2", color="#d32f2f", style=dashed];
+    "REV#2\nREMOVED" [fillcolor="#ffcdd2", color="#d32f2f", style=dashed];
+    // Remaining reviewers
+    "REV#3\nTopic: B" [fillcolor="#c8e6c9"];
+    "REV#4\nTopic: B" [fillcolor="#c8e6c9"];
+
+    // Source -> Submissions (cap=1)
+    // Sub1 and Sub3 cannot be covered - no topic-A reviewers left
+    "SOURCE" -> "SUB#1\nTopic: A" [label="0/1", color=gray, style=dashed];
+    "SOURCE" -> "SUB#2\nTopic: B" [label="1/1", color="#1976d2", penwidth=2.0];
+    "SOURCE" -> "SUB#3\nTopic: A" [label="0/1", color=gray, style=dashed];
+
+    // No edges from Sub1 or Sub3 - no matching reviewers remain
+    // Sub2 -> Rev3 (used), Sub2 -> Rev4 (unused)
+    "SUB#2\nTopic: B" -> "REV#3\nTopic: B" [label="1/1", color=blue, penwidth=2.0];
+    "SUB#2\nTopic: B" -> "REV#4\nTopic: B" [label="0/1", color=gray, style=dashed];
+
+    // Reviewers -> Sink
+    "REV#3\nTopic: B" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
+    "REV#4\nTopic: B" -> "SINK" [label="0/2", color=gray, style=dashed];
+
+    // Result annotation
+    label="K=2: Remove {Rev1, Rev2} -> Flow=1 < 3 -> CRITICAL\n(Sub1 and Sub3 have no matching reviewers)";
+    labelloc=b;
+    fontsize=12;
+    fontcolor="#d32f2f";
+}

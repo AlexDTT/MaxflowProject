@@ -79,14 +79,14 @@ Graph edges (mode 1):
 | Step | Complexity |
 |------|-----------|
 | Build flow graph | O(P × R) - check all submission-reviewer pairs for domain match |
-| Edmonds-Karp | O(V × E²) - V = P + R + 2, E ≈ P + R + (matching pairs) |
+| Edmonds-Karp | O(F × E), where F = P × MinReviewsPerSubmission |
 | Write output | O(V + E) - traverse graph once |
-| **Total** | **O(P × R + V × E²)** |
+| **Total** | **O(F × E)** |
 
-For typical inputs (P, R < 200), E ≈ 40,000 in the worst case. However, the theoretical
-O(V × E²) bound is very loose here - the network has diameter 4, so augmenting paths are
-always length 3. In practice the algorithm terminates in O(F × E) where F = P × MinReviewsPerSubmission,
-which is far more tractable.
+For typical inputs (P, R < 200), E ≈ 40,000 in the worst case. The theoretical O(V × E²)
+bound is very loose here - the network has diameter 3 (every augmenting path follows exactly
+source → submission → reviewer → sink, i.e. 3 edges). In practice the algorithm terminates
+in O(F × E) where F = P × MinReviewsPerSubmission, which is far more tractable.
 
 ---
 
@@ -160,15 +160,15 @@ impossible to cover Sub2.
 
 | Step | Complexity |
 |------|-----------|
-| Baseline max-flow | O(V × E²) |
-| R iterations, each: build graph + max-flow | R × O(P × R + V × E²) |
+| Baseline max-flow | O(F × E), where F = P × MinReviewsPerSubmission |
+| R iterations, each: build graph + max-flow | R × O(F × E) |
 | Sort risky IDs | O(R log R) |
-| **Total** | **O(R × (P × R + V × E²))** |
+| **Total** | **O(R × F × E)** |
 
 The theoretical O(V × E²) per run is very loose for this 4-node-diameter network.
 In practice each Edmonds-Karp run terminates in O(F × E) where F = P × MinReviewsPerSubmission,
 giving an effective complexity of O(R × F × E). For typical conference sizes
-(R, P < 200, F < 400, E < 40,000), this is around 10⁹ operations in the worst case -
+(R, P < 200, F < 400, E < 40,000), this is around 3×10⁹ operations in the worst case -
 feasible in a few seconds, though not instantaneous for large inputs.
 
 ---
@@ -192,10 +192,9 @@ The approach generalises the K = 1 strategy to combinations of size K:
     - If achieved flow < P × MinReviewsPerSubmission, S is a **critical subset**.
 -# **Return** all critical subsets.
 
-<b>Pruning optimisation:</b> If K > 1 and a reviewer r was already identified as risky at K = 1,
+<b>Pruning optimisation</b>: If K > 1 and a reviewer r was already identified as risky at K = 1,
 then any K-sized subset containing r is automatically critical - we can skip testing those
-subsets and mark them directly. We can also prune subsets containing multiple risky reviewers,
-as they are guaranteed to be critical.
+subsets and mark them directly.
 
 <b>Early termination</b>: Before even building the flow graph for a subset, a cheap per-topic
 count can immediately identify critical subsets without running Edmonds-Karp at all.
@@ -215,74 +214,85 @@ cross-topic coverage might still make the assignment feasible. In those modes, E
 must always be run.
 
 @subsection ext_t2_3_complexity Complexity
- 
+
 | Component | Complexity |
 |-----------|-----------|
 | Enumerate C(R, K) subsets | O(R choose K) ≈ O(R^K / K!) |
 | Build flow graph per subset | O(P × R) |
-| Edmonds-Karp per subset | O(V × E²) |
-| **Total (without pruning)** | **O(C(R,K) × (P×R + V×E²))** |
- 
+| Edmonds-Karp per subset | O(F × E), where F = P × MinReviewsPerSubmission |
+| **Total (without pruning)** | **O(C(R,K) × F × E)** |
+
 | K value | Approximate cost | Practical? |
 |---------|-----------------|------------|
-| 2 | O(R² × V×E²) | Yes, for R < 100 |
-| 3 | O(R³ × V×E²) | Borderline for R > 50 |
-| ≥ 4 | O(R⁴ × V×E²) | Impractical without heavy pruning |
- 
+| 2 | O(R² × F × E) | Yes, for R < 100 |
+| 3 | O(R³ × F × E) | Borderline for R > 50 |
+| ≥ 4 | O(R⁴ × F × E) | Impractical without heavy pruning |
+
 With pruning (removing known K=1 risky reviewers from consideration), the effective number
 of subsets drops significantly when many individual reviewers are already critical.
- 
+
 @subsection ext_t2_3_example Non-Trivial Input Example
- 
+
 @code
 #Submissions
-1, "Topic A", Alice, alice@x, 1,
-2, "Topic B", Bob,   bob@x,   2,
+1, "Topic A",   Alice, alice@x, 1,
+2, "Topic B",   Bob,   bob@x,   2,
 3, "Topic A 2", Carol, carol@x, 1,
- 
+
 #Reviewers
 1, Rev1, r1@x, 1,
 2, Rev2, r2@x, 1,
 3, Rev3, r3@x, 2,
 4, Rev4, r4@x, 2,
- 
+
 #Parameters
-MinReviewsPerSubmission, 2
+MinReviewsPerSubmission, 1
 MaxReviewsPerReviewer, 2
 @endcode
- 
+
 <b>Baseline (all reviewers)</b>: Topic A submissions {1,3} match Rev1, Rev2. Topic B submission {2}
-matches Rev3, Rev4. Required = 3 × 2 = 6.
-- Rev1 → {1,3} (2 reviews), Rev2 → {1,3} (2 reviews), Rev3 → {2} (1), Rev4 → {2} (1).
-  Flow = 6. **Feasible.**
- 
+matches Rev3, Rev4. Required = 3 × 1 = 3.
+- Rev1 → {1} (1 review), Rev2 → {3} (1 review), Rev3 → {2} (1 review). Flow = 3. **Feasible.**
+
+<b>K = 1 analysis</b>: No individual reviewer is risky. Removing any single reviewer still leaves
+at least one reviewer per topic:
+- Remove Rev1 or Rev2: the other still covers both Sub1 and Sub3 (MaxReviewsPerReviewer=2).
+- Remove Rev3 or Rev4: the other still covers Sub2.
+K = 1 returns **empty** — no risky reviewers.
+
 <div class="interactive_dotgraph">
- 
-\dotfile dox/t23_baseline.dot "T2.3 Baseline: All reviewers available, flow=6 (feasible)"
- 
+
+\dotfile dox/t23_baseline.dot "T2.3 Baseline: All reviewers available, flow=3 (feasible)"
+
 </div>
- 
-<b>K = 2, remove {Rev1, Rev3}</b>: Remaining {Rev2, Rev4}. Sub1 and Sub3 share only Rev2 (cap 2,
-so 1 each). Sub2 uses Rev4 (cap 2, gets 1). Flow = 3 < 6. **Critical subset.**
- 
+
+<b>K = 2, remove {Rev1, Rev2}</b>: No remaining topic-1 reviewers. Sub1 and Sub3 have zero
+matches. Flow = 1 (only Sub2 covered) < 3. **Critical subset.**
+
 <div class="interactive_dotgraph">
- 
-\dotfile dox/t23_remove_1_3.dot "T2.3 K=2: Removing {Rev1, Rev3} leaves flow=3 < 6 - critical subset"
- 
+
+\dotfile dox/t23_remove_1_2.dot "T2.3 K=2: Removing {Rev1, Rev2} leaves flow=1 < 3 - critical subset"
+
 </div>
- 
-<b>K = 2, remove {Rev1, Rev2}</b>: Remaining {Rev3, Rev4} - both topic 2 only. Sub1 and Sub3 have
-zero matches. Flow = 2 (only Sub2 covered). **Critical subset.**
- 
-<b>K = 2, remove {Rev3, Rev4}</b>: Remaining {Rev1, Rev2} - both topic 1 only. Sub2 has zero
-matches. Flow = 4 < 6. **Critical subset.**
- 
-<b>K = 2, remove {Rev1, Rev4}</b>: Remaining {Rev2, Rev3}. Sub1+Sub3 share Rev2 (cap 2). Sub2
-uses Rev3 (cap 2, gets 1). But Sub1+Sub3 need 4 total and Rev2 can only give 2. Sub2 gets 1
-but needs 2. Flow ≤ 3. **Critical subset.**
- 
+
+<b>K = 2, remove {Rev3, Rev4}</b>: No remaining topic-2 reviewers. Sub2 has zero matches.
+Flow = 2 < 3. **Critical subset.**
+
+<b>K = 2, remove {Rev1, Rev3}</b>: Rev2 covers Sub1 and Sub3 (cap 2). Rev4 covers Sub2.
+Flow = 3. **Feasible** - not a critical subset.
+
+<b>K = 2, remove {Rev2, Rev4}</b>: Rev1 covers Sub1 and Sub3. Rev3 covers Sub2.
+Flow = 3. **Feasible** - not a critical subset.
+
 This demonstrates that the K = 2 analysis reveals structural vulnerabilities not visible at
-K = 1: no individual reviewer is risky (K = 1 returns empty), but several pairs are critical.
+K = 1: no individual reviewer is risky, but removing both reviewers of the same topic is
+always critical. The output would be:
+
+@code
+#Risk Analysis: 2
+1, 2
+3, 4
+@endcode
 
 ---
 
@@ -296,9 +306,13 @@ domains. A submission can be matched to a reviewer if any of the following holds
 - sub.primary == rev.secondary or sub.secondary == rev.primary (cross-primary-secondary)
 - sub.secondary == rev.secondary (secondary-secondary)
 
-The goal is to find an assignment that maximises the quality of matches, not just feasibility.
-This transforms the problem from a pure max-flow problem into a **maximum-weight bipartite
-matching** problem with significantly higher computational complexity.
+Mode 3 as implemented is still a pure max-flow feasibility problem — any valid match counts
+equally and the goal remains satisfying MinReviewsPerSubmission for every submission. However,
+the spec notes that the problem has "high computational complexity if the optimal assignment is
+to be sought." This hints at a natural extension: since primary-primary matches are higher
+quality than cross or secondary-secondary matches, one could seek the assignment that maximises
+match quality rather than just feasibility. This transforms the problem into a
+**minimum-cost maximum flow** problem.
 
 @subsection ext_t2_4_approach Proposed Approach
 
@@ -342,16 +356,16 @@ since primary-primary matches (cost 0) are always preferred when available.
 
 | Approach | Complexity | Optimality |
 |----------|-----------|------------|
-| A: Layered Max-Flow | O(3 × V × E²) = O(V × E²) | Greedy, may not be globally optimal |
+| A: Layered Max-Flow | O(3 × F × E) = O(F × E) | Greedy, may not be globally optimal |
 | B: Min-Cost Max-Flow (SSP + Dijkstra) | O(F × (V + E) × log V) | Exact, globally optimal |
 | Brute force (all assignments) | O((P×R)!) | Exact, impractical |
 
 Where F = P × MinReviewsPerSubmission is the total flow value.
 
-<b>Why the general case is harder:</b> In T2.1, any valid match is equally good - it is a pure
+<b>Why the general case is harder</b>: In T2.1, any valid match is equally good - it is a pure
 feasibility problem. In T2.4, match quality varies (primary > cross > secondary), so we must
 optimise a weighted objective, not just maximise flow. This elevates the problem from
-max-flow to min-cost max-flow, increasing complexity by a factor of F × log V.
+max-flow to min-cost max-flow, increasing complexity by a factor of log V per augmentation.
 
 For typical conference sizes (P, R < 200, F < 400), Approach B is practical and runs in
 under a second.
@@ -504,14 +518,14 @@ project. See the individual function documentation for full details.
 
 | Function | Location | Complexity | Notes |
 |----------|----------|-----------|-------|
-| edmondsKarp | algorithms/EdmondKarp.h | O(V × E²) | Worst case; V vertices, E edges |
+| edmondsKarp | algorithms/EdmondKarp.h | O(F × E) | F = total flow, E = edges; theoretical O(V × E²) is very loose for this graph |
 | findAugmentingPath | algorithms/EdmondKarp.h | O(V + E) | Single BFS pass |
 | findMinResidualAlongPath | algorithms/EdmondKarp.h | O(V) | Path walk |
 | augmentFlowAlongPath | algorithms/EdmondKarp.h | O(V) | Path walk |
 | buildReviewFlowGraph | data_structures/GraphBuilder.h | O(P × R) | P submissions, R reviewers |
 | getMatchedDomain | data_structures/GraphBuilder.h | O(1) | At most 2 topics per entity |
-| findRiskyReviewersK1 | services/AssignmentLogic.h | O(R × (P×R + V×E²)) | R re-runs of Edmonds-Karp |
-| generateAssignmentsAndStore | services/AssignmentLogic.h | O(V × E²) | Dominated by max-flow |
+| findRiskyReviewersK1 | services/AssignmentLogic.h | O(R × F × E) | R re-runs of Edmonds-Karp |
+| generateAssignmentsAndStore | services/AssignmentLogic.h | O(F × E) | Dominated by max-flow |
 | totalRequiredReviews | services/AssignmentLogic.h | O(N) | N submissions |
 | totalAssignedReviews | services/AssignmentLogic.h | O(P × R) | Iterates submission→reviewer edges |
 | FileParser::parse | io/FileParser.h | O(L) | L lines in input file |

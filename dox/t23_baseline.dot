@@ -19,22 +19,25 @@ digraph T23_Baseline {
     "REV#3\nTopic: B" [fillcolor="#c8e6c9"];
     "REV#4\nTopic: B" [fillcolor="#c8e6c9"];
 
-    // Source -> Submissions (cap=2)
-    "SOURCE" -> "SUB#1\nTopic: A" [label="2/2", color="#1976d2", penwidth=2.0];
-    "SOURCE" -> "SUB#2\nTopic: B" [label="2/2", color="#1976d2", penwidth=2.0];
-    "SOURCE" -> "SUB#3\nTopic: A" [label="2/2", color="#1976d2", penwidth=2.0];
+    // Source -> Submissions (cap=1, MinReviewsPerSubmission=1)
+    "SOURCE" -> "SUB#1\nTopic: A" [label="1/1", color="#1976d2", penwidth=2.0];
+    "SOURCE" -> "SUB#2\nTopic: B" [label="1/1", color="#1976d2", penwidth=2.0];
+    "SOURCE" -> "SUB#3\nTopic: A" [label="1/1", color="#1976d2", penwidth=2.0];
 
     // Submissions -> Reviewers (mode 1, primary==primary)
+    // Sub1 -> Rev1 (used), Sub1 -> Rev2 (unused capacity)
     "SUB#1\nTopic: A" -> "REV#1\nTopic: A" [label="1/1", color=blue, penwidth=2.0];
-    "SUB#1\nTopic: A" -> "REV#2\nTopic: A" [label="1/1", color=blue, penwidth=2.0];
+    "SUB#1\nTopic: A" -> "REV#2\nTopic: A" [label="0/1", color=gray, style=dashed];
+    // Sub3 -> Rev2 (used), Sub3 -> Rev1 (unused capacity)
     "SUB#3\nTopic: A" -> "REV#1\nTopic: A" [label="0/1", color=gray, style=dashed];
-    "SUB#3\nTopic: A" -> "REV#2\nTopic: A" [label="0/1", color=gray, style=dashed];
+    "SUB#3\nTopic: A" -> "REV#2\nTopic: A" [label="1/1", color=blue, penwidth=2.0];
+    // Sub2 -> Rev3 (used), Sub2 -> Rev4 (unused capacity)
     "SUB#2\nTopic: B" -> "REV#3\nTopic: B" [label="1/1", color=blue, penwidth=2.0];
-    "SUB#2\nTopic: B" -> "REV#4\nTopic: B" [label="1/1", color=blue, penwidth=2.0];
+    "SUB#2\nTopic: B" -> "REV#4\nTopic: B" [label="0/1", color=gray, style=dashed];
 
-    // Reviewers -> Sink (cap=2)
+    // Reviewers -> Sink (cap=2, MaxReviewsPerReviewer=2)
     "REV#1\nTopic: A" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
     "REV#2\nTopic: A" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
     "REV#3\nTopic: B" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
-    "REV#4\nTopic: B" -> "SINK" [label="1/2", color="#388e3c", penwidth=2.0];
+    "REV#4\nTopic: B" -> "SINK" [label="0/2", color=gray, style=dashed];
 }
