@@ -107,7 +107,8 @@ $(function(){initNavTree('_assignment_logic_8h.html','',''); });
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle"><div class="title">AssignmentLogic.h File Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -129,7 +130,7 @@ Include dependency graph for AssignmentLogic.h:</div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="_assignment_logic_8h__dep__incl.svg" width="384" height="111"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="_assignment_logic_8h__dep__incl.svg" width="422" height="184"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="_assignment_logic_8h_source.html">Go to the source code of this file.</a></p>
@@ -138,12 +139,58 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:AssignmentLogic" id="r_AssignmentLogic"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="class_assignment_logic.html">AssignmentLogic</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static utility class for evaluating and persisting the Max Flow assignment results.  <a href="class_assignment_logic.html#details">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-enum-members" class="groupheader"><a id="enum-members" name="enum-members"></a>
+Enumerations</h2></td></tr>
+<tr class="memitem:a9243adfb7445f1adcf51b73329e774c9" id="r_a9243adfb7445f1adcf51b73329e774c9"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#a9243adfb7445f1adcf51b73329e774c9">AlgorithmType</a> { <a class="el" href="#a9243adfb7445f1adcf51b73329e774c9ad4b10a89f462d95f9e47ec216ccc30c1">FordFulkerson</a>
+, <a class="el" href="#a9243adfb7445f1adcf51b73329e774c9a6ca7c60b1701ed604027aa36072341fb">EdmondsKarp</a>
+ }</td></tr>
+<tr class="memdesc:a9243adfb7445f1adcf51b73329e774c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selects which max-flow algorithm to use.  <a href="#a9243adfb7445f1adcf51b73329e774c9">More...</a><br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Logic for assigning reviewers to submissions based on Max Flow. </p>
 
 <p class="definition">Definition in file <a class="el" href="_assignment_logic_8h_source.html">AssignmentLogic.h</a>.</p>
-</div></div><!-- contents -->
+</div><a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
+<a id="a9243adfb7445f1adcf51b73329e774c9" name="a9243adfb7445f1adcf51b73329e774c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9243adfb7445f1adcf51b73329e774c9">&#9670;&#160;</a></span>AlgorithmType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="#a9243adfb7445f1adcf51b73329e774c9">AlgorithmType</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel strong">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Selects which max-flow algorithm to use. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a9243adfb7445f1adcf51b73329e774c9ad4b10a89f462d95f9e47ec216ccc30c1" name="a9243adfb7445f1adcf51b73329e774c9ad4b10a89f462d95f9e47ec216ccc30c1"></a>FordFulkerson&#160;</td><td class="fielddoc"><p>DFS-based Ford-Fulkerson algorithm. O(F * E). </p>
+</td></tr>
+<tr><td class="fieldname"><a id="a9243adfb7445f1adcf51b73329e774c9a6ca7c60b1701ed604027aa36072341fb" name="a9243adfb7445f1adcf51b73329e774c9a6ca7c60b1701ed604027aa36072341fb"></a>EdmondsKarp&#160;</td><td class="fielddoc"><p>BFS-based Edmonds-Karp algorithm. O(V * E^2). </p>
+</td></tr>
+</table>
+
+<p class="definition">Definition at line <a class="el" href="_assignment_logic_8h_source.html#l00021">21</a> of file <a class="el" href="_assignment_logic_8h_source.html">AssignmentLogic.h</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   21</span>                         {</div>
+<div class="line"><span class="lineno">   22</span>    <a class="code hl_enumvalue" href="#a9243adfb7445f1adcf51b73329e774c9ad4b10a89f462d95f9e47ec216ccc30c1">FordFulkerson</a>, </div>
+<div class="line"><span class="lineno">   23</span>    <a class="code hl_enumvalue" href="#a9243adfb7445f1adcf51b73329e774c9a6ca7c60b1701ed604027aa36072341fb">EdmondsKarp</a>    </div>
+<div class="line"><span class="lineno">   24</span>};</div>
+<div class="ttc" id="a_assignment_logic_8h_html_a9243adfb7445f1adcf51b73329e774c9a6ca7c60b1701ed604027aa36072341fb"><div class="ttname"><a href="#a9243adfb7445f1adcf51b73329e774c9a6ca7c60b1701ed604027aa36072341fb">AlgorithmType::EdmondsKarp</a></div><div class="ttdeci">@ EdmondsKarp</div><div class="ttdoc">BFS-based Edmonds-Karp algorithm. O(V * E^2).</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8h_source.html#l00023">AssignmentLogic.h:23</a></div></div>
+<div class="ttc" id="a_assignment_logic_8h_html_a9243adfb7445f1adcf51b73329e774c9ad4b10a89f462d95f9e47ec216ccc30c1"><div class="ttname"><a href="#a9243adfb7445f1adcf51b73329e774c9ad4b10a89f462d95f9e47ec216ccc30c1">AlgorithmType::FordFulkerson</a></div><div class="ttdeci">@ FordFulkerson</div><div class="ttdoc">DFS-based Ford-Fulkerson algorithm. O(F * E).</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8h_source.html#l00022">AssignmentLogic.h:22</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->

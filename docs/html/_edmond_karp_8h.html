@@ -112,7 +112,7 @@ $(function(){initNavTree('_edmond_karp_8h.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>Implementations of the Edmonds-Karp algorithm for calculating maximum flow.  
+<p>Implementation of the Edmonds-Karp algorithm for calculating maximum flow.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_graph_8h_source.html">data_structures/Graph.h</a>&quot;</code><br />
 <code>#include &lt;queue&gt;</code><br />
@@ -151,7 +151,7 @@ Functions</h2></td></tr>
 <tr class="memdesc:a8c04ce320355c79c1f510b6e46ad1e08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes the Edmonds-Karp algorithm to find the Maximum Flow.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementations of the Edmonds-Karp algorithm for calculating maximum flow. </p>
+<div class="textblock"><p>Implementation of the Edmonds-Karp algorithm for calculating maximum flow. </p>
 <p>Provides template-based implementations of BFS-based path augmentation on generic directed flow networks. </p>
 
 <p class="definition">Definition in file <a class="el" href="_edmond_karp_8h_source.html">EdmondKarp.h</a>.</p>
@@ -254,7 +254,7 @@ template&lt;class T&gt; </div>
     <tr><td class="paramname">source</td><td>The value representing the source node. </td></tr>
     <tr><td class="paramname">target</td><td>The value representing the sink node. </td></tr>
     <tr><td class="paramname">onAugment</td><td>Optional callback invoked whenever a path is augmented. \par Complexity:<br  />
- Polynomial worst case: O(V * E^2). Pseudopolynomial (tighter in practice): O(F * E), where F is the total flow value. F depends on the numeric capacities, not just the graph size. For our network F = P * MinReviewsPerSubmission, bounded by a small constant times P, and the graph has diameter 3 (source -&gt; submission -&gt; reviewer -&gt; sink), so O(F * E) is the practical bound while O(V * E^2) covers the theoretical worst case. </td></tr>
+ O(V * E^2) polynomial worst case. Pseudopolynomial (tighter in practice): O(F * E), where F is the total flow value. F depends on the numeric capacities, not just the graph size. For our network F = P * MinReviewsPerSubmission, bounded by a small constant times P, and the graph has diameter 3 (source -&gt; submission -&gt; reviewer -&gt; sink), so O(F * E) is the practical bound while O(V * E^2) covers the theoretical worst case. </td></tr>
   </table>
   </dd>
 </dl>

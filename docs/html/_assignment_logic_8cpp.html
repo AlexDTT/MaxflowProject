@@ -113,6 +113,7 @@ $(function(){initNavTree('_assignment_logic_8cpp.html','',''); });
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="_assignment_logic_8h_source.html">services/AssignmentLogic.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_graph_builder_8h_source.html">data_structures/GraphBuilder.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_ford_fulkerson_8h_source.html">algorithms/FordFulkerson.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_edmond_karp_8h_source.html">algorithms/EdmondKarp.h</a>&quot;</code><br />
 <code>#include &lt;fstream&gt;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
@@ -121,16 +122,73 @@ $(function(){initNavTree('_assignment_logic_8cpp.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for AssignmentLogic.cpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="_assignment_logic_8cpp__incl.svg" width="1175" height="258"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="_assignment_logic_8cpp__incl.svg" width="1442" height="258"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="_assignment_logic_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:af882481678c05151b8c47eb4e8add29d" id="r_af882481678c05151b8c47eb4e8add29d"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#af882481678c05151b8c47eb4e8add29d">runMaxFlow</a> (<a class="el" href="class_graph.html">Graph</a>&lt; int &gt; *g, int source, int sink, <a class="el" href="_assignment_logic_8h.html#a9243adfb7445f1adcf51b73329e774c9">AlgorithmType</a> algo, std::function&lt; void(const std::vector&lt; int &gt; &amp;, double)&gt; logger=nullptr)</td></tr>
 <tr class="memitem:a77876bd7e23629d20315a7ac61ef09c3" id="r_a77876bd7e23629d20315a7ac61ef09c3"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a77876bd7e23629d20315a7ac61ef09c3">writeRiskSection</a> (std::ofstream &amp;out, int riskValue, const std::vector&lt; int &gt; &amp;riskyReviewerIds)</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="af882481678c05151b8c47eb4e8add29d" name="af882481678c05151b8c47eb4e8add29d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af882481678c05151b8c47eb4e8add29d">&#9670;&#160;</a></span>runMaxFlow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void runMaxFlow </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_graph.html">Graph</a>&lt; int &gt; *</td>          <td class="paramname"><span class="paramname"><em>g</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>source</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>sink</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_assignment_logic_8h.html#a9243adfb7445f1adcf51b73329e774c9">AlgorithmType</a></td>          <td class="paramname"><span class="paramname"><em>algo</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(const std::vector&lt; int &gt; &amp;, double)&gt;</td>          <td class="paramname"><span class="paramname"><em>logger</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_assignment_logic_8cpp_source.html#l00010">10</a> of file <a class="el" href="_assignment_logic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   10</span>                                                                                                                                                 {</div>
+<div class="line"><span class="lineno">   11</span>    <span class="keywordflow">if</span> (algo == <a class="code hl_enumvalue" href="_assignment_logic_8h.html#a9243adfb7445f1adcf51b73329e774c9a6ca7c60b1701ed604027aa36072341fb">AlgorithmType::EdmondsKarp</a>) {</div>
+<div class="line"><span class="lineno">   12</span>        <a class="code hl_function" href="_edmond_karp_8cpp.html#a1b7a932723c832f796e7eb79e1af10f0">edmondsKarp&lt;int&gt;</a>(g, source, sink, logger);</div>
+<div class="line"><span class="lineno">   13</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">   14</span>        <a class="code hl_function" href="_ford_fulkerson_8cpp.html#a32fb124324b25fbb279f803da9c1720c">fordFulkerson&lt;int&gt;</a>(g, source, sink, logger);</div>
+<div class="line"><span class="lineno">   15</span>    }</div>
+<div class="line"><span class="lineno">   16</span>}</div>
+<div class="ttc" id="a_assignment_logic_8h_html_a9243adfb7445f1adcf51b73329e774c9a6ca7c60b1701ed604027aa36072341fb"><div class="ttname"><a href="_assignment_logic_8h.html#a9243adfb7445f1adcf51b73329e774c9a6ca7c60b1701ed604027aa36072341fb">AlgorithmType::EdmondsKarp</a></div><div class="ttdeci">@ EdmondsKarp</div><div class="ttdoc">BFS-based Edmonds-Karp algorithm. O(V * E^2).</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8h_source.html#l00023">AssignmentLogic.h:23</a></div></div>
+<div class="ttc" id="a_edmond_karp_8cpp_html_a1b7a932723c832f796e7eb79e1af10f0"><div class="ttname"><a href="_edmond_karp_8cpp.html#a1b7a932723c832f796e7eb79e1af10f0">edmondsKarp&lt; int &gt;</a></div><div class="ttdeci">template void edmondsKarp&lt; int &gt;(Graph&lt; int &gt; *, int, int, std::function&lt; void(const std::vector&lt; int &gt; &amp;, double)&gt;)</div></div>
+<div class="ttc" id="a_ford_fulkerson_8cpp_html_a32fb124324b25fbb279f803da9c1720c"><div class="ttname"><a href="_ford_fulkerson_8cpp.html#a32fb124324b25fbb279f803da9c1720c">fordFulkerson&lt; int &gt;</a></div><div class="ttdeci">template void fordFulkerson&lt; int &gt;(Graph&lt; int &gt; *, int, int, std::function&lt; void(const std::vector&lt; int &gt; &amp;, double)&gt;)</div></div>
+</div><!-- fragment -->
+</div>
+</div>
 <a id="a77876bd7e23629d20315a7ac61ef09c3" name="a77876bd7e23629d20315a7ac61ef09c3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a77876bd7e23629d20315a7ac61ef09c3">&#9670;&#160;</a></span>writeRiskSection()</h2>
 
@@ -163,15 +221,15 @@ Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_assignment_logic_8cpp_source.html#l00060">60</a> of file <a class="el" href="_assignment_logic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   60</span>                                                                                                      {</div>
-<div class="line"><span class="lineno">   61</span>    out &lt;&lt; <span class="stringliteral">&quot;#Risk Analysis: &quot;</span> &lt;&lt; riskValue &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><span class="lineno">   62</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; riskyReviewerIds.size(); ++i) {</div>
-<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">if</span> (i &gt; 0) out &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;</div>
-<div class="line"><span class="lineno">   64</span>        out &lt;&lt; riskyReviewerIds[i];</div>
-<div class="line"><span class="lineno">   65</span>    }</div>
-<div class="line"><span class="lineno">   66</span>    out &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><span class="lineno">   67</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_assignment_logic_8cpp_source.html#l00069">69</a> of file <a class="el" href="_assignment_logic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   69</span>                                                                                                      {</div>
+<div class="line"><span class="lineno">   70</span>    out &lt;&lt; <span class="stringliteral">&quot;#Risk Analysis: &quot;</span> &lt;&lt; riskValue &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="lineno">   71</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; riskyReviewerIds.size(); ++i) {</div>
+<div class="line"><span class="lineno">   72</span>        <span class="keywordflow">if</span> (i &gt; 0) out &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>;</div>
+<div class="line"><span class="lineno">   73</span>        out &lt;&lt; riskyReviewerIds[i];</div>
+<div class="line"><span class="lineno">   74</span>    }</div>
+<div class="line"><span class="lineno">   75</span>    out &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="lineno">   76</span>}</div>
 </div><!-- fragment -->
 </div>
 </div>

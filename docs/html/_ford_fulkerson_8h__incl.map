@@ -1,0 +1,20 @@
+<map id="algorithms/FordFulkerson.h" name="algorithms/FordFulkerson.h">
+<area shape="rect" id="Node000001" title="Implementation of the Ford&#45;Fulkerson algorithm for calculating maximum flow." alt="" coords="178,5,357,31"/>
+<area shape="rect" id="Node000002" href="$_graph_8h.html" title=" " alt="" coords="115,79,276,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="257,33,220,70,216,66,254,29"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,153,63,178"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="213,34,158,53,105,81,74,110,51,141,47,138,70,107,102,77,156,48,211,29"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="300,79,378,105"/>
+<area shape="poly" id="edge8_Node000001_Node000008" title=" " alt="" coords="281,29,318,66,314,70,277,33"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="402,79,479,105"/>
+<area shape="poly" id="edge9_Node000001_Node000009" title=" " alt="" coords="298,29,398,70,396,75,296,34"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="86,153,158,178"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="185,107,147,144,143,140,181,103"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="169,108,76,148,74,144,167,103"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="182,153,238,178"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="200,104,207,137,202,138,195,105"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="262,153,315,178"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="213,103,263,141,259,145,210,107"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="340,153,414,178"/>
+<area shape="poly" id="edge6_Node000002_Node000007" title=" " alt="" coords="227,103,332,144,331,149,225,108"/>
+</map>

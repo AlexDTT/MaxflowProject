@@ -9,5 +9,6 @@ var searchData=
   ['run_6',['run',['../class_conference_app.html#aac07f61e8e5ffc6a8567a876bfd7241e',1,'ConferenceApp']]],
   ['runassignmentflow_7',['runAssignmentFlow',['../maxflow__tests_8cpp.html#a79c3e4acec96ba2a2ac6754393404f78',1,'maxflow_tests.cpp']]],
   ['runbatchmode_8',['runBatchMode',['../class_conference_app.html#a6e5e68e025d5b19694eca457226fea1b',1,'ConferenceApp']]],
-  ['runinteractivemode_9',['runInteractiveMode',['../class_conference_app.html#a146a881018b6b0242646bb1ab5469cbd',1,'ConferenceApp']]]
+  ['runinteractivemode_9',['runInteractiveMode',['../class_conference_app.html#a146a881018b6b0242646bb1ab5469cbd',1,'ConferenceApp']]],
+  ['runmaxflow_10',['runMaxFlow',['../_assignment_logic_8cpp.html#af882481678c05151b8c47eb4e8add29d',1,'AssignmentLogic.cpp']]]
 ];

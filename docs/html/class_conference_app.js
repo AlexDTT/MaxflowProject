@@ -23,6 +23,7 @@ var class_conference_app =
     [ "runBatchMode", "class_conference_app.html#a6e5e68e025d5b19694eca457226fea1b", null ],
     [ "runInteractiveMode", "class_conference_app.html#a146a881018b6b0242646bb1ab5469cbd", null ],
     [ "waitEnter", "class_conference_app.html#a558519785f0c8b9d3288d76dc5008d47", null ],
+    [ "mAlgorithm", "class_conference_app.html#adb3af061635a0c73aecbee672c7cd01d", null ],
     [ "mDataLoaded", "class_conference_app.html#a5e12b62b2c9ba3ecdbeca83c17f6da05", null ],
     [ "mFlowGraph", "class_conference_app.html#a084e46cc508a1814f3fab6f700e33fb6", null ],
     [ "mParams", "class_conference_app.html#a92c7c0e656fe4a6587e746b1fe208047", null ],

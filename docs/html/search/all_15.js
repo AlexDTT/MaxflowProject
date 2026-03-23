@@ -14,14 +14,12 @@ var searchData=
   ['testinvalidsourcethrows_11',['testInvalidSourceThrows',['../maxflow__tests_8cpp.html#a9017f932415b00f967a6f151fbc331ea',1,'maxflow_tests.cpp']]],
   ['testmodemonotonicity_12',['testModeMonotonicity',['../maxflow__tests_8cpp.html#a8286e1fc85b920e760c0b51ffb1271ae',1,'maxflow_tests.cpp']]],
   ['testprimarymodeassignmentflow_13',['testPrimaryModeAssignmentFlow',['../maxflow__tests_8cpp.html#ad81a472414c12b77927df41de5f7717c',1,'maxflow_tests.cpp']]],
-  ['tests_20differ_14',['Why Integration Tests &quot;Differ&quot;',['../extra_docs.html#ext_test_diff',1,'']]],
-  ['testsecondarysubmissionmodeenablesmatch_15',['testSecondarySubmissionModeEnablesMatch',['../maxflow__tests_8cpp.html#a549ad06baba91961e44ff6483ae4f9eb',1,'maxflow_tests.cpp']]],
-  ['the_20project_16',['About the Project',['../index.html#autotoc_md3',1,'']]],
-  ['they_20differ_17',['Why They Differ',['../extra_docs.html#ext_test_diff_d14_why',1,'']]],
-  ['title_18',['title',['../class_submission.html#ae143f4081965aaa80af89fc3a1b5baa6',1,'Submission']]],
-  ['tool_19',['Scientific Conference Organization Tool',['../index.html',1,'']]],
-  ['totalassignedreviews_20',['totalAssignedReviews',['../class_assignment_logic.html#a2d96da3e538bbca0269ba70b3d0ff050',1,'AssignmentLogic']]],
-  ['totalflowfromsource_21',['totalFlowFromSource',['../maxflow__tests_8cpp.html#a76861b439d6da5ab82b27ec9d3125af6',1,'maxflow_tests.cpp']]],
-  ['totalrequiredreviews_22',['totalRequiredReviews',['../class_assignment_logic.html#a931974837d12215fb68978c18e00491a',1,'AssignmentLogic']]],
-  ['trivial_20input_20example_23',['Non-Trivial Input Example',['../extra_docs.html#ext_t2_3_example',1,'']]]
+  ['testsecondarysubmissionmodeenablesmatch_14',['testSecondarySubmissionModeEnablesMatch',['../maxflow__tests_8cpp.html#a549ad06baba91961e44ff6483ae4f9eb',1,'maxflow_tests.cpp']]],
+  ['the_20project_15',['About the Project',['../index.html#autotoc_md3',1,'']]],
+  ['title_16',['title',['../class_submission.html#ae143f4081965aaa80af89fc3a1b5baa6',1,'Submission']]],
+  ['tool_17',['Scientific Conference Organization Tool',['../index.html',1,'']]],
+  ['totalassignedreviews_18',['totalAssignedReviews',['../class_assignment_logic.html#a2d96da3e538bbca0269ba70b3d0ff050',1,'AssignmentLogic']]],
+  ['totalflowfromsource_19',['totalFlowFromSource',['../maxflow__tests_8cpp.html#a76861b439d6da5ab82b27ec9d3125af6',1,'maxflow_tests.cpp']]],
+  ['totalrequiredreviews_20',['totalRequiredReviews',['../class_assignment_logic.html#a931974837d12215fb68978c18e00491a',1,'AssignmentLogic']]],
+  ['trivial_20input_20example_21',['Non-Trivial Input Example',['../extra_docs.html#ext_t2_3_example',1,'']]]
 ];

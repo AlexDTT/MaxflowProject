@@ -26,7 +26,7 @@
 <area shape="poly" id="edge31_Node000001_Node000016" title=" " alt="" coords="733,19,783,25,839,35,895,52,947,77,981,105,1006,138,1001,141,977,109,945,81,893,57,838,40,783,30,732,24"/>
 <area shape="rect" id="Node000017" href="$_parameters_8h.html" title=" " alt="" coords="1108,153,1253,178"/>
 <area shape="poly" id="edge30_Node000001_Node000017" title=" " alt="" coords="733,27,851,46,980,76,1070,109,1145,143,1143,148,1068,114,979,82,850,51,732,32"/>
-<area shape="rect" id="Node000018" href="$_edmond_karp_8h.html" title="Implementations of the Edmonds&#45;Karp algorithm for calculating maximum flow." alt="" coords="268,79,440,105"/>
+<area shape="rect" id="Node000018" href="$_edmond_karp_8h.html" title="Implementation of the Edmonds&#45;Karp algorithm for calculating maximum flow." alt="" coords="268,79,440,105"/>
 <area shape="poly" id="edge24_Node000001_Node000018" title=" " alt="" coords="600,34,420,77,418,72,599,29"/>
 <area shape="poly" id="edge10_Node000010_Node000004" title=" " alt="" coords="610,181,560,219,556,215,607,177"/>
 <area shape="poly" id="edge11_Node000010_Node000009" title=" " alt="" coords="580,181,400,229,398,224,578,176"/>

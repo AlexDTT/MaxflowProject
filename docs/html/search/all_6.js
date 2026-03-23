@@ -6,6 +6,5 @@ var searchData=
   ['conference_20organization_20tool_3',['Scientific Conference Organization Tool',['../index.html',1,'']]],
   ['conferenceapp_4',['ConferenceApp',['../class_conference_app.html',1,'ConferenceApp'],['../class_conference_app.html#ab1dd00e22363067780df629402f3489b',1,'ConferenceApp::ConferenceApp()']]],
   ['conferenceapp_2ecpp_5',['ConferenceApp.cpp',['../_conference_app_8cpp.html',1,'']]],
-  ['conferenceapp_2eh_6',['ConferenceApp.h',['../_conference_app_8h.html',1,'']]],
-  ['configuration_7',['Configuration',['../extra_docs.html#ext_test_diff_d10_input',1,'Input Configuration'],['../extra_docs.html#ext_test_diff_d14_input',1,'Input Configuration']]]
+  ['conferenceapp_2eh_6',['ConferenceApp.h',['../_conference_app_8h.html',1,'']]]
 ];

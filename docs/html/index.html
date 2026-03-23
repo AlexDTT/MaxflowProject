@@ -118,10 +118,14 @@ Algorithm Design (DA) - Spring 2026</h1>
 </p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
 About the Project</h1>
-<p>This project implements an organizational tool to assist a scientific committee in assigning article submissions to a set of reviewers. By modeling the <b>Review Assignment Problem</b> as a <b>Maximum Flow</b> network problem (using algorithms like Edmonds-Karp), the tool determines optimal review assignments while respecting several constraints:</p><ul>
+<p>This project implements an organizational tool to assist a scientific committee in assigning article submissions to a set of reviewers. By modeling the <b>Review Assignment Problem</b> as a <b>Maximum Flow</b> network problem, the tool determines optimal review assignments while respecting several constraints:</p><ul>
 <li>Minimum number of reviews per submission.</li>
 <li>Maximum number of reviews a reviewer is willing to perform.</li>
 <li>Matching submissions with reviewers based on their Primary (and potentially Secondary) domains of expertise.</li>
+</ul>
+<p>Two maximum-flow algorithms are available:</p><ul>
+<li><b>Ford-Fulkerson</b> (DFS-based, default): O(F × E) practical complexity.</li>
+<li><b>Edmonds-Karp</b> (BFS-based): O(V × E²) worst-case complexity, guarantees shortest augmenting paths.</li>
 </ul>
 <p>In addition to base assignments, the tool supports <b>Risk Analysis</b> scenarios to evaluate how the absence of a reviewer (K=1) might jeopardize the integrity of the review process.</p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
@@ -136,9 +140,11 @@ Usage</h1>
 <p>The application provides both a command-line menu interface and a batch mode for automated execution:</p>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Batch Mode (Recommended)</b> Automatically parses the input, generates assignments, evaluates risks, and outputs to files. <div class="fragment"><div class="line">./main -b inputs/main_input.csv output.csv</div>
+</div><!-- fragment --> To select the algorithm explicitly: <div class="fragment"><div class="line">./main -a ff -b inputs/main_input.csv output.csv   # Ford-Fulkerson (DFS)</div>
+<div class="line">./main -a ek -b inputs/main_input.csv output.csv   # Edmonds-Karp (BFS)</div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Interactive Mode</b> Starts a terminal menu prompting the user to select tasks step by step. <div class="fragment"><div class="line">./main</div>
-</div><!-- fragment --></li>
+</div><!-- fragment --> The algorithm can be changed in <b>Parameter Configuration &gt; Max-Flow Algorithm</b>.</li>
 </ul>
 </div><div class="tabbed"></div><h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
 System Architecture &amp; Graph Mapping</h1>
@@ -183,7 +189,7 @@ Generated Graph Example</h1>
 <iframe scrolling="no" loading="lazy" frameborder="0" src="dot_example_graph.dot_52748ad604cf8e6d5da172d6074e866c.svg" width="538" height="490"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div><div class="interactive_dotgraph"></div><h1 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
 Additional Documentation</h1>
-<p>For extended analysis covering risk analysis generalization (K &gt; 1), the general multi-domain assignment problem, and an explanation of test output differences, see the <a class="el" href="extra_docs.html" title="Extra Documentation and Outlined Approaches">Extra Documentation</a> page.</p>
+<p>For extended analysis covering risk analysis generalization (K &gt; 1), the general multi-domain assignment problem, and complexity analysis for both algorithms, see the <a class="el" href="extra_docs.html" title="Extra Documentation and Outlined Approaches">Extra Documentation</a> page.</p>
 <p><br  />
  </p><div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
 <tr class="markdownTableHead">

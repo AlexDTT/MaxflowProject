@@ -51,20 +51,6 @@ var NAVTREE =
         [ "Complexity", "extra_docs.html#ext_t2_4_complexity", null ],
         [ "Example", "extra_docs.html#ext_t2_4_example", null ]
       ] ],
-      [ "Why Integration Tests \"Differ\"", "extra_docs.html#ext_test_diff", [
-        [ "Overview", "extra_docs.html#ext_test_diff_overview", null ],
-        [ "Datasets 10 and 11", "extra_docs.html#ext_test_diff_dataset10", [
-          [ "Input Configuration", "extra_docs.html#ext_test_diff_d10_input", null ],
-          [ "Reference Solution (Expected)", "extra_docs.html#ext_test_diff_d10_ref", null ],
-          [ "Our Solution (Produced)", "extra_docs.html#ext_test_diff_d10_ours", null ]
-        ] ],
-        [ "Dataset 14", "extra_docs.html#ext_test_diff_dataset14", [
-          [ "Input Configuration", "extra_docs.html#ext_test_diff_d14_input", null ],
-          [ "Reference Solution (Expected)", "extra_docs.html#ext_test_diff_d14_ref", null ],
-          [ "Our Solution (Produced)", "extra_docs.html#ext_test_diff_d14_ours", null ],
-          [ "Why They Differ", "extra_docs.html#ext_test_diff_d14_why", null ]
-        ] ]
-      ] ],
       [ "Complexity Summary", "extra_docs.html#ext_complexity_table", null ]
     ] ],
     [ "Classes", "annotated.html", [
@@ -81,6 +67,7 @@ var NAVTREE =
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
+        [ "Enumerations", "globals_enum.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
@@ -90,7 +77,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_assignment_logic_8cpp.html",
-"maxflow__tests_8cpp.html#a46664dc7e359dd1392611355c5853b8d"
+"index.html#autotoc_md8"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

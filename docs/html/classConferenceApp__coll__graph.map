@@ -1,7 +1,0 @@
-<map id="ConferenceApp" name="ConferenceApp">
-<area shape="rect" id="Node000001" title="Main application controller handling CLI interactions and batch mode." alt="" coords="51,104,162,131"/>
-<area shape="rect" id="Node000002" href="$structParameters.html" title="Struct to hold global configuration parameters." alt="" coords="5,5,94,32"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,46,74,79,94,102,90,105,70,81,55,48"/>
-<area shape="rect" id="Node000003" href="$classGraph.html" title=" " alt="" coords="118,5,213,32"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="157,47,138,81,120,105,116,102,134,79,152,45"/>
-</map>

@@ -2,7 +2,7 @@ var searchData=
 [
   ['general_20formulation_20with_20secondary_20domains_20proposed_20approach_0',['T2.4 - General Formulation with Secondary Domains (Proposed Approach)',['../extra_docs.html#ext_t2_4',1,'']]],
   ['generateassignments_1',['GenerateAssignments',['../struct_parameters.html#ad865476e3ce706b539c306ed3647f381',1,'Parameters']]],
-  ['generateassignmentsandstore_2',['generateAssignmentsAndStore',['../class_assignment_logic.html#a1f49b0281d5e61cf5ab218988bfc5bba',1,'AssignmentLogic']]],
+  ['generateassignmentsandstore_2',['generateAssignmentsAndStore',['../class_assignment_logic.html#ad656eda35d8eae054f87c9c9d0cb5165',1,'AssignmentLogic']]],
   ['generated_20graph_20example_3',['Generated Graph Example',['../index.html#autotoc_md7',1,'']]],
   ['getadj_4',['getAdj',['../class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a',1,'Vertex']]],
   ['getdest_5',['getDest',['../class_edge.html#a9a2de066dff8513dd788d553fc1d0c81',1,'Edge']]],

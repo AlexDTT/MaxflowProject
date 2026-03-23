@@ -15,7 +15,6 @@ var searchData=
   ['printsep_12',['printSep',['../class_conference_app.html#a6c1f1c20d662e9e456b01d4941f16f74',1,'ConferenceApp']]],
   ['problem_20description_13',['Problem Description',['../extra_docs.html#ext_t2_1_problem',1,'Problem Description'],['../extra_docs.html#ext_t2_2_problem',1,'Problem Description'],['../extra_docs.html#ext_t2_3_problem',1,'Problem Description'],['../extra_docs.html#ext_t2_4_problem',1,'Problem Description']]],
   ['processing_14',['processing',['../class_vertex.html#ae575d4b9a6b1ada3f9626c458c060f54',1,'Vertex']]],
-  ['produced_15',['Produced',['../extra_docs.html#ext_test_diff_d10_ours',1,'Our Solution (Produced)'],['../extra_docs.html#ext_test_diff_d14_ours',1,'Our Solution (Produced)']]],
-  ['project_16',['About the Project',['../index.html#autotoc_md3',1,'']]],
-  ['proposed_20approach_17',['Proposed Approach',['../extra_docs.html#ext_t2_3_approach',1,'Proposed Approach'],['../extra_docs.html#ext_t2_4_approach',1,'Proposed Approach'],['../extra_docs.html#ext_t2_3',1,'T2.3 - Risk Analysis with K &amp;gt; 1 (Proposed Approach)'],['../extra_docs.html#ext_t2_4',1,'T2.4 - General Formulation with Secondary Domains (Proposed Approach)']]]
+  ['project_15',['About the Project',['../index.html#autotoc_md3',1,'']]],
+  ['proposed_20approach_16',['Proposed Approach',['../extra_docs.html#ext_t2_3_approach',1,'Proposed Approach'],['../extra_docs.html#ext_t2_4_approach',1,'Proposed Approach'],['../extra_docs.html#ext_t2_3',1,'T2.3 - Risk Analysis with K &amp;gt; 1 (Proposed Approach)'],['../extra_docs.html#ext_t2_4',1,'T2.4 - General Formulation with Secondary Domains (Proposed Approach)']]]
 ];

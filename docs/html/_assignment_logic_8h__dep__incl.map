@@ -1,7 +1,12 @@
 <map id="services/AssignmentLogic.h" name="services/AssignmentLogic.h">
-<area shape="rect" id="Node000001" title="Logic for assigning reviewers to submissions based on Max Flow." alt="" coords="111,5,296,31"/>
+<area shape="rect" id="Node000001" title="Logic for assigning reviewers to submissions based on Max Flow." alt="" coords="150,5,335,31"/>
 <area shape="rect" id="Node000002" href="$_assignment_logic_8cpp.html" title=" " alt="" coords="5,79,205,105"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,43,123,81,120,76,173,38"/>
-<area shape="rect" id="Node000003" href="$_conference_app_8cpp.html" title=" " alt="" coords="228,79,379,105"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="235,38,288,76,285,81,231,42"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="207,41,130,81,127,76,204,36"/>
+<area shape="rect" id="Node000003" href="$_conference_app_8cpp.html" title=" " alt="" coords="167,153,318,178"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="245,47,245,152,240,152,240,47"/>
+<area shape="rect" id="Node000004" href="$_conference_app_8h.html" title=" " alt="" coords="280,79,416,105"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="274,38,331,76,328,81,271,42"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="319,116,262,154,259,150,316,111"/>
+<area shape="rect" id="Node000005" href="$main_8cpp.html" title=" " alt="" coords="341,153,416,178"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="361,118,376,151,371,153,356,120"/>
 </map>

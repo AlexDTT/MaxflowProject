@@ -254,7 +254,7 @@
 <!-- Node18 -->
 <g id="Node000018" class="node">
 <title>Node18</title>
-<g id="a_Node000018"><a xlink:href="_edmond_karp_8h.html" target="_top" xlink:title="Implementations of the Edmonds&#45;Karp algorithm for calculating maximum flow.">
+<g id="a_Node000018"><a xlink:href="_edmond_karp_8h.html" target="_top" xlink:title="Implementation of the Edmonds&#45;Karp algorithm for calculating maximum flow.">
 <polygon fill="white" stroke="#666666" points="325.75,-129.75 197.25,-129.75 197.25,-110.5 325.75,-110.5 325.75,-129.75"/>
 <text text-anchor="middle" x="261.5" y="-116.25" font-family="Helvetica,sans-Serif" font-size="10.00">algorithms/EdmondKarp.h</text>
 </a>

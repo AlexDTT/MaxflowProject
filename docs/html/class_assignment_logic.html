@@ -124,20 +124,20 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a931974837d12215fb68978c18e00491a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the total number of required reviews across all submissions.  <br /></td></tr>
 <tr class="memitem:a2d96da3e538bbca0269ba70b3d0ff050" id="r_a2d96da3e538bbca0269ba70b3d0ff050"><td class="memItemLeft">static int&#160;</td><td class="memItemRight"><a class="el" href="#a2d96da3e538bbca0269ba70b3d0ff050">totalAssignedReviews</a> (const <a class="el" href="class_graph.html">Graph</a>&lt; int &gt; &amp;flowGraph, const std::vector&lt; <a class="el" href="class_submission.html">Submission</a> &gt; &amp;submissions, const std::vector&lt; <a class="el" href="class_reviewer.html">Reviewer</a> &gt; &amp;reviewers)</td></tr>
 <tr class="memdesc:a2d96da3e538bbca0269ba70b3d0ff050"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the actual total number of assigned reviews from the flow graph.  <br /></td></tr>
-<tr class="memitem:af7460acb335b05095c2bd5bbca2925f9" id="r_af7460acb335b05095c2bd5bbca2925f9"><td class="memItemLeft">static std::vector&lt; int &gt;&#160;</td><td class="memItemRight"><a class="el" href="#af7460acb335b05095c2bd5bbca2925f9">findRiskyReviewersK1</a> (const std::vector&lt; <a class="el" href="class_submission.html">Submission</a> &gt; &amp;submissions, const std::vector&lt; <a class="el" href="class_reviewer.html">Reviewer</a> &gt; &amp;reviewers, const <a class="el" href="struct_parameters.html">Parameters</a> &amp;params, int mode)</td></tr>
-<tr class="memdesc:af7460acb335b05095c2bd5bbca2925f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifies risky reviewers under K=1 logic.  <br /></td></tr>
+<tr class="memitem:ab9a86d5b63d1f27d3b5c7d83668664e8" id="r_ab9a86d5b63d1f27d3b5c7d83668664e8"><td class="memItemLeft">static std::vector&lt; int &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ab9a86d5b63d1f27d3b5c7d83668664e8">findRiskyReviewersK1</a> (const std::vector&lt; <a class="el" href="class_submission.html">Submission</a> &gt; &amp;submissions, const std::vector&lt; <a class="el" href="class_reviewer.html">Reviewer</a> &gt; &amp;reviewers, const <a class="el" href="struct_parameters.html">Parameters</a> &amp;params, int mode, <a class="el" href="_assignment_logic_8h.html#a9243adfb7445f1adcf51b73329e774c9">AlgorithmType</a> algo=<a class="el" href="_assignment_logic_8h.html#a9243adfb7445f1adcf51b73329e774c9ad4b10a89f462d95f9e47ec216ccc30c1">AlgorithmType::FordFulkerson</a>)</td></tr>
+<tr class="memdesc:ab9a86d5b63d1f27d3b5c7d83668664e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifies risky reviewers under K=1 logic.  <br /></td></tr>
 <tr class="memitem:a90461122cf11a333f981c472be0888bc" id="r_a90461122cf11a333f981c472be0888bc"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a90461122cf11a333f981c472be0888bc">writeAssignmentsToFile</a> (const <a class="el" href="class_graph.html">Graph</a>&lt; int &gt; &amp;flowGraph, const std::vector&lt; <a class="el" href="class_submission.html">Submission</a> &gt; &amp;submissions, const std::vector&lt; <a class="el" href="class_reviewer.html">Reviewer</a> &gt; &amp;reviewers, const <a class="el" href="struct_parameters.html">Parameters</a> &amp;params, int mode, const std::vector&lt; int &gt; *riskyReviewerIds=nullptr, int riskValue=0, const std::string &amp;outputPath=&quot;&quot;)</td></tr>
 <tr class="memdesc:a90461122cf11a333f981c472be0888bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the final review assignments to a CSV file.  <br /></td></tr>
-<tr class="memitem:a1f49b0281d5e61cf5ab218988bfc5bba" id="r_a1f49b0281d5e61cf5ab218988bfc5bba"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a1f49b0281d5e61cf5ab218988bfc5bba">generateAssignmentsAndStore</a> (<a class="el" href="class_graph.html">Graph</a>&lt; int &gt; &amp;outGraph, const std::vector&lt; <a class="el" href="class_submission.html">Submission</a> &gt; &amp;submissions, const std::vector&lt; <a class="el" href="class_reviewer.html">Reviewer</a> &gt; &amp;reviewers, const <a class="el" href="struct_parameters.html">Parameters</a> &amp;params, int mode, bool writeOutput, std::function&lt; void(const std::vector&lt; int &gt; &amp;, double)&gt; logger=nullptr)</td></tr>
-<tr class="memdesc:a1f49b0281d5e61cf5ab218988bfc5bba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates reviewer assignments based on max flow and optionally stores them.  <br /></td></tr>
+<tr class="memitem:ad656eda35d8eae054f87c9c9d0cb5165" id="r_ad656eda35d8eae054f87c9c9d0cb5165"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#ad656eda35d8eae054f87c9c9d0cb5165">generateAssignmentsAndStore</a> (<a class="el" href="class_graph.html">Graph</a>&lt; int &gt; &amp;outGraph, const std::vector&lt; <a class="el" href="class_submission.html">Submission</a> &gt; &amp;submissions, const std::vector&lt; <a class="el" href="class_reviewer.html">Reviewer</a> &gt; &amp;reviewers, const <a class="el" href="struct_parameters.html">Parameters</a> &amp;params, int mode, bool writeOutput, std::function&lt; void(const std::vector&lt; int &gt; &amp;, double)&gt; logger=nullptr, <a class="el" href="_assignment_logic_8h.html#a9243adfb7445f1adcf51b73329e774c9">AlgorithmType</a> algo=<a class="el" href="_assignment_logic_8h.html#a9243adfb7445f1adcf51b73329e774c9ad4b10a89f462d95f9e47ec216ccc30c1">AlgorithmType::FordFulkerson</a>)</td></tr>
+<tr class="memdesc:ad656eda35d8eae054f87c9c9d0cb5165"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates reviewer assignments based on max flow and optionally stores them.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Static utility class for evaluating and persisting the Max Flow assignment results. </p>
 
-<p class="definition">Definition at line <a class="el" href="_assignment_logic_8h_source.html#l00021">21</a> of file <a class="el" href="_assignment_logic_8h_source.html">AssignmentLogic.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_assignment_logic_8h_source.html#l00030">30</a> of file <a class="el" href="_assignment_logic_8h_source.html">AssignmentLogic.h</a>.</p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="af7460acb335b05095c2bd5bbca2925f9" name="af7460acb335b05095c2bd5bbca2925f9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af7460acb335b05095c2bd5bbca2925f9">&#9670;&#160;</a></span>findRiskyReviewersK1()</h2>
+<a id="ab9a86d5b63d1f27d3b5c7d83668664e8" name="ab9a86d5b63d1f27d3b5c7d83668664e8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9a86d5b63d1f27d3b5c7d83668664e8">&#9670;&#160;</a></span>findRiskyReviewersK1()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,7 +163,12 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>mode</em></span>&#160;)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>mode</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_assignment_logic_8h.html#a9243adfb7445f1adcf51b73329e774c9">AlgorithmType</a></td>          <td class="paramname"><span class="paramname"><em>algo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="_assignment_logic_8h.html#a9243adfb7445f1adcf51b73329e774c9ad4b10a89f462d95f9e47ec216ccc30c1">AlgorithmType::FordFulkerson</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -180,49 +185,50 @@ Static Public Member Functions</h2></td></tr>
     <tr><td class="paramname">reviewers</td><td>List of all reviewers. </td></tr>
     <tr><td class="paramname">params</td><td>Global parameters. </td></tr>
     <tr><td class="paramname">mode</td><td>Mode of evaluation. </td></tr>
+    <tr><td class="paramname">algo</td><td>Which max-flow algorithm to use (default: Ford-Fulkerson). </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector of risky reviewer IDs. \par Complexity:<br  />
- Polynomial worst case: O(R * V * E^2). Pseudopolynomial (practical): O(R * F * E) where R is reviewers, F = P * MinReviewsPerSubmission is the total flow. Rebuilds the graph and re-runs Edmonds-Karp for each removed reviewer. A tighter O(R * MaxReviewsPerReviewer * E) is possible by keeping the solved max-flow graph and, for each reviewer, temporarily reducing their incoming flow (creating a deficit of at most MaxReviewsPerReviewer) and running Edmonds-Karp only to resolve that deficit, rather than rebuilding from scratch. </dd></dl>
+ For Ford-Fulkerson: O(R * F * E). For Edmonds-Karp: O(R * V * E^2). Where R is reviewers, F = P * MinReviewsPerSubmission is the total flow. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_assignment_logic_8cpp_source.html#l00034">34</a> of file <a class="el" href="_assignment_logic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   34</span>                                                                                                                                                                       {</div>
-<div class="line"><span class="lineno">   35</span>    std::vector&lt;int&gt; risky;</div>
-<div class="line"><span class="lineno">   36</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> needed = <a class="code hl_function" href="#a931974837d12215fb68978c18e00491a">totalRequiredReviews</a>(submissions, params);</div>
-<div class="line"><span class="lineno">   37</span>    Graph&lt;int&gt; baseline = <a class="code hl_function" href="class_graph_builder.html#a8b9ac34ac3339f52a020df504d954ef9">GraphBuilder::buildReviewFlowGraph</a>(submissions, reviewers, params, mode);</div>
-<div class="line"><span class="lineno">   38</span>    <a class="code hl_function" href="_edmond_karp_8cpp.html#a1b7a932723c832f796e7eb79e1af10f0">edmondsKarp&lt;int&gt;</a>(&amp;baseline, <a class="code hl_function" href="class_graph_builder.html#af083e85dbe0487bc446f9419a65c514c">GraphBuilder::sourceId</a>(), <a class="code hl_function" href="class_graph_builder.html#aaaa75c30cddec8ba0c04104044ee96b0">GraphBuilder::sinkId</a>((<span class="keywordtype">int</span>) submissions.size(), (<span class="keywordtype">int</span>) reviewers.size()));</div>
-<div class="line"><span class="lineno">   39</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> baselineAchieved = <a class="code hl_function" href="#a2d96da3e538bbca0269ba70b3d0ff050">totalAssignedReviews</a>(baseline, submissions, reviewers);</div>
-<div class="line"><span class="lineno">   40</span> </div>
-<div class="line"><span class="lineno">   41</span>    <span class="keywordflow">if</span> (baselineAchieved &lt; needed) {</div>
-<div class="line"><span class="lineno">   42</span>        <span class="keywordflow">return</span> risky;</div>
-<div class="line"><span class="lineno">   43</span>    }</div>
-<div class="line"><span class="lineno">   44</span> </div>
-<div class="line"><span class="lineno">   45</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> skip = 0; skip &lt; reviewers.size(); ++skip) {</div>
-<div class="line"><span class="lineno">   46</span>        std::vector&lt;Reviewer&gt; reduced;</div>
-<div class="line"><span class="lineno">   47</span>        reduced.reserve(reviewers.size() - 1);</div>
-<div class="line"><span class="lineno">   48</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; reviewers.size(); ++i) {</div>
-<div class="line"><span class="lineno">   49</span>            <span class="keywordflow">if</span> (i != skip) reduced.push_back(reviewers[i]);</div>
-<div class="line"><span class="lineno">   50</span>        }</div>
-<div class="line"><span class="lineno">   51</span>        Graph&lt;int&gt; g = <a class="code hl_function" href="class_graph_builder.html#a8b9ac34ac3339f52a020df504d954ef9">GraphBuilder::buildReviewFlowGraph</a>(submissions, reduced, params, mode);</div>
-<div class="line"><span class="lineno">   52</span>        <a class="code hl_function" href="_edmond_karp_8cpp.html#a1b7a932723c832f796e7eb79e1af10f0">edmondsKarp&lt;int&gt;</a>(&amp;g, <a class="code hl_function" href="class_graph_builder.html#af083e85dbe0487bc446f9419a65c514c">GraphBuilder::sourceId</a>(), <a class="code hl_function" href="class_graph_builder.html#aaaa75c30cddec8ba0c04104044ee96b0">GraphBuilder::sinkId</a>((<span class="keywordtype">int</span>) submissions.size(), (<span class="keywordtype">int</span>) reduced.size()));</div>
-<div class="line"><span class="lineno">   53</span>        <span class="keywordtype">int</span> achieved = <a class="code hl_function" href="#a2d96da3e538bbca0269ba70b3d0ff050">totalAssignedReviews</a>(g, submissions, reduced);</div>
-<div class="line"><span class="lineno">   54</span>        <span class="keywordflow">if</span> (achieved &lt; needed) risky.push_back(reviewers[skip].<span class="keywordtype">id</span>);</div>
-<div class="line"><span class="lineno">   55</span>    }</div>
-<div class="line"><span class="lineno">   56</span>    std::sort(risky.begin(), risky.end());</div>
-<div class="line"><span class="lineno">   57</span>    <span class="keywordflow">return</span> risky;</div>
-<div class="line"><span class="lineno">   58</span>}</div>
-<div class="ttc" id="a_edmond_karp_8cpp_html_a1b7a932723c832f796e7eb79e1af10f0"><div class="ttname"><a href="_edmond_karp_8cpp.html#a1b7a932723c832f796e7eb79e1af10f0">edmondsKarp&lt; int &gt;</a></div><div class="ttdeci">template void edmondsKarp&lt; int &gt;(Graph&lt; int &gt; *, int, int, std::function&lt; void(const std::vector&lt; int &gt; &amp;, double)&gt;)</div></div>
-<div class="ttc" id="aclass_assignment_logic_html_a2d96da3e538bbca0269ba70b3d0ff050"><div class="ttname"><a href="#a2d96da3e538bbca0269ba70b3d0ff050">AssignmentLogic::totalAssignedReviews</a></div><div class="ttdeci">static int totalAssignedReviews(const Graph&lt; int &gt; &amp;flowGraph, const std::vector&lt; Submission &gt; &amp;submissions, const std::vector&lt; Reviewer &gt; &amp;reviewers)</div><div class="ttdoc">Computes the actual total number of assigned reviews from the flow graph.</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8cpp_source.html#l00013">AssignmentLogic.cpp:13</a></div></div>
-<div class="ttc" id="aclass_assignment_logic_html_a931974837d12215fb68978c18e00491a"><div class="ttname"><a href="#a931974837d12215fb68978c18e00491a">AssignmentLogic::totalRequiredReviews</a></div><div class="ttdeci">static int totalRequiredReviews(const std::vector&lt; Submission &gt; &amp;submissions, const Parameters &amp;params)</div><div class="ttdoc">Computes the total number of required reviews across all submissions.</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8cpp_source.html#l00009">AssignmentLogic.cpp:9</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_assignment_logic_8cpp_source.html#l00043">43</a> of file <a class="el" href="_assignment_logic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   43</span>                                                                                                                                                                                           {</div>
+<div class="line"><span class="lineno">   44</span>    std::vector&lt;int&gt; risky;</div>
+<div class="line"><span class="lineno">   45</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> needed = <a class="code hl_function" href="#a931974837d12215fb68978c18e00491a">totalRequiredReviews</a>(submissions, params);</div>
+<div class="line"><span class="lineno">   46</span>    Graph&lt;int&gt; baseline = <a class="code hl_function" href="class_graph_builder.html#a8b9ac34ac3339f52a020df504d954ef9">GraphBuilder::buildReviewFlowGraph</a>(submissions, reviewers, params, mode);</div>
+<div class="line"><span class="lineno">   47</span>    <a class="code hl_function" href="_assignment_logic_8cpp.html#af882481678c05151b8c47eb4e8add29d">runMaxFlow</a>(&amp;baseline, <a class="code hl_function" href="class_graph_builder.html#af083e85dbe0487bc446f9419a65c514c">GraphBuilder::sourceId</a>(), <a class="code hl_function" href="class_graph_builder.html#aaaa75c30cddec8ba0c04104044ee96b0">GraphBuilder::sinkId</a>((<span class="keywordtype">int</span>) submissions.size(), (<span class="keywordtype">int</span>) reviewers.size()), algo);</div>
+<div class="line"><span class="lineno">   48</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> baselineAchieved = <a class="code hl_function" href="#a2d96da3e538bbca0269ba70b3d0ff050">totalAssignedReviews</a>(baseline, submissions, reviewers);</div>
+<div class="line"><span class="lineno">   49</span> </div>
+<div class="line"><span class="lineno">   50</span>    <span class="keywordflow">if</span> (baselineAchieved &lt; needed) {</div>
+<div class="line"><span class="lineno">   51</span>        <span class="keywordflow">return</span> risky;</div>
+<div class="line"><span class="lineno">   52</span>    }</div>
+<div class="line"><span class="lineno">   53</span> </div>
+<div class="line"><span class="lineno">   54</span>    <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> skip = 0; skip &lt; reviewers.size(); ++skip) {</div>
+<div class="line"><span class="lineno">   55</span>        std::vector&lt;Reviewer&gt; reduced;</div>
+<div class="line"><span class="lineno">   56</span>        reduced.reserve(reviewers.size() - 1);</div>
+<div class="line"><span class="lineno">   57</span>        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> i = 0; i &lt; reviewers.size(); ++i) {</div>
+<div class="line"><span class="lineno">   58</span>            <span class="keywordflow">if</span> (i != skip) reduced.push_back(reviewers[i]);</div>
+<div class="line"><span class="lineno">   59</span>        }</div>
+<div class="line"><span class="lineno">   60</span>        Graph&lt;int&gt; g = <a class="code hl_function" href="class_graph_builder.html#a8b9ac34ac3339f52a020df504d954ef9">GraphBuilder::buildReviewFlowGraph</a>(submissions, reduced, params, mode);</div>
+<div class="line"><span class="lineno">   61</span>        <a class="code hl_function" href="_assignment_logic_8cpp.html#af882481678c05151b8c47eb4e8add29d">runMaxFlow</a>(&amp;g, <a class="code hl_function" href="class_graph_builder.html#af083e85dbe0487bc446f9419a65c514c">GraphBuilder::sourceId</a>(), <a class="code hl_function" href="class_graph_builder.html#aaaa75c30cddec8ba0c04104044ee96b0">GraphBuilder::sinkId</a>((<span class="keywordtype">int</span>) submissions.size(), (<span class="keywordtype">int</span>) reduced.size()), algo);</div>
+<div class="line"><span class="lineno">   62</span>        <span class="keywordtype">int</span> achieved = <a class="code hl_function" href="#a2d96da3e538bbca0269ba70b3d0ff050">totalAssignedReviews</a>(g, submissions, reduced);</div>
+<div class="line"><span class="lineno">   63</span>        <span class="keywordflow">if</span> (achieved &lt; needed) risky.push_back(reviewers[skip].<span class="keywordtype">id</span>);</div>
+<div class="line"><span class="lineno">   64</span>    }</div>
+<div class="line"><span class="lineno">   65</span>    std::sort(risky.begin(), risky.end());</div>
+<div class="line"><span class="lineno">   66</span>    <span class="keywordflow">return</span> risky;</div>
+<div class="line"><span class="lineno">   67</span>}</div>
+<div class="ttc" id="a_assignment_logic_8cpp_html_af882481678c05151b8c47eb4e8add29d"><div class="ttname"><a href="_assignment_logic_8cpp.html#af882481678c05151b8c47eb4e8add29d">runMaxFlow</a></div><div class="ttdeci">static void runMaxFlow(Graph&lt; int &gt; *g, int source, int sink, AlgorithmType algo, std::function&lt; void(const std::vector&lt; int &gt; &amp;, double)&gt; logger=nullptr)</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8cpp_source.html#l00010">AssignmentLogic.cpp:10</a></div></div>
+<div class="ttc" id="aclass_assignment_logic_html_a2d96da3e538bbca0269ba70b3d0ff050"><div class="ttname"><a href="#a2d96da3e538bbca0269ba70b3d0ff050">AssignmentLogic::totalAssignedReviews</a></div><div class="ttdeci">static int totalAssignedReviews(const Graph&lt; int &gt; &amp;flowGraph, const std::vector&lt; Submission &gt; &amp;submissions, const std::vector&lt; Reviewer &gt; &amp;reviewers)</div><div class="ttdoc">Computes the actual total number of assigned reviews from the flow graph.</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8cpp_source.html#l00022">AssignmentLogic.cpp:22</a></div></div>
+<div class="ttc" id="aclass_assignment_logic_html_a931974837d12215fb68978c18e00491a"><div class="ttname"><a href="#a931974837d12215fb68978c18e00491a">AssignmentLogic::totalRequiredReviews</a></div><div class="ttdeci">static int totalRequiredReviews(const std::vector&lt; Submission &gt; &amp;submissions, const Parameters &amp;params)</div><div class="ttdoc">Computes the total number of required reviews across all submissions.</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8cpp_source.html#l00018">AssignmentLogic.cpp:18</a></div></div>
 <div class="ttc" id="aclass_graph_builder_html_a8b9ac34ac3339f52a020df504d954ef9"><div class="ttname"><a href="class_graph_builder.html#a8b9ac34ac3339f52a020df504d954ef9">GraphBuilder::buildReviewFlowGraph</a></div><div class="ttdeci">static Graph&lt; int &gt; buildReviewFlowGraph(const vector&lt; Submission &gt; &amp;submissions, const vector&lt; Reviewer &gt; &amp;reviewers, const Parameters &amp;params, int mode)</div><div class="ttdoc">Builds a Max-Flow graph for the review assignment problem.</div><div class="ttdef"><b>Definition</b> <a href="_graph_builder_8cpp_source.html#l00057">GraphBuilder.cpp:57</a></div></div>
 <div class="ttc" id="aclass_graph_builder_html_aaaa75c30cddec8ba0c04104044ee96b0"><div class="ttname"><a href="class_graph_builder.html#aaaa75c30cddec8ba0c04104044ee96b0">GraphBuilder::sinkId</a></div><div class="ttdeci">static int sinkId(int numSubs, int numRevs)</div><div class="ttdoc">Returns the super-sink node ID.</div><div class="ttdef"><b>Definition</b> <a href="_graph_builder_8cpp_source.html#l00030">GraphBuilder.cpp:30</a></div></div>
 <div class="ttc" id="aclass_graph_builder_html_af083e85dbe0487bc446f9419a65c514c"><div class="ttname"><a href="class_graph_builder.html#af083e85dbe0487bc446f9419a65c514c">GraphBuilder::sourceId</a></div><div class="ttdeci">static int sourceId()</div><div class="ttdoc">Returns the super-source node ID (always 0).</div><div class="ttdef"><b>Definition</b> <a href="_graph_builder_8cpp_source.html#l00015">GraphBuilder.cpp:15</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a1f49b0281d5e61cf5ab218988bfc5bba" name="a1f49b0281d5e61cf5ab218988bfc5bba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f49b0281d5e61cf5ab218988bfc5bba">&#9670;&#160;</a></span>generateAssignmentsAndStore()</h2>
+<a id="ad656eda35d8eae054f87c9c9d0cb5165" name="ad656eda35d8eae054f87c9c9d0cb5165"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad656eda35d8eae054f87c9c9d0cb5165">&#9670;&#160;</a></span>generateAssignmentsAndStore()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -263,7 +269,12 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::function&lt; void(const std::vector&lt; int &gt; &amp;, double)&gt;</td>          <td class="paramname"><span class="paramname"><em>logger</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>&#160;)</td>
+          <td class="paramtype">std::function&lt; void(const std::vector&lt; int &gt; &amp;, double)&gt;</td>          <td class="paramname"><span class="paramname"><em>logger</em></span><span class="paramdefsep"> = </span><span class="paramdefval">nullptr</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_assignment_logic_8h.html#a9243adfb7445f1adcf51b73329e774c9">AlgorithmType</a></td>          <td class="paramname"><span class="paramname"><em>algo</em></span><span class="paramdefsep"> = </span><span class="paramdefval"><a class="el" href="_assignment_logic_8h.html#a9243adfb7445f1adcf51b73329e774c9ad4b10a89f462d95f9e47ec216ccc30c1">AlgorithmType::FordFulkerson</a></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -283,23 +294,24 @@ Static Public Member Functions</h2></td></tr>
     <tr><td class="paramname">mode</td><td>Operation mode mapping (e.g. strict vs relaxed constraints). </td></tr>
     <tr><td class="paramname">writeOutput</td><td>Indicates whether to dump the result to a CSV file. </td></tr>
     <tr><td class="paramname">logger</td><td>Optional logging callback. </td></tr>
+    <tr><td class="paramname">algo</td><td>Which max-flow algorithm to use (default: Ford-Fulkerson). </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if assignment was successful/complete. \par Complexity:<br  />
- Polynomial worst case: O(V * E^2). Pseudopolynomial (practical): O(F * E) dominated by the underlying Edmonds-Karp max-flow call, where F = P * MinReviewsPerSubmission is the total flow. </dd></dl>
+ For Ford-Fulkerson: O(F * E). For Edmonds-Karp: O(V * E^2). Dominated by the underlying max-flow call. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_assignment_logic_8cpp_source.html#l00148">148</a> of file <a class="el" href="_assignment_logic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  148</span>                                                                                                                                                                                                                                                                     {</div>
-<div class="line"><span class="lineno">  149</span>    outGraph = <a class="code hl_function" href="class_graph_builder.html#a8b9ac34ac3339f52a020df504d954ef9">GraphBuilder::buildReviewFlowGraph</a>(submissions, reviewers, params, mode);</div>
-<div class="line"><span class="lineno">  150</span>    <a class="code hl_function" href="_edmond_karp_8cpp.html#a1b7a932723c832f796e7eb79e1af10f0">edmondsKarp&lt;int&gt;</a>(&amp;outGraph, <a class="code hl_function" href="class_graph_builder.html#af083e85dbe0487bc446f9419a65c514c">GraphBuilder::sourceId</a>(), <a class="code hl_function" href="class_graph_builder.html#aaaa75c30cddec8ba0c04104044ee96b0">GraphBuilder::sinkId</a>((<span class="keywordtype">int</span>) submissions.size(), (<span class="keywordtype">int</span>) reviewers.size()), logger);</div>
-<div class="line"><span class="lineno">  151</span> </div>
-<div class="line"><span class="lineno">  152</span>    <span class="keywordflow">if</span> (writeOutput) {</div>
-<div class="line"><span class="lineno">  153</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="#a90461122cf11a333f981c472be0888bc">writeAssignmentsToFile</a>(outGraph, submissions, reviewers, params, mode);</div>
-<div class="line"><span class="lineno">  154</span>    }</div>
-<div class="line"><span class="lineno">  155</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  156</span>}</div>
-<div class="ttc" id="aclass_assignment_logic_html_a90461122cf11a333f981c472be0888bc"><div class="ttname"><a href="#a90461122cf11a333f981c472be0888bc">AssignmentLogic::writeAssignmentsToFile</a></div><div class="ttdeci">static bool writeAssignmentsToFile(const Graph&lt; int &gt; &amp;flowGraph, const std::vector&lt; Submission &gt; &amp;submissions, const std::vector&lt; Reviewer &gt; &amp;reviewers, const Parameters &amp;params, int mode, const std::vector&lt; int &gt; *riskyReviewerIds=nullptr, int riskValue=0, const std::string &amp;outputPath=&quot;&quot;)</div><div class="ttdoc">Writes the final review assignments to a CSV file.</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8cpp_source.html#l00069">AssignmentLogic.cpp:69</a></div></div>
+<p class="definition">Definition at line <a class="el" href="_assignment_logic_8cpp_source.html#l00157">157</a> of file <a class="el" href="_assignment_logic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  157</span>                                                                                                                                                                                                                                                                                         {</div>
+<div class="line"><span class="lineno">  158</span>    outGraph = <a class="code hl_function" href="class_graph_builder.html#a8b9ac34ac3339f52a020df504d954ef9">GraphBuilder::buildReviewFlowGraph</a>(submissions, reviewers, params, mode);</div>
+<div class="line"><span class="lineno">  159</span>    <a class="code hl_function" href="_assignment_logic_8cpp.html#af882481678c05151b8c47eb4e8add29d">runMaxFlow</a>(&amp;outGraph, <a class="code hl_function" href="class_graph_builder.html#af083e85dbe0487bc446f9419a65c514c">GraphBuilder::sourceId</a>(), <a class="code hl_function" href="class_graph_builder.html#aaaa75c30cddec8ba0c04104044ee96b0">GraphBuilder::sinkId</a>((<span class="keywordtype">int</span>) submissions.size(), (<span class="keywordtype">int</span>) reviewers.size()), algo, logger);</div>
+<div class="line"><span class="lineno">  160</span> </div>
+<div class="line"><span class="lineno">  161</span>    <span class="keywordflow">if</span> (writeOutput) {</div>
+<div class="line"><span class="lineno">  162</span>        <span class="keywordflow">return</span> <a class="code hl_function" href="#a90461122cf11a333f981c472be0888bc">writeAssignmentsToFile</a>(outGraph, submissions, reviewers, params, mode);</div>
+<div class="line"><span class="lineno">  163</span>    }</div>
+<div class="line"><span class="lineno">  164</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  165</span>}</div>
+<div class="ttc" id="aclass_assignment_logic_html_a90461122cf11a333f981c472be0888bc"><div class="ttname"><a href="#a90461122cf11a333f981c472be0888bc">AssignmentLogic::writeAssignmentsToFile</a></div><div class="ttdeci">static bool writeAssignmentsToFile(const Graph&lt; int &gt; &amp;flowGraph, const std::vector&lt; Submission &gt; &amp;submissions, const std::vector&lt; Reviewer &gt; &amp;reviewers, const Parameters &amp;params, int mode, const std::vector&lt; int &gt; *riskyReviewerIds=nullptr, int riskValue=0, const std::string &amp;outputPath=&quot;&quot;)</div><div class="ttdoc">Writes the final review assignments to a CSV file.</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8cpp_source.html#l00078">AssignmentLogic.cpp:78</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -347,27 +359,27 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The number of assigned reviews. \par Complexity:<br  />
  O(P * R) iterating over all submission-to-reviewer edges in the flow graph. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_assignment_logic_8cpp_source.html#l00013">13</a> of file <a class="el" href="_assignment_logic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   13</span>                                                                                                                                                     {</div>
-<div class="line"><span class="lineno">   14</span>    <span class="keywordtype">int</span> total = 0;</div>
-<div class="line"><span class="lineno">   15</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> numSubs = (int) submissions.size();</div>
-<div class="line"><span class="lineno">   16</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> numRevs = (int) reviewers.size();</div>
-<div class="line"><span class="lineno">   17</span>    <span class="keywordflow">if</span> (numRevs == 0) <span class="keywordflow">return</span> 0;</div>
-<div class="line"><span class="lineno">   18</span>    <span class="keywordtype">int</span> firstRevNode = <a class="code hl_function" href="class_graph_builder.html#a5808b56dac3eacd87dc7cc4966829116">GraphBuilder::reviewerNodeId</a>(0, numSubs);</div>
-<div class="line"><span class="lineno">   19</span>    <span class="keywordtype">int</span> lastRevNode = <a class="code hl_function" href="class_graph_builder.html#a5808b56dac3eacd87dc7cc4966829116">GraphBuilder::reviewerNodeId</a>(numRevs - 1, numSubs);</div>
-<div class="line"><span class="lineno">   20</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numSubs; ++i) {</div>
-<div class="line"><span class="lineno">   21</span>        <span class="keywordtype">int</span> subNode = <a class="code hl_function" href="class_graph_builder.html#ae659322d094219e6348c42cf12e70482">GraphBuilder::submissionNodeId</a>(i);</div>
-<div class="line"><span class="lineno">   22</span>        Vertex&lt;int&gt;* subV = flowGraph.<a class="code hl_function" href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">findVertex</a>(subNode);</div>
-<div class="line"><span class="lineno">   23</span>        <span class="keywordflow">if</span> (subV == <span class="keyword">nullptr</span>) <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">   24</span>        <span class="keywordflow">for</span> (Edge&lt;int&gt;* e : subV-&gt;<a class="code hl_function" href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">getAdj</a>()) {</div>
-<div class="line"><span class="lineno">   25</span>            <span class="keywordtype">int</span> destNode = e-&gt;getDest()-&gt;getInfo();</div>
-<div class="line"><span class="lineno">   26</span>            <span class="keywordflow">if</span> (destNode &gt;= firstRevNode &amp;&amp; destNode &lt;= lastRevNode &amp;&amp; e-&gt;getFlow() &gt; 0.0) {</div>
-<div class="line"><span class="lineno">   27</span>                total += (int) e-&gt;getFlow();</div>
-<div class="line"><span class="lineno">   28</span>            }</div>
-<div class="line"><span class="lineno">   29</span>        }</div>
-<div class="line"><span class="lineno">   30</span>    }</div>
-<div class="line"><span class="lineno">   31</span>    <span class="keywordflow">return</span> total;</div>
-<div class="line"><span class="lineno">   32</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_assignment_logic_8cpp_source.html#l00022">22</a> of file <a class="el" href="_assignment_logic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   22</span>                                                                                                                                                     {</div>
+<div class="line"><span class="lineno">   23</span>    <span class="keywordtype">int</span> total = 0;</div>
+<div class="line"><span class="lineno">   24</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> numSubs = (int) submissions.size();</div>
+<div class="line"><span class="lineno">   25</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> numRevs = (int) reviewers.size();</div>
+<div class="line"><span class="lineno">   26</span>    <span class="keywordflow">if</span> (numRevs == 0) <span class="keywordflow">return</span> 0;</div>
+<div class="line"><span class="lineno">   27</span>    <span class="keywordtype">int</span> firstRevNode = <a class="code hl_function" href="class_graph_builder.html#a5808b56dac3eacd87dc7cc4966829116">GraphBuilder::reviewerNodeId</a>(0, numSubs);</div>
+<div class="line"><span class="lineno">   28</span>    <span class="keywordtype">int</span> lastRevNode = <a class="code hl_function" href="class_graph_builder.html#a5808b56dac3eacd87dc7cc4966829116">GraphBuilder::reviewerNodeId</a>(numRevs - 1, numSubs);</div>
+<div class="line"><span class="lineno">   29</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numSubs; ++i) {</div>
+<div class="line"><span class="lineno">   30</span>        <span class="keywordtype">int</span> subNode = <a class="code hl_function" href="class_graph_builder.html#ae659322d094219e6348c42cf12e70482">GraphBuilder::submissionNodeId</a>(i);</div>
+<div class="line"><span class="lineno">   31</span>        Vertex&lt;int&gt;* subV = flowGraph.<a class="code hl_function" href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">findVertex</a>(subNode);</div>
+<div class="line"><span class="lineno">   32</span>        <span class="keywordflow">if</span> (subV == <span class="keyword">nullptr</span>) <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">   33</span>        <span class="keywordflow">for</span> (Edge&lt;int&gt;* e : subV-&gt;<a class="code hl_function" href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">getAdj</a>()) {</div>
+<div class="line"><span class="lineno">   34</span>            <span class="keywordtype">int</span> destNode = e-&gt;getDest()-&gt;getInfo();</div>
+<div class="line"><span class="lineno">   35</span>            <span class="keywordflow">if</span> (destNode &gt;= firstRevNode &amp;&amp; destNode &lt;= lastRevNode &amp;&amp; e-&gt;getFlow() &gt; 0.0) {</div>
+<div class="line"><span class="lineno">   36</span>                total += (int) e-&gt;getFlow();</div>
+<div class="line"><span class="lineno">   37</span>            }</div>
+<div class="line"><span class="lineno">   38</span>        }</div>
+<div class="line"><span class="lineno">   39</span>    }</div>
+<div class="line"><span class="lineno">   40</span>    <span class="keywordflow">return</span> total;</div>
+<div class="line"><span class="lineno">   41</span>}</div>
 <div class="ttc" id="aclass_graph_builder_html_a5808b56dac3eacd87dc7cc4966829116"><div class="ttname"><a href="class_graph_builder.html#a5808b56dac3eacd87dc7cc4966829116">GraphBuilder::reviewerNodeId</a></div><div class="ttdeci">static int reviewerNodeId(int revIndex, int numSubs)</div><div class="ttdoc">Maps a reviewer vector index to its graph node ID.</div><div class="ttdef"><b>Definition</b> <a href="_graph_builder_8cpp_source.html#l00025">GraphBuilder.cpp:25</a></div></div>
 <div class="ttc" id="aclass_graph_builder_html_ae659322d094219e6348c42cf12e70482"><div class="ttname"><a href="class_graph_builder.html#ae659322d094219e6348c42cf12e70482">GraphBuilder::submissionNodeId</a></div><div class="ttdeci">static int submissionNodeId(int subIndex)</div><div class="ttdoc">Maps a submission vector index to its graph node ID.</div><div class="ttdef"><b>Definition</b> <a href="_graph_builder_8cpp_source.html#l00020">GraphBuilder.cpp:20</a></div></div>
 <div class="ttc" id="aclass_graph_html_a8b7b7465fbfd562e2a469f90a437ab75"><div class="ttname"><a href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">Graph::findVertex</a></div><div class="ttdeci">Vertex&lt; T &gt; * findVertex(const T &amp;in) const</div><div class="ttdoc">Finds a vertex with a given content.</div><div class="ttdef"><b>Definition</b> <a href="_graph_8h_source.html#l00498">Graph.h:498</a></div></div>
@@ -413,10 +425,10 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The total number of required reviews. \par Complexity:<br  />
  O(N) where N is the number of submissions. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_assignment_logic_8cpp_source.html#l00009">9</a> of file <a class="el" href="_assignment_logic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">    9</span>                                                                                                            {</div>
-<div class="line"><span class="lineno">   10</span>    <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) submissions.size() * params.<a class="code hl_variable" href="struct_parameters.html#aeea9e43cbdff07b655f0b7ea87f302a3">MinReviewsPerSubmission</a>;</div>
-<div class="line"><span class="lineno">   11</span>}</div>
+<p class="definition">Definition at line <a class="el" href="_assignment_logic_8cpp_source.html#l00018">18</a> of file <a class="el" href="_assignment_logic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   18</span>                                                                                                            {</div>
+<div class="line"><span class="lineno">   19</span>    <span class="keywordflow">return</span> (<span class="keywordtype">int</span>) submissions.size() * params.<a class="code hl_variable" href="struct_parameters.html#aeea9e43cbdff07b655f0b7ea87f302a3">MinReviewsPerSubmission</a>;</div>
+<div class="line"><span class="lineno">   20</span>}</div>
 <div class="ttc" id="astruct_parameters_html_aeea9e43cbdff07b655f0b7ea87f302a3"><div class="ttname"><a href="struct_parameters.html#aeea9e43cbdff07b655f0b7ea87f302a3">Parameters::MinReviewsPerSubmission</a></div><div class="ttdeci">int MinReviewsPerSubmission</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00015">Parameters.h:15</a></div></div>
 </div><!-- fragment -->
 </div>
@@ -495,86 +507,86 @@ Static Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>True if write was successful, false otherwise. \par Complexity:<br  />
  O(V + E) for traversing the flow graph. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_assignment_logic_8cpp_source.html#l00069">69</a> of file <a class="el" href="_assignment_logic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   69</span>                                                                                                                                                                                                                                                                                {</div>
-<div class="line"><span class="lineno">   70</span>    <span class="keyword">const</span> std::string path = outputPath.empty() ? params.<a class="code hl_variable" href="struct_parameters.html#a321c029d5d04dde55af4d4cb9824da52">OutputFileName</a> : outputPath;</div>
-<div class="line"><span class="lineno">   71</span>    std::ofstream out(path);</div>
-<div class="line"><span class="lineno">   72</span>    <span class="keywordflow">if</span> (!out.is_open()) {</div>
-<div class="line"><span class="lineno">   73</span>        std::cerr &lt;&lt; <span class="stringliteral">&quot;Error: cannot open output file &#39;&quot;</span> &lt;&lt; path &lt;&lt; <span class="stringliteral">&quot;&#39;.\n&quot;</span>;</div>
-<div class="line"><span class="lineno">   74</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><span class="lineno">   75</span>    }</div>
-<div class="line"><span class="lineno">   76</span> </div>
-<div class="line"><span class="lineno">   77</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> numSubs = (int) submissions.size();</div>
-<div class="line"><span class="lineno">   78</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> numRevs = (int) reviewers.size();</div>
-<div class="line"><span class="lineno">   79</span>    std::vector&lt;std::tuple&lt;int, int, int&gt;&gt; bySubmission;</div>
-<div class="line"><span class="lineno">   80</span>    std::vector&lt;std::tuple&lt;int, int, int&gt;&gt; byReviewer;</div>
-<div class="line"><span class="lineno">   81</span> </div>
-<div class="line"><span class="lineno">   82</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numSubs; ++i) {</div>
-<div class="line"><span class="lineno">   83</span>        <span class="keywordtype">int</span> subNode = <a class="code hl_function" href="class_graph_builder.html#ae659322d094219e6348c42cf12e70482">GraphBuilder::submissionNodeId</a>(i);</div>
-<div class="line"><span class="lineno">   84</span>        Vertex&lt;int&gt;* subV = flowGraph.<a class="code hl_function" href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">findVertex</a>(subNode);</div>
-<div class="line"><span class="lineno">   85</span>        <span class="keywordflow">if</span> (subV == <span class="keyword">nullptr</span>) <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">   86</span>        <span class="keywordflow">for</span> (Edge&lt;int&gt;* e : subV-&gt;<a class="code hl_function" href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">getAdj</a>()) {</div>
-<div class="line"><span class="lineno">   87</span>            <span class="keywordflow">if</span> (e-&gt;getFlow() &lt;= 0.0) <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">   88</span>            <span class="keywordflow">if</span> (numRevs == 0) <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">   89</span> </div>
-<div class="line"><span class="lineno">   90</span>            <span class="keywordtype">int</span> destNode = e-&gt;getDest()-&gt;getInfo();</div>
-<div class="line"><span class="lineno">   91</span>            <span class="keywordflow">if</span> (destNode &lt; <a class="code hl_function" href="class_graph_builder.html#a5808b56dac3eacd87dc7cc4966829116">GraphBuilder::reviewerNodeId</a>(0, numSubs) ||</div>
-<div class="line"><span class="lineno">   92</span>                destNode &gt; <a class="code hl_function" href="class_graph_builder.html#a5808b56dac3eacd87dc7cc4966829116">GraphBuilder::reviewerNodeId</a>(numRevs - 1, numSubs)) <span class="keywordflow">continue</span>;</div>
-<div class="line"><span class="lineno">   93</span> </div>
-<div class="line"><span class="lineno">   94</span>            <span class="keywordtype">int</span> revIndex = destNode - <a class="code hl_function" href="class_graph_builder.html#a5808b56dac3eacd87dc7cc4966829116">GraphBuilder::reviewerNodeId</a>(0, numSubs);</div>
-<div class="line"><span class="lineno">   95</span>            <span class="keywordtype">int</span> matchedDomain = <a class="code hl_function" href="class_graph_builder.html#a20725155f22be6115d0d094918c831fd">GraphBuilder::getMatchedDomain</a>(submissions[i], reviewers[revIndex], mode);</div>
-<div class="line"><span class="lineno">   96</span>            bySubmission.emplace_back(submissions[i].<span class="keywordtype">id</span>, reviewers[revIndex].<span class="keywordtype">id</span>, matchedDomain);</div>
-<div class="line"><span class="lineno">   97</span>            byReviewer.emplace_back(reviewers[revIndex].<span class="keywordtype">id</span>, submissions[i].<span class="keywordtype">id</span>, matchedDomain);</div>
-<div class="line"><span class="lineno">   98</span>        }</div>
-<div class="line"><span class="lineno">   99</span>    }</div>
-<div class="line"><span class="lineno">  100</span> </div>
-<div class="line"><span class="lineno">  101</span>    <span class="keyword">auto</span> sortTuple = [](<span class="keyword">const</span> std::tuple&lt;int, int, int&gt;&amp; a, <span class="keyword">const</span> std::tuple&lt;int, int, int&gt;&amp; b) {</div>
-<div class="line"><span class="lineno">  102</span>        <span class="keywordflow">if</span> (std::get&lt;0&gt;(a) != std::get&lt;0&gt;(b)) <span class="keywordflow">return</span> std::get&lt;0&gt;(a) &lt; std::get&lt;0&gt;(b);</div>
-<div class="line"><span class="lineno">  103</span>        <span class="keywordflow">return</span> std::get&lt;1&gt;(a) &lt; std::get&lt;1&gt;(b);</div>
-<div class="line"><span class="lineno">  104</span>    };</div>
-<div class="line"><span class="lineno">  105</span>    std::sort(bySubmission.begin(), bySubmission.end(), sortTuple);</div>
-<div class="line"><span class="lineno">  106</span>    std::sort(byReviewer.begin(), byReviewer.end(), sortTuple);</div>
-<div class="line"><span class="lineno">  107</span> </div>
-<div class="line"><span class="lineno">  108</span>    <span class="keywordtype">int</span> totalAssigned = <a class="code hl_function" href="#a2d96da3e538bbca0269ba70b3d0ff050">totalAssignedReviews</a>(flowGraph, submissions, reviewers);</div>
+<p class="definition">Definition at line <a class="el" href="_assignment_logic_8cpp_source.html#l00078">78</a> of file <a class="el" href="_assignment_logic_8cpp_source.html">AssignmentLogic.cpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   78</span>                                                                                                                                                                                                                                                                                {</div>
+<div class="line"><span class="lineno">   79</span>    <span class="keyword">const</span> std::string path = outputPath.empty() ? params.<a class="code hl_variable" href="struct_parameters.html#a321c029d5d04dde55af4d4cb9824da52">OutputFileName</a> : outputPath;</div>
+<div class="line"><span class="lineno">   80</span>    std::ofstream out(path);</div>
+<div class="line"><span class="lineno">   81</span>    <span class="keywordflow">if</span> (!out.is_open()) {</div>
+<div class="line"><span class="lineno">   82</span>        std::cerr &lt;&lt; <span class="stringliteral">&quot;Error: cannot open output file &#39;&quot;</span> &lt;&lt; path &lt;&lt; <span class="stringliteral">&quot;&#39;.\n&quot;</span>;</div>
+<div class="line"><span class="lineno">   83</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><span class="lineno">   84</span>    }</div>
+<div class="line"><span class="lineno">   85</span> </div>
+<div class="line"><span class="lineno">   86</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> numSubs = (int) submissions.size();</div>
+<div class="line"><span class="lineno">   87</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> numRevs = (int) reviewers.size();</div>
+<div class="line"><span class="lineno">   88</span>    std::vector&lt;std::tuple&lt;int, int, int&gt;&gt; bySubmission;</div>
+<div class="line"><span class="lineno">   89</span>    std::vector&lt;std::tuple&lt;int, int, int&gt;&gt; byReviewer;</div>
+<div class="line"><span class="lineno">   90</span> </div>
+<div class="line"><span class="lineno">   91</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numSubs; ++i) {</div>
+<div class="line"><span class="lineno">   92</span>        <span class="keywordtype">int</span> subNode = <a class="code hl_function" href="class_graph_builder.html#ae659322d094219e6348c42cf12e70482">GraphBuilder::submissionNodeId</a>(i);</div>
+<div class="line"><span class="lineno">   93</span>        Vertex&lt;int&gt;* subV = flowGraph.<a class="code hl_function" href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">findVertex</a>(subNode);</div>
+<div class="line"><span class="lineno">   94</span>        <span class="keywordflow">if</span> (subV == <span class="keyword">nullptr</span>) <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">   95</span>        <span class="keywordflow">for</span> (Edge&lt;int&gt;* e : subV-&gt;<a class="code hl_function" href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">getAdj</a>()) {</div>
+<div class="line"><span class="lineno">   96</span>            <span class="keywordflow">if</span> (e-&gt;getFlow() &lt;= 0.0) <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">   97</span>            <span class="keywordflow">if</span> (numRevs == 0) <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">   98</span> </div>
+<div class="line"><span class="lineno">   99</span>            <span class="keywordtype">int</span> destNode = e-&gt;getDest()-&gt;getInfo();</div>
+<div class="line"><span class="lineno">  100</span>            <span class="keywordflow">if</span> (destNode &lt; <a class="code hl_function" href="class_graph_builder.html#a5808b56dac3eacd87dc7cc4966829116">GraphBuilder::reviewerNodeId</a>(0, numSubs) ||</div>
+<div class="line"><span class="lineno">  101</span>                destNode &gt; <a class="code hl_function" href="class_graph_builder.html#a5808b56dac3eacd87dc7cc4966829116">GraphBuilder::reviewerNodeId</a>(numRevs - 1, numSubs)) <span class="keywordflow">continue</span>;</div>
+<div class="line"><span class="lineno">  102</span> </div>
+<div class="line"><span class="lineno">  103</span>            <span class="keywordtype">int</span> revIndex = destNode - <a class="code hl_function" href="class_graph_builder.html#a5808b56dac3eacd87dc7cc4966829116">GraphBuilder::reviewerNodeId</a>(0, numSubs);</div>
+<div class="line"><span class="lineno">  104</span>            <span class="keywordtype">int</span> matchedDomain = <a class="code hl_function" href="class_graph_builder.html#a20725155f22be6115d0d094918c831fd">GraphBuilder::getMatchedDomain</a>(submissions[i], reviewers[revIndex], mode);</div>
+<div class="line"><span class="lineno">  105</span>            bySubmission.emplace_back(submissions[i].<span class="keywordtype">id</span>, reviewers[revIndex].<span class="keywordtype">id</span>, matchedDomain);</div>
+<div class="line"><span class="lineno">  106</span>            byReviewer.emplace_back(reviewers[revIndex].<span class="keywordtype">id</span>, submissions[i].<span class="keywordtype">id</span>, matchedDomain);</div>
+<div class="line"><span class="lineno">  107</span>        }</div>
+<div class="line"><span class="lineno">  108</span>    }</div>
 <div class="line"><span class="lineno">  109</span> </div>
-<div class="line"><span class="lineno">  110</span>    <span class="keywordflow">if</span> (mode == 0) {</div>
-<div class="line"><span class="lineno">  111</span>        out &lt;&lt; <span class="stringliteral">&quot;Mode 0: Assignment generated but output suppressed.\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  112</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><span class="lineno">  113</span>        out &lt;&lt; <span class="stringliteral">&quot;#SubmissionId,ReviewerId,Match\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  114</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; row : bySubmission) {</div>
-<div class="line"><span class="lineno">  115</span>            out &lt;&lt; std::get&lt;0&gt;(row) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; std::get&lt;1&gt;(row) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; std::get&lt;2&gt;(row) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  116</span>        }</div>
-<div class="line"><span class="lineno">  117</span>        out &lt;&lt; <span class="stringliteral">&quot;#ReviewerId,SubmissionId,Match\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  118</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; row : byReviewer) {</div>
-<div class="line"><span class="lineno">  119</span>            out &lt;&lt; std::get&lt;0&gt;(row) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; std::get&lt;1&gt;(row) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; std::get&lt;2&gt;(row) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  120</span>        }</div>
-<div class="line"><span class="lineno">  121</span>        out &lt;&lt; <span class="stringliteral">&quot;#Total: &quot;</span> &lt;&lt; totalAssigned &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  122</span>    }</div>
-<div class="line"><span class="lineno">  123</span> </div>
-<div class="line"><span class="lineno">  124</span>    <span class="keywordflow">if</span> (totalAssigned &lt; <a class="code hl_function" href="#a931974837d12215fb68978c18e00491a">totalRequiredReviews</a>(submissions, params)) {</div>
-<div class="line"><span class="lineno">  125</span>        out &lt;&lt; <span class="stringliteral">&quot;#SubmissionId,Domain,MissingReviews\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  126</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numSubs; ++i) {</div>
-<div class="line"><span class="lineno">  127</span>            <span class="keywordtype">int</span> subNode = <a class="code hl_function" href="class_graph_builder.html#ae659322d094219e6348c42cf12e70482">GraphBuilder::submissionNodeId</a>(i);</div>
-<div class="line"><span class="lineno">  128</span>            Vertex&lt;int&gt;* subV = flowGraph.<a class="code hl_function" href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">findVertex</a>(subNode);</div>
-<div class="line"><span class="lineno">  129</span>            <span class="keywordtype">int</span> assignedForSubmission = 0;</div>
-<div class="line"><span class="lineno">  130</span>            <span class="keywordflow">if</span> (subV != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><span class="lineno">  131</span>                <span class="keywordflow">for</span> (Edge&lt;int&gt;* e : subV-&gt;<a class="code hl_function" href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">getAdj</a>()) {</div>
-<div class="line"><span class="lineno">  132</span>                    <span class="keywordflow">if</span> (e-&gt;getFlow() &gt; 0.0) assignedForSubmission += (int) e-&gt;getFlow();</div>
-<div class="line"><span class="lineno">  133</span>                }</div>
-<div class="line"><span class="lineno">  134</span>            }</div>
-<div class="line"><span class="lineno">  135</span>            <span class="keywordtype">int</span> missing = params.<a class="code hl_variable" href="struct_parameters.html#aeea9e43cbdff07b655f0b7ea87f302a3">MinReviewsPerSubmission</a> - assignedForSubmission;</div>
-<div class="line"><span class="lineno">  136</span>            <span class="keywordflow">if</span> (missing &gt; 0) {</div>
-<div class="line"><span class="lineno">  137</span>                out &lt;&lt; submissions[i].id &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; submissions[i].primaryTopic &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; missing &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><span class="lineno">  138</span>            }</div>
-<div class="line"><span class="lineno">  139</span>        }</div>
-<div class="line"><span class="lineno">  140</span>    }</div>
-<div class="line"><span class="lineno">  141</span> </div>
-<div class="line"><span class="lineno">  142</span>    <span class="keywordflow">if</span> (riskyReviewerIds != <span class="keyword">nullptr</span> &amp;&amp; riskValue &gt; 0) {</div>
-<div class="line"><span class="lineno">  143</span>        <a class="code hl_function" href="_assignment_logic_8cpp.html#a77876bd7e23629d20315a7ac61ef09c3">writeRiskSection</a>(out, riskValue, *riskyReviewerIds);</div>
-<div class="line"><span class="lineno">  144</span>    }</div>
-<div class="line"><span class="lineno">  145</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><span class="lineno">  146</span>}</div>
-<div class="ttc" id="a_assignment_logic_8cpp_html_a77876bd7e23629d20315a7ac61ef09c3"><div class="ttname"><a href="_assignment_logic_8cpp.html#a77876bd7e23629d20315a7ac61ef09c3">writeRiskSection</a></div><div class="ttdeci">static void writeRiskSection(std::ofstream &amp;out, int riskValue, const std::vector&lt; int &gt; &amp;riskyReviewerIds)</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8cpp_source.html#l00060">AssignmentLogic.cpp:60</a></div></div>
+<div class="line"><span class="lineno">  110</span>    <span class="keyword">auto</span> sortTuple = [](<span class="keyword">const</span> std::tuple&lt;int, int, int&gt;&amp; a, <span class="keyword">const</span> std::tuple&lt;int, int, int&gt;&amp; b) {</div>
+<div class="line"><span class="lineno">  111</span>        <span class="keywordflow">if</span> (std::get&lt;0&gt;(a) != std::get&lt;0&gt;(b)) <span class="keywordflow">return</span> std::get&lt;0&gt;(a) &lt; std::get&lt;0&gt;(b);</div>
+<div class="line"><span class="lineno">  112</span>        <span class="keywordflow">return</span> std::get&lt;1&gt;(a) &lt; std::get&lt;1&gt;(b);</div>
+<div class="line"><span class="lineno">  113</span>    };</div>
+<div class="line"><span class="lineno">  114</span>    std::sort(bySubmission.begin(), bySubmission.end(), sortTuple);</div>
+<div class="line"><span class="lineno">  115</span>    std::sort(byReviewer.begin(), byReviewer.end(), sortTuple);</div>
+<div class="line"><span class="lineno">  116</span> </div>
+<div class="line"><span class="lineno">  117</span>    <span class="keywordtype">int</span> totalAssigned = <a class="code hl_function" href="#a2d96da3e538bbca0269ba70b3d0ff050">totalAssignedReviews</a>(flowGraph, submissions, reviewers);</div>
+<div class="line"><span class="lineno">  118</span> </div>
+<div class="line"><span class="lineno">  119</span>    <span class="keywordflow">if</span> (mode == 0) {</div>
+<div class="line"><span class="lineno">  120</span>        out &lt;&lt; <span class="stringliteral">&quot;Mode 0: Assignment generated but output suppressed.\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  121</span>    } <span class="keywordflow">else</span> {</div>
+<div class="line"><span class="lineno">  122</span>        out &lt;&lt; <span class="stringliteral">&quot;#SubmissionId,ReviewerId,Match\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  123</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; row : bySubmission) {</div>
+<div class="line"><span class="lineno">  124</span>            out &lt;&lt; std::get&lt;0&gt;(row) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; std::get&lt;1&gt;(row) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; std::get&lt;2&gt;(row) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  125</span>        }</div>
+<div class="line"><span class="lineno">  126</span>        out &lt;&lt; <span class="stringliteral">&quot;#ReviewerId,SubmissionId,Match\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  127</span>        <span class="keywordflow">for</span> (<span class="keyword">const</span> <span class="keyword">auto</span>&amp; row : byReviewer) {</div>
+<div class="line"><span class="lineno">  128</span>            out &lt;&lt; std::get&lt;0&gt;(row) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; std::get&lt;1&gt;(row) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; std::get&lt;2&gt;(row) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  129</span>        }</div>
+<div class="line"><span class="lineno">  130</span>        out &lt;&lt; <span class="stringliteral">&quot;#Total: &quot;</span> &lt;&lt; totalAssigned &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  131</span>    }</div>
+<div class="line"><span class="lineno">  132</span> </div>
+<div class="line"><span class="lineno">  133</span>    <span class="keywordflow">if</span> (totalAssigned &lt; <a class="code hl_function" href="#a931974837d12215fb68978c18e00491a">totalRequiredReviews</a>(submissions, params)) {</div>
+<div class="line"><span class="lineno">  134</span>        out &lt;&lt; <span class="stringliteral">&quot;#SubmissionId,Domain,MissingReviews\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  135</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; numSubs; ++i) {</div>
+<div class="line"><span class="lineno">  136</span>            <span class="keywordtype">int</span> subNode = <a class="code hl_function" href="class_graph_builder.html#ae659322d094219e6348c42cf12e70482">GraphBuilder::submissionNodeId</a>(i);</div>
+<div class="line"><span class="lineno">  137</span>            Vertex&lt;int&gt;* subV = flowGraph.<a class="code hl_function" href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75">findVertex</a>(subNode);</div>
+<div class="line"><span class="lineno">  138</span>            <span class="keywordtype">int</span> assignedForSubmission = 0;</div>
+<div class="line"><span class="lineno">  139</span>            <span class="keywordflow">if</span> (subV != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><span class="lineno">  140</span>                <span class="keywordflow">for</span> (Edge&lt;int&gt;* e : subV-&gt;<a class="code hl_function" href="class_vertex.html#a0010a7d0b7db1bb81dd2ebb1ffae650a">getAdj</a>()) {</div>
+<div class="line"><span class="lineno">  141</span>                    <span class="keywordflow">if</span> (e-&gt;getFlow() &gt; 0.0) assignedForSubmission += (int) e-&gt;getFlow();</div>
+<div class="line"><span class="lineno">  142</span>                }</div>
+<div class="line"><span class="lineno">  143</span>            }</div>
+<div class="line"><span class="lineno">  144</span>            <span class="keywordtype">int</span> missing = params.<a class="code hl_variable" href="struct_parameters.html#aeea9e43cbdff07b655f0b7ea87f302a3">MinReviewsPerSubmission</a> - assignedForSubmission;</div>
+<div class="line"><span class="lineno">  145</span>            <span class="keywordflow">if</span> (missing &gt; 0) {</div>
+<div class="line"><span class="lineno">  146</span>                out &lt;&lt; submissions[i].id &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; submissions[i].primaryTopic &lt;&lt; <span class="stringliteral">&quot;, &quot;</span> &lt;&lt; missing &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><span class="lineno">  147</span>            }</div>
+<div class="line"><span class="lineno">  148</span>        }</div>
+<div class="line"><span class="lineno">  149</span>    }</div>
+<div class="line"><span class="lineno">  150</span> </div>
+<div class="line"><span class="lineno">  151</span>    <span class="keywordflow">if</span> (riskyReviewerIds != <span class="keyword">nullptr</span> &amp;&amp; riskValue &gt; 0) {</div>
+<div class="line"><span class="lineno">  152</span>        <a class="code hl_function" href="_assignment_logic_8cpp.html#a77876bd7e23629d20315a7ac61ef09c3">writeRiskSection</a>(out, riskValue, *riskyReviewerIds);</div>
+<div class="line"><span class="lineno">  153</span>    }</div>
+<div class="line"><span class="lineno">  154</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><span class="lineno">  155</span>}</div>
+<div class="ttc" id="a_assignment_logic_8cpp_html_a77876bd7e23629d20315a7ac61ef09c3"><div class="ttname"><a href="_assignment_logic_8cpp.html#a77876bd7e23629d20315a7ac61ef09c3">writeRiskSection</a></div><div class="ttdeci">static void writeRiskSection(std::ofstream &amp;out, int riskValue, const std::vector&lt; int &gt; &amp;riskyReviewerIds)</div><div class="ttdef"><b>Definition</b> <a href="_assignment_logic_8cpp_source.html#l00069">AssignmentLogic.cpp:69</a></div></div>
 <div class="ttc" id="aclass_graph_builder_html_a20725155f22be6115d0d094918c831fd"><div class="ttname"><a href="class_graph_builder.html#a20725155f22be6115d0d094918c831fd">GraphBuilder::getMatchedDomain</a></div><div class="ttdeci">static int getMatchedDomain(const Submission &amp;sub, const Reviewer &amp;rev, int mode)</div><div class="ttdoc">Returns the topic on which submission and reviewer match in the given mode. Returns -1 if they do not...</div><div class="ttdef"><b>Definition</b> <a href="_graph_builder_8cpp_source.html#l00034">GraphBuilder.cpp:34</a></div></div>
 <div class="ttc" id="astruct_parameters_html_a321c029d5d04dde55af4d4cb9824da52"><div class="ttname"><a href="struct_parameters.html#a321c029d5d04dde55af4d4cb9824da52">Parameters::OutputFileName</a></div><div class="ttdeci">std::string OutputFileName</div><div class="ttdef"><b>Definition</b> <a href="_parameters_8h_source.html#l00023">Parameters.h:23</a></div></div>
 </div><!-- fragment -->
