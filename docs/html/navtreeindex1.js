@@ -1,5 +1,10 @@
 var NAVTREEINDEX1 =
 {
+"maxflow__tests_8cpp.html#a46664dc7e359dd1392611355c5853b8d":[3,0,6,0,6],
+"maxflow__tests_8cpp.html#a4d2fc5d1fa90b15fac003aa92fcab7a6":[3,0,6,0,13],
+"maxflow__tests_8cpp.html#a549ad06baba91961e44ff6483ae4f9eb":[3,0,6,0,20],
+"maxflow__tests_8cpp.html#a597f5139587fb61fc6d423f45ddc8ec6":[3,0,6,0,22],
+"maxflow__tests_8cpp.html#a5a2485fda0545f5e6a94864495c21940":[3,0,6,0,3],
 "maxflow__tests_8cpp.html#a6d62cfe4caeaa3ab65f2376119c24a35":[3,0,6,0,15],
 "maxflow__tests_8cpp.html#a76861b439d6da5ab82b27ec9d3125af6":[3,0,6,0,21],
 "maxflow__tests_8cpp.html#a79c3e4acec96ba2a2ac6754393404f78":[3,0,6,0,11],
@@ -15,14 +20,14 @@ var NAVTREEINDEX1 =
 "maxflow__tests_8cpp.html#afa7ff1bb1eafe1074e69b7f51e868443":[3,0,6,0,10],
 "maxflow__tests_8cpp_source.html":[3,0,6,0],
 "pages.html":[],
-"structParameters.html":[2,0,6],
-"structParameters.html#a1c06bfa9292515f6b208ccd287a62a96":[2,0,6,4],
-"structParameters.html#a321c029d5d04dde55af4d4cb9824da52":[2,0,6,3],
-"structParameters.html#a6a3d2e541c226b4fcd6095ebfe8f2f3f":[2,0,6,5],
-"structParameters.html#a9ac2241ed0f41c0f0d46e7a10f67c4ac":[2,0,6,7],
-"structParameters.html#aacc92b368c51db2d76aabbbdc7f7e51f":[2,0,6,6],
-"structParameters.html#ad865476e3ce706b539c306ed3647f381":[2,0,6,0],
-"structParameters.html#aeaab0c199b7a0d0857071dbec750a434":[2,0,6,1],
-"structParameters.html#aeea9e43cbdff07b655f0b7ea87f302a3":[2,0,6,2],
-"structParameters.html#af29e21748d41b4d8a0867d8083ad7551":[2,0,6,8]
+"struct_parameters.html":[2,0,6],
+"struct_parameters.html#a1c06bfa9292515f6b208ccd287a62a96":[2,0,6,4],
+"struct_parameters.html#a321c029d5d04dde55af4d4cb9824da52":[2,0,6,3],
+"struct_parameters.html#a6a3d2e541c226b4fcd6095ebfe8f2f3f":[2,0,6,5],
+"struct_parameters.html#a9ac2241ed0f41c0f0d46e7a10f67c4ac":[2,0,6,7],
+"struct_parameters.html#aacc92b368c51db2d76aabbbdc7f7e51f":[2,0,6,6],
+"struct_parameters.html#ad865476e3ce706b539c306ed3647f381":[2,0,6,0],
+"struct_parameters.html#aeaab0c199b7a0d0857071dbec750a434":[2,0,6,1],
+"struct_parameters.html#aeea9e43cbdff07b655f0b7ea87f302a3":[2,0,6,2],
+"struct_parameters.html#af29e21748d41b4d8a0867d8083ad7551":[2,0,6,8]
 };

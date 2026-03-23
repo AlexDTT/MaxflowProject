@@ -51,12 +51,19 @@ var NAVTREE =
         [ "Complexity", "extra_docs.html#ext_t2_4_complexity", null ],
         [ "Example", "extra_docs.html#ext_t2_4_example", null ]
       ] ],
-      [ "Why Two Integration Tests \"Differ\"", "extra_docs.html#ext_test_diff", [
-        [ "ext_test_diff_overview", "extra_docs.html#ext_test_diff_overview", null ],
-        [ "Input Configuration", "extra_docs.html#ext_test_diff_input", null ],
-        [ "Our Solution (dataset10)", "extra_docs.html#ext_test_diff_our_solution", null ],
-        [ "Reference Solution", "extra_docs.html#ext_test_diff_reference", null ],
-        [ "Why Both Are Correct", "extra_docs.html#ext_test_diff_why", null ]
+      [ "Why Integration Tests \"Differ\"", "extra_docs.html#ext_test_diff", [
+        [ "Overview", "extra_docs.html#ext_test_diff_overview", null ],
+        [ "Datasets 10 and 11", "extra_docs.html#ext_test_diff_dataset10", [
+          [ "Input Configuration", "extra_docs.html#ext_test_diff_d10_input", null ],
+          [ "Reference Solution (Expected)", "extra_docs.html#ext_test_diff_d10_ref", null ],
+          [ "Our Solution (Produced)", "extra_docs.html#ext_test_diff_d10_ours", null ]
+        ] ],
+        [ "Dataset 14", "extra_docs.html#ext_test_diff_dataset14", [
+          [ "Input Configuration", "extra_docs.html#ext_test_diff_d14_input", null ],
+          [ "Reference Solution (Expected)", "extra_docs.html#ext_test_diff_d14_ref", null ],
+          [ "Our Solution (Produced)", "extra_docs.html#ext_test_diff_d14_ours", null ],
+          [ "Why They Differ", "extra_docs.html#ext_test_diff_d14_why", null ]
+        ] ]
       ] ],
       [ "Complexity Summary", "extra_docs.html#ext_complexity_table", null ]
     ] ],
@@ -82,8 +89,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"AssignmentLogic_8cpp.html",
-"maxflow__tests_8cpp.html#a6d62cfe4caeaa3ab65f2376119c24a35"
+"_assignment_logic_8cpp.html",
+"maxflow__tests_8cpp.html#a46664dc7e359dd1392611355c5853b8d"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

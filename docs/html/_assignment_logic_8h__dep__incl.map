@@ -1,0 +1,7 @@
+<map id="services/AssignmentLogic.h" name="services/AssignmentLogic.h">
+<area shape="rect" id="Node000001" title="Logic for assigning reviewers to submissions based on Max Flow." alt="" coords="111,5,296,31"/>
+<area shape="rect" id="Node000002" href="$_assignment_logic_8cpp.html" title=" " alt="" coords="5,79,205,105"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,43,123,81,120,76,173,38"/>
+<area shape="rect" id="Node000003" href="$_conference_app_8cpp.html" title=" " alt="" coords="228,79,379,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="235,38,288,76,285,81,231,42"/>
+</map>

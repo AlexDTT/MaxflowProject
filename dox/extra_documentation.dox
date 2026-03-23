@@ -417,97 +417,107 @@ globally minimise total cost.
 
 ---
 
-@section ext_test_diff Why Two Integration Tests "Differ"
+@section ext_test_diff Why Integration Tests "Differ"
 
-@subsection ext_test_diff_overview
+@subsection ext_test_diff_overview Overview
 
-Integration tests **dataset10** and **dataset11** report output differences when compared against
-the reference solutions. However, our outputs are **equally correct** - they represent a different
-but valid decomposition of the same maximum flow.
+Several integration tests report output differences when compared against reference solutions.
+In every case our outputs are **equally correct** - they represent different but valid
+decompositions of the same maximum flow. The test harness uses exact `diff` comparison against
+a single reference, so it cannot recognise equally optimal assignments.
 
-@subsection ext_test_diff_input Input Configuration
+All differing solutions share these properties with the reference:
+- Same total flow (all required reviews assigned)
+- Every submission receives exactly MinReviewsPerSubmission reviews
+- No reviewer exceeds MaxReviewsPerReviewer reviews
+- Every assignment uses a valid domain match for the active mode
 
-Both datasets share the same submissions and reviewers. They differ only in whether risk analysis
-is enabled (dataset10: off, dataset11: on).
+The differences arise solely from **BFS traversal order** in Edmonds-Karp. When multiple
+shortest augmenting paths exist, adjacency list ordering (ascending reviewer ID in our case)
+determines which path is chosen, producing equally optimal but different flow decompositions.
+
+---
+
+@subsection ext_test_diff_dataset10 Datasets 10 and 11
+
+@subsubsection ext_test_diff_d10_input Input Configuration
+
+Both datasets share submissions/reviewers; differ only in risk analysis flag.
 
 @code
-# 3 submissions, all with secondary topic = 2
 Submissions:  1 (pri=1, sec=2),  2 (pri=3, sec=2),  3 (pri=4, sec=2)
-# 6 reviewers, all with primary topic = 2
 Reviewers:    1..6 (all pri=2)
-Mode: 2 (secondary submission domain enabled)
-MinReviewsPerSubmission = 2,  MaxReviewsPerReviewer = 2
+Mode: 2, MinReviews=2, MaxReviews=2
 @endcode
 
-In mode 2, a submission matches a reviewer when the reviewer's primary topic equals either the
-submission's primary or secondary topic. Since all reviewers have primary topic 2, all three
-submissions match via their secondary topic (2). Every submission can be reviewed by every reviewer.
+In mode 2, all reviewers match all submissions via secondary topic 2. Total required: 6.
+Reviewer capacity: 12. High slack.
 
-<b>Total required</b>: 3 submissions × 2 reviews = 6.
-<b>Total reviewer capacity</b>: 6 reviewers × 2 = 12. Plenty of slack.
-
-@subsection ext_test_diff_our_solution Our Solution (dataset10)
+@subsubsection ext_test_diff_d10_ref Reference Solution (Expected)
 
 @code
-#SubmissionId,ReviewerId,Match
-1, 1, 2       # Sub 1 ← Rev 1 (via topic 2)
-1, 2, 2       # Sub 1 ← Rev 2 (via topic 2)
-2, 1, 2       # Sub 2 ← Rev 1 (via topic 2)
-2, 2, 2       # Sub 2 ← Rev 2 (via topic 2)
-3, 3, 2       # Sub 3 ← Rev 3 (via topic 2)
-3, 4, 2       # Sub 3 ← Rev 4 (via topic 2)
-#Total: 6
+1,1,2  1,3,2  2,2,2  2,3,2  3,1,2  3,2,2
 @endcode
 
-Reviewers 1 and 2 each handle 2 reviews (at capacity). Reviewers 3 and 4 each handle 1 review.
-Reviewers 5 and 6 are unused. Every submission gets exactly 2 reviews.
+Rev1,2,3 at capacity (2 each); Rev4,5,6 unused. Flow=6. ✓
 
-<div class="interactive_dotgraph">
-
-\dotfile dox/test_diff_ours.dot "Our solution for dataset10: Rev1,Rev2 at capacity, flow=6"
-
-</div>
-
-@subsection ext_test_diff_reference Reference Solution
+@subsubsection ext_test_diff_d10_ours Our Solution (Produced)
 
 @code
-#SubmissionId,ReviewerId,Match
-1, 1, 2       # Sub 1 ← Rev 1 (via topic 2)
-1, 3, 2       # Sub 1 ← Rev 3 (via topic 2)
-2, 2, 2       # Sub 2 ← Rev 2 (via topic 2)
-2, 3, 2       # Sub 2 ← Rev 3 (via topic 2)
-3, 1, 2       # Sub 3 ← Rev 1 (via topic 2)
-3, 2, 2       # Sub 3 ← Rev 2 (via topic 2)
-#Total: 6
+1,1,2  1,2,2  2,1,2  2,2,2  3,3,2  3,4,2
 @endcode
 
-Reviewers 1, 2, and 3 each handle 2 reviews (at capacity). Reviewers 4, 5, 6 are unused.
-Every submission gets exactly 2 reviews.
+Rev1,2 at capacity (2 each); Rev3,4 with 1 each; Rev5,6 unused. Flow=6. ✓
 
-@subsection ext_test_diff_why Why Both Are Correct
+Both decompositions are valid. For dataset11 (risk on), removing any single reviewer still
+leaves capacity for all 6 reviews, so risk output is empty in both cases.
 
-The max-flow problem admits **multiple valid flow decompositions** that achieve the same total
-flow. Both solutions:
+---
 
-- **Total flow = 6** (all required reviews assigned)
-- **Each submission receives exactly 2 reviews** (satisfying MinReviewsPerSubmission)
-- **No reviewer exceeds 2 reviews** (satisfying MaxReviewsPerReviewer)
-- **All edges are valid** (every assignment uses the secondary topic 2 match)
+@subsection ext_test_diff_dataset14 Dataset 14
 
-The difference arises from the **BFS traversal order** in Edmonds-Karp. The algorithm finds the
-*shortest* augmenting path at each step, but when multiple shortest paths of equal length exist,
-the order in which adjacent edges are explored determines which path is chosen. Our adjacency
-list ordering produces a different - but equally optimal - flow decomposition.
+@subsubsection ext_test_diff_d14_input Input Configuration
 
-For dataset11 (with risk analysis), the same assignment is used as the baseline. Since no
-reviewer is individually critical (removing any single reviewer still leaves enough capacity
-to cover all 6 required reviews), the risk analysis output is empty in both cases - they agree
-on the risk analysis result, differing only in the assignment listing.
+@code
+Submissions:  1(pri=1,sec=4), 2(pri=1,sec=4), 3(pri=2,sec=4), 4(pri=3,sec=4)
+Reviewers:    1(pri=1), 2(pri=2), 3(pri=3), 4-6(pri=4)
+Mode: 2, MinReviews=2, MaxReviews=3
+SecondarySubmissionDomain=1, SecondaryReviewerExpertise=0
+@endcode
 
-@note The integration test uses exact `diff` comparison against a single reference output. This
-is a limitation of the test harness: it cannot recognize that two different assignments are
-equally valid. Both outputs represent a **correct maximum flow** with identical total flow and
-no constraint violations.
+Eligible edges: Rev1→Subs1,2; Rev2→Sub3; Rev3→Sub4; Rev4-6→all subs (via sec=4).
+Total required: 8. Rev1/2/3 are indispensable for their topics; Rev4-6 are interchangeable.
+
+@subsubsection ext_test_diff_d14_ref Reference Solution (Expected)
+
+@code
+1,1,1  1,5,4  2,1,1  2,4,4  3,2,2  3,4,4  4,3,3  4,4,4
+@endcode
+
+Rev1:2, Rev2:1, Rev3:1, Rev4:3 (saturated by Subs2,3,4), Rev5:1. Flow=8. ✓
+
+@subsubsection ext_test_diff_d14_ours Our Solution (Produced)
+
+@code
+1,1,1  1,4,4  2,1,1  2,4,4  3,2,2  3,4,4  4,3,3  4,5,4
+@endcode
+
+Rev1:2, Rev2:1, Rev3:1, Rev4:3 (saturated by Subs1,2,3), Rev5:1. Flow=8. ✓
+
+@subsubsection ext_test_diff_d14_why Why They Differ
+
+Both saturate Rev4 to capacity (3), differing only in **which topic-4 reviewer absorbs which
+submission's secondary slot**. Our BFS (ascending reviewer ID) fills Rev4 with Subs1,2,3 first,
+leaving Sub4's secondary slot to Rev5. The reference processes Sub4's edge earlier, saturating
+Rev4 with Subs2,3,4, leaving Sub1's secondary slot to Rev5.
+
+Both are valid shortest augmenting paths. Risk analysis is empty in both (Rev4-6 are
+interchangeable; removing any one still leaves capacity 6 > 4 needed).
+
+@note The integration test harness uses exact `diff` comparison against a single reference.
+This is a known limitation: it cannot recognise that multiple assignments are equally valid.
+All differing datasets described produce **correct maximum flow** with identical total flow
+and no constraint violations.
 
 ---
 

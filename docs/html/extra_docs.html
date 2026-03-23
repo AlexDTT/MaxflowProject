@@ -117,7 +117,7 @@ Problem Description</h2>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_1_approach"></a>
 How We Solve It</h2>
 <p>We model the problem as a <b>Maximum Flow</b> problem on a bipartite graph with a super-source and super-sink.</p>
-<p><a class="el" href="classGraph.html" title="Represents a general graph using an adjacency list.">Graph</a> construction (<a class="el" href="classGraphBuilder.html#a8b9ac34ac3339f52a020df504d954ef9" title="GraphBuilder::buildReviewFlowGraph">GraphBuilder::buildReviewFlowGraph</a>):</p>
+<p><a class="el" href="class_graph.html" title="Represents a general graph using an adjacency list.">Graph</a> construction (<a class="el" href="class_graph_builder.html#a8b9ac34ac3339f52a020df504d954ef9" title="GraphBuilder::buildReviewFlowGraph">GraphBuilder::buildReviewFlowGraph</a>):</p>
 <ul>
 <li><b>Vertices:</b> super-source (ID 0), one node per submission (IDs 1..P), one node per reviewer (IDs P+1..P+R), super-sink (ID P+R+1).</li>
 <li><b>Edges and capacities:</b><ul>
@@ -128,8 +128,8 @@ How We Solve It</h2>
 </li>
 </ul>
 <p>A <b>complete assignment</b> is achieved when the total flow equals P × MinReviewsPerSubmission. If the max flow is less than this value, some submissions cannot be fully covered.</p>
-<p><b>Algorithm</b>: We run <a class="el" href="EdmondKarp_8cpp.html#a3910c57ab30860808075348a43092a6f" title="edmondsKarp">Edmonds-Karp</a> on the constructed graph. The BFS-based augmentation guarantees we find the maximum flow. After the algorithm terminates, edges from submissions to reviewers with positive flow represent the assigned reviews.</p>
-<p><b>Output</b>: The function <a class="el" href="classAssignmentLogic.html#a90461122cf11a333f981c472be0888bc" title="AssignmentLogic::writeAssignmentsToFile">writeAssignmentsToFile</a> traverses the flow graph and writes a CSV file listing every assignment (SubmissionId, ReviewerId, matched domain), grouped both by submission and by reviewer, with the total count. If the assignment is incomplete, a missing-reviews section is appended.</p>
+<p><b>Algorithm</b>: We run <a class="el" href="_edmond_karp_8cpp.html#a3910c57ab30860808075348a43092a6f" title="edmondsKarp">Edmonds-Karp</a> on the constructed graph. The BFS-based augmentation guarantees we find the maximum flow. After the algorithm terminates, edges from submissions to reviewers with positive flow represent the assigned reviews.</p>
+<p><b>Output</b>: The function <a class="el" href="class_assignment_logic.html#a90461122cf11a333f981c472be0888bc" title="AssignmentLogic::writeAssignmentsToFile">writeAssignmentsToFile</a> traverses the flow graph and writes a CSV file listing every assignment (SubmissionId, ReviewerId, matched domain), grouped both by submission and by reviewer, with the total count. If the assignment is incomplete, a missing-reviews section is appended.</p>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_1_example"></a>
 Example</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#Submissions</span></div>
@@ -144,7 +144,7 @@ Example</h2>
 <div class="line"><span class="preprocessor">#Parameters</span></div>
 <div class="line">MinReviewsPerSubmission, 2</div>
 <div class="line">MaxReviewsPerReviewer, 2</div>
-</div><!-- fragment --><p><a class="el" href="classGraph.html" title="Represents a general graph using an adjacency list.">Graph</a> edges (mode 1):</p><ul>
+</div><!-- fragment --><p><a class="el" href="class_graph.html" title="Represents a general graph using an adjacency list.">Graph</a> edges (mode 1):</p><ul>
 <li>Source → Sub1 (cap 2), Source → Sub2 (cap 2)</li>
 <li>Sub1 → Rev1 (cap 1), Sub1 → Rev2 (cap 1) - both match topic 1</li>
 <li>Sub2 → Rev3 (cap 1) - matches topic 2</li>
@@ -153,7 +153,7 @@ Example</h2>
 <p><b>Max flow</b>: 3 (Sub1 gets 2 reviews from Rev1 and Rev2; Sub2 gets only 1 from Rev3).</p>
 <p><b>Total required</b>: 4. <b>Result</b>: Incomplete - Sub2 is missing 1 review.</p>
 <div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
-<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t21_example.dot_c9ea1a9d0b4badae9e99b8fea6c5c22e.svg" width="544" height="219"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t21_example.dot_c9ea1a9d0b4badae9e99b8fea6c5c22e.svg" width="544" height="211"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
 T2.1 Example: Max-flow graph with partial assignment (flow=3, required=4)</div>
 </div>
 </div><div class="interactive_dotgraph"></div><h2 class="doxsection"><a class="anchor" id="ext_t2_1_complexity"></a>
@@ -179,7 +179,7 @@ Problem Description</h2>
 <p>Building on T2.1, this variant asks: <b>is there a single reviewer whose absence would make a complete assignment impossible?</b> If the baseline assignment (all reviewers available) is already incomplete, risk analysis is not performed. Otherwise, we test each reviewer individually.</p>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_2_approach"></a>
 How We Solve It</h2>
-<p>Our implementation is in <a class="el" href="classAssignmentLogic.html#af7460acb335b05095c2bd5bbca2925f9" title="AssignmentLogic::findRiskyReviewersK1">findRiskyReviewersK1</a>:</p>
+<p>Our implementation is in <a class="el" href="class_assignment_logic.html#af7460acb335b05095c2bd5bbca2925f9" title="AssignmentLogic::findRiskyReviewersK1">findRiskyReviewersK1</a>:</p>
 <ol type="1">
 <li><b>Baseline check.</b> Run Edmonds-Karp with all reviewers. If the achieved flow is less than P × MinReviewsPerSubmission, return an empty list (the assignment is already infeasible; risk analysis is moot).</li>
 <li><b>Per-reviewer removal.</b> For each reviewer j (j = 0..R-1):<ul>
@@ -216,7 +216,7 @@ Example</h2>
 <div class="line">3</div>
 </div><!-- fragment --><p>This is a non-trivial result: Rev3 is the only reviewer for topic 2. Its absence makes it impossible to cover Sub2.</p>
 <div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
-<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t22_example.dot_c7ff4c75ac5b4621b05c343a1852a6cb.svg" width="544" height="238"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t22_example.dot_c7ff4c75ac5b4621b05c343a1852a6cb.svg" width="544" height="232"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
 T2.2 Example: Rev3 (highlighted in red) is the sole risky reviewer</div>
 </div>
 </div><div class="interactive_dotgraph"></div><h2 class="doxsection"><a class="anchor" id="ext_t2_2_complexity"></a>
@@ -307,12 +307,12 @@ Non-Trivial Input Example</h2>
 <li>Remove Rev3 or Rev4: the other still covers Sub2. K = 1 returns <b>empty</b> - no risky reviewers.</li>
 </ul>
 <div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
-<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t23_baseline.dot_e7f13a6b84fd6be894591b4eddfd8db4.svg" width="548" height="296"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t23_baseline.dot_e7f13a6b84fd6be894591b4eddfd8db4.svg" width="548" height="286"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
 T2.3 Baseline: All reviewers available, flow=3 (feasible)</div>
 </div>
 </div><div class="interactive_dotgraph"></div><p><b>K = 2, remove {Rev1, Rev2}</b>: No remaining topic-1 reviewers. Sub1 and Sub3 have zero matches. Flow = 1 (only Sub2 covered) &lt; 3. <b>Critical subset.</b></p>
 <div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
-<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t23_remove_1_2.dot_b767ec7aa783d457231406291a65edfb.svg" width="563" height="342"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t23_remove_1_2.dot_b767ec7aa783d457231406291a65edfb.svg" width="563" height="334"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
 T2.3 K=2: Removing {Rev1, Rev2} leaves flow=1 &lt; 3 - critical subset</div>
 </div>
 </div><div class="interactive_dotgraph"></div><p><b>K = 2, remove {Rev3, Rev4}</b>: No remaining topic-2 reviewers. Sub2 has zero matches. Flow = 2 &lt; 3. <b>Critical subset.</b></p>
@@ -349,7 +349,7 @@ Proposed Approach</h2>
 <p><b>Approach B: Min-Cost Max-Flow (Exact)</b></p>
 <p>For guaranteed optimality, we reformulate as a minimum-cost flow problem:</p>
 <ol type="1">
-<li><b><a class="el" href="classEdge.html" title="Represents a directed connection between two vertices in the graph.">Edge</a> costs by match quality:</b><ul>
+<li><b><a class="el" href="class_edge.html" title="Represents a directed connection between two vertices in the graph.">Edge</a> costs by match quality:</b><ul>
 <li>sub.primary == rev.primary: cost = 0</li>
 <li>cross match (primary ↔ secondary): cost = 1</li>
 <li>sub.secondary == rev.secondary: cost = 2</li>
@@ -405,65 +405,65 @@ Example</h2>
 </ul>
 <p><b>Min-cost max-flow</b> (proposed, not implemented): Would assign the same edges, minimising total cost (0) since primary-primary matches are always preferred.</p>
 <div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
-<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t24_example.dot_15cd24abdef3839383642c3d39ece0bb.svg" width="578" height="362"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
+<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_t24_example.dot_15cd24abdef3839383642c3d39ece0bb.svg" width="578" height="340"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
 T2.4 Example: Mode 3 matching. Gold = primary-primary (used), dashed = cross (unused)</div>
 </div>
 </div><div class="interactive_dotgraph"></div><p><b>A case where Layered fails and Min-Cost succeeds</b> (proposed): If Rev1 were removed, Layer 1 would match Sub2→Rev3 (primary-primary), leaving Sub1 to find a match in Layer 2 (Sub1→Rev2 via cross). Total match quality: 1 primary + 1 cross. But if there were a third submission competing for Rev3, Layer 1 might greedily assign Rev3 to the wrong submission, forcing a worse overall assignment - while min-cost max-flow would globally minimise total cost.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_test_diff"></a>
-Why Two Integration Tests "Differ"</h1>
+Why Integration Tests "Differ"</h1>
 <h2 class="doxsection"><a class="anchor" id="ext_test_diff_overview"></a>
-ext_test_diff_overview</h2>
-<p>Integration tests <b>dataset10</b> and <b>dataset11</b> report output differences when compared against the reference solutions. However, our outputs are <b>equally correct</b> - they represent a different but valid decomposition of the same maximum flow.</p>
-<h2 class="doxsection"><a class="anchor" id="ext_test_diff_input"></a>
-Input Configuration</h2>
-<p>Both datasets share the same submissions and reviewers. They differ only in whether risk analysis is enabled (dataset10: off, dataset11: on).</p>
-<div class="fragment"><div class="line"><span class="preprocessor"># 3 submissions, all with secondary topic = 2</span></div>
-<div class="line">Submissions:  1 (pri=1, sec=2),  2 (pri=3, sec=2),  3 (pri=4, sec=2)</div>
-<div class="line"># 6 reviewers, all with primary topic = 2</div>
-<div class="line">Reviewers:    1..6 (all pri=2)</div>
-<div class="line">Mode: 2 (secondary submission domain enabled)</div>
-<div class="line">MinReviewsPerSubmission = 2,  MaxReviewsPerReviewer = 2</div>
-</div><!-- fragment --><p>In mode 2, a submission matches a reviewer when the reviewer's primary topic equals either the submission's primary or secondary topic. Since all reviewers have primary topic 2, all three submissions match via their secondary topic (2). Every submission can be reviewed by every reviewer.</p>
-<p><b>Total required</b>: 3 submissions × 2 reviews = 6. <b>Total reviewer capacity</b>: 6 reviewers × 2 = 12. Plenty of slack.</p>
-<h2 class="doxsection"><a class="anchor" id="ext_test_diff_our_solution"></a>
-Our Solution (dataset10)</h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#SubmissionId,ReviewerId,Match</span></div>
-<div class="line">1, 1, 2       # Sub 1 ← Rev 1 (via topic 2)</div>
-<div class="line">1, 2, 2       # Sub 1 ← Rev 2 (via topic 2)</div>
-<div class="line">2, 1, 2       # Sub 2 ← Rev 1 (via topic 2)</div>
-<div class="line">2, 2, 2       # Sub 2 ← Rev 2 (via topic 2)</div>
-<div class="line">3, 3, 2       # Sub 3 ← Rev 3 (via topic 2)</div>
-<div class="line">3, 4, 2       # Sub 3 ← Rev 4 (via topic 2)</div>
-<div class="line"><span class="preprocessor">#Total: 6</span></div>
-</div><!-- fragment --><p>Reviewers 1 and 2 each handle 2 reviews (at capacity). Reviewers 3 and 4 each handle 1 review. Reviewers 5 and 6 are unused. Every submission gets exactly 2 reviews.</p>
-<div class="interactive_dotgraph"></div><div class="interactive_dotgraph"><div class="dotgraph">
-<iframe scrolling="no" loading="lazy" frameborder="0" src="dot_test_diff_ours.dot_0a7355627588219efdf32e75b0c67f7c.svg" width="572" height="451"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe><div class="caption">
-Our solution for dataset10: Rev1,Rev2 at capacity, flow=6</div>
-</div>
-</div><div class="interactive_dotgraph"></div><h2 class="doxsection"><a class="anchor" id="ext_test_diff_reference"></a>
-Reference Solution</h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#SubmissionId,ReviewerId,Match</span></div>
-<div class="line">1, 1, 2       # Sub 1 ← Rev 1 (via topic 2)</div>
-<div class="line">1, 3, 2       # Sub 1 ← Rev 3 (via topic 2)</div>
-<div class="line">2, 2, 2       # Sub 2 ← Rev 2 (via topic 2)</div>
-<div class="line">2, 3, 2       # Sub 2 ← Rev 3 (via topic 2)</div>
-<div class="line">3, 1, 2       # Sub 3 ← Rev 1 (via topic 2)</div>
-<div class="line">3, 2, 2       # Sub 3 ← Rev 2 (via topic 2)</div>
-<div class="line"><span class="preprocessor">#Total: 6</span></div>
-</div><!-- fragment --><p>Reviewers 1, 2, and 3 each handle 2 reviews (at capacity). Reviewers 4, 5, 6 are unused. Every submission gets exactly 2 reviews.</p>
-<h2 class="doxsection"><a class="anchor" id="ext_test_diff_why"></a>
-Why Both Are Correct</h2>
-<p>The max-flow problem admits <b>multiple valid flow decompositions</b> that achieve the same total flow. Both solutions:</p>
-<ul>
-<li><b>Total flow = 6</b> (all required reviews assigned)</li>
-<li><b>Each submission receives exactly 2 reviews</b> (satisfying MinReviewsPerSubmission)</li>
-<li><b>No reviewer exceeds 2 reviews</b> (satisfying MaxReviewsPerReviewer)</li>
-<li><b>All edges are valid</b> (every assignment uses the secondary topic 2 match)</li>
+Overview</h2>
+<p>Several integration tests report output differences when compared against reference solutions. In every case our outputs are <b>equally correct</b> - they represent different but valid decompositions of the same maximum flow. The test harness uses exact <span class="tt">diff</span> comparison against a single reference, so it cannot recognise equally optimal assignments.</p>
+<p>All differing solutions share these properties with the reference:</p><ul>
+<li>Same total flow (all required reviews assigned)</li>
+<li>Every submission receives exactly MinReviewsPerSubmission reviews</li>
+<li>No reviewer exceeds MaxReviewsPerReviewer reviews</li>
+<li>Every assignment uses a valid domain match for the active mode</li>
 </ul>
-<p>The difference arises from the <b>BFS traversal order</b> in Edmonds-Karp. The algorithm finds the shortest* augmenting path at each step, but when multiple shortest paths of equal length exist, the order in which adjacent edges are explored determines which path is chosen. Our adjacency list ordering produces a different - but equally optimal - flow decomposition.</p>
-<p>For dataset11 (with risk analysis), the same assignment is used as the baseline. Since no reviewer is individually critical (removing any single reviewer still leaves enough capacity to cover all 6 required reviews), the risk analysis output is empty in both cases - they agree on the risk analysis result, differing only in the assignment listing.</p>
-<dl class="section note"><dt>Note</dt><dd>The integration test uses exact <span class="tt">diff</span> comparison against a single reference output. This is a limitation of the test harness: it cannot recognize that two different assignments are equally valid. Both outputs represent a <b>correct maximum flow</b> with identical total flow and no constraint violations.</dd></dl>
+<p>The differences arise solely from <b>BFS traversal order</b> in Edmonds-Karp. When multiple shortest augmenting paths exist, adjacency list ordering (ascending reviewer ID in our case) determines which path is chosen, producing equally optimal but different flow decompositions.</p>
+<hr  />
+<h2 class="doxsection"><a class="anchor" id="ext_test_diff_dataset10"></a>
+Datasets 10 and 11</h2>
+<h3 class="doxsection"><a class="anchor" id="ext_test_diff_d10_input"></a>
+Input Configuration</h3>
+<p>Both datasets share submissions/reviewers; differ only in risk analysis flag.</p>
+<div class="fragment"><div class="line">Submissions:  1 (pri=1, sec=2),  2 (pri=3, sec=2),  3 (pri=4, sec=2)</div>
+<div class="line">Reviewers:    1..6 (all pri=2)</div>
+<div class="line">Mode: 2, MinReviews=2, MaxReviews=2</div>
+</div><!-- fragment --><p>In mode 2, all reviewers match all submissions via secondary topic 2. Total required: 6. <a class="el" href="class_reviewer.html" title="Represents a conference reviewer.">Reviewer</a> capacity: 12. High slack.</p>
+<h3 class="doxsection"><a class="anchor" id="ext_test_diff_d10_ref"></a>
+Reference Solution (Expected)</h3>
+<div class="fragment"><div class="line">1,1,2  1,3,2  2,2,2  2,3,2  3,1,2  3,2,2</div>
+</div><!-- fragment --><p>Rev1,2,3 at capacity (2 each); Rev4,5,6 unused. Flow=6. ✓</p>
+<h3 class="doxsection"><a class="anchor" id="ext_test_diff_d10_ours"></a>
+Our Solution (Produced)</h3>
+<div class="fragment"><div class="line">1,1,2  1,2,2  2,1,2  2,2,2  3,3,2  3,4,2</div>
+</div><!-- fragment --><p>Rev1,2 at capacity (2 each); Rev3,4 with 1 each; Rev5,6 unused. Flow=6. ✓</p>
+<p>Both decompositions are valid. For dataset11 (risk on), removing any single reviewer still leaves capacity for all 6 reviews, so risk output is empty in both cases.</p>
+<hr  />
+<h2 class="doxsection"><a class="anchor" id="ext_test_diff_dataset14"></a>
+Dataset 14</h2>
+<h3 class="doxsection"><a class="anchor" id="ext_test_diff_d14_input"></a>
+Input Configuration</h3>
+<div class="fragment"><div class="line">Submissions:  1(pri=1,sec=4), 2(pri=1,sec=4), 3(pri=2,sec=4), 4(pri=3,sec=4)</div>
+<div class="line">Reviewers:    1(pri=1), 2(pri=2), 3(pri=3), 4-6(pri=4)</div>
+<div class="line">Mode: 2, MinReviews=2, MaxReviews=3</div>
+<div class="line">SecondarySubmissionDomain=1, SecondaryReviewerExpertise=0</div>
+</div><!-- fragment --><p>Eligible edges: Rev1→Subs1,2; Rev2→Sub3; Rev3→Sub4; Rev4-6→all subs (via sec=4). Total required: 8. Rev1/2/3 are indispensable for their topics; Rev4-6 are interchangeable.</p>
+<h3 class="doxsection"><a class="anchor" id="ext_test_diff_d14_ref"></a>
+Reference Solution (Expected)</h3>
+<div class="fragment"><div class="line">1,1,1  1,5,4  2,1,1  2,4,4  3,2,2  3,4,4  4,3,3  4,4,4</div>
+</div><!-- fragment --><p>Rev1:2, Rev2:1, Rev3:1, Rev4:3 (saturated by Subs2,3,4), Rev5:1. Flow=8. ✓</p>
+<h3 class="doxsection"><a class="anchor" id="ext_test_diff_d14_ours"></a>
+Our Solution (Produced)</h3>
+<div class="fragment"><div class="line">1,1,1  1,4,4  2,1,1  2,4,4  3,2,2  3,4,4  4,3,3  4,5,4</div>
+</div><!-- fragment --><p>Rev1:2, Rev2:1, Rev3:1, Rev4:3 (saturated by Subs1,2,3), Rev5:1. Flow=8. ✓</p>
+<h3 class="doxsection"><a class="anchor" id="ext_test_diff_d14_why"></a>
+Why They Differ</h3>
+<p>Both saturate Rev4 to capacity (3), differing only in <b>which topic-4 reviewer absorbs which submission's secondary slot</b>. Our BFS (ascending reviewer ID) fills Rev4 with Subs1,2,3 first, leaving Sub4's secondary slot to Rev5. The reference processes Sub4's edge earlier, saturating Rev4 with Subs2,3,4, leaving Sub1's secondary slot to Rev5.</p>
+<p>Both are valid shortest augmenting paths. Risk analysis is empty in both (Rev4-6 are interchangeable; removing any one still leaves capacity 6 &gt; 4 needed).</p>
+<dl class="section note"><dt>Note</dt><dd>The integration test harness uses exact <span class="tt">diff</span> comparison against a single reference. This is a known limitation: it cannot recognise that multiple assignments are equally valid. All differing datasets described produce <b>correct maximum flow</b> with identical total flow and no constraint violations.</dd></dl>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_complexity_table"></a>
 Complexity Summary</h1>
@@ -472,35 +472,35 @@ Complexity Summary</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Location  </th><th class="markdownTableHeadNone">Complexity  </th><th class="markdownTableHeadNone">Notes  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">edmondsKarp  </td><td class="markdownTableBodyNone"><a class="el" href="EdmondKarp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V × E²) / O(F × E)  </td><td class="markdownTableBodyNone">Polynomial worst case; pseudopolynomial practical bound where F = total flow  </td></tr>
+<td class="markdownTableBodyNone">edmondsKarp  </td><td class="markdownTableBodyNone"><a class="el" href="_edmond_karp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V × E²) / O(F × E)  </td><td class="markdownTableBodyNone">Polynomial worst case; pseudopolynomial practical bound where F = total flow  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">findAugmentingPath  </td><td class="markdownTableBodyNone"><a class="el" href="EdmondKarp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">Single BFS pass  </td></tr>
+<td class="markdownTableBodyNone">findAugmentingPath  </td><td class="markdownTableBodyNone"><a class="el" href="_edmond_karp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">Single BFS pass  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">findMinResidualAlongPath  </td><td class="markdownTableBodyNone"><a class="el" href="EdmondKarp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Path walk  </td></tr>
+<td class="markdownTableBodyNone">findMinResidualAlongPath  </td><td class="markdownTableBodyNone"><a class="el" href="_edmond_karp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Path walk  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">augmentFlowAlongPath  </td><td class="markdownTableBodyNone"><a class="el" href="EdmondKarp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Path walk  </td></tr>
+<td class="markdownTableBodyNone">augmentFlowAlongPath  </td><td class="markdownTableBodyNone"><a class="el" href="_edmond_karp_8h.html" title="Implementations of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Path walk  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">buildReviewFlowGraph  </td><td class="markdownTableBodyNone"><a class="el" href="GraphBuilder_8h.html">data_structures/GraphBuilder.h</a>  </td><td class="markdownTableBodyNone">O(P × R)  </td><td class="markdownTableBodyNone">P submissions, R reviewers  </td></tr>
+<td class="markdownTableBodyNone">buildReviewFlowGraph  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_builder_8h.html">data_structures/GraphBuilder.h</a>  </td><td class="markdownTableBodyNone">O(P × R)  </td><td class="markdownTableBodyNone">P submissions, R reviewers  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">getMatchedDomain  </td><td class="markdownTableBodyNone"><a class="el" href="GraphBuilder_8h.html">data_structures/GraphBuilder.h</a>  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">At most 2 topics per entity  </td></tr>
+<td class="markdownTableBodyNone">getMatchedDomain  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_builder_8h.html">data_structures/GraphBuilder.h</a>  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">At most 2 topics per entity  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">findRiskyReviewersK1  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(R × V × E²) / O(R × F × E)  </td><td class="markdownTableBodyNone">R re-runs of Edmonds-Karp; polynomial / pseudopolynomial  </td></tr>
+<td class="markdownTableBodyNone">findRiskyReviewersK1  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(R × V × E²) / O(R × F × E)  </td><td class="markdownTableBodyNone">R re-runs of Edmonds-Karp; polynomial / pseudopolynomial  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">generateAssignmentsAndStore  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(V × E²) / O(F × E)  </td><td class="markdownTableBodyNone">Dominated by max-flow; polynomial / pseudopolynomial  </td></tr>
+<td class="markdownTableBodyNone">generateAssignmentsAndStore  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(V × E²) / O(F × E)  </td><td class="markdownTableBodyNone">Dominated by max-flow; polynomial / pseudopolynomial  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">totalRequiredReviews  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(N)  </td><td class="markdownTableBodyNone">N submissions  </td></tr>
+<td class="markdownTableBodyNone">totalRequiredReviews  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(N)  </td><td class="markdownTableBodyNone">N submissions  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">totalAssignedReviews  </td><td class="markdownTableBodyNone"><a class="el" href="AssignmentLogic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(P × R)  </td><td class="markdownTableBodyNone">Iterates submission→reviewer edges  </td></tr>
+<td class="markdownTableBodyNone">totalAssignedReviews  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(P × R)  </td><td class="markdownTableBodyNone">Iterates submission→reviewer edges  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="classFileParser.html#aaea1bf0b7d4f662f4f38f8ff1bf433b1" title="Parses a CSV input file and populates submissions, reviewers and params.">FileParser::parse</a>  </td><td class="markdownTableBodyNone"><a class="el" href="FileParser_8h.html" title="Class definition for parsing input CSV files.">io/FileParser.h</a>  </td><td class="markdownTableBodyNone">O(L)  </td><td class="markdownTableBodyNone">L lines in input file  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="class_file_parser.html#aaea1bf0b7d4f662f4f38f8ff1bf433b1" title="Parses a CSV input file and populates submissions, reviewers and params.">FileParser::parse</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_file_parser_8h.html" title="Class definition for parsing input CSV files.">io/FileParser.h</a>  </td><td class="markdownTableBodyNone">O(L)  </td><td class="markdownTableBodyNone">L lines in input file  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="classGraph.html#a8b7b7465fbfd562e2a469f90a437ab75" title="Finds a vertex with a given content.">Graph::findVertex</a>  </td><td class="markdownTableBodyNone"><a class="el" href="Graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Linear search over vertex set  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75" title="Finds a vertex with a given content.">Graph::findVertex</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Linear search over vertex set  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="classGraph.html#a00be284ea2be3b3d0f0d2e493b70245b" title="Adds a vertex with a given content to the graph.">Graph::addVertex</a>  </td><td class="markdownTableBodyNone"><a class="el" href="Graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Duplicate check  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="class_graph.html#a00be284ea2be3b3d0f0d2e493b70245b" title="Adds a vertex with a given content to the graph.">Graph::addVertex</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Duplicate check  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="classGraph.html#ac61af3aafe6277215f5a3b3cc7d58ce2" title="Adds a directed edge to the graph.">Graph::addEdge</a>  </td><td class="markdownTableBodyNone"><a class="el" href="Graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone"><a class="el" href="classVertex.html" title="Represents a node in the graph.">Vertex</a> lookups  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="class_graph.html#ac61af3aafe6277215f5a3b3cc7d58ce2" title="Adds a directed edge to the graph.">Graph::addEdge</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone"><a class="el" href="class_vertex.html" title="Represents a node in the graph.">Vertex</a> lookups  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="classGraph.html#af9c903104ad69a7782979fa9caedf163" title="Removes a vertex and all its incident edges from the graph.">Graph::removeVertex</a>  </td><td class="markdownTableBodyNone"><a class="el" href="Graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">Removes all incident edges  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="class_graph.html#af9c903104ad69a7782979fa9caedf163" title="Removes a vertex and all its incident edges from the graph.">Graph::removeVertex</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">Removes all incident edges  </td></tr>
 </table>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

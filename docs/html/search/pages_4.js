@@ -6,9 +6,9 @@ var searchData=
   ['analysis_3',['T2.1 - Basic Formulation (Primary Domains, No Risk Analysis)',['../extra_docs.html#ext_t2_1',1,'']]],
   ['analysis_20k_201_4',['T2.2 - Basic Formulation with Risk Analysis (K = 1)',['../extra_docs.html#ext_t2_2',1,'']]],
   ['analysis_20with_20k_201_20proposed_20approach_5',['T2.3 - Risk Analysis with K &amp;gt; 1 (Proposed Approach)',['../extra_docs.html#ext_t2_3',1,'']]],
-  ['and_20outlined_20approaches_6',['Extra Documentation and Outlined Approaches',['../extra_docs.html',1,'']]],
-  ['approach_7',['Approach',['../extra_docs.html#ext_t2_3_approach',1,'Proposed Approach'],['../extra_docs.html#ext_t2_4_approach',1,'Proposed Approach'],['../extra_docs.html#ext_t2_3',1,'T2.3 - Risk Analysis with K &amp;gt; 1 (Proposed Approach)'],['../extra_docs.html#ext_t2_4',1,'T2.4 - General Formulation with Secondary Domains (Proposed Approach)']]],
-  ['approaches_8',['Extra Documentation and Outlined Approaches',['../extra_docs.html',1,'']]],
-  ['architecture_20graph_20mapping_9',['System Architecture &amp;amp; Graph Mapping',['../index.html#autotoc_md6',1,'']]],
-  ['are_20correct_10',['Why Both Are Correct',['../extra_docs.html#ext_test_diff_why',1,'']]]
+  ['and_2011_6',['Datasets 10 and 11',['../extra_docs.html#ext_test_diff_dataset10',1,'']]],
+  ['and_20outlined_20approaches_7',['Extra Documentation and Outlined Approaches',['../extra_docs.html',1,'']]],
+  ['approach_8',['Approach',['../extra_docs.html#ext_t2_3_approach',1,'Proposed Approach'],['../extra_docs.html#ext_t2_4_approach',1,'Proposed Approach'],['../extra_docs.html#ext_t2_3',1,'T2.3 - Risk Analysis with K &amp;gt; 1 (Proposed Approach)'],['../extra_docs.html#ext_t2_4',1,'T2.4 - General Formulation with Secondary Domains (Proposed Approach)']]],
+  ['approaches_9',['Extra Documentation and Outlined Approaches',['../extra_docs.html',1,'']]],
+  ['architecture_20graph_20mapping_10',['System Architecture &amp;amp; Graph Mapping',['../index.html#autotoc_md6',1,'']]]
 ];
