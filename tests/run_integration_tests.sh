@@ -4,6 +4,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 INPUT_DIR="$SCRIPT_DIR/input"
 OUTPUT_DIR="$SCRIPT_DIR/output"
+RISK_DIR="$SCRIPT_DIR/risk"
 
 cd "$PROJECT_ROOT" || exit 1
 
@@ -44,15 +45,46 @@ for input_file in "$INPUT_DIR"/dataset*.csv; do
         continue
     fi
     if diff -q --strip-trailing-cr "$actual_output" "$expected_file" >/dev/null 2>&1; then
+        main_passed=true
+    else
+        main_passed=false
+    fi
+
+    # Check risk analysis output if enabled
+    risk_passed=true
+    risk_analysis=$(awk -F',' '/^RiskAnalysis,/ {gsub(/^[ \t]+/, "", $2); print $2}' "$input_file" 2>/dev/null)
+    if [[ "$risk_analysis" == "1" ]]; then
+        risk_expected="$RISK_DIR/$basename_input"
+        if [[ -f "$risk_expected" ]]; then
+            # Extract risk section from actual output (lines from "#Risk Analysis:" to end)
+            risk_actual="${actual_output}.risk"
+            awk '/^#Risk Analysis:/ {found=1} found' "$actual_output" > "$risk_actual"
+            if diff -q --strip-trailing-cr "$risk_actual" "$risk_expected" >/dev/null 2>&1; then
+                risk_passed=true
+            else
+                risk_passed=false
+            fi
+            rm -f "$risk_actual"
+        fi
+    fi
+
+    if $main_passed && $risk_passed; then
         echo "[PASS] $basename_input"
         ((PASSED++))
         PASSED_OUTPUTS+=("$actual_output")
     else
-        echo "[FAIL] $basename_input - output differs"
-        echo "       Expected: $expected_file"
-        echo "       Got:      $actual_output"
-        echo "       Diff:"
-        diff --strip-trailing-cr "$expected_file" "$actual_output" 2>&1 | head -20 | sed 's/^/       /'
+        echo "[FAIL] $basename_input"
+        if ! $main_passed; then
+            echo "       Main output differs"
+            echo "       Expected: $expected_file"
+            echo "       Got:      $actual_output"
+            echo "       Diff:"
+            diff --strip-trailing-cr "$expected_file" "$actual_output" 2>&1 | head -10 | sed 's/^/       /'
+        fi
+        if ! $risk_passed; then
+            echo "       Risk output differs"
+            echo "       Expected: $risk_expected"
+        fi
         echo "       (Keeping $output_name for inspection)"
         ((FAILED++))
     fi
