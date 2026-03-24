@@ -14,6 +14,7 @@ add_executable(main
     models/Reviewer.cpp
     io/FileParser.cpp
     algorithms/EdmondKarp.cpp
+    algorithms/FordFulkerson.cpp
     services/AssignmentLogic.cpp
     data_structures/GraphBuilder.cpp
 )
@@ -27,6 +28,7 @@ add_executable(maxflow_tests
     models/Submission.cpp
     models/Reviewer.cpp
     algorithms/EdmondKarp.cpp
+    algorithms/FordFulkerson.cpp
     services/AssignmentLogic.cpp
     data_structures/GraphBuilder.cpp
 )
@@ -53,5 +55,3 @@ if (DOXYGEN_FOUND)
         VERBATIM
     )
 endif()
-
-

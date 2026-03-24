@@ -1,10 +1,19 @@
 #include "services/AssignmentLogic.h"
 #include "data_structures/GraphBuilder.h"
+#include "algorithms/FordFulkerson.h"
 #include "algorithms/EdmondKarp.h"
 #include <fstream>
 #include <iostream>
 #include <algorithm>
 #include <tuple>
+
+static void runMaxFlow(Graph<int>* g, int source, int sink, AlgorithmType algo, std::function<void(const std::vector<int>&, double)> logger = nullptr) {
+    if (algo == AlgorithmType::EdmondsKarp) {
+        edmondsKarp<int>(g, source, sink, logger);
+    } else {
+        fordFulkerson<int>(g, source, sink, logger);
+    }
+}
 
 int AssignmentLogic::totalRequiredReviews(const std::vector<Submission>& submissions, const Parameters& params) {
     return (int) submissions.size() * params.MinReviewsPerSubmission;
@@ -31,11 +40,11 @@ int AssignmentLogic::totalAssignedReviews(const Graph<int>& flowGraph, const std
     return total;
 }
 
-std::vector<int> AssignmentLogic::findRiskyReviewersK1(const std::vector<Submission>& submissions, const std::vector<Reviewer>& reviewers, const Parameters& params, int mode) {
+std::vector<int> AssignmentLogic::findRiskyReviewersK1(const std::vector<Submission>& submissions, const std::vector<Reviewer>& reviewers, const Parameters& params, int mode, AlgorithmType algo) {
     std::vector<int> risky;
     const int needed = totalRequiredReviews(submissions, params);
     Graph<int> baseline = GraphBuilder::buildReviewFlowGraph(submissions, reviewers, params, mode);
-    edmondsKarp<int>(&baseline, GraphBuilder::sourceId(), GraphBuilder::sinkId((int) submissions.size(), (int) reviewers.size()));
+    runMaxFlow(&baseline, GraphBuilder::sourceId(), GraphBuilder::sinkId((int) submissions.size(), (int) reviewers.size()), algo);
     const int baselineAchieved = totalAssignedReviews(baseline, submissions, reviewers);
 
     if (baselineAchieved < needed) {
@@ -49,7 +58,7 @@ std::vector<int> AssignmentLogic::findRiskyReviewersK1(const std::vector<Submiss
             if (i != skip) reduced.push_back(reviewers[i]);
         }
         Graph<int> g = GraphBuilder::buildReviewFlowGraph(submissions, reduced, params, mode);
-        edmondsKarp<int>(&g, GraphBuilder::sourceId(), GraphBuilder::sinkId((int) submissions.size(), (int) reduced.size()));
+        runMaxFlow(&g, GraphBuilder::sourceId(), GraphBuilder::sinkId((int) submissions.size(), (int) reduced.size()), algo);
         int achieved = totalAssignedReviews(g, submissions, reduced);
         if (achieved < needed) risky.push_back(reviewers[skip].id);
     }
@@ -145,9 +154,9 @@ bool AssignmentLogic::writeAssignmentsToFile(const Graph<int>& flowGraph, const 
     return true;
 }
 
-bool AssignmentLogic::generateAssignmentsAndStore(Graph<int>& outGraph, const std::vector<Submission>& submissions, const std::vector<Reviewer>& reviewers, const Parameters& params, int mode, bool writeOutput, std::function<void(const std::vector<int>&, double)> logger) {
+bool AssignmentLogic::generateAssignmentsAndStore(Graph<int>& outGraph, const std::vector<Submission>& submissions, const std::vector<Reviewer>& reviewers, const Parameters& params, int mode, bool writeOutput, std::function<void(const std::vector<int>&, double)> logger, AlgorithmType algo) {
     outGraph = GraphBuilder::buildReviewFlowGraph(submissions, reviewers, params, mode);
-    edmondsKarp<int>(&outGraph, GraphBuilder::sourceId(), GraphBuilder::sinkId((int) submissions.size(), (int) reviewers.size()), logger);
+    runMaxFlow(&outGraph, GraphBuilder::sourceId(), GraphBuilder::sinkId((int) submissions.size(), (int) reviewers.size()), algo, logger);
 
     if (writeOutput) {
         return writeAssignmentsToFile(outGraph, submissions, reviewers, params, mode);

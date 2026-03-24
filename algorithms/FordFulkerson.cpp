@@ -1,56 +1,47 @@
 
-#include "algorithms/EdmondKarp.h"
+#include "algorithms/FordFulkerson.h"
 #include <algorithm>
 
-// Function to test the given vertex 'w' and visit it if conditions are met
+// Recursive DFS helper to find an augmenting path from v to t
 template <class T>
-void testAndVisit(std::queue<Vertex<T> *> &q, Edge<T> *e, Vertex<T> *w, double residual)
+bool dfsAugment(Vertex<T> *v, Vertex<T> *t)
 {
-    // Check if the vertex 'w' is not visited and there is residual capacity
-    if (!w->isVisited() && residual > 0)
+    v->setVisited(true);
+
+    if (v == t)
+        return true;
+
+    for (auto e : v->getAdj())
     {
-        // Mark 'w' as visited, set the path through which it was reached, and enqueue it
-        w->setVisited(true);
-        w->setPath(e);
-        q.push(w);
+        Vertex<T> *w = e->getDest();
+        double residual = e->getWeight() - e->getFlow();
+
+        if (!w->isVisited() && residual > 0)
+        {
+            w->setPath(e);
+            if (dfsAugment(w, t))
+                return true;
+        }
     }
+
+    return false;
 }
 
-// Function to find an augmenting path using Breadth-First Search
+// Function to find an augmenting path using Depth-First Search
 template <class T>
-bool findAugmentingPath(Graph<T> *g, Vertex<T> *s, Vertex<T> *t)
+bool ffFindAugmentingPath(Graph<T> *g, Vertex<T> *s, Vertex<T> *t)
 {
-    // Mark all vertices as not visited
     for (auto v : g->getVertexSet())
     {
         v->setVisited(false);
     }
 
-    std::queue<Vertex<T> *> q;
-    q.push(s);
-    s->setVisited(true);
-
-    while (!q.empty())
-    {
-        Vertex<T> *v = q.front();
-        q.pop();
-
-        // Explore all adjacent edges of vertex 'v'
-        for (auto e : v->getAdj())
-        {
-            Vertex<T> *w = e->getDest();
-            double residual = e->getWeight() - e->getFlow();
-            testAndVisit(q, e, w, residual);
-        }
-    }
-
-    // Return true if a path to the target is found, false otherwise
-    return t->isVisited();
+    return dfsAugment(s, t);
 }
 
 // Function to find the minimum residual capacity along the augmenting path
 template <class T>
-double findMinResidualAlongPath(Vertex<T> *s, Vertex<T> *t)
+double ffFindMinResidualAlongPath(Vertex<T> *s, Vertex<T> *t)
 {
     double f = INF;
 
@@ -65,16 +56,13 @@ double findMinResidualAlongPath(Vertex<T> *s, Vertex<T> *t)
         v = v->getPath()->getOrig();
     }
 
-    // Return the minimum residual capacity
     return f;
 }
 
 // Function to augment flow along the augmenting path with the given flow value
 template <class T>
-void augmentFlowAlongPath(Vertex<T> *s, Vertex<T> *t, double f)
+void ffAugmentFlowAlongPath(Vertex<T> *s, Vertex<T> *t, double f)
 {
-    // Traverse the augmenting path and update the flow values accordingly
-
     Vertex<T> *v = t;
     while (v != s)
     {
@@ -86,11 +74,10 @@ void augmentFlowAlongPath(Vertex<T> *s, Vertex<T> *t, double f)
     }
 }
 
-// Main function implementing the Edmonds-Karp algorithm
+// Main function implementing the Ford-Fulkerson algorithm
 template <class T>
-void edmondsKarp(Graph<T> *g, T source, T target, std::function<void(const std::vector<T> &, double)> onAugment)
+void fordFulkerson(Graph<T> *g, T source, T target, std::function<void(const std::vector<T> &, double)> onAugment)
 {
-    // Find source and target vertices in the graph
     Vertex<T> *s = g->findVertex(source);
     Vertex<T> *t = g->findVertex(target);
 
@@ -116,9 +103,9 @@ void edmondsKarp(Graph<T> *g, T source, T target, std::function<void(const std::
         }
     }
 
-    while (findAugmentingPath(g, s, t))
+    while (ffFindAugmentingPath(g, s, t))
     {
-        double f = findMinResidualAlongPath(s, t);
+        double f = ffFindMinResidualAlongPath(s, t);
 
         if (onAugment)
         {
@@ -134,7 +121,7 @@ void edmondsKarp(Graph<T> *g, T source, T target, std::function<void(const std::
             onAugment(pathNodes, f);
         }
 
-        augmentFlowAlongPath(s, t, f);
+        ffAugmentFlowAlongPath(s, t, f);
     }
 
     for (auto v : g->getVertexSet())
@@ -155,4 +142,4 @@ void edmondsKarp(Graph<T> *g, T source, T target, std::function<void(const std::
 }
 
 // Explicit instantiations for types used by the program
-template void edmondsKarp<int>(Graph<int> *, int, int, std::function<void(const std::vector<int> &, double)>);
+template void fordFulkerson<int>(Graph<int> *, int, int, std::function<void(const std::vector<int> &, double)>);

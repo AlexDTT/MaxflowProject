@@ -9,25 +9,44 @@
 
 #include "io/FileParser.h"
 #include "data_structures/GraphBuilder.h"
+#include "algorithms/FordFulkerson.h"
 #include "algorithms/EdmondKarp.h"
 #include "services/AssignmentLogic.h"
 
 namespace fs = std::filesystem;
 
-ConferenceApp::ConferenceApp() : mDataLoaded(false) {}
+ConferenceApp::ConferenceApp() : mDataLoaded(false), mAlgorithm(AlgorithmType::FordFulkerson) {}
 
 int ConferenceApp::run(int argc, char* argv[]) {
-    if (argc >= 2 && std::string(argv[1]) == "-b") {
-        if (argc < 3) {
-            std::cerr << "Usage: " << argv[0] << " -b <input.csv> [<risk_output.csv>]\n";
+    // Parse optional -a flag first
+    int argIdx = 1;
+    if (argc >= 4 && std::string(argv[argIdx]) == "-a") {
+        std::string algo = argv[argIdx + 1];
+        if (algo == "ek") {
+            mAlgorithm = AlgorithmType::EdmondsKarp;
+        } else if (algo == "ff") {
+            mAlgorithm = AlgorithmType::FordFulkerson;
+        } else {
+            std::cerr << "Unknown algorithm '" << algo << "'. Use 'ff' (Ford-Fulkerson) or 'ek' (Edmonds-Karp).\n";
             return 1;
         }
-        runBatchMode(argv[2], (argc >= 4) ? argv[3] : "");
+        argIdx += 2;
+    }
+
+    if (argc > argIdx && std::string(argv[argIdx]) == "-b") {
+        if (argIdx + 1 >= argc) {
+            std::cerr << "Usage: " << argv[0] << " [-a ff|ek] -b <input.csv> [<risk_output.csv>]\n";
+            return 1;
+        }
+
+        std::string inputFile = argv[argIdx + 1];
+        std::string riskFile = (argIdx + 2 < argc) ? argv[argIdx + 2] : "";
+        runBatchMode(inputFile, riskFile);
         return 0;
     }
 
-    if (argc > 1) {
-        std::cerr << "Usage: " << argv[0] << " [-b <input.csv> [<risk_output.csv>]]\n";
+    if (argc > argIdx) {
+        std::cerr << "Usage: " << argv[0] << " [-a ff|ek] -b <input.csv> [<risk_output.csv>]\n";
         return 1;
     }
 
@@ -92,12 +111,12 @@ void ConferenceApp::executeAndReportRiskAnalysis(const std::string& outputPath) 
     }
 
     int mode = mParams.GenerateAssignments;
-    if (!AssignmentLogic::generateAssignmentsAndStore(mFlowGraph, mSubmissions, mReviewers, mParams, mode, false)) {
+    if (!AssignmentLogic::generateAssignmentsAndStore(mFlowGraph, mSubmissions, mReviewers, mParams, mode, false, nullptr, mAlgorithm)) {
         std::cout << "Failed to compute assignment baseline for risk analysis.\n";
         return;
     }
 
-    std::vector<int> risky = AssignmentLogic::findRiskyReviewersK1(mSubmissions, mReviewers, mParams, mode);
+    std::vector<int> risky = AssignmentLogic::findRiskyReviewersK1(mSubmissions, mReviewers, mParams, mode, mAlgorithm);
 
     if (!AssignmentLogic::writeAssignmentsToFile(mFlowGraph, mSubmissions, mReviewers, mParams, mode, &risky, 1, outputPath)) {
         std::cout << "Failed to write risk analysis to '" << outputPath << "'.\n";
@@ -267,11 +286,21 @@ void ConferenceApp::menuParameterConfiguration() {
 
 void ConferenceApp::doGenerateAssignments() {
     if (!mDataLoaded) { std::cout << "No data loaded. Load data first.\n"; return; }
+
+    std::cout << "   Select max-flow algorithm:\n"
+              << "   [1] Ford-Fulkerson (DFS-based)\n"
+              << "   [2] Edmonds-Karp (BFS-based)\n";
+    int algoChoice = readInt("Algorithm: ");
+    if (algoChoice == 1) mAlgorithm = AlgorithmType::FordFulkerson;
+    else if (algoChoice == 2) mAlgorithm = AlgorithmType::EdmondsKarp;
+    else { std::cout << "Invalid choice.\n"; return; }
+
     int mode = mParams.GenerateAssignments;
-    std::cout << "Building flow graph (mode=" << mode << ")...\n";
+    std::string algoName = (mAlgorithm == AlgorithmType::FordFulkerson) ? "Ford-Fulkerson" : "Edmonds-Karp";
+    std::cout << "Building flow graph (mode=" << mode << ", algorithm=" << algoName << ")...\n";
 
     bool writeOutput = (mParams.GenerateAssignments != 0);
-    if (!AssignmentLogic::generateAssignmentsAndStore(mFlowGraph, mSubmissions, mReviewers, mParams, mode, writeOutput)) {
+    if (!AssignmentLogic::generateAssignmentsAndStore(mFlowGraph, mSubmissions, mReviewers, mParams, mode, writeOutput, nullptr, mAlgorithm)) {
         std::cout << "Failed to write output file '" << mParams.OutputFileName << "'.\n";
         return;
     }
@@ -323,7 +352,8 @@ void ConferenceApp::doExportGraphDOT() const {
 void ConferenceApp::doShowAugmentingPaths() const {
     if (!mDataLoaded) { std::cout << "No data loaded. Load data first.\n"; return; }
     int mode = mParams.GenerateAssignments;
-    std::cout << "Running Edmonds-Karp and showing paths (mode=" << mode << ")...\n\n";
+    std::string algoName = (mAlgorithm == AlgorithmType::FordFulkerson) ? "Ford-Fulkerson" : "Edmonds-Karp";
+    std::cout << "Running " << algoName << " and showing paths (mode=" << mode << ")...\n\n";
 
     auto pathLogger = [&](const std::vector<int>& pathNodes, double flow) {
         std::cout << "  Path (+flow " << flow << "): ";
@@ -335,7 +365,14 @@ void ConferenceApp::doShowAugmentingPaths() const {
     };
 
     Graph<int> tempGraph = GraphBuilder::buildReviewFlowGraph(mSubmissions, mReviewers, mParams, mode);
-    edmondsKarp<int>(&tempGraph, GraphBuilder::sourceId(), GraphBuilder::sinkId((int) mSubmissions.size(), (int) mReviewers.size()), pathLogger);
+    int source = GraphBuilder::sourceId();
+    int sink = GraphBuilder::sinkId((int) mSubmissions.size(), (int) mReviewers.size());
+
+    if (mAlgorithm == AlgorithmType::EdmondsKarp) {
+        edmondsKarp<int>(&tempGraph, source, sink, pathLogger);
+    } else {
+        fordFulkerson<int>(&tempGraph, source, sink, pathLogger);
+    }
     
     std::cout << "\nTotal assigned flow: " << AssignmentLogic::totalAssignedReviews(tempGraph, mSubmissions, mReviewers) << "\n";
 }
@@ -370,6 +407,7 @@ void ConferenceApp::printMainMenu() const {
         std::cout << "   Status : " << mSubmissions.size() << " submissions, " << mReviewers.size() << " reviewers loaded.\n";
     else
         std::cout << "   Status : No data loaded.\n";
+    std::cout << "   Algorithm: " << (mAlgorithm == AlgorithmType::FordFulkerson ? "Ford-Fulkerson (DFS)" : "Edmonds-Karp (BFS)") << "\n";
     printSep('-', 57);
     std::cout << "   [1] Data Management\n"
               << "   [2] Parameter Configuration\n"
@@ -401,7 +439,9 @@ void ConferenceApp::runBatchMode(const std::string& inputFile, const std::string
         return;
     }
     mDataLoaded = true;
+    std::string algoName = (mAlgorithm == AlgorithmType::FordFulkerson) ? "Ford-Fulkerson" : "Edmonds-Karp";
     std::cerr << "Loaded " << mSubmissions.size() << " submissions and " << mReviewers.size() << " reviewers.\n";
+    std::cerr << "Algorithm: " << algoName << "\n";
 
     int mode = mParams.GenerateAssignments;
     bool writeOutput = (mParams.GenerateAssignments != 0);
@@ -410,7 +450,7 @@ void ConferenceApp::runBatchMode(const std::string& inputFile, const std::string
     if (writeOutput) std::cerr << " -> '" << mParams.OutputFileName << "'";
     std::cerr << "...\n";
 
-    if (!AssignmentLogic::generateAssignmentsAndStore(mFlowGraph, mSubmissions, mReviewers, mParams, mode, writeOutput)) {
+    if (!AssignmentLogic::generateAssignmentsAndStore(mFlowGraph, mSubmissions, mReviewers, mParams, mode, writeOutput, nullptr, mAlgorithm)) {
         std::cerr << "Error: failed to generate/write assignments.\n";
         return;
     }

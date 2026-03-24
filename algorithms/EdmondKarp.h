@@ -1,8 +1,8 @@
 /**
  * @file EdmondKarp.h
- * @brief Implementations of the Edmonds-Karp algorithm for calculating maximum flow.
- * 
- * Provides template-based implementations of BFS-based path augmentation 
+ * @brief Implementation of the Edmonds-Karp algorithm for calculating maximum flow.
+ *
+ * Provides template-based implementations of BFS-based path augmentation
  * on generic directed flow networks.
  */
 
@@ -62,7 +62,7 @@ void augmentFlowAlongPath(Vertex<T> *s, Vertex<T> *t, double f);
  * @param source The value representing the source node.
  * @param target The value representing the sink node.
  * @param onAugment Optional callback invoked whenever a path is augmented.
- * @complexity Polynomial worst case: O(V * E^2).
+ * @complexity O(V * E^2) polynomial worst case.
  *             Pseudopolynomial (tighter in practice): O(F * E), where F is the total flow
  *             value.  F depends on the numeric capacities, not just the graph size.  For our
  *             network F = P * MinReviewsPerSubmission, bounded by a small constant times P,

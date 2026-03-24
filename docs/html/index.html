@@ -140,11 +140,11 @@ Usage</h1>
 <p>The application provides both a command-line menu interface and a batch mode for automated execution:</p>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Batch Mode (Recommended)</b> Automatically parses the input, generates assignments, evaluates risks, and outputs to files. <div class="fragment"><div class="line">./main -b inputs/main_input.csv output.csv</div>
-</div><!-- fragment --> To select the algorithm explicitly: <div class="fragment"><div class="line">./main -a ff -b inputs/main_input.csv output.csv   # Ford-Fulkerson (DFS)</div>
+</div><!-- fragment --> To select the algorithm explicitly (extra argument!): <div class="fragment"><div class="line">./main -a ff -b inputs/main_input.csv output.csv   # Ford-Fulkerson (DFS)</div>
 <div class="line">./main -a ek -b inputs/main_input.csv output.csv   # Edmonds-Karp (BFS)</div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Interactive Mode</b> Starts a terminal menu prompting the user to select tasks step by step. <div class="fragment"><div class="line">./main</div>
-</div><!-- fragment --> The algorithm can be changed in <b>Parameter Configuration &gt; Max-Flow Algorithm</b>.</li>
+</div><!-- fragment --> The algorithm can be selected when choosing <b>Algorithms &gt; Generate Assignments</b>.</li>
 </ul>
 </div><div class="tabbed"></div><h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
 System Architecture &amp; Graph Mapping</h1>

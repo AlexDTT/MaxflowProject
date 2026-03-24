@@ -7,10 +7,14 @@
 **Project:** Programming Project I - Scientific Conference Organization Tool  
 
 ## About the Project
-This project implements an organizational tool to assist a scientific committee in assigning article submissions to a set of reviewers. By modeling the **Review Assignment Problem** as a **Maximum Flow** network problem (using algorithms like Edmonds-Karp), the tool determines optimal review assignments while respecting several constraints:
+This project implements an organizational tool to assist a scientific committee in assigning article submissions to a set of reviewers. By modeling the **Review Assignment Problem** as a **Maximum Flow** network problem, the tool determines optimal review assignments while respecting several constraints:
 - Minimum number of reviews per submission.
 - Maximum number of reviews a reviewer is willing to perform.
 - Matching submissions with reviewers based on their Primary (and potentially Secondary) domains of expertise.
+
+Two maximum-flow algorithms are available:
+- **Ford-Fulkerson** (DFS-based, default): O(F × E) practical complexity.
+- **Edmonds-Karp** (BFS-based): O(V × E²) worst-case complexity, guarantees shortest augmenting paths.
 
 In addition to base assignments, the tool supports **Risk Analysis** scenarios to evaluate how the absence of a reviewer (K=1) might jeopardize the integrity of the review process. 
 
@@ -29,10 +33,16 @@ The application provides both a command-line menu interface and a batch mode for
   ```bash
   ./main -b inputs/main_input.csv output.csv
   ```
+  To select the algorithm explicitly (extra argument!):
+  ```bash
+  ./main -a ff -b inputs/main_input.csv output.csv   # Ford-Fulkerson (DFS)
+  ./main -a ek -b inputs/main_input.csv output.csv   # Edmonds-Karp (BFS)
+  ```
 - <b class="tab-title">Interactive Mode</b> Starts a terminal menu prompting the user to select tasks step by step.
   ```bash
   ./main
   ```
+  The algorithm can be selected when choosing **Algorithms > Generate Assignments**.
 
 </div>
 
@@ -90,7 +100,7 @@ This diagram illustrates the bipartite matching between **Submissions** and **Re
 
 ## Additional Documentation
 For extended analysis covering risk analysis generalization (K > 1), the general multi-domain
-assignment problem, and an explanation of test output differences, see the
+assignment problem, and complexity analysis for both algorithms, see the
 @ref extra_docs "Extra Documentation" page.
 
 <br>

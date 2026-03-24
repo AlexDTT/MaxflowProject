@@ -8,6 +8,7 @@
 #include "models/Reviewer.h"
 #include "models/Parameters.h"
 #include "data_structures/Graph.h"
+#include "services/AssignmentLogic.h"
 
 /**
  * @class ConferenceApp
@@ -24,6 +25,7 @@ private:
     Parameters              mParams;
     bool                    mDataLoaded;
     Graph<int>              mFlowGraph;
+    AlgorithmType           mAlgorithm;
 
     // Helper Utilities
     void printSep(char c = '-', int n = 57) const;

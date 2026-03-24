@@ -15,6 +15,15 @@
 #include "models/Parameters.h"
 
 /**
+ * @enum AlgorithmType
+ * @brief Selects which max-flow algorithm to use.
+ */
+enum class AlgorithmType {
+    FordFulkerson, ///< DFS-based Ford-Fulkerson algorithm. O(F * E).
+    EdmondsKarp    ///< BFS-based Edmonds-Karp algorithm. O(V * E^2).
+};
+
+/**
  * @class AssignmentLogic
  * @brief Static utility class for evaluating and persisting the Max Flow assignment results.
  */
@@ -45,17 +54,13 @@ public:
      * @param reviewers List of all reviewers.
      * @param params Global parameters.
      * @param mode Mode of evaluation.
+     * @param algo Which max-flow algorithm to use (default: Ford-Fulkerson).
      * @return Vector of risky reviewer IDs.
-     * @complexity Polynomial worst case: O(R * V * E^2).  Pseudopolynomial (practical):
-     *             O(R * F * E) where R is reviewers, F = P * MinReviewsPerSubmission is the
-     *             total flow.  Rebuilds the graph and re-runs Edmonds-Karp for each removed
-     *             reviewer.  A tighter O(R * MaxReviewsPerReviewer * E) is possible by keeping
-     *             the solved max-flow graph and, for each reviewer, temporarily reducing their
-     *             incoming flow (creating a deficit of at most MaxReviewsPerReviewer) and
-     *             running Edmonds-Karp only to resolve that deficit, rather than rebuilding
-     *             from scratch.
+     * @complexity For Ford-Fulkerson: O(R * F * E).
+     *             For Edmonds-Karp: O(R * V * E^2).
+     *             Where R is reviewers, F = P * MinReviewsPerSubmission is the total flow.
      */
-    static std::vector<int> findRiskyReviewersK1(const std::vector<Submission>& submissions, const std::vector<Reviewer>& reviewers, const Parameters& params, int mode);
+    static std::vector<int> findRiskyReviewersK1(const std::vector<Submission>& submissions, const std::vector<Reviewer>& reviewers, const Parameters& params, int mode, AlgorithmType algo = AlgorithmType::FordFulkerson);
     
     /**
      * @brief Writes the final review assignments to a CSV file.
@@ -81,12 +86,13 @@ public:
      * @param mode Operation mode mapping (e.g. strict vs relaxed constraints).
      * @param writeOutput Indicates whether to dump the result to a CSV file.
      * @param logger Optional logging callback.
+     * @param algo Which max-flow algorithm to use (default: Ford-Fulkerson).
      * @return True if assignment was successful/complete.
-     * @complexity Polynomial worst case: O(V * E^2).  Pseudopolynomial (practical):
-     *             O(F * E) dominated by the underlying Edmonds-Karp max-flow call,
-     *             where F = P * MinReviewsPerSubmission is the total flow.
+     * @complexity For Ford-Fulkerson: O(F * E).
+     *             For Edmonds-Karp: O(V * E^2).
+     *             Dominated by the underlying max-flow call.
      */
-    static bool generateAssignmentsAndStore(Graph<int>& outGraph, const std::vector<Submission>& submissions, const std::vector<Reviewer>& reviewers, const Parameters& params, int mode, bool writeOutput, std::function<void(const std::vector<int>&, double)> logger = nullptr);
+    static bool generateAssignmentsAndStore(Graph<int>& outGraph, const std::vector<Submission>& submissions, const std::vector<Reviewer>& reviewers, const Parameters& params, int mode, bool writeOutput, std::function<void(const std::vector<int>&, double)> logger = nullptr, AlgorithmType algo = AlgorithmType::FordFulkerson);
 };
 
 #endif

@@ -32,9 +32,15 @@ Graph construction (@ref GraphBuilder::buildReviewFlowGraph):
 A **complete assignment** is achieved when the total flow equals P × MinReviewsPerSubmission.
 If the max flow is less than this value, some submissions cannot be fully covered.
 
-<b>Algorithm</b>: We run @ref edmondsKarp "Edmonds-Karp" on the constructed graph. The BFS-based
-augmentation guarantees we find the maximum flow. After the algorithm terminates, edges from
-submissions to reviewers with positive flow represent the assigned reviews.
+<b>Algorithms</b>: Two max-flow algorithms are available:
+
+- @ref fordFulkerson "Ford-Fulkerson" (default): Uses DFS-based path augmentation.
+  Practical complexity O(F × E) where F is the total flow.
+- @ref edmondsKarp "Edmonds-Karp": Uses BFS-based shortest-path augmentation.
+  Worst-case complexity O(V × E²).
+
+After the algorithm terminates, edges from submissions to reviewers with positive flow
+represent the assigned reviews.
 
 <b>Output</b>: The function @ref AssignmentLogic::writeAssignmentsToFile "writeAssignmentsToFile"
 traverses the flow graph and writes a CSV file listing every assignment (SubmissionId,
@@ -76,18 +82,27 @@ Graph edges (mode 1):
 
 @subsection ext_t2_1_complexity Complexity
 
+<b>Algorithm-independent steps:</b>
+
 | Step | Complexity |
 |------|-----------|
-| Build flow graph | O(P × R) - check all submission-reviewer pairs for domain match |
-| Edmonds-Karp | O(V × E²) polynomial worst case; O(F × E) pseudopolynomial practical, F = P × MinReviewsPerSubmission |
-| Write output | O(V + E) - traverse graph once |
-| **Total** | **O(F × E)** |
+| Build flow graph | O(P × R) |
+| Write output | O(V + E) |
 
-For typical inputs (P, R < 200), E ≈ 40,000 in the worst case. The polynomial worst case
-O(V × E²) is very loose here - the network has diameter 3 (every augmenting path follows
-exactly source → submission → reviewer → sink, i.e. 3 edges). The tighter pseudopolynomial
-bound O(F × E) where F = P × MinReviewsPerSubmission captures the practical behaviour,
-since F depends on the numeric capacity values rather than just the graph size.
+<b>Max-flow (algorithm-dependent):</b>
+
+| Algorithm | Complexity | Bound type |
+|-----------|-----------|------------|
+| Ford-Fulkerson (DFS) | O(F × E) | Practical |
+| Edmonds-Karp (BFS) | O(V × E²) | Worst case |
+
+Where F = P × MinReviewsPerSubmission is the total flow value, V is the number of vertices,
+and E is the number of edges.
+
+For typical inputs (P, R < 200), E ≈ 40,000 in the worst case. The network has diameter 3
+(every augmenting path follows exactly source → submission → reviewer → sink, i.e. 3 edges).
+Ford-Fulkerson with DFS terminates in O(F × E) iterations in practice, while Edmonds-Karp
+with BFS guarantees O(V × E²) in the worst case.
 
 ---
 
@@ -103,13 +118,13 @@ incomplete, risk analysis is not performed. Otherwise, we test each reviewer ind
 
 Our implementation is in @ref AssignmentLogic::findRiskyReviewersK1 "findRiskyReviewersK1":
 
--# **Baseline check.** Run Edmonds-Karp with all reviewers. If the achieved flow is less than
+-# **Baseline check.** Run max-flow with all reviewers. If the achieved flow is less than
    P × MinReviewsPerSubmission, return an empty list (the assignment is already infeasible;
    risk analysis is moot).
 -# **Per-reviewer removal.** For each reviewer j (j = 0..R-1):
     - Build a reduced reviewer pool excluding j.
     - Construct the flow graph with the reduced pool.
-    - Run Edmonds-Karp.
+    - Run max-flow (Ford-Fulkerson or Edmonds-Karp).
     - If achieved flow < required, reviewer j is **risky**.
 -# **Sort and return.** The risky reviewer IDs are sorted and returned.
 
@@ -159,18 +174,23 @@ impossible to cover Sub2.
 
 @subsection ext_t2_2_complexity Complexity
 
+<b>Algorithm-independent steps:</b>
+
 | Step | Complexity |
 |------|-----------|
-| Baseline max-flow | O(V × E²) worst case; O(F × E) practical, F = P × MinReviewsPerSubmission |
-| R iterations, each: build graph + max-flow | R × O(F × E) pseudopolynomial |
+| Build graph per reviewer | R × O(P × R) |
 | Sort risky IDs | O(R log R) |
-| **Total** | **O(R × F × E)** pseudopolynomial; **O(R × V × E²)** polynomial worst case |
 
-The polynomial worst case O(R × V × E²) is very loose for this 4-node-diameter network.
-In practice each Edmonds-Karp run terminates in O(F × E) where F = P × MinReviewsPerSubmission,
-giving an effective pseudopolynomial complexity of O(R × F × E). For typical conference sizes
-(R, P < 200, F < 400, E < 40,000), this is around 3×10⁹ operations in the worst case -
-feasible in a few seconds, though not instantaneous for large inputs.
+<b>Max-flow (algorithm-dependent):</b>
+
+| Algorithm | Baseline + R re-runs | Total |
+|-----------|---------------------|-------|
+| Ford-Fulkerson (DFS) | R × O(F × E) | O(R × F × E) |
+| Edmonds-Karp (BFS) | R × O(V × E²) | O(R × V × E²) |
+
+Where F = P × MinReviewsPerSubmission is the total flow value. For typical conference sizes
+(R, P < 200, F < 400, E < 40,000), Ford-Fulkerson runs in a fraction of a second even
+with R re-runs.
 
 ---
 
@@ -189,7 +209,7 @@ The approach generalises the K = 1 strategy to combinations of size K:
 -# **Enumerate all C(R, K) subsets** of reviewers to remove.
 -# **For each subset S:**
     - Build a reduced reviewer pool excluding all reviewers in S.
-    - Run Edmonds-Karp on the reduced graph.
+    - Run max-flow on the reduced graph.
     - If achieved flow < P × MinReviewsPerSubmission, S is a **critical subset**.
 -# **Return** all critical subsets.
 
@@ -198,7 +218,7 @@ then any K-sized subset containing r is automatically critical - we can skip tes
 subsets and mark them directly.
 
 <b>Early termination</b>: Before even building the flow graph for a subset, a cheap per-topic
-count can immediately identify critical subsets without running Edmonds-Karp at all.
+count can immediately identify critical subsets without running max-flow at all.
 For each topic t, check:
 
 @code
@@ -207,24 +227,33 @@ count(remaining reviewers with primaryTopic == t) * MaxReviewsPerReviewer
 @endcode
 
 If this holds for any topic t, there simply are not enough reviewers left on that topic to
-cover all its submissions - the subset is provably critical and Edmonds-Karp can be skipped
+cover all its submissions - the subset is provably critical and max-flow can be skipped
 entirely. Note that this optimisation is only reliable in mode 1 (primary domains only).
 In modes 2 and 3, submissions can be covered by reviewers of a different topic via secondary
 domain matching, so a per-topic count would incorrectly flag subsets as critical when
-cross-topic coverage might still make the assignment feasible. In those modes, Edmonds-Karp
+cross-topic coverage might still make the assignment feasible. In those modes, max-flow
 must always be run.
 
 @subsection ext_t2_3_complexity Complexity
 
-| Component | Complexity |
-|-----------|-----------|
-| Enumerate C(R, K) subsets | O(R choose K) ≈ O(R^K / K!) |
-| Build flow graph per subset | O(P × R) |
-| Edmonds-Karp per subset | O(V × E²) worst case; O(F × E) practical |
-| **Total (without pruning)** | **O(C(R,K) × F × E)** pseudopolynomial; **O(C(R,K) × V × E²)** polynomial |
+<b>Algorithm-independent steps:</b>
 
-| K value | Pseudopolynomial | Polynomial worst case | Practical? |
-|---------|-----------------|----------------------|------------|
+| Step | Complexity |
+|------|-----------|
+| Enumerate C(R, K) subsets | O(R^K / K!) |
+| Build flow graph per subset | O(P × R) |
+
+<b>Max-flow per subset (algorithm-dependent):</b>
+
+| Algorithm | Complexity |
+|-----------|-----------|
+| Ford-Fulkerson (DFS) | O(F × E) |
+| Edmonds-Karp (BFS) | O(V × E²) |
+
+<b>Total by K value:</b>
+
+| K value | Ford-Fulkerson | Edmonds-Karp | Practical? |
+|---------|---------------|-------------|------------|
 | 2 | O(R² × F × E) | O(R² × V × E²) | Yes, for R < 100 |
 | 3 | O(R³ × F × E) | O(R³ × V × E²) | Borderline for R > 50 |
 | ≥ 4 | O(R⁴ × F × E) | O(R⁴ × V × E²) | Impractical without heavy pruning |
@@ -317,25 +346,66 @@ match quality rather than just feasibility. This transforms the problem into a
 
 @subsection ext_t2_4_approach Proposed Approach
 
-We outline two approaches of increasing sophistication:
+We outline three approaches of increasing sophistication:
 
 <b>Approach A: Layered Max-Flow (Greedy)</b>
 
-This extends the existing Edmonds-Karp pipeline with a priority-based, multi-pass strategy:
+This extends the existing max-flow pipeline with a priority-based, multi-pass strategy:
 
 -# **Layer 1 - Primary-Primary.** Build the flow graph with edges only where
-   sub.primary == rev.primary. Run Edmonds-Karp. Record the resulting flows.
+   sub.primary == rev.primary. Run max-flow. Record the resulting flows.
 -# **Layer 2 - Cross matches.** On the **residual capacity** (after subtracting Layer 1 flows),
    add edges where sub.primary == rev.secondary or sub.secondary == rev.primary. Run
-   Edmonds-Karp again to fill remaining capacity.
+   max-flow again to fill remaining capacity.
 -# **Layer 3 - Secondary-Secondary.** On the still-remaining capacity, add edges where
-   sub.secondary == rev.secondary. Run Edmonds-Karp a third time.
+   sub.secondary == rev.secondary. Run max-flow a third time.
 -# **Combine** flows from all three layers as the final assignment.
 
 Each layer greedily maximises flow at its quality tier before moving to the next.
-The approach runs Edmonds-Karp at most 3 times.
+The approach runs max-flow at most 3 times.
 
-<b>Approach B: Min-Cost Max-Flow (Exact)</b>
+<b>Approach B: Dummy-Node BFS Trick (Single-Pass Greedy)</b>
+
+This approach encodes match-quality priority directly into the graph topology, allowing
+a single Edmonds-Karp run to implicitly favour higher-quality matches. The key insight is
+that BFS (used by Edmonds-Karp) always finds the **shortest** augmenting path in terms of
+edge count, so we can bias the search by making lower-quality paths longer.
+
+Instead of adding a direct edge from submission to reviewer, we insert **intermediate
+dummy nodes** that stretch lower-quality match paths:
+
+- **Primary-Primary match**: submission → reviewer (1 hop). BFS favours these.
+- **Cross match** (pri↔sec): submission → DummyNode_1 → reviewer (2 hops).
+- **Secondary-Secondary match**: submission → DummyNode_1 → DummyNode_2 → reviewer (3 hops).
+
+Dummy nodes are shared across all submissions and reviewers that need them. Each
+dummy node connects forward to the next (with sufficient capacity to act as a passthrough),
+and submission→DummyNode_1 edges are added for cross matches, while DummyNode_1→DummyNode_2
+and DummyNode_2→reviewer edges are added for secondary-secondary matches. All dummy→dummy
+and dummy→reviewer edges have capacity large enough not to become bottlenecks (e.g.
+min(MinReviewsPerSubmission, MaxReviewsPerReviewer)).
+
+Because BFS strictly prefers shorter paths, it will exhaust all available primary-primary
+matches before touching cross matches, and exhaust all cross matches before touching
+secondary-secondary matches. For GenerateAssignment = 3, we can add even more dummy layers
+(e.g. 2 intermediate nodes for secondary-secondary vs 1 for cross) to increase the distance
+penalty further.
+
+<b>When does this work?</b> The approach is equivalent to running Approach A (Layered Max-Flow)
+inside a single graph. It produces a greedy prioritisation that is fast and simple to implement.
+However, it does **not** guarantee a globally optimal assignment. The problem lies in the
+<b>residual graph</b>: when max-flow algorithms "change their mind" and reroute flow, they
+push flow backward along residual edges. In a true min-cost flow algorithm, undoing a
+cost-1 edge refunds cost −1, making reroutes cheap. In the dummy-node graph, every edge -
+forward or backward - adds +1 to BFS distance, so reroutes through dummy nodes appear
+very expensive. This means the algorithm would rather take a suboptimal direct match
+elsewhere than perform a long reroute that would yield a better global assignment.
+
+In practice, for typical conference sizes, this approach produces assignments that are
+almost always optimal or very close to optimal, since conflicts that would require rerouting
+are rare in well-structured inputs.
+
+<b>Approach C: Min-Cost Max-Flow (Exact)</b>
 
 For guaranteed optimality, we reformulate as a minimum-cost flow problem:
 
@@ -357,8 +427,9 @@ since primary-primary matches (cost 0) are always preferred when available.
 
 | Approach | Complexity | Optimality |
 |----------|-----------|------------|
-| A: Layered Max-Flow | O(F × E) pseudopolynomial; O(V × E²) polynomial worst case | Greedy, may not be globally optimal |
-| B: Min-Cost Max-Flow (SSP + Dijkstra) | O(F × (V + E) × log V) | Exact, globally optimal |
+| A: Layered Max-Flow | O(F × E) per layer; 3 × O(F × E) total | Greedy, may not be globally optimal |
+| B: Dummy-Node BFS Trick | O(F × E) single pass (Edmonds-Karp) | Greedy (same as A); not globally optimal |
+| C: Min-Cost Max-Flow (SSP + Dijkstra) | O(F × (V + E) × log V) | Exact, globally optimal |
 | Brute force (all assignments) | O((P×R)!) | Exact, impractical |
 
 Where F = P × MinReviewsPerSubmission is the total flow value.
@@ -368,7 +439,7 @@ feasibility problem. In T2.4, match quality varies (primary > cross > secondary)
 optimise a weighted objective, not just maximise flow. This elevates the problem from
 max-flow to min-cost max-flow, increasing complexity by a factor of log V per augmentation.
 
-For typical conference sizes (P, R < 200, F < 400), Approach B is practical and runs in
+For typical conference sizes (P, R < 200, F < 400), Approach C is practical and runs in
 under a second.
 
 @subsection ext_t2_4_example Example
@@ -399,7 +470,7 @@ MaxReviewsPerReviewer, 2
 <b>Layered approach</b>:
 - Layer 1 (primary-primary only): Sub1→Rev1, Sub2→Rev3. Flow = 2. Done.
 
-<b>Min-cost max-flow</b> (proposed, not implemented): Would assign the same edges,
+<b>Min-cost max-flow (Approach C)</b> (proposed, not implemented): Would assign the same edges,
 minimising total cost (0) since primary-primary matches are always preferred.
 
 <div class="interactive_dotgraph">
@@ -408,7 +479,7 @@ minimising total cost (0) since primary-primary matches are always preferred.
 
 </div>
 
-<b>A case where Layered fails and Min-Cost succeeds</b> (proposed):
+<b>A case where Layered fails and Approach C (Min-Cost) succeeds</b> (proposed):
 If Rev1 were removed, Layer 1 would match Sub2→Rev3 (primary-primary), leaving Sub1 to find
 a match in Layer 2 (Sub1→Rev2 via cross). Total match quality: 1 primary + 1 cross.
 But if there were a third submission competing for Rev3, Layer 1 might greedily assign Rev3
@@ -417,125 +488,16 @@ globally minimise total cost.
 
 ---
 
-@section ext_test_diff Why Integration Tests "Differ"
-
-@subsection ext_test_diff_overview Overview
-
-Several integration tests report output differences when compared against reference solutions.
-In every case our outputs are **equally correct** - they represent different but valid
-decompositions of the same maximum flow. The test harness uses exact `diff` comparison against
-a single reference, so it cannot recognise equally optimal assignments.
-
-All differing solutions share these properties with the reference:
-- Same total flow (all required reviews assigned)
-- Every submission receives exactly MinReviewsPerSubmission reviews
-- No reviewer exceeds MaxReviewsPerReviewer reviews
-- Every assignment uses a valid domain match for the active mode
-
-The differences arise solely from **BFS traversal order** in Edmonds-Karp. When multiple
-shortest augmenting paths exist, adjacency list ordering (ascending reviewer ID in our case)
-determines which path is chosen, producing equally optimal but different flow decompositions.
-
----
-
-@subsection ext_test_diff_dataset10 Datasets 10 and 11
-
-@subsubsection ext_test_diff_d10_input Input Configuration
-
-Both datasets share submissions/reviewers; differ only in risk analysis flag.
-
-@code
-Submissions:  1 (pri=1, sec=2),  2 (pri=3, sec=2),  3 (pri=4, sec=2)
-Reviewers:    1..6 (all pri=2)
-Mode: 2, MinReviews=2, MaxReviews=2
-@endcode
-
-In mode 2, all reviewers match all submissions via secondary topic 2. Total required: 6.
-Reviewer capacity: 12. High slack.
-
-@subsubsection ext_test_diff_d10_ref Reference Solution (Expected)
-
-@code
-1,1,2  1,3,2  2,2,2  2,3,2  3,1,2  3,2,2
-@endcode
-
-Rev1,2,3 at capacity (2 each); Rev4,5,6 unused. Flow=6. ✓
-
-@subsubsection ext_test_diff_d10_ours Our Solution (Produced)
-
-@code
-1,1,2  1,2,2  2,1,2  2,2,2  3,3,2  3,4,2
-@endcode
-
-Rev1,2 at capacity (2 each); Rev3,4 with 1 each; Rev5,6 unused. Flow=6. ✓
-
-Both decompositions are valid. For dataset11 (risk on), removing any single reviewer still
-leaves capacity for all 6 reviews, so risk output is empty in both cases.
-
----
-
-@subsection ext_test_diff_dataset14 Dataset 14
-
-@subsubsection ext_test_diff_d14_input Input Configuration
-
-@code
-Submissions:  1(pri=1,sec=4), 2(pri=1,sec=4), 3(pri=2,sec=4), 4(pri=3,sec=4)
-Reviewers:    1(pri=1), 2(pri=2), 3(pri=3), 4-6(pri=4)
-Mode: 2, MinReviews=2, MaxReviews=3
-SecondarySubmissionDomain=1, SecondaryReviewerExpertise=0
-@endcode
-
-Eligible edges: Rev1→Subs1,2; Rev2→Sub3; Rev3→Sub4; Rev4-6→all subs (via sec=4).
-Total required: 8. Rev1/2/3 are indispensable for their topics; Rev4-6 are interchangeable.
-
-@subsubsection ext_test_diff_d14_ref Reference Solution (Expected)
-
-@code
-1,1,1  1,5,4  2,1,1  2,4,4  3,2,2  3,4,4  4,3,3  4,4,4
-@endcode
-
-Rev1:2, Rev2:1, Rev3:1, Rev4:3 (saturated by Subs2,3,4), Rev5:1. Flow=8. ✓
-
-@subsubsection ext_test_diff_d14_ours Our Solution (Produced)
-
-@code
-1,1,1  1,4,4  2,1,1  2,4,4  3,2,2  3,4,4  4,3,3  4,5,4
-@endcode
-
-Rev1:2, Rev2:1, Rev3:1, Rev4:3 (saturated by Subs1,2,3), Rev5:1. Flow=8. ✓
-
-@subsubsection ext_test_diff_d14_why Why They Differ
-
-Both saturate Rev4 to capacity (3), differing only in **which topic-4 reviewer absorbs which
-submission's secondary slot**. Our BFS (ascending reviewer ID) fills Rev4 with Subs1,2,3 first,
-leaving Sub4's secondary slot to Rev5. The reference processes Sub4's edge earlier, saturating
-Rev4 with Subs2,3,4, leaving Sub1's secondary slot to Rev5.
-
-Both are valid shortest augmenting paths. Risk analysis is empty in both (Rev4-6 are
-interchangeable; removing any one still leaves capacity 6 > 4 needed).
-
-@note The integration test harness uses exact `diff` comparison against a single reference.
-This is a known limitation: it cannot recognise that multiple assignments are equally valid.
-All differing datasets described produce **correct maximum flow** with identical total flow
-and no constraint violations.
-
----
-
 @section ext_complexity_table Complexity Summary
 
-The following table summarises the time complexity of the most important functions in the
-project. See the individual function documentation for full details.
+The following table summarises the time complexity of the algorithm-independent functions.
+
+<b>Algorithm-independent functions:</b>
 
 | Function | Location | Complexity | Notes |
 |----------|----------|-----------|-------|
-| edmondsKarp | algorithms/EdmondKarp.h | O(V × E²) / O(F × E) | Polynomial worst case; pseudopolynomial practical bound where F = total flow |
-| findAugmentingPath | algorithms/EdmondKarp.h | O(V + E) | Single BFS pass |
-| findMinResidualAlongPath | algorithms/EdmondKarp.h | O(V) | Path walk |
-| augmentFlowAlongPath | algorithms/EdmondKarp.h | O(V) | Path walk |
 | buildReviewFlowGraph | data_structures/GraphBuilder.h | O(P × R) | P submissions, R reviewers |
 | getMatchedDomain | data_structures/GraphBuilder.h | O(1) | At most 2 topics per entity |
-| findRiskyReviewersK1 | services/AssignmentLogic.h | O(R × V × E²) / O(R × F × E) | R re-runs of Edmonds-Karp; polynomial / pseudopolynomial |
-| generateAssignmentsAndStore | services/AssignmentLogic.h | O(V × E²) / O(F × E) | Dominated by max-flow; polynomial / pseudopolynomial |
 | totalRequiredReviews | services/AssignmentLogic.h | O(N) | N submissions |
 | totalAssignedReviews | services/AssignmentLogic.h | O(P × R) | Iterates submission→reviewer edges |
 | FileParser::parse | io/FileParser.h | O(L) | L lines in input file |
@@ -543,5 +505,27 @@ project. See the individual function documentation for full details.
 | Graph::addVertex | data_structures/Graph.h | O(V) | Duplicate check |
 | Graph::addEdge | data_structures/Graph.h | O(V) | Vertex lookups |
 | Graph::removeVertex | data_structures/Graph.h | O(V + E) | Removes all incident edges |
+
+<b>Ford-Fulkerson (DFS-based):</b>
+
+| Function | Location | Complexity | Notes |
+|----------|----------|-----------|-------|
+| fordFulkerson | algorithms/FordFulkerson.h | O(F × E) | F = total flow |
+| ffFindAugmentingPath | algorithms/FordFulkerson.h | O(V + E) | Single DFS pass |
+| ffFindMinResidualAlongPath | algorithms/FordFulkerson.h | O(V) | Path walk |
+| ffAugmentFlowAlongPath | algorithms/FordFulkerson.h | O(V) | Path walk |
+| findRiskyReviewersK1 | services/AssignmentLogic.h | O(R × F × E) | R re-runs of max-flow |
+| generateAssignmentsAndStore | services/AssignmentLogic.h | O(F × E) | Dominated by max-flow |
+
+<b>Edmonds-Karp (BFS-based):</b>
+
+| Function | Location | Complexity | Notes |
+|----------|----------|-----------|-------|
+| edmondsKarp | algorithms/EdmondKarp.h | O(V × E²) | Worst case; shortest augmenting paths |
+| findAugmentingPath | algorithms/EdmondKarp.h | O(V + E) | Single BFS pass |
+| findMinResidualAlongPath | algorithms/EdmondKarp.h | O(V) | Path walk |
+| augmentFlowAlongPath | algorithms/EdmondKarp.h | O(V) | Path walk |
+| findRiskyReviewersK1 | services/AssignmentLogic.h | O(R × V × E²) | R re-runs of max-flow |
+| generateAssignmentsAndStore | services/AssignmentLogic.h | O(V × E²) | Dominated by max-flow |
 
 */

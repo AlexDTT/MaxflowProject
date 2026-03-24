@@ -8,7 +8,9 @@ TARGET_SOURCES := \
 	models/Submission.cpp \
 	models/Reviewer.cpp \
 	io/FileParser.cpp \
-	algorithms/EdmondKarp.cpp services/AssignmentLogic.cpp \
+	algorithms/EdmondKarp.cpp \
+	algorithms/FordFulkerson.cpp \
+	services/AssignmentLogic.cpp \
 	data_structures/GraphBuilder.cpp
 TARGET_OBJECTS := $(TARGET_SOURCES:.cpp=.o)
 
@@ -17,7 +19,9 @@ UNIT_TEST_SOURCES := \
 	tests/maxflow_tests.cpp \
 	models/Submission.cpp \
 	models/Reviewer.cpp \
-	algorithms/EdmondKarp.cpp services/AssignmentLogic.cpp \
+	algorithms/EdmondKarp.cpp \
+	algorithms/FordFulkerson.cpp \
+	services/AssignmentLogic.cpp \
 	data_structures/GraphBuilder.cpp
 UNIT_TEST_OBJECTS := $(UNIT_TEST_SOURCES:.cpp=.o)
 

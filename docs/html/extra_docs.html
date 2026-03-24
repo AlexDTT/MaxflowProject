@@ -163,17 +163,23 @@ T2.1 Example: Max-flow graph with partial assignment (flow=3, required=4)</div>
 </div>
 </div><div class="interactive_dotgraph"></div><h2 class="doxsection"><a class="anchor" id="ext_t2_1_complexity"></a>
 Complexity</h2>
+<p><b>Algorithm-independent steps:</b></p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Step  </th><th class="markdownTableHeadNone">Ford-Fulkerson (DFS)  </th><th class="markdownTableHeadNone">Edmonds-Karp (BFS)  </th></tr>
+<th class="markdownTableHeadNone">Step  </th><th class="markdownTableHeadNone">Complexity  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Build flow graph  </td><td class="markdownTableBodyNone">O(P × R)  </td><td class="markdownTableBodyNone">O(P × R)  </td></tr>
+<td class="markdownTableBodyNone">Build flow graph  </td><td class="markdownTableBodyNone">O(P × R)  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Max-flow  </td><td class="markdownTableBodyNone">O(F × E)  </td><td class="markdownTableBodyNone">O(V × E²)  </td></tr>
+<td class="markdownTableBodyNone">Write output  </td><td class="markdownTableBodyNone">O(V + E)  </td></tr>
+</table>
+<p><b>Max-flow (algorithm-dependent):</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Algorithm  </th><th class="markdownTableHeadNone">Complexity  </th><th class="markdownTableHeadNone">Bound type  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Write output  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">O(V + E)  </td></tr>
+<td class="markdownTableBodyNone">Ford-Fulkerson (DFS)  </td><td class="markdownTableBodyNone">O(F × E)  </td><td class="markdownTableBodyNone">Practical  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(F × E)</b>  </td><td class="markdownTableBodyNone"><b>O(V × E²)</b>  </td></tr>
+<td class="markdownTableBodyNone">Edmonds-Karp (BFS)  </td><td class="markdownTableBodyNone">O(V × E²)  </td><td class="markdownTableBodyNone">Worst case  </td></tr>
 </table>
 <p>Where F = P × MinReviewsPerSubmission is the total flow value, V is the number of vertices, and E is the number of edges.</p>
 <p>For typical inputs (P, R &lt; 200), E ≈ 40,000 in the worst case. The network has diameter 3 (every augmenting path follows exactly source → submission → reviewer → sink, i.e. 3 edges). Ford-Fulkerson with DFS terminates in O(F × E) iterations in practice, while Edmonds-Karp with BFS guarantees O(V × E²) in the worst case.</p>
@@ -227,17 +233,23 @@ T2.2 Example: Rev3 (highlighted in red) is the sole risky reviewer</div>
 </div>
 </div><div class="interactive_dotgraph"></div><h2 class="doxsection"><a class="anchor" id="ext_t2_2_complexity"></a>
 Complexity</h2>
+<p><b>Algorithm-independent steps:</b></p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Step  </th><th class="markdownTableHeadNone">Ford-Fulkerson (DFS)  </th><th class="markdownTableHeadNone">Edmonds-Karp (BFS)  </th></tr>
+<th class="markdownTableHeadNone">Step  </th><th class="markdownTableHeadNone">Complexity  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Baseline max-flow  </td><td class="markdownTableBodyNone">O(F × E)  </td><td class="markdownTableBodyNone">O(V × E²)  </td></tr>
+<td class="markdownTableBodyNone">Build graph per reviewer  </td><td class="markdownTableBodyNone">R × O(P × R)  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">R iterations, each: build graph + max-flow  </td><td class="markdownTableBodyNone">R × O(F × E)  </td><td class="markdownTableBodyNone">R × O(V × E²)  </td></tr>
+<td class="markdownTableBodyNone">Sort risky IDs  </td><td class="markdownTableBodyNone">O(R log R)  </td></tr>
+</table>
+<p><b>Max-flow (algorithm-dependent):</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Algorithm  </th><th class="markdownTableHeadNone">Baseline + R re-runs  </th><th class="markdownTableHeadNone">Total  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Sort risky IDs  </td><td class="markdownTableBodyNone">O(R log R)  </td><td class="markdownTableBodyNone">O(R log R)  </td></tr>
+<td class="markdownTableBodyNone">Ford-Fulkerson (DFS)  </td><td class="markdownTableBodyNone">R × O(F × E)  </td><td class="markdownTableBodyNone">O(R × F × E)  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Total</b>  </td><td class="markdownTableBodyNone"><b>O(R × F × E)</b>  </td><td class="markdownTableBodyNone"><b>O(R × V × E²)</b>  </td></tr>
+<td class="markdownTableBodyNone">Edmonds-Karp (BFS)  </td><td class="markdownTableBodyNone">R × O(V × E²)  </td><td class="markdownTableBodyNone">O(R × V × E²)  </td></tr>
 </table>
 <p>Where F = P × MinReviewsPerSubmission is the total flow value. For typical conference sizes (R, P &lt; 200, F &lt; 400, E &lt; 40,000), Ford-Fulkerson runs in a fraction of a second even with R re-runs.</p>
 <hr  />
@@ -266,18 +278,25 @@ Proposed Approach</h2>
 </div><!-- fragment --><p>If this holds for any topic t, there simply are not enough reviewers left on that topic to cover all its submissions - the subset is provably critical and max-flow can be skipped entirely. Note that this optimisation is only reliable in mode 1 (primary domains only). In modes 2 and 3, submissions can be covered by reviewers of a different topic via secondary domain matching, so a per-topic count would incorrectly flag subsets as critical when cross-topic coverage might still make the assignment feasible. In those modes, max-flow must always be run.</p>
 <h2 class="doxsection"><a class="anchor" id="ext_t2_3_complexity"></a>
 Complexity</h2>
+<p><b>Algorithm-independent steps:</b></p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Component  </th><th class="markdownTableHeadNone">Ford-Fulkerson (DFS)  </th><th class="markdownTableHeadNone">Edmonds-Karp (BFS)  </th></tr>
+<th class="markdownTableHeadNone">Step  </th><th class="markdownTableHeadNone">Complexity  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Enumerate C(R, K) subsets  </td><td class="markdownTableBodyNone">O(R^K / K!)  </td><td class="markdownTableBodyNone">O(R^K / K!)  </td></tr>
+<td class="markdownTableBodyNone">Enumerate C(R, K) subsets  </td><td class="markdownTableBodyNone">O(R^K / K!)  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Build flow graph per subset  </td><td class="markdownTableBodyNone">O(P × R)  </td><td class="markdownTableBodyNone">O(P × R)  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Max-flow per subset  </td><td class="markdownTableBodyNone">O(F × E)  </td><td class="markdownTableBodyNone">O(V × E²)  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><b>Total (without pruning)</b>  </td><td class="markdownTableBodyNone"><b>O(C(R,K) × F × E)</b>  </td><td class="markdownTableBodyNone"><b>O(C(R,K) × V × E²)</b>  </td></tr>
+<td class="markdownTableBodyNone">Build flow graph per subset  </td><td class="markdownTableBodyNone">O(P × R)  </td></tr>
 </table>
+<p><b>Max-flow per subset (algorithm-dependent):</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Algorithm  </th><th class="markdownTableHeadNone">Complexity  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Ford-Fulkerson (DFS)  </td><td class="markdownTableBodyNone">O(F × E)  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Edmonds-Karp (BFS)  </td><td class="markdownTableBodyNone">O(V × E²)  </td></tr>
+</table>
+<p><b>Total by K value:</b></p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">K value  </th><th class="markdownTableHeadNone">Ford-Fulkerson  </th><th class="markdownTableHeadNone">Edmonds-Karp  </th><th class="markdownTableHeadNone">Practical?  </th></tr>
@@ -362,7 +381,7 @@ Proposed Approach</h2>
 </ul>
 <p>Dummy nodes are shared across all submissions and reviewers that need them. Each dummy node connects forward to the next (with sufficient capacity to act as a passthrough), and submission→DummyNode_1 edges are added for cross matches, while DummyNode_1→DummyNode_2 and DummyNode_2→reviewer edges are added for secondary-secondary matches. All dummy→dummy and dummy→reviewer edges have capacity large enough not to become bottlenecks (e.g. min(MinReviewsPerSubmission, MaxReviewsPerReviewer)).</p>
 <p>Because BFS strictly prefers shorter paths, it will exhaust all available primary-primary matches before touching cross matches, and exhaust all cross matches before touching secondary-secondary matches. For GenerateAssignment = 3, we can add even more dummy layers (e.g. 2 intermediate nodes for secondary-secondary vs 1 for cross) to increase the distance penalty further.</p>
-<p>When does this work?** The approach is equivalent to running Approach A (Layered Max-Flow) inside a single graph. It produces a greedy prioritisation that is fast and simple to implement. However, it does <b>not</b> guarantee a globally optimal assignment. The problem lies in the residual graph**: when max-flow algorithms "change their mind" and reroute flow, they push flow backward along residual edges. In a true min-cost flow algorithm, undoing a cost-1 edge refunds cost −1, making reroutes cheap. In the dummy-node graph, every edge — forward or backward — adds +1 to BFS distance, so reroutes through dummy nodes appear very expensive. This means the algorithm would rather take a suboptimal direct match elsewhere than perform a long reroute that would yield a better global assignment.</p>
+<p><b>When does this work?</b> The approach is equivalent to running Approach A (Layered Max-Flow) inside a single graph. It produces a greedy prioritisation that is fast and simple to implement. However, it does <b>not</b> guarantee a globally optimal assignment. The problem lies in the <b>residual graph</b>: when max-flow algorithms "change their mind" and reroute flow, they push flow backward along residual edges. In a true min-cost flow algorithm, undoing a cost-1 edge refunds cost −1, making reroutes cheap. In the dummy-node graph, every edge - forward or backward - adds +1 to BFS distance, so reroutes through dummy nodes appear very expensive. This means the algorithm would rather take a suboptimal direct match elsewhere than perform a long reroute that would yield a better global assignment.</p>
 <p>In practice, for typical conference sizes, this approach produces assignments that are almost always optimal or very close to optimal, since conflicts that would require rerouting are rare in well-structured inputs.</p>
 <p><b>Approach C: Min-Cost Max-Flow (Exact)</b></p>
 <p>For guaranteed optimality, we reformulate as a minimum-cost flow problem:</p>
@@ -432,48 +451,63 @@ T2.4 Example: Mode 3 matching. Gold = primary-primary (used), dashed = cross (un
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="ext_complexity_table"></a>
 Complexity Summary</h1>
-<p>The following table summarises the time complexity of the most important functions in the project. See the individual function documentation for full details.</p>
+<p>The following table summarises the time complexity of the algorithm-independent functions.</p>
+<p><b>Algorithm-independent functions:</b></p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Location  </th><th class="markdownTableHeadNone">Ford-Fulkerson  </th><th class="markdownTableHeadNone">Edmonds-Karp  </th><th class="markdownTableHeadNone">Notes  </th></tr>
+<th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Location  </th><th class="markdownTableHeadNone">Complexity  </th><th class="markdownTableHeadNone">Notes  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">fordFulkerson  </td><td class="markdownTableBodyNone"><a class="el" href="_ford_fulkerson_8h.html" title="Implementation of the Ford-Fulkerson algorithm for calculating maximum flow.">algorithms/FordFulkerson.h</a>  </td><td class="markdownTableBodyNone">O(F × E)  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">DFS-based; F = total flow  </td></tr>
+<td class="markdownTableBodyNone">buildReviewFlowGraph  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_builder_8h.html">data_structures/GraphBuilder.h</a>  </td><td class="markdownTableBodyNone">O(P × R)  </td><td class="markdownTableBodyNone">P submissions, R reviewers  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">edmondsKarp  </td><td class="markdownTableBodyNone"><a class="el" href="_edmond_karp_8h.html" title="Implementation of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">O(V × E²)  </td><td class="markdownTableBodyNone">BFS-based; shortest augmenting paths  </td></tr>
+<td class="markdownTableBodyNone">getMatchedDomain  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_builder_8h.html">data_structures/GraphBuilder.h</a>  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">At most 2 topics per entity  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">ffFindAugmentingPath  </td><td class="markdownTableBodyNone"><a class="el" href="_ford_fulkerson_8h.html" title="Implementation of the Ford-Fulkerson algorithm for calculating maximum flow.">algorithms/FordFulkerson.h</a>  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">Single DFS pass  </td></tr>
+<td class="markdownTableBodyNone">totalRequiredReviews  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(N)  </td><td class="markdownTableBodyNone">N submissions  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">findAugmentingPath  </td><td class="markdownTableBodyNone"><a class="el" href="_edmond_karp_8h.html" title="Implementation of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">Single BFS pass  </td></tr>
+<td class="markdownTableBodyNone">totalAssignedReviews  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(P × R)  </td><td class="markdownTableBodyNone">Iterates submission→reviewer edges  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">ffFindMinResidualAlongPath  </td><td class="markdownTableBodyNone"><a class="el" href="_ford_fulkerson_8h.html" title="Implementation of the Ford-Fulkerson algorithm for calculating maximum flow.">algorithms/FordFulkerson.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">Path walk  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="class_file_parser.html#aaea1bf0b7d4f662f4f38f8ff1bf433b1" title="Parses a CSV input file and populates submissions, reviewers and params.">FileParser::parse</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_file_parser_8h.html" title="Class definition for parsing input CSV files.">io/FileParser.h</a>  </td><td class="markdownTableBodyNone">O(L)  </td><td class="markdownTableBodyNone">L lines in input file  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">findMinResidualAlongPath  </td><td class="markdownTableBodyNone"><a class="el" href="_edmond_karp_8h.html" title="Implementation of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Path walk  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75" title="Finds a vertex with a given content.">Graph::findVertex</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Linear search over vertex set  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">ffAugmentFlowAlongPath  </td><td class="markdownTableBodyNone"><a class="el" href="_ford_fulkerson_8h.html" title="Implementation of the Ford-Fulkerson algorithm for calculating maximum flow.">algorithms/FordFulkerson.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">Path walk  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="class_graph.html#a00be284ea2be3b3d0f0d2e493b70245b" title="Adds a vertex with a given content to the graph.">Graph::addVertex</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Duplicate check  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">augmentFlowAlongPath  </td><td class="markdownTableBodyNone"><a class="el" href="_edmond_karp_8h.html" title="Implementation of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">—  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Path walk  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="class_graph.html#ac61af3aafe6277215f5a3b3cc7d58ce2" title="Adds a directed edge to the graph.">Graph::addEdge</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone"><a class="el" href="class_vertex.html" title="Represents a node in the graph.">Vertex</a> lookups  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">buildReviewFlowGraph  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_builder_8h.html">data_structures/GraphBuilder.h</a>  </td><td class="markdownTableBodyNone">O(P × R)  </td><td class="markdownTableBodyNone">O(P × R)  </td><td class="markdownTableBodyNone">P submissions, R reviewers  </td></tr>
+<td class="markdownTableBodyNone"><a class="el" href="class_graph.html#af9c903104ad69a7782979fa9caedf163" title="Removes a vertex and all its incident edges from the graph.">Graph::removeVertex</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">Removes all incident edges  </td></tr>
+</table>
+<p><b>Ford-Fulkerson (DFS-based):</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Location  </th><th class="markdownTableHeadNone">Complexity  </th><th class="markdownTableHeadNone">Notes  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">fordFulkerson  </td><td class="markdownTableBodyNone"><a class="el" href="_ford_fulkerson_8h.html" title="Implementation of the Ford-Fulkerson algorithm for calculating maximum flow.">algorithms/FordFulkerson.h</a>  </td><td class="markdownTableBodyNone">O(F × E)  </td><td class="markdownTableBodyNone">F = total flow  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">getMatchedDomain  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_builder_8h.html">data_structures/GraphBuilder.h</a>  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">O(1)  </td><td class="markdownTableBodyNone">At most 2 topics per entity  </td></tr>
+<td class="markdownTableBodyNone">ffFindAugmentingPath  </td><td class="markdownTableBodyNone"><a class="el" href="_ford_fulkerson_8h.html" title="Implementation of the Ford-Fulkerson algorithm for calculating maximum flow.">algorithms/FordFulkerson.h</a>  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">Single DFS pass  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">findRiskyReviewersK1  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(R × F × E)  </td><td class="markdownTableBodyNone">O(R × V × E²)  </td><td class="markdownTableBodyNone">R re-runs of max-flow  </td></tr>
+<td class="markdownTableBodyNone">ffFindMinResidualAlongPath  </td><td class="markdownTableBodyNone"><a class="el" href="_ford_fulkerson_8h.html" title="Implementation of the Ford-Fulkerson algorithm for calculating maximum flow.">algorithms/FordFulkerson.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Path walk  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">generateAssignmentsAndStore  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(F × E)  </td><td class="markdownTableBodyNone">O(V × E²)  </td><td class="markdownTableBodyNone">Dominated by max-flow  </td></tr>
+<td class="markdownTableBodyNone">ffAugmentFlowAlongPath  </td><td class="markdownTableBodyNone"><a class="el" href="_ford_fulkerson_8h.html" title="Implementation of the Ford-Fulkerson algorithm for calculating maximum flow.">algorithms/FordFulkerson.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Path walk  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">totalRequiredReviews  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(N)  </td><td class="markdownTableBodyNone">O(N)  </td><td class="markdownTableBodyNone">N submissions  </td></tr>
+<td class="markdownTableBodyNone">findRiskyReviewersK1  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(R × F × E)  </td><td class="markdownTableBodyNone">R re-runs of max-flow  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">totalAssignedReviews  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(P × R)  </td><td class="markdownTableBodyNone">O(P × R)  </td><td class="markdownTableBodyNone">Iterates submission→reviewer edges  </td></tr>
+<td class="markdownTableBodyNone">generateAssignmentsAndStore  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(F × E)  </td><td class="markdownTableBodyNone">Dominated by max-flow  </td></tr>
+</table>
+<p><b>Edmonds-Karp (BFS-based):</b></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Function  </th><th class="markdownTableHeadNone">Location  </th><th class="markdownTableHeadNone">Complexity  </th><th class="markdownTableHeadNone">Notes  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="class_file_parser.html#aaea1bf0b7d4f662f4f38f8ff1bf433b1" title="Parses a CSV input file and populates submissions, reviewers and params.">FileParser::parse</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_file_parser_8h.html" title="Class definition for parsing input CSV files.">io/FileParser.h</a>  </td><td class="markdownTableBodyNone">O(L)  </td><td class="markdownTableBodyNone">O(L)  </td><td class="markdownTableBodyNone">L lines in input file  </td></tr>
+<td class="markdownTableBodyNone">edmondsKarp  </td><td class="markdownTableBodyNone"><a class="el" href="_edmond_karp_8h.html" title="Implementation of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V × E²)  </td><td class="markdownTableBodyNone">Worst case; shortest augmenting paths  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="class_graph.html#a8b7b7465fbfd562e2a469f90a437ab75" title="Finds a vertex with a given content.">Graph::findVertex</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Linear search over vertex set  </td></tr>
+<td class="markdownTableBodyNone">findAugmentingPath  </td><td class="markdownTableBodyNone"><a class="el" href="_edmond_karp_8h.html" title="Implementation of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">Single BFS pass  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="class_graph.html#a00be284ea2be3b3d0f0d2e493b70245b" title="Adds a vertex with a given content to the graph.">Graph::addVertex</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Duplicate check  </td></tr>
+<td class="markdownTableBodyNone">findMinResidualAlongPath  </td><td class="markdownTableBodyNone"><a class="el" href="_edmond_karp_8h.html" title="Implementation of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Path walk  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone"><a class="el" href="class_graph.html#ac61af3aafe6277215f5a3b3cc7d58ce2" title="Adds a directed edge to the graph.">Graph::addEdge</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone"><a class="el" href="class_vertex.html" title="Represents a node in the graph.">Vertex</a> lookups  </td></tr>
+<td class="markdownTableBodyNone">augmentFlowAlongPath  </td><td class="markdownTableBodyNone"><a class="el" href="_edmond_karp_8h.html" title="Implementation of the Edmonds-Karp algorithm for calculating maximum flow.">algorithms/EdmondKarp.h</a>  </td><td class="markdownTableBodyNone">O(V)  </td><td class="markdownTableBodyNone">Path walk  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone"><a class="el" href="class_graph.html#af9c903104ad69a7782979fa9caedf163" title="Removes a vertex and all its incident edges from the graph.">Graph::removeVertex</a>  </td><td class="markdownTableBodyNone"><a class="el" href="_graph_8h.html">data_structures/Graph.h</a>  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">O(V + E)  </td><td class="markdownTableBodyNone">Removes all incident edges  </td></tr>
+<td class="markdownTableBodyNone">findRiskyReviewersK1  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(R × V × E²)  </td><td class="markdownTableBodyNone">R re-runs of max-flow  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">generateAssignmentsAndStore  </td><td class="markdownTableBodyNone"><a class="el" href="_assignment_logic_8h.html" title="Logic for assigning reviewers to submissions based on Max Flow.">services/AssignmentLogic.h</a>  </td><td class="markdownTableBodyNone">O(V × E²)  </td><td class="markdownTableBodyNone">Dominated by max-flow  </td></tr>
 </table>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
